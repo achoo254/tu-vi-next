@@ -1,0 +1,20 @@
+{
+  "name": "@tuvi/chart",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Lá số tử vi tiếng Việt: âm lịch Việt Nam (UTC+7) và lớp bọc duy nhất quanh iztro",
+  "exports": {
+    ".": "./src/index.ts",
+    "./input": "./src/input.ts",
+    "./schema": "./src/birth-input.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "iztro": "2.6.3",
+    "lunar-lite": "0.2.8",
+    "zod": "^4.6.7"
+  }
+}
