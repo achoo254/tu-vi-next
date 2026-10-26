@@ -11,6 +11,7 @@ import { ChartErrorBoundary } from '../chart/chart-error-boundary';
 import { ConfirmDialog } from '../chart/confirm-dialog';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
+import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/illustrations';
 import { type Translate, useI18n } from '../i18n/i18n';
 
 type Cast = { chart: Chart; error: null } | { chart: null; error: string | null };
@@ -102,14 +103,31 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           {notice}
         </p>
       )}
-      <section className="intro" data-id="intro">
-        <h1 className="intro-title">{t('intro.title')}</h1>
-        <p className="intro-lead">{t('intro.lead')}</p>
-        <ul className="intro-points">
-          <li>{t('intro.point.calendar')}</li>
-          <li>{signedIn ? t('intro.point.save') : t('intro.point.private')}</li>
-        </ul>
-      </section>
+      <div className={`intro-row${signedIn ? '' : ' intro-row-hero'}`}>
+        <section className="intro" data-id="intro">
+          <h1 className="intro-title">{t('intro.title')}</h1>
+          <p className="intro-lead">{t('intro.lead')}</p>
+          <ul className="intro-points">
+            <li>{t('intro.point.calendar')}</li>
+            <li>{signedIn ? t('intro.point.save') : t('intro.point.private')}</li>
+          </ul>
+        </section>
+        {/* The signed-out welcome only: signed-in visitors come back for their charts. Decorative. */}
+        {!signedIn && (
+          <img
+            className="intro-hero"
+            src={HERO_1200_URL}
+            srcSet={`${HERO_640_URL} 640w, ${HERO_1200_URL} 1200w`}
+            sizes="(min-width: 900px) 480px, 100vw"
+            width={HERO_WIDTH}
+            height={HERO_HEIGHT}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+            data-id="intro-hero"
+          />
+        )}
+      </div>
       <div className="home-grid">
         <div className="home-side">
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />

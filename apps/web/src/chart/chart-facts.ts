@@ -1,10 +1,13 @@
 /** The chart's details for the board's centre (screen and PNG export alike). */
 import type { Chart } from '@tuvi/chart';
 import type { Translate } from '../i18n/i18n';
+import { elementArt } from './chart-art';
 
 export interface ChartFact {
   label: string;
   value: string;
+  /** Decorative emblem shown before the value (the element of the five-elements class). */
+  icon?: string;
 }
 
 const pad = (n: number): string => String(n).padStart(2, '0');
@@ -26,7 +29,7 @@ export function chartFacts(chart: Chart, t: Translate): ChartFact[] {
     { label: chart.yinYangGender, value: '' },
     { label: t('chart.soul'), value: t('chart.at', { branch: chart.soulBranch }) },
     { label: t('chart.body'), value: t('chart.at', { branch: chart.bodyBranch }) },
-    { label: t('chart.fiveElements'), value: chart.fiveElementsClass },
+    { label: t('chart.fiveElements'), value: chart.fiveElementsClass, icon: elementArt(chart.fiveElementsClass) ?? undefined },
     { label: t('chart.soulStar'), value: chart.soulStar },
     { label: t('chart.bodyStar'), value: chart.bodyStar },
   ];

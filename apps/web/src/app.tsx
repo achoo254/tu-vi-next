@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect } from 'react';
 import { useSession } from './api/session-api';
+import { NOT_FOUND_URL } from './art/illustrations';
 import { brand } from './brand';
 import { useI18n } from './i18n/i18n';
 import { PageFooter } from './layout/page-footer';
@@ -18,6 +19,7 @@ function NotFound(): ReactNode {
   const { t } = useI18n();
   return (
     <article className="card doc">
+      <img className="not-found-art" src={NOT_FOUND_URL} width={120} height={120} alt="" aria-hidden="true" decoding="async" />
       <h1 className="doc-title">{t('notFound.title')}</h1>
       <a className="btn btn-primary" href="/">
         {t('notFound.back')}

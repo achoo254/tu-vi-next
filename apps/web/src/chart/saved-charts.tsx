@@ -1,6 +1,7 @@
 import type { BirthInput } from '@tuvi/chart/schema';
 import type { ReactNode } from 'react';
 import type { SavedChart } from '../api/charts-api';
+import { EMPTY_SAVED_URL } from '../art/illustrations';
 import { useI18n } from '../i18n/i18n';
 
 interface SavedChartsProps {
@@ -32,7 +33,12 @@ export function SavedCharts({ charts, message, onOpen, onDelete }: SavedChartsPr
         </p>
       )}
       {charts === 'error' && <p className="alert alert-error">{t('saved.loadError')}</p>}
-      {Array.isArray(charts) && charts.length === 0 && <p className="empty">{t('saved.empty')}</p>}
+      {Array.isArray(charts) && charts.length === 0 && (
+        <div className="empty-state" data-id="saved-empty">
+          <img src={EMPTY_SAVED_URL} width={72} height={72} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <p className="empty">{t('saved.empty')}</p>
+        </div>
+      )}
       {Array.isArray(charts) && charts.length > 0 && (
         <ul className="item-list">
           {charts.map((chart) => (

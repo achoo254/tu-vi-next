@@ -13,11 +13,14 @@ export const MUTAGEN_TERM: Record<Mutagen, string> = { loc: 'Lộc', quyen: 'Quy
 const ELEMENT_TERM: Record<FiveElement, string> = { kim: 'Kim', moc: 'Mộc', thuy: 'Thủy', hoa: 'Hỏa', tho: 'Thổ' };
 const YIN_YANG_TERM: Record<YinYang, string> = { am: 'Âm', duong: 'Dương' };
 
-/** "Tử Vi (M)", "Thái Âm (V) · Hóa Khoa": a star as it reads on the board. */
-export function starLabel(star: ChartStar): string {
-  const brightness = star.brightness ? ` (${BRIGHTNESS_MARK[star.brightness]})` : '';
-  const mutagen = star.mutagen ? ` · Hóa ${MUTAGEN_TERM[star.mutagen]}` : '';
-  return `${star.name}${brightness}${mutagen}`;
+/** "Tử Vi (M)": a star's name with its brightness mark. */
+export function starName(star: ChartStar): string {
+  return star.brightness ? `${star.name} (${BRIGHTNESS_MARK[star.brightness]})` : star.name;
+}
+
+/** "Hóa Khoa": a transformation as it reads on the board. */
+export function mutagenLabel(mutagen: Mutagen): string {
+  return `Hóa ${MUTAGEN_TERM[mutagen]}`;
 }
 
 /** The lines of a star's short meaning, in the UI language. */

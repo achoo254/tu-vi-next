@@ -35,9 +35,13 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
   });
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('âm lịch Việt Nam');
+  // The signed-out welcome illustration loads (a real decoded image, not a broken link).
+  await expect.poll(() => page.locator('[data-id=intro-hero]').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   // 25 March 1985 is in Vietnam's leap 2nd month (China has no leap month that year).
   await castChart(page, { name: 'Bé Na', day: '25', month: '3', year: '1985', time: '14:20' });
   const centre = page.locator('[data-id=chart-centre]');
+  await expect(page.locator('[data-id=chart-board] .palace-icon')).toHaveCount(12);
+  await expect(centre.locator('.fact-icon')).toHaveCount(1);
   await expect(centre).toContainText('ngày 5 tháng 2 nhuận năm Ất Sửu');
   await expect(centre).toContainText('Mùi (13:00–14:59)');
 
@@ -70,6 +74,7 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await page.click('[data-id=nav-sign-in]');
   await expect(page.locator('[data-id=nav-sign-out]')).toBeVisible();
   await expect(page.locator('[data-id=saved-charts]')).toContainText('Chưa có lá số nào');
+  await expect(page.locator('[data-id=intro-hero]')).toHaveCount(0);
 
   await castChart(page, { name: 'Tết Đinh Hợi', day: '17', month: '2', year: '2007', time: '23:30' });
   await expect(page.locator('[data-id=chart-centre]')).toContainText('tính sang ngày hôm sau');
@@ -116,6 +121,9 @@ test('layout: auth-style header and footer, legal pages in both languages', asyn
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Privacy');
   await page.goto('/terms?lang=vi');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Điều khoản sử dụng');
+  await page.goto('/no-such-page?lang=vi');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Không có trang này');
+  await expect.poll(() => page.locator('.not-found-art').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   const health = await page.request.get('/healthz');
   expect(health.status()).toBe(200);
 });

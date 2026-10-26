@@ -1,10 +1,34 @@
 import type { Chart } from '@tuvi/chart';
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { ApiError } from '../api/api-client';
 import { signInHref } from '../api/session-api';
 import { useI18n } from '../i18n/i18n';
-import { canShareFiles, exportFileName, renderChartPng, shareOrDownload } from './export-png';
 import { chartTitle } from './chart-facts';
+
+type ExportModule = typeof import('./export-png');
+
+/**
+ * The PNG export (canvas drawing and its art) in its own small chunk, so the first page load does not carry it.
+ * It is fetched as soon as a chart shows, so pressing Share still runs inside the tap's user activation.
+ */
+let exportModule: Promise<ExportModule> | null = null;
+function loadExport(): Promise<ExportModule> {
+  exportModule ??= import('./export-png').catch((error: unknown) => {
+    exportModule = null; // let the next press retry (e.g. after a release replaced the chunk)
+    throw error;
+  });
+  return exportModule;
+}
+
+/** Whether the share button makes sense here (Web Share with files). */
+function canShareFiles(): boolean {
+  if (typeof navigator.canShare !== 'function') return false;
+  try {
+    return navigator.canShare({ files: [new File([new Uint8Array(1)], 'probe.png', { type: 'image/png' })] });
+  } catch {
+    return false;
+  }
+}
 
 interface ChartActionsProps {
   chart: Chart;
@@ -24,6 +48,11 @@ export function ChartActions({ chart, signedIn, signInAvailable, onSave }: Chart
   const [message, setMessage] = useState<string | null>(null);
   const [shareable] = useState(canShareFiles);
 
+  useEffect(() => {
+    // Prefetch only; a failure here is retried (and reported) when the person presses Download or Share.
+    loadExport().catch(() => undefined);
+  }, []);
+
   async function save(): Promise<void> {
     setMessage(null);
     setSaveState('saving');
@@ -40,6 +69,7 @@ export function ChartActions({ chart, signedIn, signInAvailable, onSave }: Chart
     setMessage(null);
     setExporting(true);
     try {
+      const { renderChartPng, shareOrDownload, exportFileName } = await loadExport();
       const blob = await renderChartPng(chart, t);
       await shareOrDownload(blob, exportFileName(chart), chartTitle(chart, t), share);
     } catch {

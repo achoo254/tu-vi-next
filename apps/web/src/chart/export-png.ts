@@ -2,16 +2,16 @@
  * The chart as a 1080 × 1350 PNG (4:5, the portrait size social feeds show whole), drawn on a canvas in
  * the browser: title, the 4 × 4 board, the entertainment note and the tuvi.hoandat.com watermark.
  * Colours come from the --c-export-* tokens (always light, whatever the screen theme). The AI art (sky paper,
- * frame, medallion, zodiac animals, star emblems) is drawn when it loaded; a missing image is left out, never
+ * frame, medallion, zodiac animals, star, palace, transformation and element emblems) is drawn when it loaded; a missing image is left out, never
  * a reason to fail the export. Cells cover the paper at --cell-opacity, as on screen.
  */
-import type { Chart, ChartPalace, ChartStar } from '@tuvi/chart';
+import type { Chart, ChartPalace, ChartStar, Mutagen } from '@tuvi/chart';
 import { APP_HOST } from '../brand';
 import type { Translate } from '../i18n/i18n';
 import { boardPosition } from './board-layout';
-import { FRAME_URL, MEDALLION_URL, SKY_URL, starArt, zodiacArt } from './chart-art';
+import { FRAME_URL, MEDALLION_URL, SKY_URL, elementArt, mutagenArt, palaceArt, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
-import { starLabel } from './star-terms';
+import { mutagenLabel, starName } from './star-terms';
 
 export const EXPORT_WIDTH = 1080;
 export const EXPORT_HEIGHT = 1350;
@@ -114,11 +114,42 @@ export interface ExportArt {
   marks: Map<number, CanvasImageSource>;
   /** Small emblems by major star name. */
   stars: Map<string, CanvasImageSource>;
+  /** Palace emblems by palace name. */
+  palaces: Map<string, CanvasImageSource>;
+  /** Transformation badges. */
+  mutagens: Map<Mutagen, CanvasImageSource>;
+  /** The emblem of the five-elements class, before "Cục" in the centre. */
+  element?: CanvasImageSource;
 }
 
-const NO_ART: ExportArt = { marks: new Map(), stars: new Map() };
+const NO_ART: ExportArt = { marks: new Map(), stars: new Map(), palaces: new Map(), mutagens: new Map() };
 const STAR_ICON = 20;
 const MARK = 30;
+const PALACE_ICON = 22;
+const BADGE = 16;
+const FACT_ICON = 26;
+
+/**
+ * A star's label at (x, y): "Thái Âm (V)", then " · ", the transformation's badge and "Hóa Khoa" when it has
+ * one. The whole line keeps within `maxWidth`; the font and colour are the caller's.
+ */
+function drawStarLabel(ctx: CanvasRenderingContext2D, star: ChartStar, x: number, y: number, maxWidth: number, art: ExportArt, badgeSize: number): void {
+  if (!star.mutagen) {
+    ctx.fillText(starName(star), x, y, maxWidth);
+    return;
+  }
+  const head = `${starName(star)} · `;
+  const tail = mutagenLabel(star.mutagen);
+  const badge = art.mutagens.get(star.mutagen);
+  const badgeWidth = badge ? badgeSize + 3 : 0;
+  const natural = ctx.measureText(head).width + badgeWidth + ctx.measureText(tail).width;
+  // Squeeze the text (as fillText's maxWidth does) when the line is too wide; the badge keeps its size.
+  const scale = natural > maxWidth ? Math.max((maxWidth - badgeWidth) / (natural - badgeWidth), 0.1) : 1;
+  const headWidth = ctx.measureText(head).width * scale;
+  ctx.fillText(head, x, y, headWidth);
+  if (badge) ctx.drawImage(badge, x + headWidth, y + 1, badgeSize, badgeSize);
+  ctx.fillText(tail, x + headWidth + badgeWidth, y, ctx.measureText(tail).width * scale);
+}
 
 function fillCell(ctx: CanvasRenderingContext2D, rect: Rect, colour: string, opacity: number): void {
   ctx.globalAlpha = opacity;
@@ -150,11 +181,19 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
   ctx.font = `700 20px ${SANS}`;
   ctx.fillStyle = palace.isSoulPalace ? palette.soul : palette.accent;
   ctx.textAlign = 'left';
-  ctx.fillText(`${palace.name}${palace.isBodyPalace ? ` · ${t('chart.bodyMark')}` : ''}`, x + PAD, y + PAD, inner * 0.62);
+  const palaceIcon = art.palaces.get(palace.name);
+  const nameIndent = palaceIcon ? PALACE_ICON + 5 : 0;
+  if (palaceIcon) ctx.drawImage(palaceIcon, x + PAD, y + PAD - 1, PALACE_ICON, PALACE_ICON);
+  const branch = `${palace.stem} ${palace.branch}`;
+  ctx.font = `500 16px ${SANS}`;
+  // The name gets whatever the can-chi leaves (at least 62% of the cell), so it is squeezed only when it must be.
+  const branchWidth = Math.min(ctx.measureText(branch).width, inner * 0.38);
+  ctx.font = `700 20px ${SANS}`;
+  ctx.fillText(`${palace.name}${palace.isBodyPalace ? ` · ${t('chart.bodyMark')}` : ''}`, x + PAD + nameIndent, y + PAD, inner - branchWidth - 10 - nameIndent);
   ctx.font = `500 16px ${SANS}`;
   ctx.fillStyle = palette.muted;
   ctx.textAlign = 'right';
-  ctx.fillText(`${palace.stem} ${palace.branch}`, x + width - PAD, y + PAD + 3, inner * 0.38);
+  ctx.fillText(branch, x + width - PAD, y + PAD + 3, inner * 0.38);
   ctx.textAlign = 'left';
 
   let cursor = y + PAD + 32;
@@ -164,7 +203,7 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
     const indent = icon ? STAR_ICON + 6 : 0;
     if (icon) ctx.drawImage(icon, x + PAD, cursor - 1, STAR_ICON, STAR_ICON);
     ctx.fillStyle = starColour(star, palette);
-    ctx.fillText(starLabel(star), x + PAD + indent, cursor, inner - indent);
+    drawStarLabel(ctx, star, x + PAD + indent, cursor, inner - indent, art, BADGE + 2);
     cursor += 24;
   }
   const footerTop = y + height - PAD - 36;
@@ -177,11 +216,10 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
     ctx.fillText(line, x + PAD, cursor + 2, inner);
     cursor += 18;
   }
-  const mutagens = minor.filter((s) => s.mutagen).map(starLabel);
   ctx.fillStyle = palette.mutagen;
-  for (const label of mutagens) {
+  for (const star of minor.filter((s) => s.mutagen)) {
     if (cursor + 18 > footerTop) break;
-    ctx.fillText(label, x + PAD, cursor + 2, inner);
+    drawStarLabel(ctx, star, x + PAD, cursor + 2, inner, art, BADGE - 2);
     cursor += 18;
   }
   ctx.font = `500 14px ${SANS}`;
@@ -209,14 +247,19 @@ function drawCentre(ctx: CanvasRenderingContext2D, chart: Chart, palette: Palett
     ctx.fillStyle = palette.muted;
     const text = fact.value ? `${fact.label}: ` : fact.label;
     ctx.textAlign = 'left';
-    const lineWidth = ctx.measureText(text).width + (fact.value ? ctx.measureText(fact.value).width : 0);
+    const icon = fact.icon ? art.element : undefined;
+    const iconWidth = icon ? FACT_ICON + 4 : 0;
+    const labelWidth = ctx.measureText(text).width;
+    ctx.font = `500 17px ${SANS}`;
+    const lineWidth = labelWidth + iconWidth + (fact.value ? ctx.measureText(fact.value).width : 0);
+    ctx.font = `600 17px ${SANS}`;
     const start = x + width / 2 - Math.min(lineWidth, inner) / 2;
     ctx.fillText(text, start, cursor, inner);
+    if (icon) ctx.drawImage(icon, start + labelWidth, cursor + 9 - FACT_ICON / 2, FACT_ICON, FACT_ICON);
     if (fact.value) {
       ctx.font = `500 17px ${SANS}`;
       ctx.fillStyle = palette.text;
-      const labelWidth = ctx.measureText(text).width;
-      ctx.fillText(fact.value, start + labelWidth, cursor, Math.max(inner - labelWidth, 40));
+      ctx.fillText(fact.value, start + labelWidth + iconWidth, cursor, Math.max(inner - labelWidth - iconWidth, 40));
     }
     cursor += 29;
   }
@@ -312,17 +355,21 @@ async function loadImage(url: string | null): Promise<HTMLImageElement | undefin
 async function loadArt(chart: Chart): Promise<ExportArt> {
   const yearBranch = (((chart.lunarDate.year + 8) % 12) + 12) % 12;
   const majors = [...new Set(chart.palaces.flatMap((p) => p.majorStars.map((s) => s.name)))];
-  const [sky, frame, medallion, yearAnimal, marks, stars] = await Promise.all([
+  const mutagenKinds = [...new Set(chart.palaces.flatMap((p) => [...p.majorStars, ...p.minorStars, ...p.otherStars].flatMap((s) => (s.mutagen ? [s.mutagen] : []))))];
+  const [sky, frame, medallion, yearAnimal, element, marks, stars, palaces, mutagens] = await Promise.all([
     loadImage(SKY_URL),
     loadImage(FRAME_URL),
     loadImage(MEDALLION_URL),
     loadImage(zodiacArt(yearBranch, 'large')),
+    loadImage(elementArt(chart.fiveElementsClass)),
     Promise.all(chart.palaces.map(async (p) => [p.branchIndex, await loadImage(zodiacArt(p.branchIndex, 'small'))] as const)),
     Promise.all(majors.map(async (name) => [name, await loadImage(starArt(name, 'small'))] as const)),
+    Promise.all(chart.palaces.map(async (p) => [p.name, await loadImage(palaceArt(p.name))] as const)),
+    Promise.all(mutagenKinds.map(async (kind) => [kind, await loadImage(mutagenArt(kind))] as const)),
   ]);
   const present = <K>(entries: ReadonlyArray<readonly [K, HTMLImageElement | undefined]>): Map<K, CanvasImageSource> =>
     new Map(entries.flatMap(([key, image]) => (image ? [[key, image] as const] : [])));
-  return { sky, frame, medallion, yearAnimal, marks: present(marks), stars: present(stars) };
+  return { sky, frame, medallion, yearAnimal, element, marks: present(marks), stars: present(stars), palaces: present(palaces), mutagens: present(mutagens) };
 }
 
 /** The PNG file of the chart. Waits for the web fonts and the art so the canvas is complete. */
@@ -381,14 +428,4 @@ export async function shareOrDownload(blob: Blob, fileName: string, title: strin
     setTimeout(() => URL.revokeObjectURL(url), 10_000);
   }
   return 'downloaded';
-}
-
-/** Whether the share button makes sense here (Web Share with files). */
-export function canShareFiles(): boolean {
-  if (typeof navigator.canShare !== 'function') return false;
-  try {
-    return navigator.canShare({ files: [new File([new Uint8Array(1)], 'probe.png', { type: 'image/png' })] });
-  } catch {
-    return false;
-  }
 }

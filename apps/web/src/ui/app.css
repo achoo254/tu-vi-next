@@ -310,6 +310,29 @@ button {
   gap: var(--space-3);
   max-width: 760px;
 }
+.intro-row {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .intro-row-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  }
+}
+/* A short banner on phones so the form stays near the top; the full picture beside the intro on wide screens. */
+.intro-hero {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+@media (min-width: 900px) {
+  .intro-hero {
+    aspect-ratio: 1200 / 669;
+  }
+}
 .intro-title {
   font-family: var(--font-sans);
   font-weight: 700;
@@ -353,6 +376,16 @@ button {
   .saved-charts {
     padding: var(--space-5);
   }
+}
+.empty-state {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.empty-state img {
+  flex: none;
+  width: 72px;
+  height: 72px;
 }
 .empty {
   font-size: 14px;
@@ -460,6 +493,24 @@ button {
   margin-right: var(--space-1);
   vertical-align: -4px;
 }
+.palace-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: var(--space-1);
+  vertical-align: -3px;
+}
+.mutagen-badge {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+  vertical-align: -2px;
+}
+.fact-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: var(--space-1);
+  vertical-align: middle;
+}
 .star-dialog-art {
   justify-self: center;
   width: 112px;
@@ -503,8 +554,13 @@ button {
 }
 .palace-head {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: var(--space-2);
+  column-gap: var(--space-2);
+}
+/* The emblem and the palace name never part; in a narrow cell the can-chi moves to its own line instead. */
+.palace-title {
+  white-space: nowrap;
 }
 .palace-name {
   font-weight: 700;
@@ -517,6 +573,7 @@ button {
   font-weight: 600;
 }
 .palace-branch {
+  margin-left: auto;
   color: var(--c-text-muted);
   white-space: nowrap;
 }
@@ -662,6 +719,11 @@ button {
   padding-left: var(--space-5);
   display: grid;
   gap: var(--space-2);
+}
+.not-found-art {
+  justify-self: center;
+  width: 120px;
+  height: 120px;
 }
 .doc .btn {
   justify-self: start;

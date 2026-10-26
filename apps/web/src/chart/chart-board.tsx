@@ -1,12 +1,12 @@
-import type { Chart, ChartPalace, ChartStar } from '@tuvi/chart';
+import type { Chart, ChartPalace, ChartStar, Mutagen } from '@tuvi/chart';
 import { type ReactNode, useState } from 'react';
 import { useI18n } from '../i18n/i18n';
 import type { MessageKey } from '../i18n/messages';
 import { boardPosition, listOrder } from './board-layout';
-import { starArt, zodiacArt } from './chart-art';
+import { mutagenArt, palaceArt, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
 import { StarDialog } from './star-dialog';
-import { starLabel } from './star-terms';
+import { mutagenLabel, starName } from './star-terms';
 
 interface Selection {
   star: ChartStar;
@@ -19,12 +19,31 @@ function StarIcon({ name }: { name: string }): ReactNode {
   return src ? <img className="star-icon" src={src} width={18} height={18} alt="" aria-hidden="true" loading="lazy" decoding="async" /> : null;
 }
 
+/** The transformation's badge before "Hóa Lộc" and the like; decorative (the words are the text). */
+function MutagenBadge({ mutagen }: { mutagen: Mutagen }): ReactNode {
+  const src = mutagenArt(mutagen);
+  return src ? <img className="mutagen-badge" src={src} width={14} height={14} alt="" aria-hidden="true" loading="lazy" decoding="async" /> : null;
+}
+
+/** The palace's emblem before its name; decorative. */
+function PalaceIcon({ name }: { name: string }): ReactNode {
+  const src = palaceArt(name);
+  return src ? <img className="palace-icon" src={src} width={16} height={16} alt="" aria-hidden="true" loading="lazy" decoding="async" /> : null;
+}
+
 function StarButton({ star, onSelect }: { star: ChartStar; onSelect(star: ChartStar): void }): ReactNode {
   return (
     <li>
       <button type="button" className={`star star-${star.kind}`} onClick={() => onSelect(star)}>
         {star.kind === 'major' && <StarIcon name={star.name} />}
-        {starLabel(star)}
+        {starName(star)}
+        {star.mutagen && (
+          <>
+            {' · '}
+            <MutagenBadge mutagen={star.mutagen} />
+            {mutagenLabel(star.mutagen)}
+          </>
+        )}
       </button>
     </li>
   );
@@ -70,7 +89,10 @@ function PalaceCell({ palace, onSelect }: { palace: ChartPalace; onSelect(select
     >
       <header className="palace-head">
         <span className="palace-name">
-          {palace.name}
+          <span className="palace-title">
+            <PalaceIcon name={palace.name} />
+            {palace.name}
+          </span>
           {palace.isBodyPalace && <span className="palace-body"> · {t('chart.bodyMark')}</span>}
         </span>
         <span className="palace-branch">
@@ -112,7 +134,12 @@ export function ChartBoard({ chart }: { chart: Chart }): ReactNode {
             {chartFacts(chart, t).map((fact) => (
               <div key={fact.label} className="fact">
                 <dt>{fact.label}</dt>
-                {fact.value && <dd>{fact.value}</dd>}
+                {fact.value && (
+                  <dd>
+                    {fact.icon && <img className="fact-icon" src={fact.icon} width={28} height={28} alt="" aria-hidden="true" decoding="async" />}
+                    {fact.value}
+                  </dd>
+                )}
               </div>
             ))}
           </dl>

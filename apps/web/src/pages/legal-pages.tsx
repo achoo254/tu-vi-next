@@ -18,6 +18,7 @@ interface LegalDoc {
 export type LegalPageKind = 'privacy' | 'terms' | 'credits';
 
 const ICON_LICENCE = 'AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
+const OPEN_ART_LICENCE = 'AI-generated with open models (Qwen-Image, Z-Image-Turbo, FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 
 const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
   privacy: {
@@ -171,7 +172,11 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         { heading: 'Biểu tượng app', paragraphs: [ICON_LICENCE] },
         {
           heading: 'Hình minh hoạ',
-          paragraphs: ['12 con giáp, 14 huy hiệu chính tinh, nền giấy bầu trời sao, khung và huy chương của bàn lá số: ' + ICON_LICENCE],
+          paragraphs: [
+            '12 con giáp, 14 huy hiệu chính tinh, nền giấy bầu trời sao, khung và huy chương của bàn lá số: ' + ICON_LICENCE,
+            'Huy hiệu 12 cung, tứ hóa và ngũ hành cục, tranh trang chủ, ảnh xem trước khi chia sẻ link, hình danh sách lá số trống và trang 404: ' +
+              OPEN_ART_LICENCE,
+          ],
         },
         { heading: 'Mã nguồn', paragraphs: ['Mã nguồn của app theo giấy phép MIT.'] },
       ],
@@ -206,7 +211,11 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         { heading: 'App icon', paragraphs: [ICON_LICENCE] },
         {
           heading: 'Illustrations',
-          paragraphs: ['The 12 zodiac animals, the 14 major-star emblems, the starry paper, the board frame and the medallion: ' + ICON_LICENCE],
+          paragraphs: [
+            'The 12 zodiac animals, the 14 major-star emblems, the starry paper, the board frame and the medallion: ' + ICON_LICENCE,
+            'The emblems of the 12 palaces, the four transformations and the five element classes, the home illustration, the link-preview picture, the empty saved-charts picture and the 404 picture: ' +
+              OPEN_ART_LICENCE,
+          ],
         },
         { heading: 'Source code', paragraphs: ["The app's source code is under the MIT licence."] },
       ],
