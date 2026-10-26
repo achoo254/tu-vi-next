@@ -2,7 +2,8 @@
  * The link of the "Làm video lá số" button: Clip's birth chart template (`/tao?t=la-so`) filled in from the chart.
  * Only derived, non-identifying values travel (the zodiac animal of the birth year, the major star of Mệnh, the cục,
  * two short lines and one sentence of reading) plus the chart's name, which the person can clear in Clip. Never the
- * birth date or hour. Clip checks every parameter against its own whitelists and length limits; the limits here
+ * birth date or hour. The query holds only `t` and the whitelisted picture ids; the name and every line of text ride
+ * in the `#fragment`, which browsers never send, so they reach no server log (Clip reads both, then clears them). Clip checks every parameter against its own whitelists and length limits; the limits here
  * are Clip's, so nothing is dropped there.
  */
 import type { Chart } from '@tuvi/chart';
@@ -61,11 +62,18 @@ function cucId(fiveElementsClass: string): string | null {
   return CUC_IDS[first] ?? null;
 }
 
+export interface ChartVideoLink {
+  /** `t` and the picture ids (animal, star, cục): sent to Clip's server with the page request. */
+  query: URLSearchParams;
+  /** The name and the text lines: kept in the browser (the URL fragment). */
+  fragment: URLSearchParams;
+}
+
 /**
- * The query of Clip's birth chart template for this chart. `reading` is the corpus once loaded (null before: a
+ * The values of Clip's birth chart template for this chart. `reading` is the corpus once loaded (null before: a
  * neutral line then stands in for the reading).
  */
-export function chartVideoQuery(chart: Chart, reading: Interpretation | null, t: Translate, appHost: string): URLSearchParams {
+export function chartVideoLink(chart: Chart, reading: Interpretation | null, t: Translate, appHost: string): ChartVideoLink {
   // The year's branch from the lunar year, as can-chi.ts computes it (year + 8).
   const branch = mod(chart.lunarDate.year + 8, 12);
   const soul = chart.palaces.find((p) => p.isSoulPalace);
@@ -83,15 +91,18 @@ export function chartVideoQuery(chart: Chart, reading: Interpretation | null, t:
   query.set('star', main ? (STAR_IDS[main.name] ?? '') : '');
   const cuc = cucId(chart.fiveElementsClass);
   if (cuc) query.set('cuc', cuc);
+
+  const fragment = new URLSearchParams();
   const name = clampText(chart.input.name, CLIP_LIMITS.name);
-  if (name) query.set('name', name);
-  query.set('line1', clampText(t('video.line1', { animal, stars }), CLIP_LIMITS.line));
-  query.set('line2', clampText(chart.fiveElementsClass, CLIP_LIMITS.line));
-  query.set('reading', clampText(text ? firstSentence(text) : t('video.readingFallback', { host: appHost }), CLIP_LIMITS.reading));
-  return query;
+  if (name) fragment.set('name', name);
+  fragment.set('line1', clampText(t('video.line1', { animal, stars }), CLIP_LIMITS.line));
+  fragment.set('line2', clampText(chart.fiveElementsClass, CLIP_LIMITS.line));
+  fragment.set('reading', clampText(text ? firstSentence(text) : t('video.readingFallback', { host: appHost }), CLIP_LIMITS.reading));
+  return { query, fragment };
 }
 
-/** The full link: `<clipOrigin>/tao?…`. */
+/** The full link: `<clipOrigin>/tao?<ids>#<text>`. */
 export function chartVideoUrl(clipOrigin: string, chart: Chart, reading: Interpretation | null, t: Translate, appHost: string): string {
-  return `${clipOrigin}/tao?${chartVideoQuery(chart, reading, t, appHost).toString()}`;
+  const { query, fragment } = chartVideoLink(chart, reading, t, appHost);
+  return `${clipOrigin}/tao?${query.toString()}#${fragment.toString()}`;
 }

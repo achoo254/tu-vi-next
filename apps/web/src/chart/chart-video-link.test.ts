@@ -3,7 +3,7 @@ import { type Chart, buildChart } from '@tuvi/chart';
 import { describe, expect, it } from 'vitest';
 import { translator } from '../i18n/i18n';
 import { buildInterpretation } from '../interpretation/corpus';
-import { CLIP_LIMITS, chartVideoQuery, chartVideoUrl, clampText, firstSentence } from './chart-video-link';
+import { CLIP_LIMITS, chartVideoLink, chartVideoUrl, clampText, firstSentence } from './chart-video-link';
 
 const t = translator('vi');
 const reading = buildInterpretation();
@@ -21,11 +21,17 @@ function chartOf(year: number, month: number, day: number, hour: number, name = 
   return buildChart({ name, calendar: 'solar', year, month, day, isLeapMonth: false, hour, minute: 30, gender: year % 2 === 0 ? 'male' : 'female' });
 }
 
+/** Everything the link carries, query and fragment together (as Clip reads it). */
+function chartVideoQuery(chart: Chart, corpus: typeof reading | null, translate: typeof t, host: string): URLSearchParams {
+  const { query, fragment } = chartVideoLink(chart, corpus, translate, host);
+  return new URLSearchParams([...query, ...fragment]);
+}
+
 /** About 400 charts spread over years, days and hours. */
 const CHARTS: Chart[] = [];
 for (let i = 0; i < 400; i += 1) CHARTS.push(chartOf(1940 + (i % 80), 1 + (i % 12), 1 + ((i * 7) % 28), (i * 5) % 24));
 
-describe('chartVideoQuery', () => {
+describe('chartVideoLink', () => {
   it('fills Clip’s birth chart template from the chart', () => {
     const chart = chartOf(1991, 8, 16, 9, 'Lan');
     const query = chartVideoQuery(chart, reading, t, 'tuvi.example');
@@ -57,6 +63,15 @@ describe('chartVideoQuery', () => {
     }
   });
 
+  it('keeps the name and every text line out of the query (they ride in the fragment, which no server sees)', () => {
+    for (const chart of [chartOf(1987, 11, 23, 14, 'Minh'), ...CHARTS.slice(0, 50)]) {
+      const { query, fragment } = chartVideoLink(chart, reading, t, 'tuvi.example');
+      expect([...query.keys()].sort()).toEqual(['animal', 'cuc', 'star', 't']);
+      for (const value of query.values()) expect(value).toMatch(/^[a-z-]*$/);
+      expect([...fragment.keys()].sort()).toEqual(chart.input.name ? ['line1', 'line2', 'name', 'reading'] : ['line1', 'line2', 'reading']);
+    }
+  });
+
   it('never sends the birth date or hour', () => {
     const chart = chartOf(1987, 11, 23, 14, 'Minh');
     const query = chartVideoQuery(chart, reading, t, 'tuvi.example');
@@ -81,10 +96,15 @@ describe('chartVideoQuery', () => {
     expect(query.get('reading')).toBe('Lá số tử vi lập trên tuvi.example');
   });
 
-  it('builds the link to Clip’s create page', () => {
+  it('builds the link to Clip’s create page: ids in the query, text in the fragment', () => {
     const url = new URL(chartVideoUrl('https://clip.example', chartOf(1991, 8, 16, 9, 'Lan & <b>'), reading, t, 'tuvi.example'));
     expect(url.origin + url.pathname).toBe('https://clip.example/tao');
-    expect(url.searchParams.get('name')).toBe('Lan & <b>');
+    expect(url.search).toBe('?t=la-so&animal=mui&star=thai-duong&cuc=moc-tam');
+    const fragment = new URLSearchParams(url.hash.slice(1));
+    expect(fragment.get('name')).toBe('Lan & <b>');
+    expect(fragment.get('line1')).toBe('Tuổi Mùi · Mệnh Thái Dương, Thiên Lương');
+    expect(fragment.get('line2')).toBe('Mộc Tam Cục');
+    expect(fragment.get('reading')).toMatch(/^Như mặt trời/);
   });
 });
 
