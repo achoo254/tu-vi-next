@@ -10,7 +10,8 @@ import type { AuthConfig, ServerConfig } from '../config';
 import type { Db } from '../db/client';
 import { codeChallenge, newLoginState, openState, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
 import { clearSessionCookie, readCookie, readSessionToken, setSessionCookie } from './session-cookie';
-import { createSession, deleteSessionByToken, findSession, upsertUser } from './session-store';
+import { safeErrorText } from '../log-error';
+import { createSession, deleteSessionByToken, findSession, purgeExpiredSessions, upsertUser } from './session-store';
 
 const LOGIN_COOKIE = 'tuvi_login';
 const DISCOVERY_TTL_MS = 60 * 60 * 1000;
@@ -46,7 +47,7 @@ function discoveryClient(auth: AuthConfig): () => Promise<Discovery> {
 }
 
 /** `?login=<result>` on the return path, so the page can say what happened. */
-function withLoginResult(path: string, result: 'fail' | 'unavailable'): string {
+function withLoginResult(path: string, result: 'fail' | 'unavailable' | 'busy'): string {
   const url = new URL(path, 'http://app.invalid');
   url.searchParams.set('login', result);
   return `${url.pathname}${url.search}${url.hash}`;
@@ -57,7 +58,15 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
   const { auth } = config;
   const discover = auth ? discoveryClient(auth) : null;
   const secure = config.nodeEnv === 'production';
-  const signInLimit = rateLimit({ windowMs: 15 * 60 * 1000, limit: config.signInLimitPer15Min, standardHeaders: 'draft-8', legacyHeaders: false });
+  // Only the start is limited: a callback is worthless without the sealed state cookie a start hands out. Over the
+  // limit the person lands back on the page with a notice, not on a bare 429.
+  const signInLimit = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: config.signInLimitPer15Min,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    handler: (req, res) => res.redirect(withLoginResult(safeReturnPath(req.query.return), 'busy')),
+  });
 
   router.get('/api/session', async (req, res) => {
     const token = readSessionToken(req, config);
@@ -90,12 +99,12 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
       }).toString();
       res.redirect(url.href);
     } catch (error) {
-      console.warn('sign-in start failed', error instanceof Error ? error.message : typeof error);
+      console.warn('sign-in start failed', safeErrorText(error));
       res.redirect(withLoginResult(returnTo, 'fail'));
     }
   });
 
-  router.get('/auth/callback', signInLimit, async (req, res) => {
+  router.get('/auth/callback', async (req, res) => {
     const state = auth ? openState(readCookie(req, LOGIN_COOKIE), auth.clientSecret, now().getTime()) : null;
     res.clearCookie(LOGIN_COOKIE, { httpOnly: true, secure, sameSite: 'lax', path: '/auth' });
     const fail = (): void => res.redirect(withLoginResult(state?.returnTo ?? '/', 'fail'));
@@ -123,10 +132,14 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
       }
       const at = now();
       const userId = await upsertUser(db, sub, at);
+      // Signing in again replaces the browser's previous session; expired rows of anyone go too.
+      const previous = readSessionToken(req, config);
+      if (previous) await deleteSessionByToken(db, previous);
+      await purgeExpiredSessions(db, at);
       setSessionCookie(res, config, await createSession(db, userId, at));
       res.redirect(state.returnTo);
     } catch (error) {
-      console.warn('sign-in failed', error instanceof Error ? error.message : typeof error);
+      console.warn('sign-in failed', safeErrorText(error));
       fail();
     }
   });

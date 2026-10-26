@@ -1,4 +1,5 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { sql } from 'drizzle-orm';
+import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { type FakeIdp, startFakeIdp } from '../test/fake-idp';
 import { type TestServer, startTestServer } from '../test/test-server';
 import { MAX_CHARTS_PER_USER } from './charts/chart-store';
@@ -188,5 +189,74 @@ describe('signed in through the hoandat.com account', () => {
     // Still there for its owner.
     const listA = (await (await api(server, '/api/charts', { cookie: a })).json()) as { charts: Array<{ id: string }> };
     expect(listA.charts.some((c) => c.id === chart.id)).toBe(true);
+  });
+});
+
+describe('sign-in limits and session hygiene', () => {
+  let idp: FakeIdp;
+  let server: TestServer;
+
+  beforeAll(async () => {
+    idp = await startFakeIdp({ clientId: CLIENT_ID, clientSecret: SECRET, sub: 'account-c' });
+    server = await startTestServer({ AUTH_ISSUER: idp.issuer, AUTH_CLIENT_SECRET: SECRET }, { signInLimitPer15Min: 3 });
+  });
+  afterAll(async () => {
+    await server.close();
+    await idp.close();
+  });
+
+  it('replaces the browser’s previous session when it signs in again', async () => {
+    const first = await signIn(server);
+    const start = await fetch(`${server.origin}/auth/login?return=/saved`, { redirect: 'manual' });
+    const consent = await fetch(location(start), { redirect: 'manual' });
+    const callback = await fetch(location(consent), { redirect: 'manual', headers: { cookie: `${cookieFrom(start, 'tuvi_login')}; ${first}` } });
+    const second = cookieFrom(callback, 'tuvi_session');
+    expect(second).not.toBe(first);
+    expect(await (await api(server, '/api/session', { cookie: first })).json()).toMatchObject({ signedIn: false });
+    expect(await (await api(server, '/api/session', { cookie: second })).json()).toMatchObject({ signedIn: true });
+  });
+
+  it('sends a start over the limit back to the page with a notice, not a bare 429', async () => {
+    // Two starts were used above (limit 3 per window).
+    expect((await fetch(`${server.origin}/auth/login?return=/`, { redirect: 'manual' })).status).toBe(302);
+    const over = await fetch(`${server.origin}/auth/login?return=/credits`, { redirect: 'manual' });
+    expect(over.status).toBe(302);
+    expect(location(over)).toBe('/credits?login=busy');
+  });
+});
+
+describe('logging a failed query', () => {
+  let idp: FakeIdp;
+  let server: TestServer;
+
+  beforeAll(async () => {
+    idp = await startFakeIdp({ clientId: CLIENT_ID, clientSecret: SECRET, sub: 'account-d' });
+    server = await startTestServer({ AUTH_ISSUER: idp.issuer, AUTH_CLIENT_SECRET: SECRET });
+  });
+  afterAll(async () => {
+    await server.close();
+    await idp.close();
+  });
+
+  it('never writes the chart’s name or birth data to the log', async () => {
+    const session = await signIn(server);
+    // Break the insert only (the count before it still works), so the failing query carries the birth data.
+    await server.database.db.execute(sql`alter table charts rename column name to name_broken`);
+    const logged: string[] = [];
+    const spy = vi.spyOn(console, 'error').mockImplementation((...args: unknown[]) => {
+      logged.push(args.map(String).join(' '));
+    });
+    try {
+      const res = await api(server, '/api/charts', { method: 'POST', cookie: session, body: JSON.stringify(birth) });
+      expect(res.status).toBe(500);
+      expect(await res.json()).toEqual({ error: 'internal' });
+    } finally {
+      spy.mockRestore();
+    }
+    const text = logged.join('\n');
+    expect(text).toContain('request failed');
+    expect(text).toContain('query failed');
+    expect(text).not.toContain('Bé Na');
+    expect(text).not.toContain('1985');
   });
 });

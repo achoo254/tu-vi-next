@@ -98,8 +98,7 @@ Lá số thứ nhất khớp ví dụ trong README của iztro (Mệnh tại Ng�
 
 ## 7. Kích thước
 
-Phase 3 đặt mục tiêu `packages/chart` sau gzip < 150 KB. Đo bằng `vite build` (chunk riêng của engine, tải khi cần):
-**487 KB, gzip 154,5 KB**. Riêng `iztro` cùng thư viện nó kéo theo đã là 146 KB gzip (đo bằng esbuild: `lunar-typescript`
-100 KB, `i18next` và 6 ngôn ngữ của iztro phần lớn còn lại); phần của app (lịch Việt, module bọc, `zod/mini`) khoảng
-10 KB. Không đạt dưới 150 KB nếu vẫn dùng iztro. Trang tải trước bundle chính 90 KB gzip; engine tải song song khi vào
-trang lập lá số, các trang pháp lý không tải engine.
+Đo bằng `vite build` (chunk riêng của engine, tải khi cần): **487 KB, gzip 154,5 KB**. Riêng `iztro` cùng thư viện nó
+kéo theo đã là 146 KB gzip (đo bằng esbuild: `lunar-typescript` 100 KB, `i18next` và 6 ngôn ngữ của iztro phần lớn còn
+lại); phần của app (lịch Việt, module bọc, `zod/mini`) khoảng 10 KB. Mức này được chấp nhận (26/10/2026) vì engine tải
+lười: trang tải trước bundle chính 90 KB gzip, engine tải khi vào trang lập lá số, các trang pháp lý không tải engine.

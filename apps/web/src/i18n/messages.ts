@@ -59,6 +59,10 @@ export const vi = {
   'chart.decade': 'Đại hạn {from}–{to}',
   'chart.board': 'Bàn lá số 12 cung',
   'chart.starHint': 'Bấm vào một sao để xem nghĩa.',
+  'chart.renderError': 'Không vẽ được lá số này. Thử lại, hoặc kiểm tra lại ngày giờ sinh.',
+  'chart.retry': 'Thử lại',
+  'chart.engineFailed': 'Không tải được phần lập lá số. Tải lại trang để thử lại.',
+  'chart.reload': 'Tải lại trang',
 
   'actions.save': 'Lưu lá số',
   'actions.saving': 'Đang lưu…',
@@ -77,9 +81,11 @@ export const vi = {
   'saved.delete': 'Xoá',
   'saved.confirmDelete': 'Xoá lá số "{name}"?',
   'saved.loadError': 'Không tải được danh sách lá số.',
+  'saved.deleteError': 'Không xoá được lá số, thử lại sau.',
 
   'login.fail': 'Đăng nhập chưa thành công. Thử lại nhé.',
   'login.unavailable': 'Đăng nhập tạm thời chưa mở. Bạn vẫn lập và tải ảnh lá số được.',
+  'login.busy': 'Có quá nhiều lần đăng nhập từ mạng của bạn. Đợi vài phút rồi thử lại.',
 
   'star.close': 'Đóng',
   'star.kind.major': 'Chính tinh: một trong 14 sao chính, định tính chất của cung.',
@@ -167,6 +173,10 @@ export const en: Messages = {
   'chart.decade': 'Decade {from}–{to}',
   'chart.board': 'The 12-palace board',
   'chart.starHint': 'Tap a star to read its meaning.',
+  'chart.renderError': 'This chart could not be drawn. Try again, or check the birth date and time.',
+  'chart.retry': 'Try again',
+  'chart.engineFailed': 'The chart engine could not be loaded. Reload the page to try again.',
+  'chart.reload': 'Reload the page',
 
   'actions.save': 'Save chart',
   'actions.saving': 'Saving…',
@@ -185,9 +195,11 @@ export const en: Messages = {
   'saved.delete': 'Delete',
   'saved.confirmDelete': 'Delete the chart "{name}"?',
   'saved.loadError': 'Could not load your charts.',
+  'saved.deleteError': 'Could not delete the chart, try again later.',
 
   'login.fail': 'Sign-in did not go through. Please try again.',
   'login.unavailable': 'Sign-in is not open yet. You can still cast charts and download them.',
+  'login.busy': 'Too many sign-ins from your network. Wait a few minutes and try again.',
 
   'star.close': 'Close',
   'star.kind.major': 'Major star: one of the 14 main stars, it sets the character of the palace.',

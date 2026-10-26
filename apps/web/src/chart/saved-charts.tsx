@@ -5,6 +5,8 @@ import { useI18n } from '../i18n/i18n';
 
 interface SavedChartsProps {
   charts: SavedChart[] | 'error' | null;
+  /** A failed action on the list (deleting), shown above it. */
+  message: string | null;
   onOpen(input: BirthInput): void;
   onDelete(chart: SavedChart): void;
 }
@@ -17,13 +19,18 @@ function describe(input: BirthInput, lunarLabel: string): string {
 }
 
 /** The signed-in account's charts, newest first. */
-export function SavedCharts({ charts, onOpen, onDelete }: SavedChartsProps): ReactNode {
+export function SavedCharts({ charts, message, onOpen, onDelete }: SavedChartsProps): ReactNode {
   const { t } = useI18n();
   return (
     <section className="card saved-charts" aria-labelledby="saved-title" data-id="saved-charts">
       <h2 id="saved-title" className="card-title">
         {t('saved.title')}
       </h2>
+      {message && (
+        <p className="alert alert-error" role="alert" data-id="saved-message">
+          {message}
+        </p>
+      )}
       {charts === 'error' && <p className="alert alert-error">{t('saved.loadError')}</p>}
       {Array.isArray(charts) && charts.length === 0 && <p className="empty">{t('saved.empty')}</p>}
       {Array.isArray(charts) && charts.length > 0 && (

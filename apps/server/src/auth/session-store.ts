@@ -1,5 +1,5 @@
 import { createHash, randomBytes } from 'node:crypto';
-import { eq } from 'drizzle-orm';
+import { eq, lt, lte, or } from 'drizzle-orm';
 import type { Db } from '../db/client';
 import { sessions, users } from '../db/schema';
 
@@ -54,4 +54,14 @@ export async function findSession(db: Db, token: string, now: Date): Promise<Ses
 
 export async function deleteSessionByToken(db: Db, token: string): Promise<void> {
   await db.delete(sessions).where(eq(sessions.id, hashToken(token)));
+}
+
+/** Deletes every session past its absolute or idle expiry; returns how many went. */
+export async function purgeExpiredSessions(db: Db, now: Date): Promise<number> {
+  const idleSince = new Date(now.getTime() - SESSION_IDLE_MS);
+  const removed = await db
+    .delete(sessions)
+    .where(or(lte(sessions.expiresAt, now), lt(sessions.lastSeenAt, idleSince)))
+    .returning({ id: sessions.id });
+  return removed.length;
 }

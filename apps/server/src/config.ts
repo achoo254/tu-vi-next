@@ -38,7 +38,10 @@ export interface ServerConfig {
   pgliteDir: string | null | undefined;
   /** Sign-in through the hoandat.com account; null when AUTH_CLIENT_SECRET is not set. */
   auth: AuthConfig | null;
-  /** Sign-in start/callback requests per 15 minutes per IP. */
+  /**
+   * Sign-in starts per 15 minutes per IP. Generous: mobile carriers put many people behind one address, and the
+   * real client IP is the one nginx forwards (Cloudflare's real-IP restore is global on the host).
+   */
   signInLimitPer15Min: number;
 }
 
@@ -80,6 +83,6 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
           redirectUri: `${publicUrl.origin}/auth/callback`,
         }
       : null,
-    signInLimitPer15Min: 30,
+    signInLimitPer15Min: 100,
   };
 }

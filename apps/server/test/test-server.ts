@@ -12,7 +12,7 @@ export interface TestServer {
   close(): Promise<void>;
 }
 
-export async function startTestServer(env: Record<string, string> = {}): Promise<TestServer> {
+export async function startTestServer(env: Record<string, string> = {}, overrides: Partial<ServerConfig> = {}): Promise<TestServer> {
   const database = await openPglite();
   // The app's public origin is the test server itself, known once it listens: listen first, then build the app.
   let handler: ReturnType<typeof createApp> | null = null;
@@ -22,7 +22,7 @@ export async function startTestServer(env: Record<string, string> = {}): Promise
   });
   await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
   const origin = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
-  const config = loadConfig({ NODE_ENV: 'test', PUBLIC_URL: origin, ...env });
+  const config = { ...loadConfig({ NODE_ENV: 'test', PUBLIC_URL: origin, ...env }), ...overrides };
   handler = createApp({ config, db: database.db });
   return {
     origin,

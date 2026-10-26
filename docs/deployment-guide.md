@@ -51,7 +51,8 @@ không bao giờ trong repo. Trên server là `/etc/tuvi/production.env` (`root:
    Thêm dòng `host tuvi tuvi 127.0.0.1/32 scram-sha-256` vào `pg_hba.conf` (cạnh các dòng của sản phẩm khác) rồi
    `systemctl reload postgresql`. Không tạo instance Postgres mới.
 4. **Env:** ghi `/etc/tuvi/production.env` từ thư mục env trên iCloud qua ssh stdin, không in giá trị ra màn hình.
-5. **Cài unit và nginx:** `SSH_TARGET=<alias> bash infra/deploy.sh setup`.
+5. **Cài unit và nginx:** `SSH_TARGET=<alias> bash infra/deploy.sh setup`. Chạy lại sau khi sửa unit hay site nginx:
+   unit đổi thì service đang chạy được restart ngay.
 6. **Release:** `SSH_TARGET=<alias> bash infra/deploy.sh`.
 
 ## Release
@@ -60,9 +61,12 @@ không bao giờ trong repo. Trên server là `/etc/tuvi/production.env` (`root:
 SSH_TARGET=<alias> [SSH_OPTS="-F <ssh_config>"] bash infra/deploy.sh
 ```
 
-Script chạy `pnpm lint`, `typecheck`, `test`, `build` trên máy dev, đẩy `apps/web/dist`, `apps/server/dist`,
+Script từ chối chạy khi cây làm việc còn thay đổi chưa commit (`git status --porcelain` khác rỗng): bản release mang
+tên commit `HEAD` nên phải đúng là `HEAD`. Sau đó chạy `pnpm lint`, `typecheck`, `test`, `build` trên máy dev, đẩy `apps/web/dist`, `apps/server/dist`,
 `apps/server/drizzle` vào `/var/www/tuvi/releases/<thời điểm>-<commit>`, trỏ `current` sang bản mới, restart
-`tuvi-server`, rồi kiểm `/healthz` trên loopback và `https://tuvi.hoandat.com/` qua origin. Giữ 5 bản gần nhất.
+`tuvi-server`, rồi kiểm `/healthz` trên loopback và `https://tuvi.hoandat.com/` qua origin. Một trong hai bước kiểm
+hỏng thì script tự trỏ `current` về bản trước, restart, in log và thoát mã 1. Giữ 5 bản gần nhất. Gói release không
+chứa `._*` hay `.DS_Store` (`COPYFILE_DISABLE=1` và `--exclude`).
 Server không cần `pnpm install`: bundle đã gồm mọi thư viện.
 
 Kiểm sau release:
@@ -73,15 +77,24 @@ Kiểm sau release:
 
 ## Rollback
 
+Release hỏng tự quay về bản trước (mục Release). Quay về tay:
+
 ```sh
 ssh <alias> 'cd /var/www/tuvi && ls -1dt releases/*/'          # chọn bản trước
 ssh <alias> 'cd /var/www/tuvi && ln -sfn releases/<bản trước> current && systemctl restart tuvi-server'
 ```
 
-Migration chỉ thêm bảng/cột; bản cũ chạy được trên schema mới. Gỡ hẳn app: `systemctl disable --now tuvi-server`,
+Migration chỉ thêm bảng/cột; bản cũ chạy được trên schema mới (migration đã chạy thì vẫn giữ khi quay về).
+
+## Cache trình duyệt
+
+`index.html` và các file không băm trả `Cache-Control: no-cache`; `/assets/` (tên có hash) cache một năm. Sau mỗi
+release, trang mở từ bản trước không tải được chunk engine cũ (đã xoá): web tự tải lại trang một lần rồi mới báo lỗi. Gỡ hẳn app: `systemctl disable --now tuvi-server`,
 xoá `/etc/nginx/conf.d/tuvi.hoandat.com.conf` (`nginx -t` rồi reload), xoá bản ghi DNS, gỡ `TUVI_WEB_*` trên IdP.
 
 ## Log
 
 `journalctl -u tuvi-server`; nginx: `/var/log/nginx/tuvi.hoandat.com.{access,error}.log`. Log của server chỉ ghi
-lỗi và trạng thái đăng nhập, không ghi ngày sinh hay tên.
+lỗi và trạng thái đăng nhập, không ghi ngày sinh hay tên: lỗi truy vấn chỉ ghi mã và thông báo của Postgres, không
+ghi câu SQL hay tham số (`apps/server/src/log-error.ts`, có test). Phiên hết hạn bị xoá khi server khởi động, mỗi giờ
+và mỗi lần đăng nhập. Mất kết nối Postgres (Postgres chung restart) không làm sập service.

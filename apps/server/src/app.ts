@@ -7,6 +7,7 @@ import { chartRoutes } from './charts/chart-routes';
 import type { ServerConfig } from './config';
 import type { Db } from './db/client';
 import { HttpError } from './http-error';
+import { safeErrorText } from './log-error';
 
 export interface AppDeps {
   config: ServerConfig;
@@ -44,7 +45,8 @@ export function createApp({ config, db, now = () => new Date() }: AppDeps): Expr
       res.status(400).json({ error: 'invalid-body' });
       return;
     }
-    console.error('request failed', err instanceof Error ? (err.stack ?? err.message) : typeof err);
+    // Never the raw error: a failed query's message carries the chart's name and birth data.
+    console.error('request failed', safeErrorText(err));
     res.status(500).json({ error: 'internal' });
   };
   app.use(onError);

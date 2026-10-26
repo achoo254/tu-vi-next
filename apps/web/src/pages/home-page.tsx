@@ -6,20 +6,23 @@ import type { SessionState } from '../api/session-api';
 import { BirthForm } from '../chart/birth-form';
 import { ChartActions } from '../chart/chart-actions';
 import { ChartBoard } from '../chart/chart-board';
-import { type ChartEngine, useChartEngine } from '../chart/chart-engine';
+import { type ChartEngineState, useChartEngine } from '../chart/chart-engine';
+import { ChartErrorBoundary } from '../chart/chart-error-boundary';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
 import { type Translate, useI18n } from '../i18n/i18n';
 
 type Cast = { chart: Chart; error: null } | { chart: null; error: string | null };
 
-function cast(engine: ChartEngine | null, input: BirthInput | null, t: Translate): Cast {
-  if (!input || !engine) return { chart: null, error: null };
+function cast(engine: ChartEngineState, input: BirthInput | null, t: Translate): Cast {
+  if (!input || typeof engine === 'string') return { chart: null, error: null };
   try {
     return { chart: engine.buildChart(input), error: null };
   } catch (error) {
     if (error instanceof engine.ChartInputError) return { chart: null, error: t(`form.error.${error.code}`, { min: MIN_BIRTH_YEAR, max: MAX_BIRTH_YEAR }) };
-    throw error;
+    // Not the person's input (an engine bug or an unexpected iztro failure): say so instead of blanking the page.
+    console.error('chart could not be cast', error instanceof Error ? error.message : typeof error);
+    return { chart: null, error: t('chart.renderError') };
   }
 }
 
@@ -27,6 +30,7 @@ function loginNotice(t: Translate): string | null {
   const login = new URLSearchParams(window.location.search).get('login');
   if (login === 'fail') return t('login.fail');
   if (login === 'unavailable') return t('login.unavailable');
+  if (login === 'busy') return t('login.busy');
   return null;
 }
 
@@ -37,6 +41,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   const [input, setInput] = useState<BirthInput | null>(loadLastInput);
   const [formKey, setFormKey] = useState(0);
   const [saved, setSaved] = useState<SavedChart[] | 'error' | null>(null);
+  const [savedMessage, setSavedMessage] = useState<string | null>(null);
   const chartRef = useRef<HTMLElement>(null);
   const { chart, error } = useMemo(() => cast(engine, input, t), [engine, input, t]);
   const signedIn = session.status === 'ready' && session.signedIn;
@@ -79,11 +84,13 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
 
   async function remove(target: SavedChart): Promise<void> {
     if (!window.confirm(t('saved.confirmDelete', { name: target.input.name || t('chart.unnamed') }))) return;
+    setSavedMessage(null);
     try {
       await deleteChart(target.id);
-    } finally {
-      await refresh();
+    } catch {
+      setSavedMessage(t('saved.deleteError'));
     }
+    await refresh();
   }
 
   return (
@@ -104,8 +111,16 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
       <div className="home-grid">
         <div className="home-side">
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
-          {signedIn && <SavedCharts charts={saved} onOpen={open} onDelete={(c) => void remove(c)} />}
+          {signedIn && <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={(c) => void remove(c)} />}
         </div>
+        {engine === 'failed' && (
+          <p className="alert alert-error" role="alert" data-id="engine-failed">
+            {t('chart.engineFailed')}{' '}
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => window.location.reload()}>
+              {t('chart.reload')}
+            </button>
+          </p>
+        )}
         {chart && (
           <section className="chart" ref={chartRef} aria-labelledby="chart-title" data-id="chart">
             <div className="chart-head">
@@ -123,7 +138,19 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 }}
               />
             </div>
-            <ChartBoard chart={chart} />
+            <ChartErrorBoundary
+              key={JSON.stringify(chart.input)}
+              fallback={(retry) => (
+                <p className="alert alert-error" role="alert" data-id="chart-error">
+                  {t('chart.renderError')}{' '}
+                  <button type="button" className="btn btn-secondary btn-sm" onClick={retry}>
+                    {t('chart.retry')}
+                  </button>
+                </p>
+              )}
+            >
+              <ChartBoard chart={chart} />
+            </ChartErrorBoundary>
           </section>
         )}
       </div>

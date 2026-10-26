@@ -22,6 +22,9 @@ export const DEV_PGLITE_DIR = path.resolve(SERVER_DIR, '../../.data/pglite');
 export async function openPostgres(connectionString: string): Promise<DbHandle> {
   // A small pool: the app is light and shares the host's Postgres with other products.
   const pool = new pg.Pool({ connectionString, max: 4 });
+  // An idle client losing its connection (the shared Postgres restarting) emits `error` on the pool; without
+  // a listener Node would crash the process. The pool drops that client and opens a new one when needed.
+  pool.on('error', (error) => console.error('postgres idle client error', error.message));
   const db = drizzleNodePg(pool, { schema });
   await migrateNodePg(db, { migrationsFolder: MIGRATIONS });
   return { db, close: () => pool.end() };

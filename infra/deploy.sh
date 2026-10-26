@@ -6,9 +6,11 @@
 #
 # setup: system user `tuvi`, directories, the systemd unit and the nginx site (nginx -t before reload, the
 #   previous file restored on failure). /etc/tuvi/production.env must already exist (docs/deployment-guide.md).
-# release: gates + build here, upload to /var/www/tuvi/releases/<stamp>, point `current` at it, restart
-#   tuvi-server, check /healthz on loopback and https://tuvi.hoandat.com/ through the origin. The five newest
-#   releases stay; rollback: docs/deployment-guide.md.
+#   A changed unit restarts the running service.
+# release: refuses a dirty working tree; gates + build here, upload to /var/www/tuvi/releases/<stamp>, point
+#   `current` at it, restart tuvi-server, check /healthz on loopback and https://tuvi.hoandat.com/ through the
+#   origin. On failure `current` goes back to the previous release, the service restarts, and the script exits 1.
+#   The five newest releases stay; manual rollback: docs/deployment-guide.md.
 set -euo pipefail
 
 : "${SSH_TARGET:?set SSH_TARGET to the ssh host alias of the server}"
@@ -17,6 +19,8 @@ mode="${1:-release}"
 remote=/var/www/tuvi
 host=tuvi.hoandat.com
 port=5290
+# macOS tar would otherwise add AppleDouble `._*` entries that nginx would serve.
+export COPYFILE_DISABLE=1
 
 cd "$(dirname "$0")/.."
 
@@ -24,7 +28,7 @@ ssh_run() { ssh "${ssh_opts[@]}" "$SSH_TARGET" "$@"; }
 
 setup() {
 	ssh_run "mkdir -p $remote/infra" </dev/null
-	rsync -rlz -e "ssh ${ssh_opts[*]}" infra/ "$SSH_TARGET:$remote/infra/"
+	rsync -rlz --exclude "._*" --exclude .DS_Store -e "ssh ${ssh_opts[*]}" infra/ "$SSH_TARGET:$remote/infra/"
 	ssh_run bash -s <<EOF
 set -euo pipefail
 test -f /etc/tuvi/production.env || { echo "missing /etc/tuvi/production.env (docs/deployment-guide.md)" >&2; exit 1; }
@@ -32,8 +36,14 @@ id tuvi >/dev/null 2>&1 || useradd --system --no-create-home --shell /sbin/nolog
 chown root:tuvi /etc/tuvi/production.env
 chmod 640 /etc/tuvi/production.env
 mkdir -p $remote/releases
-install -m 644 $remote/infra/tuvi-server.service /etc/systemd/system/tuvi-server.service
-systemctl daemon-reload
+unit=/etc/systemd/system/tuvi-server.service
+if ! cmp -s $remote/infra/tuvi-server.service \$unit; then
+	install -m 644 $remote/infra/tuvi-server.service \$unit
+	systemctl daemon-reload
+	# A running service keeps the old limits and ExecStart until restarted (no-op when not running yet).
+	systemctl try-restart tuvi-server
+	echo "unit installed"
+fi
 systemctl enable tuvi-server >/dev/null
 conf=/etc/nginx/conf.d/$host.conf
 if ! cmp -s $remote/infra/nginx/$host.conf \$conf; then
@@ -51,6 +61,11 @@ EOF
 }
 
 release() {
+	# The release is named after HEAD: it must be exactly HEAD.
+	if [ -n "$(git status --porcelain)" ]; then
+		echo "working tree is not clean: commit or stash first (git status)" >&2
+		exit 1
+	fi
 	pnpm lint
 	pnpm typecheck
 	pnpm test
@@ -60,29 +75,46 @@ release() {
 	dir="$remote/releases/$stamp"
 	ssh_run "mkdir -p $dir" </dev/null
 	# The server bundle needs only Node and the migrations: no install on the server.
-	tar czf - apps/web/dist apps/server/dist apps/server/drizzle | ssh_run "tar xzf - --no-same-owner -C $dir"
+	tar czf - --exclude '._*' --exclude .DS_Store apps/web/dist apps/server/dist apps/server/drizzle | ssh_run "tar xzf - --no-same-owner -C $dir"
 	ssh_run bash -s <<EOF
 set -euo pipefail
 cd $remote
 chown -R root:root $dir
 find $dir -type d -exec chmod 755 {} +
 find $dir -type f -exec chmod 644 {} +
+prev=\$(readlink -f current || true)
 ln -sfn $dir current.next
 mv -T current.next current
+healthy() {
+	for attempt in \$(seq 1 20); do
+		curl -fsS http://127.0.0.1:$port/healthz >/dev/null && return 0
+		sleep 1
+	done
+	return 1
+}
+origin_ok() {
+	# Right after a reload old nginx workers can still answer; give them a moment.
+	for attempt in 1 2 3 4 5; do
+		code=\$(curl -sk -o /dev/null -w '%{http_code}' --resolve $host:443:127.0.0.1 https://$host/)
+		[ "\$code" = 200 ] && return 0
+		sleep 1
+	done
+	echo "origin https://$host/ -> \$code" >&2
+	return 1
+}
 systemctl restart tuvi-server
-for attempt in \$(seq 1 20); do
-	if curl -fsS http://127.0.0.1:$port/healthz >/dev/null; then echo "healthz ok"; break; fi
-	sleep 1
-done
-curl -fsS http://127.0.0.1:$port/healthz >/dev/null || { journalctl -u tuvi-server -n 40 --no-pager; exit 1; }
-# Right after a reload old nginx workers can still answer; give them a moment.
-for attempt in 1 2 3 4 5; do
-	code=\$(curl -sk -o /dev/null -w '%{http_code}' --resolve $host:443:127.0.0.1 https://$host/)
-	[ "\$code" = 200 ] && break
-	sleep 1
-done
-echo "origin https://$host/ -> \$code"
-[ "\$code" = 200 ]
+if ! healthy || ! origin_ok; then
+	journalctl -u tuvi-server -n 40 --no-pager || true
+	if [ -n "\$prev" ] && [ -d "\$prev" ] && [ "\$prev" != "$dir" ]; then
+		echo "release failed: switching back to \$prev" >&2
+		ln -sfn "\$prev" current.next
+		mv -T current.next current
+		systemctl restart tuvi-server
+		if healthy; then echo "previous release is back and healthy" >&2; else echo "previous release is not healthy either" >&2; fi
+	fi
+	exit 1
+fi
+echo "healthz ok, origin 200"
 ls -1dt releases/*/ | tail -n +6 | xargs -r rm -rf
 EOF
 }
