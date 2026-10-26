@@ -1,0 +1,25 @@
+{
+  "$schema": "./node_modules/@achoo254/brand/brand.config.schema.json",
+  "appName": "Tử Vi",
+  "shortName": "Tử Vi",
+  "description": "Lập lá số tử vi tiếng Việt theo âm lịch Việt Nam, xem nghĩa từng sao, lưu và chia sẻ lá số thành ảnh.",
+  "colors": {
+    "primary": "#6e56cf",
+    "background": "#f9f9fb",
+    "backgroundDark": "#111113"
+  },
+  "icon": "brand/app-icon.svg",
+  "iconMaskable": "brand/app-icon-maskable.svg",
+  "webInstall": true,
+  "appIds": {
+    "ios": "com.hoandat.tuvi"
+  },
+  "urlScheme": "com.hoandat.tuvi",
+  "primaryTenant": {
+    "domain": "hoandat.com",
+    "issuer": "https://auth.hoandat.com"
+  },
+  "hostTemplates": {
+    "web": "tuvi.{domain}"
+  }
+}
