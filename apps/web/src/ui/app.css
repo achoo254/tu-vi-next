@@ -80,6 +80,7 @@ button {
 }
 .app-brand b {
   color: var(--c-primary);
+  white-space: nowrap;
 }
 .app-brand-mark {
   flex: none;
@@ -660,6 +661,69 @@ button {
   }
 }
 
+/* lưu niên: the year picked above the board and its marks on it, quieter than the natal chart */
+.yearly-panel {
+  display: grid;
+  gap: var(--space-2);
+  font-size: 14px;
+}
+.yearly-pick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.yearly-select {
+  width: auto;
+  min-width: 180px;
+}
+.yearly-summary,
+.yearly-mutagens {
+  margin: 0;
+  color: var(--c-text-muted);
+}
+.yearly-mutagens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+}
+.yearly-mutagens-label {
+  font-weight: 600;
+}
+.yearly-mutagen {
+  color: var(--c-primary);
+  white-space: nowrap;
+}
+.yearly-link {
+  justify-self: start;
+  font-size: 14px;
+  font-weight: 600;
+}
+.palace-yearly {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.yearly-tag {
+  padding: 0 var(--space-2);
+  border: 1px solid color-mix(in srgb, var(--c-primary) 40%, transparent);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--c-primary);
+}
+.palace-yearly-soul {
+  outline: 2px dashed color-mix(in srgb, var(--c-primary) 65%, transparent);
+  outline-offset: -5px;
+}
+.star-yearly {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c-primary);
+}
+
 /* star meaning */
 .star-dialog {
   width: min(420px, calc(100vw - 2 * var(--gutter)));
@@ -787,4 +851,187 @@ button {
   color: var(--c-text);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+/* yearly pages (/tu-vi-2027 and one per con giáp) and their teaser on the home page */
+.year-page {
+  max-width: 880px;
+  /* Grid tracks may shrink below their content, so a wide table scrolls in its wrapper instead of widening the page. */
+  grid-template-columns: minmax(0, 1fr);
+}
+.year-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+.year-hero > div {
+  flex: 1 1 260px;
+  display: grid;
+  gap: var(--space-2);
+}
+.year-sign-art {
+  flex: none;
+}
+.year-hero .year-sign-art {
+  width: 96px;
+  height: 96px;
+}
+.year-breadcrumb {
+  font-size: 13px;
+  color: var(--c-text-muted);
+}
+.year-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+}
+.year-subheading {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: var(--space-2);
+}
+.year-facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-2) var(--space-4);
+}
+.year-fact dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-muted);
+}
+.year-fact dd {
+  margin: 0;
+}
+.year-table-wrap {
+  overflow-x: auto;
+}
+.year-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.year-table th,
+.year-table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--c-border-subtle);
+  text-align: left;
+  vertical-align: top;
+}
+.year-table thead th {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--c-text-muted);
+}
+.fortune-canchi,
+.fortune-star,
+.fortune-han {
+  display: block;
+}
+.fortune-canchi {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--c-text-muted);
+}
+.fortune-star {
+  font-weight: 600;
+}
+.fortune-han,
+.year-muted {
+  color: var(--c-text-muted);
+}
+.year-notes {
+  font-size: 14px;
+}
+.year-interpretation p + p {
+  margin-top: var(--space-2);
+}
+.sign-grid,
+.teaser-signs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+/* .doc ul indents lists for reading; the sign grid is a grid of cards, not a list to read. */
+.doc .sign-grid {
+  padding: 0;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+}
+
+.sign-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--c-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  color: var(--c-text);
+  text-decoration: none;
+}
+.sign-card:hover {
+  border-color: color-mix(in srgb, var(--c-primary) 55%, var(--c-border));
+}
+.sign-card[aria-current="page"] {
+  border-color: var(--c-primary);
+  box-shadow: var(--shadow-focus-primary);
+}
+.sign-card .year-sign-art {
+  width: 40px;
+  height: 40px;
+}
+.sign-card-name {
+  font-weight: 600;
+}
+.sign-card-note {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--c-text-muted);
+}
+.year-cta {
+  justify-self: start;
+  max-width: 100%;
+  min-height: 44px;
+  padding-block: var(--space-2);
+  line-height: 1.35;
+  text-align: center;
+  white-space: normal;
+}
+.year-disclaimer {
+  text-align: left;
+}
+.year-teaser {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+}
+@media (min-width: 480px) {
+  .year-teaser {
+    padding: var(--space-5);
+  }
+}
+.teaser-signs {
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+}
+.teaser-sign {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--c-text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.teaser-sign:hover {
+  background: color-mix(in srgb, var(--c-primary) 8%, transparent);
+}
+.teaser-animal {
+  font-weight: 400;
+  color: var(--c-text-muted);
 }

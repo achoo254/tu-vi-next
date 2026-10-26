@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5291 --strictPort",
-    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "build": "tsc --noEmit -p tsconfig.json && vite build && vite build --ssr src/year/year-prerender.tsx --outDir dist-ssr && tsx prerender.ts",
     "preview": "vite preview --port 5291 --strictPort",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p e2e/tsconfig.json",
     "e2e": "playwright test -c e2e/playwright.config.ts"

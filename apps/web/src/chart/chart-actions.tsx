@@ -1,4 +1,4 @@
-import type { Chart } from '@tuvi/chart';
+import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type ReactNode, useEffect, useState } from 'react';
 import { ApiError } from '../api/api-client';
 import { signInHref } from '../api/session-api';
@@ -32,6 +32,8 @@ function canShareFiles(): boolean {
 
 interface ChartActionsProps {
   chart: Chart;
+  /** The lưu niên shown on the board, drawn on the image too. */
+  horoscope: YearHoroscope | null;
   signedIn: boolean;
   signInAvailable: boolean;
   /** Saves the chart's input; resolves when it is stored. */
@@ -41,7 +43,7 @@ interface ChartActionsProps {
 type SaveState = 'idle' | 'saving' | 'saved';
 
 /** Save (signed in), download the PNG, share it (Web Share API). */
-export function ChartActions({ chart, signedIn, signInAvailable, onSave }: ChartActionsProps): ReactNode {
+export function ChartActions({ chart, horoscope, signedIn, signInAvailable, onSave }: ChartActionsProps): ReactNode {
   const { t, locale } = useI18n();
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const [exporting, setExporting] = useState(false);
@@ -70,7 +72,7 @@ export function ChartActions({ chart, signedIn, signInAvailable, onSave }: Chart
     setExporting(true);
     try {
       const { renderChartPng, shareOrDownload, exportFileName } = await loadExport();
-      const blob = await renderChartPng(chart, t);
+      const blob = await renderChartPng(chart, t, horoscope);
       await shareOrDownload(blob, exportFileName(chart), chartTitle(chart, t), share);
     } catch {
       setMessage(t('actions.error.export'));

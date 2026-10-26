@@ -1,4 +1,4 @@
-import type { Chart } from '@tuvi/chart';
+import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type BirthInput, MAX_BIRTH_YEAR, MIN_BIRTH_YEAR } from '@tuvi/chart/schema';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type SavedChart, deleteChart, listCharts, saveChart } from '../api/charts-api';
@@ -11,6 +11,10 @@ import { ChartErrorBoundary } from '../chart/chart-error-boundary';
 import { ConfirmDialog } from '../chart/confirm-dialog';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
+import { vietnamToday, yearOptions } from '../chart/yearly-marks';
+import { YearlyPanel } from '../chart/yearly-panel';
+import { FEATURED_YEAR } from '../year/year-routes';
+import { YearPagesTeaser } from './year-pages-teaser';
 import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/illustrations';
 import { type Translate, useI18n } from '../i18n/i18n';
 
@@ -25,6 +29,26 @@ function cast(engine: ChartEngineState, input: BirthInput | null, t: Translate):
     // Not the person's input (an engine bug or an unexpected iztro failure): say so instead of blanking the page.
     console.error('chart could not be cast', error instanceof Error ? error.message : typeof error);
     return { chart: null, error: t('chart.renderError') };
+  }
+}
+
+interface Yearly {
+  years: Array<{ year: number; canChi: string }>;
+  horoscope: YearHoroscope | null;
+}
+
+/** The lưu niên years offered for the chart and the horoscope of the chosen one (the featured year by default). */
+function yearly(engine: ChartEngineState, chart: Chart | null, choice: number | null): Yearly {
+  if (!chart || typeof engine === 'string') return { years: [], horoscope: null };
+  try {
+    const current = engine.solarToVnLunar(vietnamToday()).year;
+    const { years, initial } = yearOptions(current, chart.lunarDate.year, FEATURED_YEAR);
+    const year = choice !== null && years.includes(choice) ? choice : initial;
+    return { years: years.map((y) => ({ year: y, canChi: engine.yearCanChi(y) })), horoscope: year === null ? null : engine.yearHoroscope(chart, year) };
+  } catch (error) {
+    // The board still shows without the year's marks.
+    console.error('lưu niên could not be computed', error instanceof Error ? error.message : typeof error);
+    return { years: [], horoscope: null };
   }
 }
 
@@ -47,6 +71,8 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   const [pendingDelete, setPendingDelete] = useState<SavedChart | null>(null);
   const chartRef = useRef<HTMLElement>(null);
   const { chart, error } = useMemo(() => cast(engine, input, t), [engine, input, t]);
+  const [yearChoice, setYearChoice] = useState<number | null>(null);
+  const { years, horoscope } = useMemo(() => yearly(engine, chart, yearChoice), [engine, chart, yearChoice]);
   const signedIn = session.status === 'ready' && session.signedIn;
   const notice = loginNotice(t);
 
@@ -159,6 +185,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
               <ChartActions
                 key={JSON.stringify(chart.input)}
                 chart={chart}
+                horoscope={horoscope}
                 signedIn={signedIn}
                 signInAvailable={session.status === 'ready' && session.signInAvailable}
                 onSave={async () => {
@@ -167,6 +194,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 }}
               />
             </div>
+            <YearlyPanel chart={chart} horoscope={horoscope} years={years} onYear={setYearChoice} />
             <ChartErrorBoundary
               key={JSON.stringify(chart.input)}
               fallback={(retry) => (
@@ -178,11 +206,12 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 </p>
               )}
             >
-              <ChartBoard chart={chart} />
+              <ChartBoard chart={chart} horoscope={horoscope} />
             </ChartErrorBoundary>
           </section>
         )}
       </div>
+      <YearPagesTeaser />
     </div>
   );
 }

@@ -13,11 +13,13 @@ import * as viStarModule from 'iztro/lib/i18n/locales/vi-VN/star';
 import { type BirthInput, BirthInputSchema } from './birth-input';
 import { type BirthHour, type EarthlyBranch, EARTHLY_BRANCHES, birthHour } from './birth-hour';
 import { type CanChi, canChiOf, yearStemIndex } from './can-chi';
+import { yearCanChi } from './year-fortune';
 import {
   type LunarDate,
   type SolarDate,
   addDays,
   chineseLunarToSolar,
+  chineseSolarToLunar,
   isValidSolarDate,
   jdFromDate,
   solarToVnLunar,
@@ -195,6 +197,19 @@ function birthSolarDateOf(input: BirthInput): SolarDate {
   return solar;
 }
 
+/** iztro's chart for a Vietnamese lunar birth date (through its stand-in date). */
+function iztroAstrolabe(lunarDate: LunarDate, hourBranch: number, gender: BirthInput['gender']): ReturnType<typeof astro.withOptions> {
+  return astro.withOptions({
+    type: 'solar',
+    dateStr: formatIztroDate(iztroStandInDate(lunarDate)),
+    timeIndex: hourBranch,
+    gender,
+    fixLeap: true,
+    language: 'vi-VN',
+    config: IZTRO_CONFIG,
+  });
+}
+
 /** Casts the chart of `input`. Throws ChartInputError for input that does not name a real date. */
 export function buildChart(input: BirthInput): Chart {
   const parsed = BirthInputSchema.safeParse(input);
@@ -205,15 +220,7 @@ export function buildChart(input: BirthInput): Chart {
   const chartSolarDate = hour.nextDay ? addDays(birthSolarDate, 1) : birthSolarDate;
   const lunarDate = solarToVnLunar(chartSolarDate);
 
-  const astrolabe = astro.withOptions({
-    type: 'solar',
-    dateStr: formatIztroDate(iztroStandInDate(lunarDate)),
-    timeIndex: hour.branchIndex,
-    gender: birth.gender,
-    fixLeap: true,
-    language: 'vi-VN',
-    config: IZTRO_CONFIG,
-  });
+  const astrolabe = iztroAstrolabe(lunarDate, hour.branchIndex, birth.gender);
 
   const palaces = astrolabe.palaces
     .map((palace): ChartPalace => {
@@ -251,5 +258,66 @@ export function buildChart(input: BirthInput): Chart {
     soulBranch: branchOf(astrolabe.earthlyBranchOfSoulPalace),
     bodyBranch: branchOf(astrolabe.earthlyBranchOfBodyPalace),
     palaces,
+  };
+}
+
+/** Lưu niên of a chart: what iztro's horoscope gives for one lunar year. */
+export interface YearHoroscope {
+  /** The lunar year looked at, e.g. 2027. */
+  lunarYear: number;
+  /** Its can chi, e.g. "Đinh Mùi". */
+  canChi: string;
+  /** Tuổi mụ in that year. */
+  nominalAge: number;
+  /** Branch index (0 = Tý) of the lưu niên Mệnh: the palace on the year's branch. */
+  soulBranchIndex: number;
+  /** Branch index of the tiểu hạn palace. */
+  minorLimitBranchIndex: number;
+  /** Branch index of the đại hạn running that year; null before the first đại hạn starts. */
+  decadeBranchIndex: number | null;
+  /** Lưu tứ hóa: the star each transformation of the year's stem falls on. */
+  mutagens: Record<Mutagen, string>;
+}
+
+/**
+ * The lưu niên of `chart` in `lunarYear` (Vietnamese lunar year, from the birth year on).
+ *
+ * iztro reads the birth from the stand-in date, which may lie 60·k years from the real birth (same can chi).
+ * The year asked for is moved by the same 60·k years, so iztro sees the same can chi and the same tuổi mụ; a
+ * day in the 6th lunar month keeps clear of the Tết boundary. astrolabe.test.ts checks the shift changes
+ * nothing.
+ */
+export function yearHoroscope(chart: Chart, lunarYear: number): YearHoroscope {
+  if (!Number.isInteger(lunarYear) || lunarYear < chart.lunarDate.year || lunarYear > chart.lunarDate.year + 120) {
+    throw new RangeError(`no lưu niên for ${lunarYear} on a chart of ${chart.lunarDate.year}`);
+  }
+  const standIn = iztroStandInDate(chart.lunarDate);
+  const shift = chineseSolarToLunar(standIn).year - chart.lunarDate.year;
+  const target = chineseLunarToSolar({ year: lunarYear + shift, month: 6, day: 1, isLeapMonth: false });
+  if (!target) throw new Error(`no date in lunar year ${lunarYear + shift}`);
+  const astrolabe = iztroAstrolabe(chart.lunarDate, chart.hour.branchIndex, chart.input.gender);
+  const horoscope = astrolabe.horoscope(formatIztroDate(target), chart.hour.branchIndex);
+  const branchIndexAt = (index: number): number => {
+    const palace = astrolabe.palaces[index];
+    if (palace === undefined) throw new Error(`iztro horoscope points at palace ${index}`);
+    return EARTHLY_BRANCHES.indexOf(branchOf(palace.earthlyBranch));
+  };
+  const nominalAge = lunarYear - chart.lunarDate.year + 1;
+  const decadePalace = astrolabe.palaces[horoscope.decadal.index];
+  const [from, to] = decadePalace?.decadal.range ?? [0, -1];
+  // iztro lists the year's stars in the order Lộc, Quyền, Khoa, Kỵ.
+  const yearlyMutagen = (order: number): string => {
+    const star = horoscope.yearly.mutagen[order];
+    if (star === undefined) throw new Error(`iztro gave no lưu tứ hóa ${order}`);
+    return star;
+  };
+  return {
+    lunarYear,
+    canChi: yearCanChi(lunarYear),
+    nominalAge,
+    soulBranchIndex: branchIndexAt(horoscope.yearly.index),
+    minorLimitBranchIndex: branchIndexAt(horoscope.age.index),
+    decadeBranchIndex: nominalAge >= from && nominalAge <= to ? branchIndexAt(horoscope.decadal.index) : null,
+    mutagens: { loc: yearlyMutagen(0), quyen: yearlyMutagen(1), khoa: yearlyMutagen(2), ky: yearlyMutagen(3) },
   };
 }

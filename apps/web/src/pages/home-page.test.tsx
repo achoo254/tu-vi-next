@@ -30,6 +30,12 @@ describe('home page, signed out', () => {
     expect(board.textContent).toContain('ngày 1 tháng 1 năm Đinh Hợi');
     expect(JSON.parse(window.localStorage.getItem('tuvi.last-input') ?? 'null')).toMatchObject({ year: 2007, month: 2, day: 17 });
     expect(screen.getByRole('link', { name: 'Đăng nhập để lưu' }).getAttribute('href')).toMatch(/^\/auth\/login\?return=%2F/);
+    // Lưu niên: the featured year (or the current one once it has passed), its marks on the board, the yearly page link.
+    const select = screen.getByLabelText('Lưu niên');
+    expect(select.querySelectorAll('option').length).toBeGreaterThan(0);
+    expect(board.querySelectorAll('.yearly-tag').length).toBeGreaterThanOrEqual(2);
+    expect(board.querySelectorAll('.star-yearly')).toHaveLength(4);
+    expect(screen.getByRole('link', { name: /tuổi Hợi/ }).getAttribute('href')).toBe('/tu-vi-2027/tuoi-hoi');
   });
 
   it('explains a date that does not exist', async () => {

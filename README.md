@@ -3,8 +3,8 @@
 Thư mục repo: `tu-vi-next` (tên hiển thị lấy từ [`brand.config.json`](brand.config.json), không có hậu tố `-next`).
 Chạy tại `https://tuvi.hoandat.com`, thuộc tầng giải trí của hệ sinh thái hoandat.com.
 
-Nhập ngày giờ sinh (dương hoặc âm lịch) để lập lá số tử vi 12 cung bằng tiếng Việt, bấm vào từng sao để đọc nghĩa
-ngắn, xuất lá số thành ảnh PNG 1080×1350 để chia sẻ. Âm lịch tính theo giờ Việt Nam (UTC+7). Chưa đăng nhập thì mọi
+Nhập ngày giờ sinh (dương hoặc âm lịch) để lập lá số tử vi 12 cung bằng tiếng Việt, xem lưu niên (mặc định 2027) trên
+lá số, bấm vào từng sao để đọc nghĩa ngắn, xuất lá số thành ảnh PNG 1080×1350 để chia sẻ. Âm lịch tính theo giờ Việt Nam (UTC+7). Chưa đăng nhập thì mọi
 thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Nội dung mang tính giải trí,
 tham khảo.
 
@@ -19,6 +19,8 @@ tham khảo.
 | [`brand`](brand) | Biểu tượng AI gốc và các file sinh từ nó (`pnpm brand:gen`) |
 
 Lá số được kiểm thế nào, chỗ nào chưa kiểm: [`docs/chart-verification.md`](docs/chart-verification.md).
+Trang "Tử vi 2027" theo con giáp (render sẵn lúc build cho máy tìm kiếm) và nguồn của bảng sao hạn:
+[`docs/year-pages.md`](docs/year-pages.md).
 Deploy và rollback: [`docs/deployment-guide.md`](docs/deployment-guide.md).
 
 ## Chạy

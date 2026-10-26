@@ -1,6 +1,7 @@
-import { buildChart } from '@tuvi/chart';
+import { buildChart, yearHoroscope } from '@tuvi/chart';
 import { describe, expect, it } from 'vitest';
-import { CENTRE_RECT, EXPORT_HEIGHT, EXPORT_WIDTH, type Rect, exportFileName, palaceRect, wrapText } from './export-png';
+import { translator } from '../i18n/i18n';
+import { CENTRE_RECT, EXPORT_HEIGHT, EXPORT_WIDTH, type Rect, exportFileName, exportSubtitle, palaceRect, wrapText } from './export-png';
 
 const overlaps = (a: Rect, b: Rect): boolean => a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
 
@@ -27,5 +28,12 @@ describe('PNG export layout', () => {
     const base = { name: '', calendar: 'solar', year: 2000, month: 8, day: 16, isLeapMonth: false, hour: 3, minute: 30, gender: 'male' } as const;
     expect(exportFileName(buildChart({ ...base, name: 'Nguyễn Đức Ánh' }))).toBe('la-so-nguyen-duc-anh.png');
     expect(exportFileName(buildChart(base))).toBe('la-so-2000-08-16.png');
+  });
+
+  it('names the lưu niên in the header', () => {
+    const chart = buildChart({ name: '', calendar: 'solar', year: 2000, month: 8, day: 16, isLeapMonth: false, hour: 3, minute: 30, gender: 'male' });
+    const t = translator('vi');
+    expect(exportSubtitle(chart, t, null)).toBe('16/08/2000 · 03:30 · Dương Nam · Canh Thìn');
+    expect(exportSubtitle(chart, t, yearHoroscope(chart, 2027))).toBe('16/08/2000 · 03:30 · Dương Nam · Canh Thìn · Lưu niên 2027 Đinh Mùi');
   });
 });

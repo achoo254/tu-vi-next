@@ -123,12 +123,33 @@ export const vi = {
   'zodiac.10': 'Chó',
   'zodiac.11': 'Lợn',
   'chart.zodiac': 'Tuổi {branch}, con {animal}',
+  'yearly.label': 'Lưu niên',
+  'yearly.option': '{year} {canChi}',
+  'yearly.summary': 'Năm {canChi}, tuổi mụ {age}: Lưu Mệnh tại {soul}, Tiểu hạn tại {minor}{decade}.',
+  'yearly.decade': ', Đại hạn tại {branch} ({from}–{to})',
+  'yearly.mutagens': 'Lưu tứ hóa',
+  'yearly.tag.soul': 'Lưu Mệnh',
+  'yearly.tag.decade': 'Đại hạn',
+  'yearly.tag.minor': 'Tiểu hạn',
+  'yearly.export': 'Lưu niên {year} {canChi}',
+  'yearly.yearPage': 'Xem Tử vi {year} tuổi {branch}',
+  'home.year.title': 'Tử vi {year} theo 12 con giáp',
+  'home.year.lead': 'Sao chiếu mệnh, vận hạn, tuổi hợp và Thái Tuế năm {year} của từng con giáp, theo âm lịch Việt Nam.',
+  'home.year.all': 'Xem cả 12 con giáp',
+  'page.loadFailed': 'Không tải được trang này. Tải lại trang để thử lại.',
+  'layout.yearPages': 'Tử vi {year}',
   'notFound.title': 'Không có trang này',
   'notFound.back': 'Về trang lập lá số',
 } as const;
 
 export type MessageKey = keyof typeof vi;
 export type Messages = Record<MessageKey, string>;
+
+/** The animal of each con giáp, by branch index (0 = Tý … 11 = Hợi). */
+export const ZODIAC_NAME_KEYS = [
+  'zodiac.0', 'zodiac.1', 'zodiac.2', 'zodiac.3', 'zodiac.4', 'zodiac.5',
+  'zodiac.6', 'zodiac.7', 'zodiac.8', 'zodiac.9', 'zodiac.10', 'zodiac.11',
+] as const satisfies readonly MessageKey[];
 
 export const en: Messages = {
   'layout.nav': 'Navigation',
@@ -251,6 +272,21 @@ export const en: Messages = {
   'zodiac.10': 'Dog',
   'zodiac.11': 'Pig',
   'chart.zodiac': 'Born in a {branch} year: the {animal}',
+  'yearly.label': 'Year (lưu niên)',
+  'yearly.option': '{year} {canChi}',
+  'yearly.summary': 'Year {canChi}, age {age} (tuổi mụ): year Mệnh at {soul}, minor limit at {minor}{decade}.',
+  'yearly.decade': ', decade at {branch} ({from}–{to})',
+  'yearly.mutagens': 'Year transformations',
+  'yearly.tag.soul': 'Year Mệnh',
+  'yearly.tag.decade': 'Decade',
+  'yearly.tag.minor': 'Minor limit',
+  'yearly.export': 'Lưu niên {year} {canChi}',
+  'yearly.yearPage': '{year} for the {branch} year',
+  'home.year.title': '{year} for the 12 zodiac animals',
+  'home.year.lead': 'Guiding stars, limits, harmonies and Thái Tuế in {year} for each animal, in the Vietnamese lunar calendar.',
+  'home.year.all': 'All 12 animals',
+  'page.loadFailed': 'This page could not be loaded. Reload the page to try again.',
+  'layout.yearPages': '{year} by zodiac',
   'notFound.title': 'Page not found',
   'notFound.back': 'Back to casting a chart',
 };

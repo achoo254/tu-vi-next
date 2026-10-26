@@ -2,6 +2,7 @@ import { type ReactNode, useState } from 'react';
 import { type SessionState, signInHref, signOut } from '../api/session-api';
 import { brand } from '../brand';
 import { useI18n } from '../i18n/i18n';
+import { FEATURED_YEAR, parseYearRoute, yearIndexPath } from '../year/year-routes';
 
 /** AI-drawn app mark (apps/web/public, made by pnpm brand:gen), decorative: the name follows it. */
 const BRAND_MARK = '/brand-mark-96.webp';
@@ -35,6 +36,9 @@ export function TopBar({ path, session }: TopBarProps): ReactNode {
         <nav className="topbar-nav" aria-label={t('layout.nav')}>
           <a className="topbar-link" href="/" aria-current={path === '/' ? 'page' : undefined} data-id="nav-home">
             {t('layout.home')}
+          </a>
+          <a className="topbar-link" href={yearIndexPath()} aria-current={parseYearRoute(path) ? 'page' : undefined} data-id="nav-year">
+            {t('layout.yearPages', { year: FEATURED_YEAR })}
           </a>
           {session.status === 'ready' && session.signedIn && (
             <button type="button" className="topbar-link topbar-button" onClick={() => void onSignOut()} disabled={signingOut} data-id="nav-sign-out">

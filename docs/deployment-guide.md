@@ -8,7 +8,7 @@ vào đây; dùng alias SSH (`SSH_TARGET`) và placeholder như `<SERVER_65_IP>`
 
 | Phần | Ở đâu |
 |---|---|
-| Web (React + Vite, tĩnh) | `/var/www/tuvi/current/apps/web/dist`, nginx phục vụ trực tiếp |
+| Web (React + Vite, tĩnh) | `/var/www/tuvi/current/apps/web/dist`, nginx phục vụ trực tiếp; trang `/tu-vi-2027…` là HTML render sẵn (`<path>/index.html`, [`year-pages.md`](year-pages.md)) |
 | API (Node, Express 5, một file bundle) | systemd `tuvi-server`, loopback `127.0.0.1:5290`, Node 22 ở `/opt/node22` |
 | Database | Postgres đang chạy trên `.65`, database `tuvi`, role `tuvi`; migration chạy khi server khởi động |
 | Đường vào | Cloudflare (proxied, SSL "full") → nginx `conf.d/tuvi.hoandat.com.conf` → `/api/`, `/auth/`, `/healthz` sang API |

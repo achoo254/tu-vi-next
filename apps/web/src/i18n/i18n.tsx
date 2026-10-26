@@ -51,7 +51,8 @@ interface I18n {
 const I18nContext = createContext<I18n | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }): ReactNode {
-  const [locale, setLocaleState] = useState<Locale>(() => initialLocale(window.location.search, readStoredLocale()));
+  // Pages prerendered at build time (no window) are rendered in Vietnamese.
+  const [locale, setLocaleState] = useState<Locale>(() => (typeof window === 'undefined' ? 'vi' : initialLocale(window.location.search, readStoredLocale())));
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);

@@ -96,9 +96,27 @@ Lá số thứ nhất khớp ví dụ trong README của iztro (Mệnh tại Ng�
   app ở các ngày hai lịch khác nhau. App theo lịch chính thức (miền Bắc rồi cả nước).
 - **Năm ngoài 1901–2099** không nhận (giới hạn của bảng và thuật toán đã kiểm).
 
-## 7. Kích thước
+## 7. Lưu niên (vận hạn năm trên lá số)
 
-Đo bằng `vite build` (chunk riêng của engine, tải khi cần): **487 KB, gzip 154,5 KB**. Riêng `iztro` cùng thư viện nó
+`yearHoroscope(chart, năm âm)` trong [`astrolabe.ts`](../packages/chart/src/astrolabe.ts) lấy `horoscope()` của iztro:
+Lưu Mệnh, Tiểu hạn, Đại hạn đang chạy, lưu tứ hóa. iztro tính tuổi mụ và Đại hạn từ năm sinh của **ngày thay**, nên
+năm được hỏi cũng dời đúng 60·k năm như ngày thay (cùng can chi, cùng tuổi mụ), lấy ngày mùng 1 tháng 6 âm của năm đó
+cho xa ranh giới Tết. Test [`year-horoscope.test.ts`](../packages/chart/src/year-horoscope.test.ts):
+
+- khớp iztro gọi thẳng bằng ngày thật (ba lá số mà lịch Việt và Trung Quốc trùng nhau, năm 2026, 2027, 2028, 2031, 2045);
+- năm lá số mẫu × 11 năm mỗi lá số, đúng quy tắc sách: Lưu Mệnh tại chi của năm; Tiểu hạn khởi tuổi 1 tại Tuất (Thân
+  Tý Thìn), Mùi (Tỵ Dậu Sửu), Thìn (Dần Ngọ Tuất), Sửu (Hợi Mão Mùi), nam thuận nữ nghịch; Đại hạn là cung chứa tuổi
+  mụ; lưu tứ hóa theo can năm (bảng mặc định của iztro, năm Canh: Dương Vũ Âm Đồng);
+- hai lá số ngày 30 âm mà Trung Quốc không có (30/1/1985, 30/5/1984; ngày thay cách 60 năm) vẫn đúng các quy tắc trên;
+- trước Đại hạn đầu (tuổi mụ nhỏ hơn số cục) không có Đại hạn; năm trước năm sinh bị từ chối.
+
+Lá số 16/8/2000 03:30 nam, năm 2027: tuổi mụ 28, Lưu Mệnh Mùi, Tiểu hạn Sửu, Đại hạn Thân (23–32), lưu Lộc Thái Âm,
+Quyền Thiên Đồng, Khoa Thiên Cơ, Kỵ Cự Môn.
+
+## 8. Kích thước
+
+Đo bằng `vite build` (chunk riêng của engine, tải khi cần): **487 KB, gzip 154,4 KB** (lưu niên thêm 0,01 KB). Riêng `iztro` cùng thư viện nó
 kéo theo đã là 146 KB gzip (đo bằng esbuild: `lunar-typescript` 100 KB, `i18next` và 6 ngôn ngữ của iztro phần lớn còn
 lại); phần của app (lịch Việt, module bọc, `zod/mini`) khoảng 10 KB. Mức này được chấp nhận (26/10/2026) vì engine tải
-lười: trang tải trước bundle chính 90 KB gzip, engine tải khi vào trang lập lá số, các trang pháp lý không tải engine.
+lười: trang tải trước JS chính 93 KB gzip (bundle chính 84 KB và hai chunk dùng chung 6,6 KB, 2,4 KB; đo 26/10/2026), engine
+tải khi vào trang lập lá số; trang pháp lý (4 KB) và trang Tử vi theo năm (7,4 KB) có chunk riêng, không tải engine.

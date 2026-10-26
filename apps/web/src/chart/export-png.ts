@@ -1,17 +1,19 @@
 /**
  * The chart as a 1080 × 1350 PNG (4:5, the portrait size social feeds show whole), drawn on a canvas in
- * the browser: title, the 4 × 4 board, the entertainment note and the tuvi.hoandat.com watermark.
+ * the browser: title, the 4 × 4 board, the entertainment note and the tuvi.hoandat.com watermark. With a lưu niên,
+ * the header names the year and the board carries its marks (Lưu Mệnh, Đại hạn, Tiểu hạn, lưu tứ hóa).
  * Colours come from the --c-export-* tokens (always light, whatever the screen theme). The AI art (sky paper,
  * frame, medallion, zodiac animals, star, palace, transformation and element emblems) is drawn when it loaded; a missing image is left out, never
  * a reason to fail the export. Cells cover the paper at --cell-opacity, as on screen.
  */
-import type { Chart, ChartPalace, ChartStar, Mutagen } from '@tuvi/chart';
+import type { Chart, ChartPalace, ChartStar, Mutagen, YearHoroscope } from '@tuvi/chart';
 import { APP_HOST } from '../brand';
 import type { Translate } from '../i18n/i18n';
 import { boardPosition } from './board-layout';
 import { FRAME_URL, MEDALLION_URL, SKY_URL, elementArt, mutagenArt, palaceArt, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
 import { mutagenLabel, starName } from './star-terms';
+import { palaceYearTags, yearlyMutagen, yearlyMutagenLabel } from './yearly-marks';
 
 export const EXPORT_WIDTH = 1080;
 export const EXPORT_HEIGHT = 1350;
@@ -166,7 +168,7 @@ function drawCover(ctx: CanvasRenderingContext2D, image: HTMLImageElement): void
   ctx.drawImage(image, (EXPORT_WIDTH - w) / 2, (EXPORT_HEIGHT - h) / 2, w, h);
 }
 
-function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette: Palette, t: Translate, art: ExportArt): void {
+function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette: Palette, t: Translate, art: ExportArt, horoscope: YearHoroscope | null): void {
   const { x, y, width, height } = palaceRect(palace.branchIndex);
   const inner = width - 2 * PAD;
   fillCell(ctx, { x, y, width, height }, palace.isSoulPalace ? palette.panel : palette.bg, palette.cellOpacity);
@@ -206,6 +208,18 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
     drawStarLabel(ctx, star, x + PAD + indent, cursor, inner - indent, art, BADGE + 2);
     cursor += 24;
   }
+  // The year's transformations on this palace's stars, before the minor stars so they are never cut off.
+  ctx.font = `600 15px ${SANS}`;
+  ctx.fillStyle = palette.accent;
+  for (const star of [...palace.majorStars, ...palace.minorStars]) {
+    const yearly = yearlyMutagen(horoscope, star.name);
+    if (!yearly) continue;
+    const badge = art.mutagens.get(yearly);
+    const indent = badge ? BADGE + 3 : 0;
+    if (badge) ctx.drawImage(badge, x + PAD, cursor + 1, BADGE, BADGE);
+    ctx.fillText(`${yearlyMutagenLabel(yearly)} · ${star.name}`, x + PAD + indent, cursor + 1, inner - indent);
+    cursor += 20;
+  }
   const footerTop = y + height - PAD - 36;
   ctx.font = `400 14px ${SANS}`;
   const minor = [...palace.minorStars, ...palace.otherStars];
@@ -224,8 +238,20 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
   }
   ctx.font = `500 14px ${SANS}`;
   ctx.fillStyle = palette.muted;
-  ctx.fillText(t('chart.decade', { from: palace.decadeAges[0], to: palace.decadeAges[1] }), x + PAD, footerTop, inner);
+  const decade = t('chart.decade', { from: palace.decadeAges[0], to: palace.decadeAges[1] });
+  ctx.fillText(decade, x + PAD, footerTop, inner);
   ctx.fillText(`${palace.lifeStage} · ${palace.doctorStar}`, x + PAD, footerTop + 18, inner);
+  const tags = palaceYearTags(horoscope, palace.branchIndex);
+  if (tags.length > 0) {
+    const decadeWidth = ctx.measureText(decade).width;
+    ctx.font = `700 14px ${SANS}`;
+    ctx.fillStyle = palette.accent;
+    ctx.textAlign = 'right';
+    // Right-aligned on the đại hạn line, clear of the zodiac mark in the corner.
+    const right = x + width - PAD - MARK - 6;
+    ctx.fillText(tags.map((tag) => t(`yearly.tag.${tag}`)).join(' · '), right, footerTop, Math.max(right - (x + PAD + decadeWidth + 8), 40));
+    ctx.textAlign = 'left';
+  }
 }
 
 function drawCentre(ctx: CanvasRenderingContext2D, chart: Chart, palette: Palette, t: Translate, art: ExportArt): void {
@@ -266,8 +292,22 @@ function drawCentre(ctx: CanvasRenderingContext2D, chart: Chart, palette: Palett
   ctx.textAlign = 'left';
 }
 
+/** The line under the title: birth date, gender polarity, year can chi, and the lưu niên when there is one. */
+export function exportSubtitle(chart: Chart, t: Translate, horoscope: YearHoroscope | null): string {
+  const first = chartFacts(chart, t)[0];
+  const parts = [first?.value, chart.yinYangGender, chart.canChi.year, horoscope ? t('yearly.export', { year: horoscope.lunarYear, canChi: horoscope.canChi }) : undefined];
+  return parts.filter((part): part is string => Boolean(part)).join(' · ');
+}
+
 /** Draws the chart; `t` gives the UI strings in the current language. */
-export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Translate, art: ExportArt = NO_ART, palette: Palette = readPalette()): void {
+export function drawChart(
+  ctx: CanvasRenderingContext2D,
+  chart: Chart,
+  t: Translate,
+  art: ExportArt = NO_ART,
+  palette: Palette = readPalette(),
+  horoscope: YearHoroscope | null = null,
+): void {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
   if (art.sky) drawCover(ctx, art.sky);
@@ -278,10 +318,9 @@ export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Transl
   ctx.fillText(chartTitle(chart, t), MARGIN, 52, BOARD_SIZE);
   ctx.font = `500 22px ${SANS}`;
   ctx.fillStyle = palette.muted;
-  const first = chartFacts(chart, t)[0];
-  ctx.fillText(`${first ? `${first.value} · ` : ''}${chart.yinYangGender} · ${chart.canChi.year}`, MARGIN, 108, BOARD_SIZE);
+  ctx.fillText(exportSubtitle(chart, t, horoscope), MARGIN, 108, BOARD_SIZE);
 
-  for (const palace of chart.palaces) drawPalace(ctx, palace, palette, t, art);
+  for (const palace of chart.palaces) drawPalace(ctx, palace, palette, t, art, horoscope);
   drawCentre(ctx, chart, palette, t, art);
 
   ctx.strokeStyle = palette.line;
@@ -297,6 +336,15 @@ export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Transl
     ctx.strokeStyle = palette.soul;
     ctx.lineWidth = 4;
     ctx.strokeRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4);
+  }
+  if (horoscope) {
+    // The lưu niên Mệnh: a dashed line just inside the cell, so it reads apart from the natal Mệnh.
+    const r = palaceRect(horoscope.soulBranchIndex);
+    ctx.strokeStyle = palette.accent;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([8, 6]);
+    ctx.strokeRect(r.x + 7, r.y + 7, r.width - 14, r.height - 14);
+    ctx.setLineDash([]);
   }
   if (art.frame) {
     drawNineSlice(ctx, art.frame, { x: MARGIN - FRAME_OUTSET, y: BOARD_TOP - FRAME_OUTSET, width: BOARD_SIZE + 2 * FRAME_OUTSET, height: BOARD_SIZE + 2 * FRAME_OUTSET });
@@ -352,10 +400,12 @@ async function loadImage(url: string | null): Promise<HTMLImageElement | undefin
   }
 }
 
-async function loadArt(chart: Chart): Promise<ExportArt> {
+async function loadArt(chart: Chart, horoscope: YearHoroscope | null): Promise<ExportArt> {
   const yearBranch = (((chart.lunarDate.year + 8) % 12) + 12) % 12;
   const majors = [...new Set(chart.palaces.flatMap((p) => p.majorStars.map((s) => s.name)))];
-  const mutagenKinds = [...new Set(chart.palaces.flatMap((p) => [...p.majorStars, ...p.minorStars, ...p.otherStars].flatMap((s) => (s.mutagen ? [s.mutagen] : []))))];
+  const natalKinds = chart.palaces.flatMap((p) => [...p.majorStars, ...p.minorStars, ...p.otherStars].flatMap((s) => (s.mutagen ? [s.mutagen] : [])));
+  const yearlyKinds: Mutagen[] = horoscope ? ['loc', 'quyen', 'khoa', 'ky'] : [];
+  const mutagenKinds = [...new Set([...natalKinds, ...yearlyKinds])];
   const [sky, frame, medallion, yearAnimal, element, marks, stars, palaces, mutagens] = await Promise.all([
     loadImage(SKY_URL),
     loadImage(FRAME_URL),
@@ -372,10 +422,10 @@ async function loadArt(chart: Chart): Promise<ExportArt> {
   return { sky, frame, medallion, yearAnimal, element, marks: present(marks), stars: present(stars), palaces: present(palaces), mutagens: present(mutagens) };
 }
 
-/** The PNG file of the chart. Waits for the web fonts and the art so the canvas is complete. */
-export async function renderChartPng(chart: Chart, t: Translate): Promise<Blob> {
+/** The PNG file of the chart (with the lưu niên, if any). Waits for the web fonts and the art so the canvas is complete. */
+export async function renderChartPng(chart: Chart, t: Translate, horoscope: YearHoroscope | null = null): Promise<Blob> {
   const [art] = await Promise.all([
-    loadArt(chart),
+    loadArt(chart, horoscope),
     ...[`700 40px Inter`, `500 18px Inter`, `600 18px Inter`, `400 14px Inter`].map((font) => document.fonts.load(font)),
   ]);
   const canvas = document.createElement('canvas');
@@ -383,7 +433,7 @@ export async function renderChartPng(chart: Chart, t: Translate): Promise<Blob> 
   canvas.height = EXPORT_HEIGHT;
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('canvas 2d context unavailable');
-  drawChart(ctx, chart, t, art);
+  drawChart(ctx, chart, t, art, readPalette(), horoscope);
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('canvas.toBlob returned nothing'))), 'image/png');
   });
