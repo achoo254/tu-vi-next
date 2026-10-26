@@ -26,8 +26,9 @@ describe('yearly pages', () => {
     expect(document.querySelector('[data-id=year-sign-tai-sui]')?.textContent).toContain('hại Thái Tuế');
     expect(document.querySelector('[data-id=year-facts]')?.textContent).toContain('Thứ bảy, 6/2/2027');
     expect(document.querySelector('[data-id=year-facts]')?.textContent).toContain('Thiên Hà Thủy');
-    // The written interpretation is not there yet: no section, no placeholder.
-    expect(document.querySelector('[data-id=year-interpretation]')).toBeNull();
+    // The written interpretation: six sections, in order.
+    const headings = [...(document.querySelector('[data-id=year-interpretation]')?.querySelectorAll('h3') ?? [])].map((h) => h.textContent);
+    expect(headings).toEqual(['Tổng quan', 'Công việc', 'Tài chính', 'Tình cảm, gia đình', 'Sức khỏe', 'Lời khuyên']);
   });
 
   it('says plainly when a sign does not meet Thái Tuế', () => {
@@ -51,5 +52,15 @@ describe('yearly pages', () => {
     expect(head.path).toBe('/tu-vi-2027/tuoi-mui');
     expect(head.image.path).toMatch(/mui-256/);
     expect(yearPageHead({ year: 2027, branchIndex: null }).image.path).toBe('/og-image.png');
+  });
+
+  it('renders all six interpretation sections on each of the 12 pages', () => {
+    for (let branch = 0; branch < 12; branch++) {
+      show(branch);
+      const section = document.querySelector('[data-id=year-interpretation]');
+      expect(section?.querySelectorAll('h3'), String(branch)).toHaveLength(6);
+      for (const block of section?.querySelectorAll('.year-interpretation') ?? []) expect(block.querySelector('p')?.textContent?.length ?? 0).toBeGreaterThan(40);
+      cleanup();
+    }
   });
 });

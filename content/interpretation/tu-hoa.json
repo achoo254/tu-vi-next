@@ -1,0 +1,74 @@
+{
+  "hoa-loc": {
+    "name": "Hóa Lộc",
+    "essence": "Hóa Lộc mang năng lượng của sự hanh thông, tài lộc và những cơ hội đến một cách tự nhiên. Cung nào có Hóa Lộc là nơi bạn dễ được đón nhận, dễ gặt hái và nên mạnh dạn đầu tư công sức.",
+    "palaces": {
+      "menh": "Bạn có duyên với cơ hội, dễ mến và thường gặp thuận lợi khi chủ động thể hiện mình.",
+      "huynh-de": "Anh chị em và bạn thân là nguồn hỗ trợ ấm áp, đôi khi còn mở ra những cơ hội bất ngờ.",
+      "phu-the": "Tình cảm có nhiều niềm vui, người bạn đời thường mang đến sự đủ đầy và nâng đỡ.",
+      "tu-nu": "Con cái và những người trẻ quanh bạn là niềm vui, cũng là động lực để bạn cố gắng hơn.",
+      "tai-bach": "Dòng tiền khá thuận, bạn nhạy với cơ hội kiếm thêm; giữ thói quen để dành sẽ giúp lộc được bền.",
+      "tat-ach": "Tinh thần lạc quan giúp bạn hồi phục năng lượng nhanh, nhưng vẫn nên chú ý ăn uống điều độ.",
+      "thien-di": "Ra ngoài là gặp may, đi xa, giao lưu hay làm việc với bên ngoài đều dễ mang lại lợi ích.",
+      "no-boc": "Bạn bè, đồng nghiệp sẵn lòng giúp đỡ, mạng lưới quan hệ là tài sản quý của bạn.",
+      "quan-loc": "Công việc có nhiều cơ hội phát triển, dễ được ghi nhận bằng thành quả cụ thể.",
+      "dien-trach": "Chuyện nhà cửa, nơi ở có nhiều thuận lợi, tổ ấm dễ trở nên đầy đặn và dễ chịu.",
+      "phuc-duc": "Tâm hồn rộng mở, biết hưởng niềm vui giản dị, và thường được che chở bởi những điều tốt đẹp.",
+      "phu-mau": "Cha mẹ và người đi trước là chỗ dựa, mang lại cho bạn sự nâng đỡ cả về vật chất lẫn tinh thần."
+    }
+  },
+  "hoa-quyen": {
+    "name": "Hóa Quyền",
+    "essence": "Hóa Quyền là năng lượng của sự chủ động, quyết đoán và khả năng nắm quyền điều phối. Cung nào có Hóa Quyền là nơi bạn có tiếng nói, nên đứng ra dẫn dắt nhưng nhớ giữ sự mềm mỏng.",
+    "palaces": {
+      "menh": "Bạn tự tin, có chính kiến và dễ trở thành người đưa ra quyết định trong tập thể.",
+      "huynh-de": "Bạn thường giữ vai trò người anh, người chị cả trong nhóm thân, được tin tưởng lắng nghe.",
+      "phu-the": "Hai người đều có cá tính mạnh; phân chia vai trò rõ ràng sẽ giúp tình cảm thêm vững.",
+      "tu-nu": "Bạn có ảnh hưởng lớn tới con cái; dạy dỗ bằng sự đồng hành sẽ hiệu quả hơn mệnh lệnh.",
+      "tai-bach": "Bạn chủ động trong chuyện tiền bạc, thích tự quản lý và tự quyết định nguồn thu của mình.",
+      "tat-ach": "Sức bền tốt, nhưng hay gồng mình; chú ý giữ sức khỏe bằng cách nghỉ ngơi đúng lúc.",
+      "thien-di": "Ra ngoài xã hội bạn có uy, dễ được giao việc lớn hoặc đứng ra đại diện.",
+      "no-boc": "Bạn có khả năng tập hợp và điều phối mọi người, hợp vai trò trưởng nhóm.",
+      "quan-loc": "Sự nghiệp thuận cho vai trò quản lý, bạn dễ thăng tiến khi dám nhận trách nhiệm.",
+      "dien-trach": "Bạn thích tự tay lo liệu chuyện nhà cửa và có khả năng gây dựng tài sản vững chắc.",
+      "phuc-duc": "Bạn có ý chí mạnh từ bên trong, biết tự làm chủ cảm xúc và hướng tới mục tiêu.",
+      "phu-mau": "Cha mẹ thường có cá tính rõ ràng; học được từ họ sự quyết đoán là món quà quý."
+    }
+  },
+  "hoa-khoa": {
+    "name": "Hóa Khoa",
+    "essence": "Hóa Khoa là năng lượng của học vấn, danh tiếng đẹp và sự hỗ trợ đúng lúc từ người có hiểu biết. Cung nào có Hóa Khoa là nơi bạn được ghi nhận nhờ uy tín và sự chỉn chu.",
+    "palaces": {
+      "menh": "Bạn thông minh, lịch thiệp và dễ tạo thiện cảm nhờ phong thái có học thức.",
+      "huynh-de": "Anh chị em hoặc bạn thân là những người hiểu biết, sẵn sàng góp ý chân thành.",
+      "phu-the": "Người bạn đời có học thức, tinh tế; hai bạn dễ cùng nhau học hỏi và tiến bộ.",
+      "tu-nu": "Con cái ham học, có năng khiếu; bạn là người truyền cảm hứng học tập cho chúng.",
+      "tai-bach": "Tiền bạc đến từ chuyên môn và uy tín, bạn quản lý tài chính một cách rõ ràng, minh bạch.",
+      "tat-ach": "Bạn biết tìm hiểu cách chăm sóc bản thân; duy trì thói quen lành mạnh sẽ giúp tinh thần luôn sáng.",
+      "thien-di": "Ra ngoài bạn có tiếng tốt, dễ gặp quý nhân là người có kiến thức.",
+      "no-boc": "Bạn bè, đồng nghiệp đánh giá cao năng lực của bạn, nhiều người sẵn lòng giới thiệu bạn.",
+      "quan-loc": "Sự nghiệp gắn với chuyên môn, bằng cấp hoặc danh tiếng, hợp những ngành cần sự tin cậy.",
+      "dien-trach": "Không khí gia đình nề nếp, yên ổn; bạn thích một không gian sống gọn gàng và có chiều sâu.",
+      "phuc-duc": "Đời sống tinh thần phong phú, bạn tìm thấy niềm vui trong đọc sách, học hỏi và suy ngẫm.",
+      "phu-mau": "Cha mẹ coi trọng việc học, dành cho bạn nền tảng tốt về kiến thức và cách sống."
+    }
+  },
+  "hoa-ky": {
+    "name": "Hóa Kỵ",
+    "essence": "Hóa Kỵ chỉ ra nơi bạn dễ trăn trở, vướng bận hoặc phải bỏ nhiều tâm sức hơn. Đó cũng là nơi bạn học được nhiều nhất: khi hiểu rõ và kiên nhẫn, điểm vướng ấy thường trở thành chiều sâu của bạn.",
+    "palaces": {
+      "menh": "Bạn hay tự đòi hỏi cao ở bản thân; học cách tự bao dung sẽ giúp bạn nhẹ nhõm và tiến xa hơn.",
+      "huynh-de": "Đôi khi khó nói chuyện thấu đáo với anh chị em; chủ động lắng nghe sẽ gỡ được nhiều khúc mắc.",
+      "phu-the": "Tình cảm cần nhiều sự thấu hiểu; nói rõ mong muốn của mình là cách giữ hòa khí tốt nhất.",
+      "tu-nu": "Bạn dễ lo lắng cho con cái; tin tưởng và cho chúng không gian để tự lớn sẽ tốt cho cả hai bên.",
+      "tai-bach": "Chuyện tiền bạc cần cẩn trọng hơn; ghi chép chi tiêu và tránh vay mượn bốc đồng sẽ giúp bạn an tâm.",
+      "tat-ach": "Tâm lý căng thẳng dễ ảnh hưởng đến thể trạng; chú ý giữ sức khỏe bằng giấc ngủ đều và thời gian thư giãn.",
+      "thien-di": "Ra ngoài nên chuẩn bị kỹ và kiểm tra lại kế hoạch, sự cẩn thận sẽ giúp mọi chuyến đi suôn sẻ.",
+      "no-boc": "Nên chọn bạn mà chơi và rõ ràng trong hợp tác, như vậy các mối quan hệ sẽ bền và dễ chịu.",
+      "quan-loc": "Công việc đòi hỏi bạn nỗ lực nhiều; kiên trì với chuyên môn sẽ biến áp lực thành bản lĩnh.",
+      "dien-trach": "Chuyện nhà cửa có thể khiến bạn bận lòng; lên kế hoạch dài hơi thay vì vội vàng sẽ giúp ích.",
+      "phuc-duc": "Bạn hay suy nghĩ nhiều về ý nghĩa cuộc sống; thiền, đi bộ hay viết nhật ký sẽ giúp tâm trí an yên.",
+      "phu-mau": "Đôi lúc khác quan điểm với cha mẹ; thêm sự kiên nhẫn và trò chuyện sẽ giúp hai thế hệ gần nhau hơn."
+    }
+  }
+}

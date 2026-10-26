@@ -163,6 +163,13 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
           ],
         },
         {
+          heading: 'Lời luận giải',
+          paragraphs: [
+            'Lời luận giải các sao, cung, tứ hóa, cục và phần Tử vi theo năm là văn bản tự viết cho app, không chép câu chữ sách hay trang nào; ý nghĩa theo quy ước của Tử Vi Đẩu Số Tân Biên (Vân Đằng Thái Thứ Lang), viết lại bằng giọng hiện đại, tích cực. Nội dung mang tính giải trí, tham khảo.',
+            'Bảng sao chiếu mệnh và hạn tính theo cách đếm Cửu Diệu, Bát Hạn của Báo Hà Tĩnh và Báo La Văn Sử, đối chiếu với bảng năm 2027 của ngaydep.com.',
+          ],
+        },
+        {
           heading: 'Giao diện',
           items: [
             { text: 'React', href: 'https://react.dev', note: 'giấy phép MIT.' },
@@ -199,6 +206,13 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
               href: 'https://github.com/Renhuai123/ziwei-doushu',
               note: 'by Renhuai123 (MIT code): read only as a reference for regression-test ideas; no code or dataset copied.',
             },
+          ],
+        },
+        {
+          heading: 'Interpretations',
+          paragraphs: [
+            'The readings of stars, palaces, transformations, element classes and the yearly pages are original text written for the app, copying no book or website; the meanings follow the conventions of Tử Vi Đẩu Số Tân Biên (Vân Đằng Thái Thứ Lang), retold in a modern, positive tone. For entertainment and reference only.',
+            'The guiding star and limit tables follow the Cửu Diệu and Bát Hạn counting described by Báo Hà Tĩnh and Báo La Văn Sử, checked against the 2027 table of ngaydep.com.',
           ],
         },
         {

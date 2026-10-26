@@ -559,9 +559,26 @@ button {
   justify-content: space-between;
   column-gap: var(--space-2);
 }
-/* The emblem and the palace name never part; in a narrow cell the can-chi moves to its own line instead. */
+/* The emblem and the palace name never part; in a narrow cell the can-chi moves to its own line instead.
+   The name is a button (it opens the palace's meaning) that reads as the plain heading it replaces. */
 .palace-title {
   white-space: nowrap;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.palace-title:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media (pointer: coarse) {
+  .palace-title {
+    min-height: 32px;
+  }
 }
 .palace-name {
   font-weight: 700;
@@ -725,8 +742,52 @@ button {
 }
 
 /* star meaning */
+.readings p {
+  margin: 0;
+}
+.readings {
+  display: grid;
+  gap: var(--space-2);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.reading-palace {
+  display: grid;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--c-border-subtle);
+}
+.reading-heading {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-primary);
+}
+.reading-advice,
+.reading-mutagen {
+  color: var(--c-text);
+}
+.reading-advice b,
+.reading-mutagen b {
+  color: var(--c-mutagen);
+}
+.palace-dialog-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--c-primary);
+}
+.centre-reading {
+  max-width: 46ch;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--c-text-muted);
+}
+
 .star-dialog {
-  width: min(420px, calc(100vw - 2 * var(--gutter)));
+  width: min(480px, calc(100vw - 2 * var(--gutter)));
+  max-height: calc(100dvh - 2 * var(--gutter));
+  overflow-y: auto;
   padding: var(--space-5);
   color: var(--c-text);
   box-shadow: var(--shadow-lg);

@@ -1,0 +1,184 @@
+{
+  "tu-vi": {
+    "name": "Tử Vi",
+    "essence": "Ngôi sao đứng đầu chòm sao, tượng trưng cho phẩm chất của người dẫn dắt: điềm tĩnh, tự trọng và có tầm nhìn bao quát. Người mang sao này thường được tin cậy, biết che chở cho người khác. Bài học của Tử Vi là biết lắng nghe và chia sẻ quyền quyết định, để vị trí trung tâm không trở thành sự cô đơn.",
+    "brightness": {
+      "mieu": "Phong thái lãnh đạo tự nhiên, được nể trọng mà không cần phô trương, dễ gặp người hỗ trợ đúng lúc.",
+      "vuong": "Uy tín vững vàng, biết tổ chức và quyết định chắc chắn, đứng ra gánh vác việc lớn khá suôn sẻ.",
+      "dac": "Có khả năng điều phối tốt, chỉ cần thêm sự kiên trì là tầm ảnh hưởng sẽ lan rộng dần.",
+      "loi": "Tố chất dẫn dắt hiện diện ở mức vừa phải, phát huy rõ nhất khi được làm việc trong một tập thể tin tưởng mình.",
+      "binh": "Phẩm chất tự trọng vẫn còn đó, nhưng cần môi trường và người đồng hành phù hợp để tỏa sáng.",
+      "bat": "Năng lượng dẫn dắt hướng vào bên trong nhiều hơn, là dịp rèn tính khiêm tốn và học hỏi từ người giỏi.",
+      "ham": "Sao chưa ở vị trí thuận nên cái tôi dễ chạm tự ái; bù lại, khi biết mềm mỏng và hợp tác, bạn trưởng thành rất vững."
+    }
+  },
+  "thien-co": {
+    "name": "Thiên Cơ",
+    "essence": "Sao của trí tuệ linh hoạt, mưu lược và óc tính toán, thường gắn với người khéo tay, giỏi kỹ thuật hoặc hoạch định. Bạn nhìn ra nhiều phương án và thích nghi nhanh với thay đổi. Điều cần rèn là bớt suy nghĩ vòng vo, chọn một hướng và đi đến cùng.",
+    "brightness": {
+      "mieu": "Đầu óc sắc bén, ý tưởng hay lại có tính thực tế, rất hợp vai cố vấn hoặc người lên kế hoạch.",
+      "vuong": "Nhanh nhạy, giỏi giải quyết vấn đề và xoay chuyển tình thế một cách khéo léo.",
+      "dac": "Suy nghĩ mạch lạc, biết tận dụng cơ hội nhỏ để tạo bước tiến đều đặn.",
+      "loi": "Sự khéo léo hiện ra ở những việc cụ thể, càng làm nhiều càng thành thạo.",
+      "binh": "Ý tưởng dồi dào nhưng cần ghi chép, sắp xếp để biến thành việc làm cụ thể.",
+      "bat": "Dễ đổi ý khi gặp áp lực; đây là lúc tập giữ nhịp và kiên nhẫn với lựa chọn của mình.",
+      "ham": "Tâm trí hay lo xa, nghĩ nhiều; khi biết thả lỏng và tập trung từng việc, sự tinh tế của bạn lại trở thành lợi thế."
+    }
+  },
+  "thai-duong": {
+    "name": "Thái Dương",
+    "essence": "Mặt Trời của lá số, mang năng lượng cho đi, nhiệt thành và hướng ngoại, thường gắn với danh tiếng và hình ảnh người cha. Bạn sống rộng lượng, thích được cống hiến và làm điều có ích cho số đông. Bài học là biết giữ sức, vì mặt trời cũng cần hoàng hôn để nghỉ ngơi.",
+    "brightness": {
+      "mieu": "Tỏa sáng rực rỡ, dễ được công nhận, có sức truyền cảm hứng mạnh mẽ cho người xung quanh.",
+      "vuong": "Nhiệt huyết dồi dào, làm việc hết mình và thường được đền đáp xứng đáng.",
+      "dac": "Có uy tín và sự ấm áp, càng kiên trì cống hiến thì hình ảnh càng đẹp.",
+      "loi": "Ánh sáng dịu nhưng bền, hợp những công việc phục vụ cộng đồng một cách lặng lẽ.",
+      "binh": "Thiện chí luôn có, chỉ cần chọn đúng nơi để đặt công sức thì thành quả sẽ rõ ràng hơn.",
+      "bat": "Đôi khi cho đi nhiều mà chưa được ghi nhận ngay; hãy kiên nhẫn và chăm sóc bản thân song song.",
+      "ham": "Như mặt trời lúc khuất bóng, bạn dễ làm việc phía sau hậu trường; đó lại là nơi rèn sự sâu sắc và bền bỉ."
+    }
+  },
+  "vu-khuc": {
+    "name": "Vũ Khúc",
+    "essence": "Sao chủ về tài chính, mang tính cương nghị, thực tế và quyết đoán. Người có Vũ Khúc thường giỏi quản lý tiền bạc, làm việc chắc chắn, nói là làm. Điểm cần cân bằng là sự cứng rắn: thêm chút mềm mỏng sẽ giúp bạn được lòng người hơn.",
+    "brightness": {
+      "mieu": "Bản lĩnh tài chính vững vàng, quyết đoán đúng lúc và dễ gây dựng nền tảng vật chất chắc chắn.",
+      "vuong": "Năng lực thực thi mạnh, giỏi biến kế hoạch thành kết quả đo đếm được.",
+      "dac": "Làm ăn cẩn trọng, tích lũy từng bước, càng về lâu càng vững.",
+      "loi": "Có óc tính toán thực tế, phát huy tốt trong những việc cần sự chính xác.",
+      "binh": "Năng lực ổn định; việc học thêm kỹ năng quản lý sẽ giúp bạn tiến xa hơn.",
+      "bat": "Dễ cứng nhắc khi áp lực tăng; tập lắng nghe và linh hoạt sẽ mở thêm nhiều lối đi.",
+      "ham": "Tiền bạc đến rồi đi khá nhanh; đây là cơ hội để xây thói quen chi tiêu có kế hoạch và tự chủ hơn."
+    }
+  },
+  "thien-dong": {
+    "name": "Thiên Đồng",
+    "essence": "Phúc tinh của sự hiền hòa, lạc quan và hồn nhiên, giúp bạn dễ hòa nhập và biết tận hưởng cuộc sống. Bạn thường được quý mến nhờ tính dễ chịu, không thích tranh giành. Bài học là tự đặt mục tiêu rõ ràng và chủ động hơn, để sự thong thả không biến thành trì hoãn.",
+    "brightness": {
+      "mieu": "Phúc khí dồi dào, gặp chuyện khó thường có lối ra êm đẹp, sống vui và lan tỏa sự dễ chịu.",
+      "vuong": "Tính tình ôn hòa, khéo xoay xở và hay được người khác giúp đỡ.",
+      "dac": "Sống lạc quan, biết cân bằng giữa làm việc và tận hưởng.",
+      "loi": "Sự hiền hòa giúp bạn giữ được các mối quan hệ tốt đẹp lâu dài.",
+      "binh": "Thích nhịp sống thong thả; một chút kỷ luật sẽ giúp những dự định thành hình.",
+      "bat": "Dễ dao động theo cảm xúc; giữ thói quen đều đặn sẽ giúp tinh thần vững hơn.",
+      "ham": "Có thể phải tự lực nhiều hơn người khác; chính trải nghiệm ấy làm bạn trưởng thành và biết quý niềm vui giản dị."
+    }
+  },
+  "liem-trinh": {
+    "name": "Liêm Trinh",
+    "essence": "Sao của nguyên tắc, lòng tự trọng và nhiệt huyết mãnh liệt, vừa có nét nghiêm cẩn vừa có sức hút riêng. Bạn sống có chính kiến, dám theo đuổi điều mình tin và làm việc rất chuyên tâm. Điều cần rèn là kiểm soát cảm xúc mạnh và bớt khắt khe với chính mình.",
+    "brightness": {
+      "mieu": "Chính trực, có năng lực tổ chức và sức hút tự nhiên, dễ được giao trọng trách.",
+      "vuong": "Ý chí mạnh, làm việc có kỷ luật và thường đạt được điều mình đặt ra.",
+      "dac": "Có nguyên tắc rõ ràng, càng gặp thử thách càng thể hiện bản lĩnh.",
+      "loi": "Nhiệt huyết được dẫn dắt đúng hướng, hợp những môi trường có quy củ.",
+      "binh": "Vừa có tự trọng vừa có cảm xúc mạnh; tìm được mục tiêu đáng theo đuổi sẽ giúp bạn tập trung.",
+      "bat": "Dễ nóng nảy khi bị hiểu lầm; dành thời gian lắng lại trước khi phản hồi sẽ giúp bạn rất nhiều.",
+      "ham": "Năng lượng dồi dào nhưng dễ phân tán; khi đặt mình vào khuôn khổ rõ ràng, bạn biến sức mạnh ấy thành thành tựu."
+    }
+  },
+  "thien-phu": {
+    "name": "Thiên Phủ",
+    "essence": "Sao kho tàng, tượng trưng cho sự đầy đặn, ổn định và khả năng quản lý, gìn giữ. Bạn thường điềm đạm, chu đáo, biết lo xa và bao dung với người khác. Bài học là đôi khi dám bước ra khỏi vùng an toàn để kho báu của mình được mở rộng thêm.",
+    "brightness": {
+      "mieu": "Phong thái đĩnh đạc, biết tích lũy và giữ gìn, dễ có cuộc sống đủ đầy, an ổn.",
+      "vuong": "Giỏi quản lý con người lẫn tài sản, được tin tưởng giao những việc quan trọng.",
+      "dac": "Chắc chắn, cẩn thận, xây dựng mọi thứ từ nền móng vững.",
+      "loi": "Có tố chất của người giữ của, hợp những vai trò cần sự tin cậy.",
+      "binh": "Sống ổn định, chỉ cần thêm chút chủ động là cơ hội sẽ rộng mở hơn.",
+      "bat": "Đôi khi quá thận trọng nên bỏ lỡ thời điểm; tập ra quyết định nhanh hơn với việc nhỏ.",
+      "ham": "Kho tàng còn đang trong giai đoạn tích lũy; kiên nhẫn và tiết kiệm đều đặn sẽ giúp bạn đầy dần."
+    }
+  },
+  "thai-am": {
+    "name": "Thái Âm",
+    "essence": "Mặt Trăng của lá số, mang vẻ dịu dàng, tinh tế và giàu cảm xúc, thường gắn với tài sản tích lũy, nhà cửa và hình ảnh người mẹ. Bạn có óc thẩm mỹ, biết chăm chút và vun vén. Điều cần lưu ý là sự nhạy cảm: hãy chia sẻ nhiều hơn thay vì giữ mọi thứ trong lòng.",
+    "brightness": {
+      "mieu": "Ánh trăng tròn đầy: tinh tế, có duyên và dễ tích lũy, cuộc sống êm đềm, đủ đầy.",
+      "vuong": "Khéo vun vén, giỏi chăm sóc người khác và giữ gìn tài sản.",
+      "dac": "Cảm nhận tốt, biết lắng nghe, càng sống chậm càng thấy rõ giá trị của mình.",
+      "loi": "Sự dịu dàng là thế mạnh, giúp bạn gắn kết các mối quan hệ một cách tự nhiên.",
+      "binh": "Giàu cảm xúc; viết ra hoặc tâm sự sẽ giúp bạn nhẹ lòng và sáng suốt hơn.",
+      "bat": "Dễ nghĩ ngợi khi mọi việc chưa như ý; hãy cho mình khoảng nghỉ để tâm trí trong lại.",
+      "ham": "Như trăng non, vẻ đẹp của bạn cần thời gian để hiện rõ; nuôi dưỡng sự tự tin từng chút là chìa khóa."
+    }
+  },
+  "tham-lang": {
+    "name": "Tham Lang",
+    "essence": "Sao đa tài, đa năng, tràn đầy khao khát trải nghiệm và có sức hấp dẫn trong giao tiếp. Bạn tò mò, ham học hỏi, dễ kết bạn và có năng khiếu ở nhiều lĩnh vực. Bài học của Tham Lang là biết tiết chế: chọn ít mà sâu sẽ mang lại nhiều hơn.",
+    "brightness": {
+      "mieu": "Đa tài và có duyên, biến khả năng giao tiếp thành cơ hội làm ăn, phát triển rực rỡ.",
+      "vuong": "Năng động, nắm bắt thời cơ tốt, biết cách tạo ấn tượng và mở rộng mối quan hệ.",
+      "dac": "Có sức hút và sự nhạy bén, thành công khi theo đuổi đam mê một cách nghiêm túc.",
+      "loi": "Sở thích phong phú, biết biến chúng thành kỹ năng hữu ích.",
+      "binh": "Nhiều mối quan tâm cùng lúc; ưu tiên một vài điều sẽ giúp bạn đi xa hơn.",
+      "bat": "Dễ bị cuốn vào những thú vui trước mắt; đặt mục tiêu dài hạn sẽ giữ bạn đúng hướng.",
+      "ham": "Ham muốn trải nghiệm mạnh mẽ; khi học cách tự chủ, đó là nguồn năng lượng sáng tạo rất lớn."
+    }
+  },
+  "cu-mon": {
+    "name": "Cự Môn",
+    "essence": "Sao của lời nói và tư duy phân tích, giúp bạn ăn nói sắc sảo, nhìn ra kẽ hở mà người khác bỏ qua. Bạn hợp với những việc dùng ngôn từ, lý lẽ như giảng dạy, tư vấn, truyền thông. Điều cần rèn là chọn lời mềm mỏng và bớt nghi ngại, để tài ăn nói trở thành cầu nối thay vì rào cản.",
+    "brightness": {
+      "mieu": "Lời nói có sức thuyết phục cao, lập luận chặt chẽ, dễ thành danh nhờ chuyên môn và tài hùng biện.",
+      "vuong": "Ăn nói lưu loát, phân tích sắc bén, được tin tưởng trong vai trò cố vấn hoặc người phát ngôn.",
+      "dac": "Có chính kiến rõ ràng, biết dùng lý lẽ để bảo vệ điều đúng.",
+      "loi": "Khả năng diễn đạt tốt, càng rèn luyện càng tỏa sáng.",
+      "binh": "Thẳng thắn, đôi khi hơi gắt; thêm một câu khen trước khi góp ý sẽ giúp bạn được lắng nghe.",
+      "bat": "Dễ vướng chuyện hiểu lầm vì lời nói; nói chậm lại và hỏi nhiều hơn sẽ hóa giải phần lớn.",
+      "ham": "Hay hoài nghi và cân nhắc kỹ; biến thói quen ấy thành sự cẩn trọng trong nghiên cứu, bạn sẽ rất giỏi."
+    }
+  },
+  "thien-tuong": {
+    "name": "Thiên Tướng",
+    "essence": "Ấn tinh của sự công bằng, chỉn chu và tinh thần giúp đỡ người khác. Bạn có phong thái đứng đắn, thích sự ngăn nắp, hay đứng ra bênh vực lẽ phải. Bài học là giữ vững chính kiến, vì Thiên Tướng dễ chịu ảnh hưởng từ môi trường và những người xung quanh.",
+    "brightness": {
+      "mieu": "Đáng tin cậy, có uy tín, thường được giao vai trò điều phối hoặc giữ nguyên tắc chung.",
+      "vuong": "Chu đáo, công tâm, giúp người mà vẫn giữ được vị thế của mình.",
+      "dac": "Biết cách xử sự khéo léo, giữ hòa khí trong tập thể.",
+      "loi": "Tinh thần trách nhiệm tốt, phát huy rõ khi làm việc cùng người có tâm.",
+      "binh": "Tốt bụng và chỉn chu; nên chọn bạn đồng hành kỹ vì họ ảnh hưởng nhiều đến bạn.",
+      "bat": "Đôi khi giúp người quá sức mình; học cách từ chối nhẹ nhàng là một kỹ năng đáng giá.",
+      "ham": "Dễ phân vân giữa nhiều lời khuyên; tin vào giá trị cốt lõi của mình sẽ giúp bạn vững vàng."
+    }
+  },
+  "thien-luong": {
+    "name": "Thiên Lương",
+    "essence": "Ấm tinh của sự che chở, nhân hậu và hiểu biết, mang dáng dấp của người thầy, người cố vấn. Bạn sống có đạo lý, thích giúp đỡ và thường được người khác tìm đến xin lời khuyên. Điều cần lưu ý là tránh thói quen giảng giải quá nhiều, để sự quan tâm luôn nhẹ nhàng.",
+    "brightness": {
+      "mieu": "Đức độ, thông tuệ, được kính trọng và hay gặp may mắn hóa giải khó khăn.",
+      "vuong": "Có tâm và có tầm, rất hợp với giáo dục, y tế, tư vấn hay công tác cộng đồng.",
+      "dac": "Hiểu chuyện, điềm tĩnh, là chỗ dựa tinh thần cho người thân.",
+      "loi": "Sự tử tế đến tự nhiên, giúp bạn xây được nhiều mối quan hệ bền.",
+      "binh": "Có lòng tốt, chỉ cần đặt giới hạn hợp lý để không ôm việc của người khác.",
+      "bat": "Đôi khi hơi xa rời thực tế; kết hợp lý tưởng với kế hoạch cụ thể sẽ giúp bạn hiệu quả hơn.",
+      "ham": "Dễ cảm thấy cô đơn với lý tưởng của mình; tìm cộng đồng cùng giá trị sẽ tiếp thêm cho bạn năng lượng."
+    }
+  },
+  "that-sat": {
+    "name": "Thất Sát",
+    "essence": "Tướng tinh của sự dũng cảm, độc lập và tinh thần khai phá, không ngại đương đầu với thử thách. Bạn quyết đoán, hành động nhanh và thường tự tạo dựng con đường riêng. Bài học là kiên nhẫn hơn với nhịp của người khác và cân nhắc kỹ trước những bước ngoặt lớn.",
+    "brightness": {
+      "mieu": "Bản lĩnh và khí phách, xông pha đâu thành công đó, rất hợp vai người mở đường.",
+      "vuong": "Ý chí mạnh, dám làm dám chịu, biết nắm thời cơ để bứt phá.",
+      "dac": "Quyết đoán có tính toán, thành công nhờ sự bền bỉ và tự lập.",
+      "loi": "Năng lượng hành động dồi dào, phát huy tốt khi có mục tiêu rõ.",
+      "binh": "Thích tự quyết; lắng nghe góp ý trước khi hành động sẽ giúp bạn ít vất vả hơn.",
+      "bat": "Dễ nóng vội; chia mục tiêu lớn thành bước nhỏ sẽ giúp sức mạnh của bạn bền hơn.",
+      "ham": "Con đường nhiều thử thách hơn, nhưng mỗi lần vượt qua là một lần bạn cứng cáp và tự tin hơn."
+    }
+  },
+  "pha-quan": {
+    "name": "Phá Quân",
+    "essence": "Sao của đổi mới, dám phá bỏ cái cũ để xây dựng cái mới, mang tinh thần tiên phong và ưa thử thách. Bạn không ngại thay đổi, có sức sáng tạo và thường là người khởi xướng. Điều cần rèn là sự kiên nhẫn và việc chăm chút cho những gì đã xây, để mỗi lần làm mới đều có kết quả bền.",
+    "brightness": {
+      "mieu": "Tinh thần cải cách mạnh mẽ, dám nghĩ dám làm và tạo dấu ấn đột phá.",
+      "vuong": "Năng động, sáng tạo, biến thay đổi thành cơ hội phát triển.",
+      "dac": "Đổi mới có định hướng, biết khi nào nên giữ, khi nào nên làm lại.",
+      "loi": "Sức sáng tạo được thể hiện qua những cải tiến thiết thực.",
+      "binh": "Thích cái mới; hoàn thành trọn vẹn việc cũ trước khi bắt đầu việc khác sẽ giúp bạn vững hơn.",
+      "bat": "Dễ bốc đồng khi chán; giữ thói quen lập kế hoạch sẽ giúp năng lượng đổi mới có ích hơn.",
+      "ham": "Hay trải qua nhiều lần làm lại từ đầu; mỗi lần như thế là bài học quý giúp bạn khôn ngoan hơn."
+    }
+  }
+}

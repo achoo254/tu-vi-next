@@ -1,6 +1,7 @@
 /**
  * What the yearly pages say, apart from the UI words: calendar facts of the year and the written yearly
- * interpretation per con giáp (content/README.md).
+ * interpretation per con giáp (content/interpretation/year-<năm>/<slug>.json at the repository root, see
+ * content/interpretation/SOURCES.md).
  */
 import type { SolarDate } from '@tuvi/chart';
 import * as z from 'zod/mini';
@@ -23,19 +24,27 @@ export const LUNAR_YEAR_FACTS: Readonly<Record<number, LunarYearFacts>> = {
   2027: { tet: { year: 2027, month: 2, day: 6 }, lastDay: { year: 2028, month: 1, day: 25 }, leapMonth: null },
 };
 
-export const INTERPRETATION_FIELDS = ['overview', 'career', 'love', 'health', 'advice'] as const;
+export const INTERPRETATION_FIELDS = ['overview', 'career', 'money', 'love', 'health', 'advice'] as const;
 export type InterpretationField = (typeof INTERPRETATION_FIELDS)[number];
-export type Interpretation = Record<InterpretationField, string>;
 
+/** One file: who it is about (checked against its file name by the tests), then the six sections. */
 export const InterpretationSchema = z.strictObject({
+  branch: z.string(),
+  animal: z.string(),
+  year: z.int(),
+  'year-name': z.string(),
+  /** One line on how the sign meets the year; kept in the file, not shown. */
+  relation: z.string(),
   overview: z.string(),
   career: z.string(),
+  money: z.string(),
   love: z.string(),
   health: z.string(),
   advice: z.string(),
 });
 
-const FILES = import.meta.glob<unknown>('./content/year-*/*.json', { eager: true, import: 'default' });
+const FILES = import.meta.glob<unknown>('../../../../content/interpretation/year-*/*.json', { eager: true, import: 'default' });
+const fileKey = (year: number, slug: string): string => `../../../../content/interpretation/year-${year}/${slug}.json`;
 
 /**
  * The written interpretation of one con giáp in `year`: only the non-empty fields, as paragraphs. Null when
@@ -43,7 +52,7 @@ const FILES = import.meta.glob<unknown>('./content/year-*/*.json', { eager: true
  */
 export function interpretation(year: number, branchIndex: number): Partial<Record<InterpretationField, string[]>> | null {
   const slug = ZODIAC_SLUGS[branchIndex];
-  const raw = slug === undefined ? undefined : FILES[`./content/year-${year}/${slug}.json`];
+  const raw = slug === undefined ? undefined : FILES[fileKey(year, slug)];
   if (raw === undefined) return null;
   const parsed = InterpretationSchema.safeParse(raw);
   if (!parsed.success) {
@@ -61,5 +70,7 @@ export function interpretation(year: number, branchIndex: number): Partial<Recor
   return Object.keys(sections).length > 0 ? sections : null;
 }
 
-/** Every interpretation file with its path, for the tests. */
-export const INTERPRETATION_FILES: Readonly<Record<string, unknown>> = FILES;
+/** The raw interpretation file of one con giáp in `year`, for the tests. */
+export function interpretationFile(year: number, slug: string): unknown {
+  return FILES[fileKey(year, slug)];
+}

@@ -113,6 +113,7 @@ test('layout: auth-style header and footer, legal pages in both languages', asyn
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Ghi công');
   await expect(page.locator('[data-id=legal-credits]')).toContainText('iztro');
   await expect(page.locator('[data-id=legal-credits]')).toContainText('ziwei-doushu');
+  await expect(page.locator('[data-id=legal-credits]')).toContainText('Tử Vi Đẩu Số Tân Biên (Vân Đằng Thái Thứ Lang)');
   await expect(page.locator('[data-id=foot-home]')).toHaveText('Một app của hoandat.com');
   await page.click('[data-id=lang-en]');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Credits');

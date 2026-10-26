@@ -1,8 +1,8 @@
 # Trang "Tử vi 2027" và bảng sao hạn
 
 Các trang `/tu-vi-2027` (cả năm, 12 con giáp) và `/tu-vi-2027/tuoi-<con giáp>` (`ty`, `suu`, `dan`, `mao`, `thin`,
-`ti` là Tỵ, `ngo`, `mui`, `than`, `dau`, `tuat`, `hoi`). Chỉ có số liệu tính được; phần luận giải viết sẵn nằm ở
-[`apps/web/src/year/content/`](../apps/web/src/year/content/README.md), trường nào rỗng thì mục đó không hiện.
+`ti` là Tỵ, `ngo`, `mui`, `than`, `dau`, `tuat`, `hoi`). Số liệu tính được, cộng phần luận giải viết sẵn (sáu mục) ở
+[`content/interpretation/year-2027/`](../content/interpretation/SOURCES.md); mục nào rỗng thì không hiện.
 Năm của trang và năm lưu niên mặc định trên lá số: `FEATURED_YEAR` trong
 [`year-routes.ts`](../apps/web/src/year/year-routes.ts).
 

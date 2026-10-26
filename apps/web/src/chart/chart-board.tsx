@@ -5,14 +5,10 @@ import { ZODIAC_NAME_KEYS } from '../i18n/messages';
 import { boardPosition, listOrder } from './board-layout';
 import { mutagenArt, palaceArt, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
-import { StarDialog } from './star-dialog';
+import { type BoardSelection, StarDialog } from './star-dialog';
+import { useInterpretation } from '../interpretation/use-interpretation';
 import { mutagenLabel, starName } from './star-terms';
 import { palaceYearTags, yearlyMutagen, yearlyMutagenLabel } from './yearly-marks';
-
-interface Selection {
-  star: ChartStar;
-  palace: ChartPalace;
-}
 
 /** The major star's emblem beside its name; decorative (the name is the text). */
 function StarIcon({ name }: { name: string }): ReactNode {
@@ -83,13 +79,13 @@ function YearAnimal({ chart }: { chart: Chart }): ReactNode {
 interface PalaceCellProps {
   palace: ChartPalace;
   horoscope: YearHoroscope | null;
-  onSelect(selection: Selection): void;
+  onSelect(selection: BoardSelection): void;
 }
 
 function PalaceCell({ palace, horoscope, onSelect }: PalaceCellProps): ReactNode {
   const { t } = useI18n();
   const [row, column] = boardPosition(palace.branchIndex);
-  const select = (star: ChartStar): void => onSelect({ star, palace });
+  const select = (star: ChartStar): void => onSelect({ kind: 'star', star, palace });
   const tags = palaceYearTags(horoscope, palace.branchIndex);
   return (
     <section
@@ -100,10 +96,16 @@ function PalaceCell({ palace, horoscope, onSelect }: PalaceCellProps): ReactNode
     >
       <header className="palace-head">
         <span className="palace-name">
-          <span className="palace-title">
+          <button
+            type="button"
+            className="palace-title"
+            onClick={() => onSelect({ kind: 'palace', palace })}
+            aria-label={t('palace.open', { palace: palace.name })}
+            data-id={`palace-open-${palace.branchIndex}`}
+          >
             <PalaceIcon name={palace.name} />
             {palace.name}
-          </span>
+          </button>
           {palace.isBodyPalace && <span className="palace-body"> · {t('chart.bodyMark')}</span>}
         </span>
         <span className="palace-branch">
@@ -146,7 +148,9 @@ function PalaceCell({ palace, horoscope, onSelect }: PalaceCellProps): ReactNode
  */
 export function ChartBoard({ chart, horoscope = null }: { chart: Chart; horoscope?: YearHoroscope | null }): ReactNode {
   const { t } = useI18n();
-  const [selection, setSelection] = useState<Selection | null>(null);
+  const [selection, setSelection] = useState<BoardSelection | null>(null);
+  const interpretation = useInterpretation();
+  const cucReading = interpretation?.cuc(chart.fiveElementsClass);
   return (
     <>
       <div className="board" role="group" aria-label={t('chart.board')} data-id="chart-board">
@@ -166,13 +170,18 @@ export function ChartBoard({ chart, horoscope = null }: { chart: Chart; horoscop
               </div>
             ))}
           </dl>
+          {cucReading && (
+            <p className="centre-reading" lang="vi" data-id="cuc-reading">
+              {cucReading}
+            </p>
+          )}
           <p className="help">{t('chart.starHint')}</p>
         </section>
         {listOrder(chart.palaces).map((palace) => (
           <PalaceCell key={palace.branchIndex} palace={palace} horoscope={horoscope} onSelect={setSelection} />
         ))}
       </div>
-      <StarDialog selection={selection} onClose={() => setSelection(null)} />
+      <StarDialog selection={selection} interpretation={interpretation} horoscope={horoscope} onClose={() => setSelection(null)} />
     </>
   );
 }

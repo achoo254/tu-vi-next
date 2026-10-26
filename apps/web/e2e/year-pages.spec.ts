@@ -28,6 +28,29 @@ test('chart: lưu niên 2027 on the board, in the summary and in the PNG', async
   await expect(page.locator('[data-id=chart-board] .star', { hasText: 'Thái Âm' })).toContainText('Lưu Lộc');
   await expect(page.locator('[data-id=yearly-year-page]')).toHaveAttribute('href', '/tu-vi-2027/tuoi-thin');
 
+  // Readings: the cục in the centre; Cự Môn (Tật Ách, Sửu) carries the year's Lưu Kỵ; the palace's own line.
+  await expect(page.locator('[data-id=cuc-reading]')).toContainText('cây xanh');
+  await page.locator('[data-id=chart-board] .star', { hasText: 'Cự Môn' }).click();
+  const dialog = page.locator('[data-id=star-dialog]');
+  await expect(dialog.locator('.reading-heading')).toHaveText('Tại cung Tật Ách');
+  await expect(dialog).toContainText('Độ sáng Bất:');
+  await expect(dialog.locator('.reading-mutagen')).toHaveText([/^Lưu niên 2027: Hóa Kỵ tại cung Tật Ách: \S/]);
+  for (const width of [1440, 375]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.screenshot({ path: testInfo.outputPath(`star-dialog-${width}.png`) });
+  }
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await dialog.getByRole('button', { name: 'Đóng' }).click();
+  // Thiên Đồng (same palace) carries the natal Hóa Kỵ of a Canh year: the natal sentence.
+  await page.locator('[data-id=chart-board] .star', { hasText: 'Thiên Đồng' }).click();
+  await expect(dialog.locator('.reading-mutagen').first()).toHaveText(/^Hóa Kỵ tại cung Tật Ách: \S/);
+  await dialog.getByRole('button', { name: 'Đóng' }).click();
+  await page.click('[data-id=palace-open-6]');
+  await expect(dialog.locator('[data-id=palace-reading]')).toContainText('Cung trung tâm');
+  await page.setViewportSize({ width: 375, height: 900 });
+  await page.screenshot({ path: testInfo.outputPath('palace-dialog-375.png') });
+  await dialog.getByRole('button', { name: 'Đóng' }).click();
+
   for (const width of [1440, 375]) {
     await page.setViewportSize({ width, height: 900 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
@@ -56,7 +79,7 @@ test('yearly page: tuổi Mùi shows its sao hạn table, relations and Thái Tu
   await expect(page.locator('[data-id=year-relations]')).toContainText('Hợi, Mão');
   await expect(page.locator('[data-id=year-sign-tai-sui]')).toContainText('trực Thái Tuế');
   await expect(page.locator('[data-id=year-facts]')).toContainText('Thứ bảy, 6/2/2027');
-  await expect(page.locator('[data-id=year-interpretation]')).toHaveCount(0);
+  await expect(page.locator('[data-id=year-interpretation] h3')).toHaveText(['Tổng quan', 'Công việc', 'Tài chính', 'Tình cảm, gia đình', 'Sức khỏe', 'Lời khuyên']);
   await expect(page.locator('[data-id=nav-year]')).toHaveAttribute('aria-current', 'page');
   await expect.poll(() => page.locator('.year-hero .year-sign-art').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   for (const width of [1440, 375]) {
@@ -99,6 +122,7 @@ test('yearly pages: the HTML itself carries the title, description and content f
   expect(html).toContain('<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article"');
   expect(html).toContain('<h1 class="doc-title">Tử vi 2027 tuổi Mùi (Dê)</h1>');
   expect(html).toContain('Thái Bạch');
+  expect(html).toContain('<h3 class="year-subheading">Tài chính</h3>');
 
   const index = await (await request.get('/tu-vi-2027')).text();
   expect(index).toContain('<title>Tử vi 2027 Đinh Mùi: sao hạn, Thái Tuế của 12 con giáp · ');

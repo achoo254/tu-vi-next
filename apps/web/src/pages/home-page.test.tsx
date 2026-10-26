@@ -36,6 +36,9 @@ describe('home page, signed out', () => {
     expect(board.querySelectorAll('.yearly-tag').length).toBeGreaterThanOrEqual(2);
     expect(board.querySelectorAll('.star-yearly')).toHaveLength(4);
     expect(screen.getByRole('link', { name: /tuổi Hợi/ }).getAttribute('href')).toBe('/tu-vi-2027/tuoi-hoi');
+    // The written readings load on their own: the cục text in the centre.
+    expect((await screen.findByText(/./, { selector: '[data-id=cuc-reading]' })).textContent?.length).toBeGreaterThan(40);
+    // (The star and palace dialogs use <dialog>.showModal, which jsdom lacks: covered by the E2E run.)
   });
 
   it('explains a date that does not exist', async () => {

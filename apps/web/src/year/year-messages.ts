@@ -64,7 +64,8 @@ const vi = {
 
   interpretationTitle: 'Luận giải tuổi {branch} năm {year}',
   'section.overview': 'Tổng quan',
-  'section.career': 'Công việc, tài chính',
+  'section.career': 'Công việc',
+  'section.money': 'Tài chính',
   'section.love': 'Tình cảm, gia đình',
   'section.health': 'Sức khỏe',
   'section.advice': 'Lời khuyên',
@@ -133,7 +134,8 @@ const en: Record<YearMessageKey, string> = {
 
   interpretationTitle: 'The {branch} year in {year}',
   'section.overview': 'Overview',
-  'section.career': 'Work and money',
+  'section.career': 'Work',
+  'section.money': 'Money',
   'section.love': 'Love and family',
   'section.health': 'Health',
   'section.advice': 'Advice',

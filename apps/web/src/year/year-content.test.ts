@@ -1,6 +1,6 @@
-import { vnLunarToSolar } from '@tuvi/chart';
+import { EARTHLY_BRANCHES, vnLunarToSolar } from '@tuvi/chart';
 import { describe, expect, it } from 'vitest';
-import { INTERPRETATION_FILES, InterpretationSchema, LUNAR_YEAR_FACTS, interpretation } from './year-content';
+import { INTERPRETATION_FIELDS, InterpretationSchema, LUNAR_YEAR_FACTS, interpretation, interpretationFile } from './year-content';
 import { ZODIAC_SLUGS } from './year-routes';
 
 describe('lunar year facts', () => {
@@ -24,20 +24,16 @@ describe('lunar year facts', () => {
 });
 
 describe('yearly interpretations', () => {
-  it('has a well-formed slot for each of the 12 con giáp of 2027', () => {
-    for (const slug of ZODIAC_SLUGS) {
-      const file = INTERPRETATION_FILES[`./content/year-2027/${slug}.json`];
-      expect(file, slug).toBeDefined();
-      expect(InterpretationSchema.safeParse(file).success, slug).toBe(true);
-    }
-  });
-
-  it('shows nothing while the slots are empty', () => {
-    for (let branch = 0; branch < 12; branch++) {
-      const file = InterpretationSchema.parse(INTERPRETATION_FILES[`./content/year-2027/${ZODIAC_SLUGS[branch] ?? ''}.json`]);
-      const filled = Object.values(file).some((text) => text.trim() !== '');
-      expect(interpretation(2027, branch) === null).toBe(!filled);
-    }
+  it('has all six sections, filled in, for each of the 12 con giáp of 2027', () => {
+    ZODIAC_SLUGS.forEach((slug, branch) => {
+      const parsed = InterpretationSchema.safeParse(interpretationFile(2027, slug));
+      expect(parsed.success, slug).toBe(true);
+      if (!parsed.success) return;
+      expect(parsed.data.branch, slug).toBe(EARTHLY_BRANCHES[branch]);
+      expect([parsed.data.year, parsed.data['year-name']], slug).toEqual([2027, 'Đinh Mùi']);
+      const sections = interpretation(2027, branch);
+      expect(Object.keys(sections ?? {}), slug).toEqual([...INTERPRETATION_FIELDS]);
+    });
     expect(interpretation(2031, 0)).toBeNull();
   });
 });

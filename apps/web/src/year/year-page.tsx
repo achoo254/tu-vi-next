@@ -1,8 +1,8 @@
 /**
  * The yearly pages: "/tu-vi-2027" (the year for all 12 con giáp) and "/tu-vi-2027/tuoi-<con giáp>". Loaded on
  * demand by the browser and rendered to HTML at build time (year-prerender.tsx), so crawlers read the same
- * page. Everything shown is computed (@tuvi/chart/year) or written content (year-content.ts); the written
- * interpretation appears only where it exists.
+ * page. Everything shown is computed (@tuvi/chart/year) or written content (year-content.ts); each section
+ * of the written interpretation appears only where it has text.
  */
 import {
   type BatHan,
@@ -384,9 +384,9 @@ function SignPage({ year, branchIndex }: { year: number; branchIndex: number }):
           <p className="intro-lead">{y('signLead', vars)}</p>
         </div>
       </header>
+      <Interpretation year={year} branchIndex={branchIndex} y={y} />
       <FortuneTable year={year} branchIndex={branchIndex} y={y} locale={locale} />
       <Relations year={year} branchIndex={branchIndex} y={y} locale={locale} />
-      <Interpretation year={year} branchIndex={branchIndex} y={y} />
       <YearFacts year={year} y={y} locale={locale} />
       <Closing year={year} y={y} />
       <nav aria-label={y('otherSigns')}>

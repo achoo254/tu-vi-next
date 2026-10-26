@@ -1,0 +1,50 @@
+{
+  "menh": {
+    "name": "Mệnh",
+    "about": "Cung trung tâm của lá số, nói về chính bạn: tính cách, cách suy nghĩ, điểm mạnh bẩm sinh và cách bạn bước vào đời."
+  },
+  "huynh-de": {
+    "name": "Huynh Đệ",
+    "about": "Cung nói về anh chị em ruột và những người thân thiết như ruột thịt, cùng cách bạn gắn bó, sẻ chia với họ."
+  },
+  "phu-the": {
+    "name": "Phu Thê",
+    "about": "Cung nói về tình yêu và hôn nhân: kiểu người bạn dễ rung động, cách bạn yêu và điều bạn cần ở một mối quan hệ lâu dài."
+  },
+  "tu-nu": {
+    "name": "Tử Nữ",
+    "about": "Cung nói về con cái và thế hệ sau, cũng là cách bạn chăm chút, dạy dỗ và truyền cảm hứng cho người nhỏ tuổi hơn."
+  },
+  "tai-bach": {
+    "name": "Tài Bạch",
+    "about": "Cung nói về tiền bạc: cách bạn kiếm, giữ và tiêu tiền, cùng thái độ của bạn với chuyện vật chất."
+  },
+  "tat-ach": {
+    "name": "Tật Ách",
+    "about": "Cung nhắc bạn về sức khỏe và nhịp sống: những thói quen nên giữ gìn để thân tâm luôn cân bằng."
+  },
+  "thien-di": {
+    "name": "Thiên Di",
+    "about": "Cung nói về con người bạn khi ra ngoài xã hội: đi xa, xê dịch, gặp gỡ và cách thế giới bên ngoài đón nhận bạn."
+  },
+  "no-boc": {
+    "name": "Nô Bộc",
+    "about": "Cung nói về bạn bè, đồng nghiệp, cộng sự và những người bạn dẫn dắt — mạng lưới quan hệ quanh bạn."
+  },
+  "quan-loc": {
+    "name": "Quan Lộc",
+    "about": "Cung nói về sự nghiệp và học hành: hướng đi phù hợp, phong cách làm việc và con đường khẳng định bản thân."
+  },
+  "dien-trach": {
+    "name": "Điền Trạch",
+    "about": "Cung nói về nhà cửa, nơi ở và tài sản tích lũy, cũng là không khí tổ ấm mà bạn tạo dựng."
+  },
+  "phuc-duc": {
+    "name": "Phúc Đức",
+    "about": "Cung nói về đời sống tinh thần, niềm vui nội tâm, sự may mắn và những giá trị tốt đẹp từ gia tộc."
+  },
+  "phu-mau": {
+    "name": "Phụ Mẫu",
+    "about": "Cung nói về cha mẹ, sự nuôi dưỡng thuở nhỏ và mối quan hệ của bạn với những người đi trước, người dìu dắt."
+  }
+}
