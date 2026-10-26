@@ -8,6 +8,7 @@ import { ChartActions } from '../chart/chart-actions';
 import { ChartBoard } from '../chart/chart-board';
 import { type ChartEngineState, useChartEngine } from '../chart/chart-engine';
 import { ChartErrorBoundary } from '../chart/chart-error-boundary';
+import { ConfirmDialog } from '../chart/confirm-dialog';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
 import { type Translate, useI18n } from '../i18n/i18n';
@@ -42,6 +43,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   const [formKey, setFormKey] = useState(0);
   const [saved, setSaved] = useState<SavedChart[] | 'error' | null>(null);
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<SavedChart | null>(null);
   const chartRef = useRef<HTMLElement>(null);
   const { chart, error } = useMemo(() => cast(engine, input, t), [engine, input, t]);
   const signedIn = session.status === 'ready' && session.signedIn;
@@ -83,7 +85,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   }
 
   async function remove(target: SavedChart): Promise<void> {
-    if (!window.confirm(t('saved.confirmDelete', { name: target.input.name || t('chart.unnamed') }))) return;
+    setPendingDelete(null);
     setSavedMessage(null);
     try {
       await deleteChart(target.id);
@@ -111,7 +113,16 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
       <div className="home-grid">
         <div className="home-side">
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
-          {signedIn && <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={(c) => void remove(c)} />}
+          {signedIn && <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={setPendingDelete} />}
+          <ConfirmDialog
+            message={pendingDelete ? t('saved.confirmDelete', { name: pendingDelete.input.name || t('chart.unnamed') }) : null}
+            confirmLabel={t('saved.delete')}
+            cancelLabel={t('saved.cancel')}
+            onConfirm={() => {
+              if (pendingDelete) void remove(pendingDelete);
+            }}
+            onCancel={() => setPendingDelete(null)}
+          />
         </div>
         {engine === 'failed' && (
           <p className="alert alert-error" role="alert" data-id="engine-failed">

@@ -87,8 +87,16 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await expect(page.locator('[data-id=chart-centre]')).toContainText('ngày 2 tháng 1 năm Đinh Hợi');
   await expect(page.locator('[data-id=birth-form-year]')).toHaveValue('2007');
 
-  page.once('dialog', (dialog) => void dialog.accept());
+  // The app asks with its own dialog (never window.confirm): cancel keeps the chart, confirm deletes it.
+  const confirmDialog = page.locator('[data-id=confirm-dialog]');
   await saved.getByRole('button', { name: 'Xoá' }).click();
+  await expect(confirmDialog).toBeVisible();
+  await expect(page.locator('[data-id=confirm-dialog-cancel]')).toBeFocused();
+  await page.click('[data-id=confirm-dialog-cancel]');
+  await expect(confirmDialog).toBeHidden();
+  await expect(saved.getByRole('button', { name: 'Xoá' })).toBeVisible();
+  await saved.getByRole('button', { name: 'Xoá' }).click();
+  await page.click('[data-id=confirm-dialog-confirm]');
   await expect(page.locator('[data-id=saved-charts]')).toContainText('Chưa có lá số nào');
 
   await page.click('[data-id=nav-sign-out]');
