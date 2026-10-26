@@ -1,11 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { contrastRatio, findColourLiterals, parseThemes } from './token-contrast';
+import { contrastRatio, findColourLiterals, mixHex, parseThemes } from './token-contrast';
 
 describe('token checks', () => {
   it('computes WCAG contrast ratios', () => {
     expect(contrastRatio('#000000', '#ffffff')).toBeCloseTo(21, 5);
     expect(contrastRatio('#ffffff', '#ffffff')).toBe(1);
     expect(contrastRatio('#767676', '#ffffff')).toBeCloseTo(4.54, 2);
+  });
+
+  it('mixes colours like color-mix in srgb', () => {
+    expect(mixHex('#ffffff', '#000000', 0.5)).toBe('#808080');
+    expect(mixHex('#ffffff', '#d9c7e1', 1)).toBe('#ffffff');
   });
 
   it('reads light tokens and dark overrides', () => {

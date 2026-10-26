@@ -77,7 +77,13 @@
   --c-mutagen: #4f3422; /* amber-12: Hóa Lộc/Quyền/Khoa/Kỵ (amber-11 is 4.38:1 on slate-2) */
   --c-soul: #953ea3; /* plum-11: the Mệnh palace outline */
 
-  /* PNG export: always light, whatever the screen theme */
+  /* AI art layer (apps/web/src/art): board cells are --cell-opacity of the surface over the sky paper. The
+     darkest pixel of art/decor/sky.webp is recorded here so check:tokens tests text over the worst case. */
+  --c-art-sky-darkest: #d9c7e1;
+  --cell-opacity: 86%;
+
+  /* PNG export: always light, whatever the screen theme; cells cover the sky paper at this opacity */
+  --export-cell-opacity: 86%;
   --c-export-bg: #ffffff;
   --c-export-panel: #f9f9fb;
   --c-export-line: #8b8d98;
@@ -128,6 +134,8 @@
     --c-star-minor: #b0b4ba;
     --c-mutagen: #ffca16; /* amber-11 dark */
     --c-soul: #e796f3;
+    /* dark: cells stay opaque over the (light) sky paper, so contrast is the plain surface's */
+    --cell-opacity: 100%;
   }
 }
 

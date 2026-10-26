@@ -169,6 +169,10 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
           ],
         },
         { heading: 'Biểu tượng app', paragraphs: [ICON_LICENCE] },
+        {
+          heading: 'Hình minh hoạ',
+          paragraphs: ['12 con giáp, 14 huy hiệu chính tinh, nền giấy bầu trời sao, khung và huy chương của bàn lá số: ' + ICON_LICENCE],
+        },
         { heading: 'Mã nguồn', paragraphs: ['Mã nguồn của app theo giấy phép MIT.'] },
       ],
     },
@@ -200,6 +204,10 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
           ],
         },
         { heading: 'App icon', paragraphs: [ICON_LICENCE] },
+        {
+          heading: 'Illustrations',
+          paragraphs: ['The 12 zodiac animals, the 14 major-star emblems, the starry paper, the board frame and the medallion: ' + ICON_LICENCE],
+        },
         { heading: 'Source code', paragraphs: ["The app's source code is under the MIT licence."] },
       ],
     },

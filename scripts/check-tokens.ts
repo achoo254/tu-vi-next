@@ -10,7 +10,7 @@
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { type LiteralViolation, type TokenMap, contrastRatio, findColourLiterals, parseThemes } from './token-contrast';
+import { type LiteralViolation, type TokenMap, contrastRatio, findColourLiterals, mixHex, parseThemes } from './token-contrast';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WEB = path.join(ROOT, 'apps/web');
@@ -76,6 +76,19 @@ async function main(): Promise<number> {
       checked++;
       if (ratio < AA_TEXT) failures.push(`  ${theme.padEnd(5)} ${ratio.toFixed(2)}:1  ${fg} on ${bg}`);
     }
+  }
+  // Board cells and export cells over the AI sky paper (light theme and export; dark cells are opaque).
+  const cellWeight = Number.parseFloat(value(themes.light, '--cell-opacity')) / 100;
+  const sky = value(themes.light, '--c-art-sky-darkest');
+  const exportWeight = Number.parseFloat(value(themes.light, '--export-cell-opacity')) / 100;
+  const overArt: ReadonlyArray<readonly [string, string, number]> = [
+    ...SCREEN_TEXT.flatMap((fg) => ['--c-surface', '--c-surface-subtle'].map((bg) => [fg, bg, cellWeight] as const)),
+    ...EXPORT_TEXT.flatMap((fg) => EXPORT_BACKGROUNDS.map((bg) => [fg, bg, exportWeight] as const)),
+  ];
+  for (const [fg, bg, weight] of overArt) {
+    const ratio = contrastRatio(value(themes.light, fg), mixHex(value(themes.light, bg), sky, weight));
+    checked++;
+    if (ratio < AA_TEXT) failures.push(`  art   ${ratio.toFixed(2)}:1  ${fg} on ${bg} ${weight * 100}% over the sky paper`);
   }
   if (failures.length > 0) {
     failed = true;

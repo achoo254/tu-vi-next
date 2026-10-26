@@ -1,6 +1,7 @@
 import type { ChartPalace, ChartStar } from '@tuvi/chart';
 import { type ReactNode, useEffect, useRef } from 'react';
 import { useI18n } from '../i18n/i18n';
+import { starArt } from './chart-art';
 import { starMeaning } from './star-terms';
 
 interface StarDialogProps {
@@ -12,6 +13,7 @@ interface StarDialogProps {
 export function StarDialog({ selection, onClose }: StarDialogProps): ReactNode {
   const { t } = useI18n();
   const ref = useRef<HTMLDialogElement>(null);
+  const art = selection ? starArt(selection.star.name, 'large') : null;
 
   useEffect(() => {
     const dialog = ref.current;
@@ -24,6 +26,7 @@ export function StarDialog({ selection, onClose }: StarDialogProps): ReactNode {
     <dialog ref={ref} className="card star-dialog" onClose={onClose} aria-labelledby="star-dialog-title" data-id="star-dialog">
       {selection && (
         <>
+          {art && <img className="star-dialog-art" src={art} width={112} height={112} alt="" aria-hidden="true" />}
           <h3 id="star-dialog-title" className={`star-dialog-title star-${selection.star.kind}`}>
             {selection.star.name}
           </h3>

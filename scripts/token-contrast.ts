@@ -69,3 +69,12 @@ export interface LiteralViolation {
 export function findColourLiterals(source: string, file: string): LiteralViolation[] {
   return source.split(/\r?\n/).flatMap((line, index) => [...line.matchAll(COLOUR_LITERAL)].map((m) => ({ file, line: index + 1, match: m[0] })));
 }
+
+/** `a` mixed over `b` in sRGB, `weight` (0–1) of `a`, as #rrggbb: what color-mix(in srgb, a w%, b) gives. */
+export function mixHex(a: string, b: string, weight: number): string {
+  const channelOf = (hex: string, offset: number): number => Number.parseInt(hex.slice(offset, offset + 2), 16);
+  return `#${[1, 3, 5]
+    .map((offset) => Math.round(channelOf(a, offset) * weight + channelOf(b, offset) * (1 - weight)))
+    .map((v) => v.toString(16).padStart(2, '0'))
+    .join('')}`;
+}

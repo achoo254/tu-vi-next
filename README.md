@@ -52,5 +52,6 @@ lịch Trung Quốc: `lunar-lite`, `lunar-typescript` (MIT); âm lịch Việt N
 [`ziwei-doushu`](https://github.com/Renhuai123/ziwei-doushu) (mã MIT) chỉ đọc tham khảo ý tưởng test, không chép mã
 hay dữ liệu. Danh sách đầy đủ ở trang `/credits`.
 
-Biểu tượng app ([`brand/app-icon-master-1024.png`](brand/app-icon-master-1024.png) và các file sinh từ nó) không thuộc
-phạm vi MIT: AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).
+Biểu tượng app ([`brand/app-icon-master-1024.png`](brand/app-icon-master-1024.png) và các file sinh từ nó) và hình
+minh hoạ của lá số ([`apps/web/src/art`](apps/web/src/art/CREDITS.md): 12 con giáp, 14 huy hiệu chính tinh, nền,
+khung, huy chương) không thuộc phạm vi MIT: AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).

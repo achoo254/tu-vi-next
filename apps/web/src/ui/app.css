@@ -406,14 +406,18 @@ button {
 .chart-actions .alert {
   flex-basis: 100%;
 }
+/* The AI sky paper behind the board (apps/web/src/art/decor); cells sit on it at --cell-opacity. */
 .board {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--c-bg) url("../art/decor/sky.webp") center / cover;
 }
 .board-centre,
 .palace {
-  background: var(--c-surface);
+  background: color-mix(in srgb, var(--c-surface) var(--cell-opacity), transparent);
   border: 1px solid var(--c-border);
   border-radius: var(--radius-md);
   padding: var(--space-3);
@@ -423,7 +427,43 @@ button {
   display: grid;
   gap: var(--space-2);
   align-content: start;
-  background: var(--c-surface-subtle);
+  background: color-mix(in srgb, var(--c-surface-subtle) var(--cell-opacity), transparent);
+}
+.year-animal {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+}
+/* The AI medallion behind the birth year's animal. */
+.year-animal-art {
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  background: url("../art/decor/medallion.webp") center / contain no-repeat;
+}
+.year-animal-art img {
+  width: 92px;
+  height: 92px;
+}
+.palace-mark {
+  width: 20px;
+  height: 20px;
+  margin-left: var(--space-1);
+  vertical-align: -5px;
+  opacity: 0.75;
+}
+.star-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: var(--space-1);
+  vertical-align: -4px;
+}
+.star-dialog-art {
+  justify-self: center;
+  width: 112px;
+  height: 112px;
 }
 .board-title {
   font-size: 18px;
@@ -532,15 +572,16 @@ button {
 }
 /* the traditional board once each palace has room */
 @media (min-width: 720px) {
+  /* The traditional board inside the AI ornamental frame (border-image keeps its corners unstretched). */
   .board {
     display: grid;
     grid-template-columns: repeat(4, minmax(var(--palace-min), 1fr));
     grid-auto-rows: minmax(200px, auto);
     gap: 0;
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--c-surface);
+    padding: var(--space-3);
+    border: 30px solid transparent;
+    border-image: url("../art/decor/frame.webp") 110 / 30px / 6px stretch;
+    border-radius: 0;
   }
   .board-centre {
     grid-row: 2 / span 2;

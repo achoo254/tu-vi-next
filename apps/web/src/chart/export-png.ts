@@ -1,12 +1,15 @@
 /**
  * The chart as a 1080 × 1350 PNG (4:5, the portrait size social feeds show whole), drawn on a canvas in
  * the browser: title, the 4 × 4 board, the entertainment note and the tuvi.hoandat.com watermark.
- * Colours come from the --c-export-* tokens (always light, whatever the screen theme).
+ * Colours come from the --c-export-* tokens (always light, whatever the screen theme). The AI art (sky paper,
+ * frame, medallion, zodiac animals, star emblems) is drawn when it loaded; a missing image is left out, never
+ * a reason to fail the export. Cells cover the paper at --cell-opacity, as on screen.
  */
 import type { Chart, ChartPalace, ChartStar } from '@tuvi/chart';
 import { APP_HOST } from '../brand';
 import type { Translate } from '../i18n/i18n';
 import { boardPosition } from './board-layout';
+import { FRAME_URL, MEDALLION_URL, SKY_URL, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
 import { starLabel } from './star-terms';
 
@@ -45,6 +48,15 @@ interface Palette {
   major: string;
   malefic: string;
   mutagen: string;
+  /** Opacity (0–1) of a cell over the sky paper (--cell-opacity, light theme). */
+  cellOpacity: number;
+}
+
+/** --export-cell-opacity (the export is always light): 86% → 0.86. */
+function cellOpacity(style: CSSStyleDeclaration): number {
+  const value = Number.parseFloat(style.getPropertyValue('--export-cell-opacity'));
+  if (!Number.isFinite(value)) throw new Error('token --export-cell-opacity is not defined');
+  return value / 100;
 }
 
 function readPalette(): Palette {
@@ -65,6 +77,7 @@ function readPalette(): Palette {
     major: token('major'),
     malefic: token('malefic'),
     mutagen: token('mutagen'),
+    cellOpacity: cellOpacity(style),
   };
 }
 
@@ -91,11 +104,47 @@ function starColour(star: ChartStar, palette: Palette): string {
   return palette.muted;
 }
 
-function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette: Palette, t: Translate): void {
+/** The art of one export, by role; any of it may be missing. */
+export interface ExportArt {
+  sky?: HTMLImageElement;
+  frame?: HTMLImageElement;
+  medallion?: CanvasImageSource;
+  yearAnimal?: CanvasImageSource;
+  /** Small zodiac marks by branch index. */
+  marks: Map<number, CanvasImageSource>;
+  /** Small emblems by major star name. */
+  stars: Map<string, CanvasImageSource>;
+}
+
+const NO_ART: ExportArt = { marks: new Map(), stars: new Map() };
+const STAR_ICON = 20;
+const MARK = 30;
+
+function fillCell(ctx: CanvasRenderingContext2D, rect: Rect, colour: string, opacity: number): void {
+  ctx.globalAlpha = opacity;
+  ctx.fillStyle = colour;
+  ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+  ctx.globalAlpha = 1;
+}
+
+/** Draws `image` to cover the canvas (centre crop). */
+function drawCover(ctx: CanvasRenderingContext2D, image: HTMLImageElement): void {
+  const scale = Math.max(EXPORT_WIDTH / image.width, EXPORT_HEIGHT / image.height);
+  const w = image.width * scale;
+  const h = image.height * scale;
+  ctx.drawImage(image, (EXPORT_WIDTH - w) / 2, (EXPORT_HEIGHT - h) / 2, w, h);
+}
+
+function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette: Palette, t: Translate, art: ExportArt): void {
   const { x, y, width, height } = palaceRect(palace.branchIndex);
   const inner = width - 2 * PAD;
-  ctx.fillStyle = palace.isSoulPalace ? palette.panel : palette.bg;
-  ctx.fillRect(x, y, width, height);
+  fillCell(ctx, { x, y, width, height }, palace.isSoulPalace ? palette.panel : palette.bg, palette.cellOpacity);
+  const mark = art.marks.get(palace.branchIndex);
+  if (mark) {
+    ctx.globalAlpha = 0.8;
+    ctx.drawImage(mark, x + width - PAD - MARK, y + height - PAD - MARK, MARK, MARK);
+    ctx.globalAlpha = 1;
+  }
 
   ctx.textBaseline = 'top';
   ctx.font = `700 20px ${SANS}`;
@@ -111,8 +160,11 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
   let cursor = y + PAD + 32;
   ctx.font = `700 19px ${SANS}`;
   for (const star of palace.majorStars) {
+    const icon = art.stars.get(star.name);
+    const indent = icon ? STAR_ICON + 6 : 0;
+    if (icon) ctx.drawImage(icon, x + PAD, cursor - 1, STAR_ICON, STAR_ICON);
     ctx.fillStyle = starColour(star, palette);
-    ctx.fillText(starLabel(star), x + PAD, cursor, inner);
+    ctx.fillText(starLabel(star), x + PAD + indent, cursor, inner - indent);
     cursor += 24;
   }
   const footerTop = y + height - PAD - 36;
@@ -138,19 +190,22 @@ function drawPalace(ctx: CanvasRenderingContext2D, palace: ChartPalace, palette:
   ctx.fillText(`${palace.lifeStage} · ${palace.doctorStar}`, x + PAD, footerTop + 18, inner);
 }
 
-function drawCentre(ctx: CanvasRenderingContext2D, chart: Chart, palette: Palette, t: Translate): void {
+function drawCentre(ctx: CanvasRenderingContext2D, chart: Chart, palette: Palette, t: Translate, art: ExportArt): void {
   const { x, y, width } = CENTRE_RECT;
   const inner = width - 4 * PAD;
-  ctx.fillStyle = palette.panel;
-  ctx.fillRect(CENTRE_RECT.x, CENTRE_RECT.y, CENTRE_RECT.width, CENTRE_RECT.height);
+  fillCell(ctx, CENTRE_RECT, palette.panel, palette.cellOpacity);
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
   ctx.fillStyle = palette.accent;
-  ctx.font = `700 30px ${SANS}`;
-  ctx.fillText(chartTitle(chart, t), x + width / 2, y + 36, inner);
-  let cursor = y + 96;
+  ctx.font = `700 28px ${SANS}`;
+  ctx.fillText(chartTitle(chart, t), x + width / 2, y + 22, inner);
+  const medallion = 128;
+  const top = y + 60;
+  if (art.medallion) ctx.drawImage(art.medallion, x + width / 2 - medallion / 2, top, medallion, medallion);
+  if (art.yearAnimal) ctx.drawImage(art.yearAnimal, x + width / 2 - 44, top + 20, 88, 88);
+  let cursor = art.medallion || art.yearAnimal ? top + medallion + 10 : y + 80;
   for (const fact of chartFacts(chart, t)) {
-    ctx.font = `600 18px ${SANS}`;
+    ctx.font = `600 17px ${SANS}`;
     ctx.fillStyle = palette.muted;
     const text = fact.value ? `${fact.label}: ` : fact.label;
     ctx.textAlign = 'left';
@@ -158,20 +213,21 @@ function drawCentre(ctx: CanvasRenderingContext2D, chart: Chart, palette: Palett
     const start = x + width / 2 - Math.min(lineWidth, inner) / 2;
     ctx.fillText(text, start, cursor, inner);
     if (fact.value) {
-      ctx.font = `500 18px ${SANS}`;
+      ctx.font = `500 17px ${SANS}`;
       ctx.fillStyle = palette.text;
       const labelWidth = ctx.measureText(text).width;
       ctx.fillText(fact.value, start + labelWidth, cursor, Math.max(inner - labelWidth, 40));
     }
-    cursor += 34;
+    cursor += 29;
   }
   ctx.textAlign = 'left';
 }
 
 /** Draws the chart; `t` gives the UI strings in the current language. */
-export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Translate, palette: Palette = readPalette()): void {
+export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Translate, art: ExportArt = NO_ART, palette: Palette = readPalette()): void {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+  if (art.sky) drawCover(ctx, art.sky);
   ctx.textBaseline = 'top';
   ctx.textAlign = 'left';
   ctx.fillStyle = palette.text;
@@ -182,8 +238,8 @@ export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Transl
   const first = chartFacts(chart, t)[0];
   ctx.fillText(`${first ? `${first.value} · ` : ''}${chart.yinYangGender} · ${chart.canChi.year}`, MARGIN, 108, BOARD_SIZE);
 
-  for (const palace of chart.palaces) drawPalace(ctx, palace, palette, t);
-  drawCentre(ctx, chart, palette, t);
+  for (const palace of chart.palaces) drawPalace(ctx, palace, palette, t, art);
+  drawCentre(ctx, chart, palette, t, art);
 
   ctx.strokeStyle = palette.line;
   ctx.lineWidth = 2;
@@ -199,6 +255,9 @@ export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Transl
     ctx.lineWidth = 4;
     ctx.strokeRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4);
   }
+  if (art.frame) {
+    drawNineSlice(ctx, art.frame, { x: MARGIN - FRAME_OUTSET, y: BOARD_TOP - FRAME_OUTSET, width: BOARD_SIZE + 2 * FRAME_OUTSET, height: BOARD_SIZE + 2 * FRAME_OUTSET });
+  }
 
   const footerY = BOARD_TOP + BOARD_SIZE + 44;
   ctx.font = `500 22px ${SANS}`;
@@ -211,15 +270,73 @@ export function drawChart(ctx: CanvasRenderingContext2D, chart: Chart, t: Transl
   ctx.textAlign = 'left';
 }
 
-/** The PNG file of the chart. Waits for the web fonts so the canvas does not fall back to a system face. */
+/** The frame sits just outside the board; its corners keep their size, its edges stretch (as border-image does). */
+const FRAME_OUTSET = 30;
+const FRAME_SLICE = 110;
+const FRAME_CORNER = 40;
+
+function drawNineSlice(ctx: CanvasRenderingContext2D, image: HTMLImageElement, to: Rect): void {
+  const s = FRAME_SLICE;
+  const c = FRAME_CORNER;
+  const sw = image.width;
+  const sh = image.height;
+  const xs = [0, s, sw - s, sw];
+  const ys = [0, s, sh - s, sh];
+  const dx = [to.x, to.x + c, to.x + to.width - c, to.x + to.width];
+  const dy = [to.y, to.y + c, to.y + to.height - c, to.y + to.height];
+  for (let row = 0; row < 3; row++) {
+    for (let col = 0; col < 3; col++) {
+      if (row === 1 && col === 1) continue; // the empty middle
+      const [sx0 = 0, sx1 = 0] = [xs[col], xs[col + 1]];
+      const [sy0 = 0, sy1 = 0] = [ys[row], ys[row + 1]];
+      const [dx0 = 0, dx1 = 0] = [dx[col], dx[col + 1]];
+      const [dy0 = 0, dy1 = 0] = [dy[row], dy[row + 1]];
+      ctx.drawImage(image, sx0, sy0, sx1 - sx0, sy1 - sy0, dx0, dy0, dx1 - dx0, dy1 - dy0);
+    }
+  }
+}
+
+/** An image once decoded, or undefined when it fails to load (the export goes on without it). */
+async function loadImage(url: string | null): Promise<HTMLImageElement | undefined> {
+  if (!url) return undefined;
+  const image = new Image();
+  image.src = url;
+  try {
+    await image.decode();
+    return image;
+  } catch {
+    return undefined;
+  }
+}
+
+async function loadArt(chart: Chart): Promise<ExportArt> {
+  const yearBranch = (((chart.lunarDate.year + 8) % 12) + 12) % 12;
+  const majors = [...new Set(chart.palaces.flatMap((p) => p.majorStars.map((s) => s.name)))];
+  const [sky, frame, medallion, yearAnimal, marks, stars] = await Promise.all([
+    loadImage(SKY_URL),
+    loadImage(FRAME_URL),
+    loadImage(MEDALLION_URL),
+    loadImage(zodiacArt(yearBranch, 'large')),
+    Promise.all(chart.palaces.map(async (p) => [p.branchIndex, await loadImage(zodiacArt(p.branchIndex, 'small'))] as const)),
+    Promise.all(majors.map(async (name) => [name, await loadImage(starArt(name, 'small'))] as const)),
+  ]);
+  const present = <K>(entries: ReadonlyArray<readonly [K, HTMLImageElement | undefined]>): Map<K, CanvasImageSource> =>
+    new Map(entries.flatMap(([key, image]) => (image ? [[key, image] as const] : [])));
+  return { sky, frame, medallion, yearAnimal, marks: present(marks), stars: present(stars) };
+}
+
+/** The PNG file of the chart. Waits for the web fonts and the art so the canvas is complete. */
 export async function renderChartPng(chart: Chart, t: Translate): Promise<Blob> {
-  await Promise.all([`700 40px Inter`, `500 18px Inter`, `600 18px Inter`, `400 14px Inter`].map((font) => document.fonts.load(font)));
+  const [art] = await Promise.all([
+    loadArt(chart),
+    ...[`700 40px Inter`, `500 18px Inter`, `600 18px Inter`, `400 14px Inter`].map((font) => document.fonts.load(font)),
+  ]);
   const canvas = document.createElement('canvas');
   canvas.width = EXPORT_WIDTH;
   canvas.height = EXPORT_HEIGHT;
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('canvas 2d context unavailable');
-  drawChart(ctx, chart, t);
+  drawChart(ctx, chart, t, art);
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('canvas.toBlob returned nothing'))), 'image/png');
   });

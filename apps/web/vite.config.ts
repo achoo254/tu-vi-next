@@ -19,6 +19,8 @@ export default defineConfig({
   },
   build: {
     target: 'es2022',
+    // The small art (zodiac marks, star icons) stays as files: inlined as base64 it would grow the main chunk.
+    assetsInlineLimit: (file) => (file.includes('/src/art/') ? false : undefined),
     sourcemap: true,
   },
 });
