@@ -440,6 +440,13 @@ button {
 .chart-actions .alert {
   flex-basis: 100%;
 }
+.chart-video-note {
+  flex-basis: 100%;
+  max-width: 60ch;
+  margin: 0;
+  font-size: 13px;
+  color: var(--c-text-muted);
+}
 /* The AI sky paper behind the board (apps/web/src/art/decor); cells sit on it at --cell-opacity. */
 .board {
   display: flex;

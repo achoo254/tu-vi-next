@@ -4,7 +4,9 @@ Thư mục repo: `tu-vi-next` (tên hiển thị lấy từ [`brand.config.json`
 Chạy tại `https://tuvi.hoandat.com`, thuộc tầng giải trí của hệ sinh thái hoandat.com.
 
 Nhập ngày giờ sinh (dương hoặc âm lịch) để lập lá số tử vi 12 cung bằng tiếng Việt, xem lưu niên (mặc định 2027) trên
-lá số, bấm vào từng sao để đọc nghĩa ngắn, xuất lá số thành ảnh PNG 1080×1350 để chia sẻ. Âm lịch tính theo giờ Việt Nam (UTC+7). Chưa đăng nhập thì mọi
+lá số, bấm vào từng sao để đọc nghĩa ngắn, xuất lá số thành ảnh PNG 1080×1350 để chia sẻ, hoặc bấm "Làm video lá số" để mở mẫu "Lá số tử vi" của Clip
+(video dọc 9:16) đã điền sẵn con giáp, chính tinh ở Mệnh, cục và một câu luận giải; link chỉ mang các giá trị đó và tên,
+không mang ngày giờ sinh (`apps/web/src/chart/chart-video-link.ts`). Âm lịch tính theo giờ Việt Nam (UTC+7). Chưa đăng nhập thì mọi
 thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Nội dung mang tính giải trí,
 tham khảo.
 

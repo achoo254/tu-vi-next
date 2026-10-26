@@ -10,3 +10,7 @@ export const APP_HOST = new URL(primaryOrigin(brand)).host;
 
 /** The ecosystem's home page (the footer's "An app from …" link). */
 export const ECOSYSTEM_URL = `https://${brand.primaryTenant.domain}`;
+
+/** Clip, the ecosystem's video app (same account): the chart video is made there. */
+export const CLIP_URL = `https://clip.${brand.primaryTenant.domain}`;
+export const CLIP_HOST = new URL(CLIP_URL).host;
