@@ -793,6 +793,8 @@ button {
 
 .star-dialog {
   width: min(480px, calc(100vw - 2 * var(--gutter)));
+  /* As tall as its content: iOS Safari otherwise stretches a modal dialog, and the grid spreads the rows. */
+  height: fit-content;
   max-height: calc(100dvh - 2 * var(--gutter));
   overflow-y: auto;
   padding: var(--space-5);
@@ -801,6 +803,7 @@ button {
 }
 .star-dialog[open] {
   display: grid;
+  align-content: start;
   gap: var(--space-3);
 }
 .star-dialog::backdrop {
@@ -818,6 +821,7 @@ button {
 }
 .star-dialog .btn {
   justify-self: end;
+  align-self: start;
 }
 .confirm-message {
   margin: 0;
