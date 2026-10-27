@@ -69,35 +69,60 @@ export interface ChartVideoLink {
   fragment: URLSearchParams;
 }
 
+/** What a chart says at a glance: shown above the board, drawn on the story card, sent to Clip's video. */
+export interface ChartSummary {
+  /** Branch index (0 = Tý) of the birth year: its con giáp. */
+  branchIndex: number;
+  /** The con giáp's name, e.g. "Thìn". */
+  animal: string;
+  /** The first major star in Mệnh, or null when Mệnh has none (vô chính diệu). */
+  mainStar: string | null;
+  /** The major stars in Mệnh, comma separated, or the "vô chính diệu" wording. */
+  stars: string;
+  /** The cục, e.g. "Mộc Tam Cục". */
+  cuc: string;
+  /** One sentence of reading for the main star in Mệnh (else the cục); null before the corpus loads. */
+  reading: string | null;
+}
+
+/** The chart at a glance. `reading` is the corpus once loaded (null before). */
+export function chartSummary(chart: Chart, reading: Interpretation | null, t: Translate): ChartSummary {
+  // The year's branch from the lunar year, as can-chi.ts computes it (year + 8).
+  const branchIndex = mod(chart.lunarDate.year + 8, 12);
+  const soul = chart.palaces.find((p) => p.isSoulPalace);
+  const majors = (soul?.majorStars ?? []).filter((s) => STAR_IDS[s.name] !== undefined);
+  const main = majors[0];
+  const starText = main && soul ? reading?.star(main.name, main.brightness, soul.name)?.inPalace?.text : undefined;
+  const text = starText ?? reading?.cuc(chart.fiveElementsClass) ?? null;
+  return {
+    branchIndex,
+    animal: BRANCH_NAMES[branchIndex] ?? '',
+    mainStar: main?.name ?? null,
+    stars: majors.length > 0 ? majors.map((s) => s.name).join(', ') : t('video.noMajorStar'),
+    cuc: chart.fiveElementsClass,
+    reading: text ? firstSentence(text) : null,
+  };
+}
+
 /**
  * The values of Clip's birth chart template for this chart. `reading` is the corpus once loaded (null before: a
  * neutral line then stands in for the reading).
  */
 export function chartVideoLink(chart: Chart, reading: Interpretation | null, t: Translate, appHost: string): ChartVideoLink {
-  // The year's branch from the lunar year, as can-chi.ts computes it (year + 8).
-  const branch = mod(chart.lunarDate.year + 8, 12);
-  const soul = chart.palaces.find((p) => p.isSoulPalace);
-  const majors = (soul?.majorStars ?? []).filter((s) => STAR_IDS[s.name] !== undefined);
-  const main = majors[0];
-  const animal = BRANCH_NAMES[branch] ?? '';
-  const stars = majors.length > 0 ? majors.map((s) => s.name).join(', ') : t('video.noMajorStar');
-
-  const starText = main && soul ? reading?.star(main.name, main.brightness, soul.name)?.inPalace?.text : undefined;
-  const text = starText ?? reading?.cuc(chart.fiveElementsClass) ?? null;
-
+  const summary = chartSummary(chart, reading, t);
   const query = new URLSearchParams({ t: 'la-so' });
-  query.set('animal', ANIMAL_IDS[branch] ?? 'ty');
+  query.set('animal', ANIMAL_IDS[summary.branchIndex] ?? 'ty');
   // Empty on purpose when Mệnh has no major star: Clip then shows no star (rather than its sample one).
-  query.set('star', main ? (STAR_IDS[main.name] ?? '') : '');
+  query.set('star', summary.mainStar ? (STAR_IDS[summary.mainStar] ?? '') : '');
   const cuc = cucId(chart.fiveElementsClass);
   if (cuc) query.set('cuc', cuc);
 
   const fragment = new URLSearchParams();
   const name = clampText(chart.input.name, CLIP_LIMITS.name);
   if (name) fragment.set('name', name);
-  fragment.set('line1', clampText(t('video.line1', { animal, stars }), CLIP_LIMITS.line));
+  fragment.set('line1', clampText(t('video.line1', { animal: summary.animal, stars: summary.stars }), CLIP_LIMITS.line));
   fragment.set('line2', clampText(chart.fiveElementsClass, CLIP_LIMITS.line));
-  fragment.set('reading', clampText(text ? firstSentence(text) : t('video.readingFallback', { host: appHost }), CLIP_LIMITS.reading));
+  fragment.set('reading', clampText(summary.reading ?? t('video.readingFallback', { host: appHost }), CLIP_LIMITS.reading));
   return { query, fragment };
 }
 

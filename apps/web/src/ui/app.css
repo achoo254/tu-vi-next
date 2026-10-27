@@ -145,8 +145,8 @@ button {
   box-shadow: var(--shadow-sm);
 }
 .card-title {
-  font-family: var(--font-mono);
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-weight: 800;
   font-size: 18px;
   letter-spacing: -0.01em;
 }
@@ -336,7 +336,7 @@ button {
 }
 .intro-title {
   font-family: var(--font-sans);
-  font-weight: 700;
+  font-weight: 800;
   font-size: clamp(26px, 4vw, 36px);
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -345,12 +345,101 @@ button {
   font-size: 17px;
   color: var(--c-text-muted);
 }
-.intro-points {
-  margin: 0;
-  padding-left: var(--space-5);
-  display: grid;
-  gap: var(--space-1);
+.intro-note {
   font-size: 15px;
+  font-weight: 600;
+}
+.intro-why {
+  font-size: 14px;
+  color: var(--c-text-muted);
+}
+.intro-why summary {
+  cursor: pointer;
+  width: fit-content;
+}
+.intro-why p {
+  margin-top: var(--space-1);
+}
+
+/* The chart at a glance: what people screenshot and share, so it comes first and moves a little. */
+.chart-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--c-primary) 35%, var(--c-border));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c-primary) 14%, var(--c-surface)), var(--c-surface) 60%);
+  animation: rise-in 420ms var(--ease-standard) both;
+}
+.chart-summary-art {
+  width: 112px;
+  height: 112px;
+  animation: float 3.2s ease-in-out infinite alternate;
+}
+.chart-summary-text {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.chart-summary-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(22px, 3.4vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--c-primary);
+}
+.chart-summary-cuc {
+  font-weight: 700;
+}
+.chart-summary-reading {
+  font-size: 17px;
+  line-height: 1.5;
+}
+.chart-summary-hint {
+  font-size: 14px;
+  color: var(--c-text-muted);
+}
+.chart-summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+@media (max-width: 520px) {
+  .chart-summary {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .chart-summary-art {
+    width: 96px;
+    height: 96px;
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes float {
+  from {
+    transform: translateY(0) rotate(-3deg);
+  }
+  to {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chart-summary,
+  .chart-summary-art {
+    animation: none;
+  }
 }
 .home-grid {
   display: grid;
@@ -842,11 +931,14 @@ button {
   gap: var(--space-4);
 }
 .doc-title {
-  font-family: var(--font-mono);
-  font-size: 24px;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: -0.02em;
 }
 .doc-heading {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-weight: 800;
   font-size: 17px;
   margin-bottom: var(--space-2);
 }

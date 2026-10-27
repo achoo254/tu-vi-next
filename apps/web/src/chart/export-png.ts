@@ -388,7 +388,7 @@ function drawNineSlice(ctx: CanvasRenderingContext2D, image: HTMLImageElement, t
 }
 
 /** An image once decoded, or undefined when it fails to load (the export goes on without it). */
-async function loadImage(url: string | null): Promise<HTMLImageElement | undefined> {
+export async function loadImage(url: string | null): Promise<HTMLImageElement | undefined> {
   if (!url) return undefined;
   const image = new Image();
   image.src = url;

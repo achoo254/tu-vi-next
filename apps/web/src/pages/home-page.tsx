@@ -8,6 +8,7 @@ import { ChartActions } from '../chart/chart-actions';
 import { ChartBoard } from '../chart/chart-board';
 import { type ChartEngineState, useChartEngine } from '../chart/chart-engine';
 import { ChartErrorBoundary } from '../chart/chart-error-boundary';
+import { ChartSummaryCard } from '../chart/chart-summary';
 import { ConfirmDialog } from '../chart/confirm-dialog';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
@@ -133,10 +134,11 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
         <section className="intro" data-id="intro">
           <h1 className="intro-title">{t('intro.title')}</h1>
           <p className="intro-lead">{t('intro.lead')}</p>
-          <ul className="intro-points">
-            <li>{t('intro.point.calendar')}</li>
-            <li>{signedIn ? t('intro.point.save') : t('intro.point.private')}</li>
-          </ul>
+          <p className="intro-note">{signedIn ? t('intro.point.save') : t('intro.point.private')}</p>
+          <details className="intro-why" data-id="intro-why">
+            <summary>{t('intro.why')}</summary>
+            <p>{t('intro.point.calendar')}</p>
+          </details>
         </section>
         {/* The signed-out welcome only: signed-in visitors come back for their charts. Decorative. */}
         {!signedIn && (
@@ -178,6 +180,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
         )}
         {chart && (
           <section className="chart" ref={chartRef} aria-labelledby="chart-title" data-id="chart">
+            <ChartSummaryCard key={`summary-${JSON.stringify(chart.input)}`} chart={chart} />
             <div className="chart-head">
               <h2 id="chart-title" className="card-title">
                 {t('chart.title')}

@@ -2,11 +2,8 @@ import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type ReactNode, useEffect, useState } from 'react';
 import { ApiError } from '../api/api-client';
 import { signInHref } from '../api/session-api';
-import { APP_HOST, CLIP_HOST, CLIP_URL } from '../brand';
 import { useI18n } from '../i18n/i18n';
-import { useInterpretation } from '../interpretation/use-interpretation';
 import { chartTitle } from './chart-facts';
-import { chartVideoUrl } from './chart-video-link';
 
 type ExportModule = typeof import('./export-png');
 
@@ -45,15 +42,13 @@ interface ChartActionsProps {
 
 type SaveState = 'idle' | 'saving' | 'saved';
 
-/** Save (signed in), download the PNG, share it (Web Share API), make a video of it on Clip. */
+/** Save (signed in), download the full chart as a PNG, share it (Web Share API). */
 export function ChartActions({ chart, horoscope, signedIn, signInAvailable, onSave }: ChartActionsProps): ReactNode {
   const { t, locale } = useI18n();
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const [exporting, setExporting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [shareable] = useState(canShareFiles);
-  const interpretation = useInterpretation();
-  const videoUrl = chartVideoUrl(CLIP_URL, chart, interpretation, t, APP_HOST);
 
   useEffect(() => {
     // Prefetch only; a failure here is retried (and reported) when the person presses Download or Share.
@@ -107,12 +102,6 @@ export function ChartActions({ chart, horoscope, signedIn, signInAvailable, onSa
           {t('actions.share')}
         </button>
       )}
-      <a className="btn btn-secondary" href={videoUrl} target="_blank" rel="noopener" aria-describedby="chart-video-note" data-id="chart-video">
-        {t('actions.video')}
-      </a>
-      <p id="chart-video-note" className="chart-video-note" data-id="chart-video-note">
-        {t('actions.videoNote', { clip: CLIP_HOST })}
-      </p>
       {message && (
         <p className="alert alert-error" role="alert">
           {message}
