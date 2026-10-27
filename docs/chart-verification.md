@@ -71,32 +71,40 @@ hai ngày đó đúng, các ngày khác không đổi.
 
 | Ngày giờ sinh | Âm lịch Việt | Mệnh | Thân | Cục | Mệnh chủ / Thân chủ | Tử Vi tại |
 |---|---|---|---|---|---|---|
-| 16/8/2000 03:30, nam | 17/7 Canh Thìn, giờ Dần | Ngọ (Tử Vi) | Tuất | Mộc Tam Cục | Phá Quân / Văn Xương | Ngọ |
-| 17/2/2007 10:00, nữ | 1/1 Đinh Hợi, giờ Tỵ | Dậu (vô chính diệu) | Mùi | Thổ Ngũ Cục | Văn Khúc / Thiên Cơ | Ngọ |
-| 25/3/1985 14:20, nam | 5/2 nhuận Ất Sửu, giờ Mùi | Thân (vô chính diệu) | Tuất | Thủy Nhị Cục | Liêm Trinh / Thiên Tướng | Mão |
+| 16/8/2000 03:30, nam | 17/7 Canh Thìn, giờ Dần | Ngọ (Tử Vi) | Tuất | Mộc Tam Cục | Liêm Trinh / Văn Xương | Ngọ |
+| 17/2/2007 10:00, nữ | 1/1 Đinh Hợi, giờ Tỵ | Dậu (vô chính diệu) | Mùi | Thổ Ngũ Cục | Cự Môn / Thiên Cơ | Ngọ |
+| 25/3/1985 14:20, nam | 5/2 nhuận Ất Sửu, giờ Mùi | Thân (vô chính diệu) | Tuất | Thủy Nhị Cục | Cự Môn / Thiên Tướng | Mão |
 
 Lá số thứ nhất khớp ví dụ trong README của iztro (Mệnh tại Ngọ có Tử Vi).
 
-## 6. Chưa kiểm được
+## 6. Đối chiếu với hai trang tử vi Việt (27/10/2026)
 
-- **Đối chiếu với 2 trang lập lá số tử vi Việt (việc 4 của phase 3): chưa làm.** Các trang tìm được (yeutuvi.com,
-  tuvi.vn…) chỉ lập lá số qua form và JavaScript, công cụ của phiên làm việc không gửi form được. Cần người (hoặc phiên
-  có trình duyệt được phép) nhập 3 lá số ở mục 5 trên hai trang và ghi kết quả vào đây.
-- **Khác biệt trường phái có thể gặp (chưa có nguồn, chưa sửa):** app dùng cấu hình mặc định của iztro. Những điểm
-  nên so khi đối chiếu ở trên:
-  - Mệnh chủ, Thân chủ: iztro (mặc định) lấy Mệnh chủ theo chi của cung Mệnh; nhiều sách tử vi Việt có thể an theo
-    chi năm sinh. iztro có `algorithm: 'zhongzhou'` lấy theo chi năm.
-  - Tứ hoá theo can năm, nhất là năm Canh và Nhâm, là chỗ các phái hay khác nhau; iztro cho phép đổi bảng
-    (`config.mutagens`).
-  - Tên một số sao phụ trong dữ liệu vi-VN của iztro (Tuần/Triệt tách thành Tuần Trung, Tuần Không, Triệt Lộ, Không
-    Vong…; Bác Sỹ, Lực Sỹ) có thể khác cách gọi quen thuộc.
+Ba lá số ở mục 5 cùng 27 ngày giờ ngẫu nhiên (1935–2020, giờ 0–22, nam và nữ) được lập trên
+[tuvi.vn](https://tuvi.vn/lap-la-so-tu-vi) và [tuvi.cohoc.net](https://tuvi.cohoc.net/lap-la-so-tu-vi.html), so từng cung
+với app bằng script (lấy dữ liệu bằng form POST của tuvi.vn và JSON `Core.html` của tuvi.cohoc.net).
 
-  Chỉ đổi khi có nguồn tử vi Việt nói rõ, và thêm test cho chỗ đổi.
+- **Khớp cả 30 lá số trên cả hai trang:** ngày âm lịch, Cục, cung Mệnh, cung Thân, 14 chính tinh từng cung, tuổi bắt
+  đầu đại hạn, tứ hóa theo can năm (kể cả năm Canh: Dương Vũ Âm Đồng).
+- **Ba chỗ khác, hai trang giống nhau, app đã sửa theo:**
+  - Mệnh chủ an theo **chi năm sinh** (tuvi.vn khớp 30/30), không theo chi cung Mệnh như mặc định của iztro.
+  - Thân chủ theo chi năm; năm **Tý là Linh Tinh**, năm Ngọ là Hỏa Tinh (iztro cho cả hai là Hỏa Tinh). Bảng đủ 12 chi
+    lấy từ tuvi.cohoc.net, các năm Tý trong mẫu khớp tuvi.vn.
+  - Cung con cái tên **Tử Tức** (iztro vi-VN gọi Tử Nữ).
+
+  Bảng nằm ở `SOUL_STAR_BY_YEAR_BRANCH`, `BODY_STAR_BY_YEAR_BRANCH`, tên cung ở `vnPalaceName`
+  ([`astrolabe.ts`](../packages/chart/src/astrolabe.ts)); test trong `astrolabe.test.ts` ghi lại giá trị hai trang.
+- **Chưa so:** vị trí sao phụ và tạp diệu, độ sáng sao, vòng Tràng Sinh và Bác Sĩ; giờ 23:00–23:59 (các trang xử lý
+  giờ Tý muộn khác nhau).
+
+## 7. Chưa kiểm được
+
+- Tên một số sao phụ trong dữ liệu vi-VN của iztro (Tuần/Triệt tách thành Tuần Trung, Tuần Không, Triệt Lộ, Không
+  Vong…; Bác Sỹ, Lực Sỹ) có thể khác cách gọi quen thuộc. Chỉ đổi khi có nguồn tử vi Việt nói rõ, và thêm test.
 - **Miền Nam 1968–1975** dùng lịch UTC+8; người sinh ở miền Nam giai đoạn này có thể có ngày âm lệch một ngày so với
   app ở các ngày hai lịch khác nhau. App theo lịch chính thức (miền Bắc rồi cả nước).
 - **Năm ngoài 1901–2099** không nhận (giới hạn của bảng và thuật toán đã kiểm).
 
-## 7. Lưu niên (vận hạn năm trên lá số)
+## 8. Lưu niên (vận hạn năm trên lá số)
 
 `yearHoroscope(chart, năm âm)` trong [`astrolabe.ts`](../packages/chart/src/astrolabe.ts) lấy `horoscope()` của iztro:
 Lưu Mệnh, Tiểu hạn, Đại hạn đang chạy, lưu tứ hóa. iztro tính tuổi mụ và Đại hạn từ năm sinh của **ngày thay**, nên
@@ -113,7 +121,7 @@ cho xa ranh giới Tết. Test [`year-horoscope.test.ts`](../packages/chart/src/
 Lá số 16/8/2000 03:30 nam, năm 2027: tuổi mụ 28, Lưu Mệnh Mùi, Tiểu hạn Sửu, Đại hạn Thân (23–32), lưu Lộc Thái Âm,
 Quyền Thiên Đồng, Khoa Thiên Cơ, Kỵ Cự Môn.
 
-## 8. Kích thước
+## 9. Kích thước
 
 Đo bằng `vite build` (chunk riêng của engine, tải khi cần): **487 KB, gzip 154,4 KB** (lưu niên thêm 0,01 KB). Riêng `iztro` cùng thư viện nó
 kéo theo đã là 146 KB gzip (đo bằng esbuild: `lunar-typescript` 100 KB, `i18next` và 6 ngôn ngữ của iztro phần lớn còn

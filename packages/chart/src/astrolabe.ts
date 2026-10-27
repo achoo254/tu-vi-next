@@ -116,6 +116,39 @@ const BRIGHTNESS_BY_LABEL: Readonly<Record<string, Brightness>> = {
   Hãm: 'ham',
 };
 
+/**
+ * Mệnh chủ and Thân chủ by the year's branch (index 0 = Tý), as Vietnamese charts set them: the same on tuvi.vn
+ * and tuvi.cohoc.net for all 12 branches (docs/chart-verification.md §6). iztro's default reads Mệnh chủ from
+ * the Mệnh palace's branch, and gives Thân chủ Hỏa Tinh to both Tý and Ngọ years.
+ */
+export const SOUL_STAR_BY_YEAR_BRANCH = [
+  'Tham Lang', 'Cự Môn', 'Lộc Tồn', 'Văn Khúc', 'Liêm Trinh', 'Vũ Khúc',
+  'Phá Quân', 'Vũ Khúc', 'Liêm Trinh', 'Văn Khúc', 'Lộc Tồn', 'Cự Môn',
+] as const;
+export const BODY_STAR_BY_YEAR_BRANCH = [
+  'Linh Tinh', 'Thiên Tướng', 'Thiên Lương', 'Thiên Đồng', 'Văn Xương', 'Thiên Cơ',
+  'Hỏa Tinh', 'Thiên Tướng', 'Thiên Lương', 'Thiên Đồng', 'Văn Xương', 'Thiên Cơ',
+] as const;
+
+/** Palace names where iztro's vi-VN text differs from the name Vietnamese charts use. */
+const VN_PALACE_NAMES: Readonly<Record<string, string>> = { 'Tử Nữ': 'Tử Tức' };
+
+/** The Vietnamese name of an iztro palace name. */
+export function vnPalaceName(iztroName: string): string {
+  return VN_PALACE_NAMES[iztroName] ?? iztroName;
+}
+
+/** Index (0 = Tý) of the branch of a lunar year: 1984 is Giáp Tý. */
+function yearBranchIndex(lunarYear: number): number {
+  return (((lunarYear - 4) % 12) + 12) % 12;
+}
+
+function pick<T>(table: readonly T[], index: number): T {
+  const value = table[index];
+  if (value === undefined) throw new RangeError(`no entry ${index}`);
+  return value;
+}
+
 const MUTAGEN_BY_LABEL: Readonly<Record<string, Mutagen>> = { Lộc: 'loc', Quyền: 'quyen', Khoa: 'khoa', Kỵ: 'ky' };
 const ELEMENT_BY_HANZI: Readonly<Record<string, FiveElement>> = { 金: 'kim', 木: 'moc', 水: 'thuy', 火: 'hoa', 土: 'tho' };
 const YIN_YANG_BY_HANZI: Readonly<Record<string, YinYang>> = { 阴: 'am', 阳: 'duong' };
@@ -227,7 +260,7 @@ export function buildChart(input: BirthInput): Chart {
       const branch = branchOf(palace.earthlyBranch);
       const [from, to] = palace.decadal.range;
       return {
-        name: palace.name,
+        name: vnPalaceName(palace.name),
         branchIndex: EARTHLY_BRANCHES.indexOf(branch),
         branch,
         stem: palace.heavenlyStem,
@@ -253,8 +286,8 @@ export function buildChart(input: BirthInput): Chart {
     hour,
     yinYangGender: `${yang ? 'Dương' : 'Âm'} ${birth.gender === 'male' ? 'Nam' : 'Nữ'}`,
     fiveElementsClass: astrolabe.fiveElementsClass,
-    soulStar: astrolabe.soul,
-    bodyStar: astrolabe.body,
+    soulStar: pick(SOUL_STAR_BY_YEAR_BRANCH, yearBranchIndex(lunarDate.year)),
+    bodyStar: pick(BODY_STAR_BY_YEAR_BRANCH, yearBranchIndex(lunarDate.year)),
     soulBranch: branchOf(astrolabe.earthlyBranchOfSoulPalace),
     bodyBranch: branchOf(astrolabe.earthlyBranchOfBodyPalace),
     palaces,

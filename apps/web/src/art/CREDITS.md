@@ -4,7 +4,7 @@
 |---|---|
 | `zodiac/` | 12 con giáp lịch Việt (Tý chuột, Sửu trâu, Dần hổ, Mão mèo, Thìn rồng, Tỵ rắn, Ngọ ngựa, Mùi dê, Thân khỉ, Dậu gà, Tuất chó, Hợi lợn), mỗi con hai cỡ: 256 px và 64 px |
 | `stars/` | 14 chính tinh dạng huy hiệu chòm sao, mỗi sao hai cỡ: 192 px và 48 px |
-| `palaces/` | Huy hiệu 12 cung (Mệnh hoa sen, Phụ Mẫu hai ông bà, Phúc Đức đền thờ, Điền Trạch nhà, Quan Lộc mũ cánh chuồn, Nô Bộc đôi tay giúp nhau, Thiên Di đường và la bàn, Tật Ách hồ lô thuốc, Tài Bạch tiền vàng, Tử Tức nôi em bé, Phu Thê đôi nhẫn, Huynh Đệ bắt tay), 48 px; khoá theo tên cung của iztro (`Tử Nữ` = Tử Tức) |
+| `palaces/` | Huy hiệu 12 cung (Mệnh hoa sen, Phụ Mẫu hai ông bà, Phúc Đức đền thờ, Điền Trạch nhà, Quan Lộc mũ cánh chuồn, Nô Bộc đôi tay giúp nhau, Thiên Di đường và la bàn, Tật Ách hồ lô thuốc, Tài Bạch tiền vàng, Tử Tức nôi em bé, Phu Thê đôi nhẫn, Huynh Đệ bắt tay), 48 px; khoá theo tên cung trên lá số (`Tử Tức`) |
 | `mutagens/` | Huy hiệu tứ hóa: Lộc (thỏi vàng nảy mầm), Quyền (gậy như ý), Khoa (cuộn giấy và bút lông), Kỵ (nút chỉ rối dưới mây đen), 48 px |
 | `elements/` | Huy hiệu ngũ hành cục: Thủy (giọt nước), Mộc (cây non), Kim (chuông và thỏi vàng), Thổ (núi đất), Hỏa (lửa trên lư đồng), 96 px |
 | `illustrations/` | Tranh trang chủ khi chưa đăng nhập (bánh xe 12 con giáp trên trời sao; `hero-640`, `hero-1200`), hình danh sách lá số trống (hộp cuộn giấy) và trang 404 (kính thiên văn), 192 px |

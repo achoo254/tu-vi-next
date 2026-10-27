@@ -38,7 +38,7 @@ const STAR_KEYS: Readonly<Record<string, string>> = {
   'Phá Quân': 'phaquan',
 };
 
-/** The 12 palaces' emblems, by the palace name the chart uses (iztro's vi-VN names: Tử Nữ is the Tử Tức palace). */
+/** The 12 palaces' emblems, by the palace name the chart uses (the engine names it Tử Tức, not iztro's Tử Nữ). */
 const PALACE_KEYS: Readonly<Record<string, string>> = {
   'Mệnh': 'menh',
   'Phụ Mẫu': 'phumau',
@@ -49,7 +49,7 @@ const PALACE_KEYS: Readonly<Record<string, string>> = {
   'Thiên Di': 'thiendi',
   'Tật Ách': 'tatach',
   'Tài Bạch': 'taibach',
-  'Tử Nữ': 'tutuc',
+  'Tử Tức': 'tutuc',
   'Phu Thê': 'phuthe',
   'Huynh Đệ': 'huynhde',
 };

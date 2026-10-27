@@ -5,7 +5,15 @@
  */
 import { astro } from 'iztro';
 import { describe, expect, it } from 'vitest';
-import { type Chart, ChartInputError, buildChart, iztroStandInDate } from './astrolabe';
+import {
+  BODY_STAR_BY_YEAR_BRANCH,
+  type Chart,
+  ChartInputError,
+  SOUL_STAR_BY_YEAR_BRANCH,
+  buildChart,
+  iztroStandInDate,
+  vnPalaceName,
+} from './astrolabe';
 import type { BirthInput } from './birth-input';
 import { jdFromDate, jdToDate, solarToVnLunar } from './vn-lunar-calendar';
 
@@ -20,16 +28,17 @@ function input(overrides: Partial<BirthInput>): BirthInput {
 
 type IztroChart = ReturnType<typeof astro.bySolar>;
 
-/** Everything a chart shows, as one comparable value. */
+/**
+ * Everything a chart shows, as one comparable value, with the app's Vietnamese palace names. Mệnh chủ and Thân
+ * chủ are left out: the app sets them by the year's branch, not as iztro does (tested below).
+ */
 function iztroSignature(a: IztroChart): string {
   return JSON.stringify([
-    a.soul,
-    a.body,
     a.fiveElementsClass,
     a.earthlyBranchOfSoulPalace,
     a.earthlyBranchOfBodyPalace,
     a.palaces.map((p) => [
-      p.name,
+      vnPalaceName(p.name),
       p.heavenlyStem,
       p.earthlyBranch,
       p.isBodyPalace,
@@ -47,8 +56,6 @@ function chartSignature(c: Chart): string {
   const brightnessLabel: Record<string, string> = { mieu: 'Miếu', vuong: 'Vượng', dac: 'Đắc', loi: 'Lợi', binh: 'Bình', bat: 'Bất', ham: 'Hãm' };
   const mutagenLabel: Record<string, string> = { loc: 'Lộc', quyen: 'Quyền', khoa: 'Khoa', ky: 'Kỵ' };
   return JSON.stringify([
-    c.soulStar,
-    c.bodyStar,
     c.fiveElementsClass,
     c.soulBranch,
     c.bodyBranch,
@@ -263,5 +270,37 @@ describe('star details', () => {
     const tuVi = stars.find((s) => s.name === 'Tử Vi');
     expect(tuVi).toMatchObject({ kind: 'major', element: 'tho', yinYang: 'am', brightness: 'mieu' });
     expect(stars.filter((s) => s.element === null).map((s) => s.name).sort()).toEqual(['Thái Dương', 'Thất Sát']);
+  });
+});
+
+describe('Mệnh chủ, Thân chủ and palace names as Vietnamese charts give them', () => {
+  // Read from tuvi.vn and tuvi.cohoc.net on 27/10/2026: both give these for every year branch, Tý first.
+  it('sets Mệnh chủ and Thân chủ by the year branch', () => {
+    expect(SOUL_STAR_BY_YEAR_BRANCH).toEqual([
+      'Tham Lang', 'Cự Môn', 'Lộc Tồn', 'Văn Khúc', 'Liêm Trinh', 'Vũ Khúc',
+      'Phá Quân', 'Vũ Khúc', 'Liêm Trinh', 'Văn Khúc', 'Lộc Tồn', 'Cự Môn',
+    ]);
+    expect(BODY_STAR_BY_YEAR_BRANCH).toEqual([
+      'Linh Tinh', 'Thiên Tướng', 'Thiên Lương', 'Thiên Đồng', 'Văn Xương', 'Thiên Cơ',
+      'Hỏa Tinh', 'Thiên Tướng', 'Thiên Lương', 'Thiên Đồng', 'Văn Xương', 'Thiên Cơ',
+    ]);
+  });
+
+  it.each([
+    // birth, Mệnh chủ, Thân chủ as both sites show them
+    [input({}), 'Liêm Trinh', 'Văn Xương'],
+    [input({ year: 2007, month: 2, day: 17, hour: 10, minute: 0, gender: 'female' }), 'Cự Môn', 'Thiên Cơ'],
+    [input({ year: 1985, month: 3, day: 25, hour: 14, minute: 20 }), 'Cự Môn', 'Thiên Tướng'],
+    [input({ year: 1996, month: 7, day: 15, hour: 9, minute: 0 }), 'Tham Lang', 'Linh Tinh'],
+    [input({ year: 1990, month: 7, day: 15, hour: 9, minute: 0 }), 'Phá Quân', 'Hỏa Tinh'],
+  ])('%#: %s', (birth, soulStar, bodyStar) => {
+    const chart = buildChart(birth);
+    expect([chart.soulStar, chart.bodyStar]).toEqual([soulStar, bodyStar]);
+  });
+
+  it('names the children palace Tử Tức', () => {
+    const names = buildChart(input({})).palaces.map((p) => p.name);
+    expect(names).toContain('Tử Tức');
+    expect(names).not.toContain('Tử Nữ');
   });
 });
