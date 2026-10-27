@@ -603,10 +603,10 @@ button {
   vertical-align: -2px;
 }
 .fact-icon {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   margin-right: var(--space-1);
-  vertical-align: middle;
+  vertical-align: -6px;
 }
 .star-dialog-art {
   justify-self: center;
@@ -625,17 +625,18 @@ button {
   gap: 2px;
   font-size: 14px;
 }
-.fact {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
+/* Label and value run as one sentence, so a long value (the four can chi) wraps under itself
+   instead of dropping whole onto its own line below a lone label. */
+.fact dt,
+.fact dd {
+  display: inline;
 }
 .fact dt {
   font-weight: 600;
   color: var(--c-text-muted);
 }
 .fact dt:has(+ dd)::after {
-  content: ":";
+  content: ": ";
 }
 .fact dd {
   margin: 0;
@@ -720,6 +721,15 @@ button {
   font-size: 15px;
   font-weight: 700;
 }
+.star-mutagen {
+  white-space: nowrap;
+}
+.palace-no-major {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--c-text-muted);
+}
 .star-major {
   color: var(--c-star-major);
 }
@@ -760,9 +770,6 @@ button {
     text-align: center;
     justify-items: center;
     align-content: center;
-  }
-  .fact {
-    justify-content: center;
   }
   .board-centre,
   .palace {

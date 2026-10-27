@@ -7,7 +7,7 @@ import { mutagenArt, palaceArt, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
 import { type BoardSelection, StarDialog } from './star-dialog';
 import { useInterpretation } from '../interpretation/use-interpretation';
-import { mutagenLabel, starName } from './star-terms';
+import { BRIGHTNESS_MARK, mutagenLabel } from './star-terms';
 import { palaceYearTags, yearlyMutagen, yearlyMutagenLabel } from './yearly-marks';
 
 /** The major star's emblem beside its name; decorative (the name is the text). */
@@ -34,17 +34,20 @@ function StarButton({ star, horoscope, onSelect }: { star: ChartStar; horoscope:
     <li>
       <button type="button" className={`star star-${star.kind}`} onClick={() => onSelect(star)}>
         {star.kind === 'major' && <StarIcon name={star.name} />}
-        {starName(star)}
+        {/* the brightness mark stays on the name's last line instead of wrapping alone */}
+        {star.name}
+        {star.brightness && `\u00a0(${BRIGHTNESS_MARK[star.brightness]})`}
+        {/* each transformation (badge and words) wraps as one piece; the badge stands in for a separator */}
+        {star.mutagen && ' '}
         {star.mutagen && (
-          <>
-            {' · '}
+          <span className="star-mutagen">
             <MutagenBadge mutagen={star.mutagen} />
             {mutagenLabel(star.mutagen)}
-          </>
+          </span>
         )}
+        {yearly && ' '}
         {yearly && (
-          <span className="star-yearly">
-            {' · '}
+          <span className="star-mutagen star-yearly">
             <MutagenBadge mutagen={yearly} />
             {yearlyMutagenLabel(yearly)}
           </span>
@@ -122,11 +125,15 @@ function PalaceCell({ palace, horoscope, onSelect }: PalaceCellProps): ReactNode
           ))}
         </p>
       )}
-      <ul className="stars stars-major">
-        {palace.majorStars.map((star) => (
-          <StarButton key={star.name} star={star} horoscope={horoscope} onSelect={select} />
-        ))}
-      </ul>
+      {palace.majorStars.length > 0 ? (
+        <ul className="stars stars-major">
+          {palace.majorStars.map((star) => (
+            <StarButton key={star.name} star={star} horoscope={horoscope} onSelect={select} />
+          ))}
+        </ul>
+      ) : (
+        <p className="palace-no-major">{t('chart.noMajorStar')}</p>
+      )}
       <ul className="stars stars-minor">
         {[...palace.minorStars, ...palace.otherStars].map((star, index) => (
           <StarButton key={`${star.name}-${index}`} star={star} horoscope={horoscope} onSelect={select} />
