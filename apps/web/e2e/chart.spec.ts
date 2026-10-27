@@ -34,7 +34,7 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
     if (new URL(request.url()).pathname.startsWith('/api/charts')) apiCalls.push(request.url());
   });
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('âm lịch Việt Nam');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('trong 10 giây');
   // The signed-out welcome illustration loads (a real decoded image, not a broken link).
   await expect.poll(() => page.locator('[data-id=intro-hero]').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   // 25 March 1985 is in Vietnam's leap 2nd month (China has no leap month that year).
@@ -44,6 +44,13 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
   await expect(centre.locator('.fact-icon')).toHaveCount(1);
   await expect(centre).toContainText('ngày 5 tháng 2 nhuận năm Ất Sửu');
   await expect(centre).toContainText('Mùi (13:00–14:59)');
+
+  // The chart in plain words: 12 palaces under their everyday names, Mệnh open; the board's key (collapsed) above it.
+  const plain = page.locator('[data-id=plain-reading]');
+  await expect(plain.locator('details')).toHaveCount(12);
+  await expect(plain.locator('details[open]')).toHaveCount(1);
+  await expect(plain.locator('details[open]')).toContainText('Bản thân, tính cách');
+  await expect(page.locator('[data-id=board-legend]')).toContainText('M Miếu');
 
   await page.locator('[data-id=chart-board] .star-major').first().click();
   const dialog = page.locator('[data-id=star-dialog]');

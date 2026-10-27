@@ -1,4 +1,4 @@
-import type { Chart, ChartPalace, ChartStar, Mutagen, YearHoroscope } from '@tuvi/chart';
+import type { Brightness, Chart, ChartPalace, ChartStar, Mutagen, YearHoroscope } from '@tuvi/chart';
 import { type ReactNode, useState } from 'react';
 import { useI18n } from '../i18n/i18n';
 import { ZODIAC_NAME_KEYS } from '../i18n/messages';
@@ -7,7 +7,7 @@ import { mutagenArt, palaceArt, starArt, zodiacArt } from './chart-art';
 import { chartFacts, chartTitle } from './chart-facts';
 import { type BoardSelection, StarDialog } from './star-dialog';
 import { useInterpretation } from '../interpretation/use-interpretation';
-import { BRIGHTNESS_MARK, mutagenLabel } from './star-terms';
+import { BRIGHTNESS_MARK, BRIGHTNESS_TERM, mutagenLabel } from './star-terms';
 import { palaceYearTags, yearlyMutagen, yearlyMutagenLabel } from './yearly-marks';
 
 /** The major star's emblem beside its name; decorative (the name is the text). */
@@ -17,13 +17,13 @@ function StarIcon({ name }: { name: string }): ReactNode {
 }
 
 /** The transformation's badge before "Hóa Lộc" and the like; decorative (the words are the text). */
-function MutagenBadge({ mutagen }: { mutagen: Mutagen }): ReactNode {
+export function MutagenBadge({ mutagen }: { mutagen: Mutagen }): ReactNode {
   const src = mutagenArt(mutagen);
   return src ? <img className="mutagen-badge" src={src} width={14} height={14} alt="" aria-hidden="true" loading="lazy" decoding="async" /> : null;
 }
 
 /** The palace's emblem before its name; decorative. */
-function PalaceIcon({ name }: { name: string }): ReactNode {
+export function PalaceIcon({ name }: { name: string }): ReactNode {
   const src = palaceArt(name);
   return src ? <img className="palace-icon" src={src} width={16} height={16} alt="" aria-hidden="true" loading="lazy" decoding="async" /> : null;
 }
@@ -76,6 +76,41 @@ function YearAnimal({ chart }: { chart: Chart }): ReactNode {
       </div>
       <figcaption className="help">{caption}</figcaption>
     </figure>
+  );
+}
+
+/** Brightness levels, strongest first, as the legend lists them. */
+const BRIGHTNESS_ORDER: readonly Brightness[] = ['mieu', 'vuong', 'dac', 'loi', 'binh', 'bat', 'ham'];
+
+/** The board's key, collapsed to one line until opened: what the star colours, the bracketed letters and the Hóa marks mean. */
+function BoardLegend(): ReactNode {
+  const { t } = useI18n();
+  return (
+    <details className="board-legend" data-id="board-legend">
+      <summary>{t('legend.title')}</summary>
+      <dl>
+        <div>
+          <dt>{t('legend.kinds')}:</dt>
+          <dd>
+            <span className="star-major">{t('legend.major')}</span>
+            {' · '}
+            <span className="star-auspicious">{t('legend.auspicious')}</span>
+            {' · '}
+            <span className="star-malefic">{t('legend.malefic')}</span>
+            {' · '}
+            <span className="star-minor">{t('legend.minor')}</span>
+          </dd>
+        </div>
+        <div>
+          <dt>{t('legend.brightness')}:</dt>
+          <dd lang="vi">{BRIGHTNESS_ORDER.map((level) => `${BRIGHTNESS_MARK[level]} ${BRIGHTNESS_TERM[level]}`).join(', ')}</dd>
+        </div>
+        <div>
+          <dt>{t('legend.mutagensTitle')}:</dt>
+          <dd>{t('legend.mutagens')}</dd>
+        </div>
+      </dl>
+    </details>
   );
 }
 
@@ -160,6 +195,7 @@ export function ChartBoard({ chart, horoscope = null }: { chart: Chart; horoscop
   const cucReading = interpretation?.cuc(chart.fiveElementsClass);
   return (
     <>
+      <BoardLegend />
       <div className="board" role="group" aria-label={t('chart.board')} data-id="chart-board">
         <section className="board-centre" data-id="chart-centre">
           <h3 className="board-title">{chartTitle(chart, t)}</h3>

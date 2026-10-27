@@ -781,6 +781,76 @@ button {
   }
 }
 
+/* the chart in plain words (plain-reading-section.tsx): one collapsible item per palace, Mệnh open */
+.plain-reading {
+  display: grid;
+  gap: var(--space-2);
+}
+.plain-palaces {
+  display: grid;
+  gap: var(--space-2);
+}
+.plain-palace {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+}
+.plain-palace-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-2);
+  padding: var(--space-3);
+  cursor: pointer;
+}
+.plain-palace-head .palace-icon {
+  align-self: center;
+}
+.plain-palace-area {
+  font-weight: 700;
+  color: var(--c-primary);
+}
+.plain-palace-terms {
+  font-size: 13px;
+  color: var(--c-text-muted);
+}
+.plain-palace-body {
+  padding: 0 var(--space-3) var(--space-3);
+}
+.plain-palace-about {
+  color: var(--c-text-muted);
+}
+.plain-star {
+  display: grid;
+  gap: var(--space-1);
+}
+/* the board's key, just above it */
+.board-legend {
+  font-size: 13px;
+  color: var(--c-text-muted);
+}
+.board-legend summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+.board-legend dl {
+  margin: var(--space-1) 0 0;
+  display: grid;
+  gap: 2px;
+}
+.board-legend dt,
+.board-legend dd {
+  display: inline;
+  margin: 0;
+}
+.board-legend dt {
+  font-weight: 600;
+  margin-right: var(--space-1);
+}
+.board-legend .star-minor {
+  color: var(--c-star-minor);
+}
+
 /* lưu niên: the year picked above the board and its marks on it, quieter than the natal chart */
 .yearly-panel {
   display: grid;

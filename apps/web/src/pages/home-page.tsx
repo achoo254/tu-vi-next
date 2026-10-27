@@ -9,6 +9,7 @@ import { ChartBoard } from '../chart/chart-board';
 import { type ChartEngineState, useChartEngine } from '../chart/chart-engine';
 import { ChartErrorBoundary } from '../chart/chart-error-boundary';
 import { ChartSummaryCard } from '../chart/chart-summary';
+import { PlainReadingSection } from '../chart/plain-reading-section';
 import { ConfirmDialog } from '../chart/confirm-dialog';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
@@ -181,6 +182,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
         {chart && (
           <section className="chart" ref={chartRef} aria-labelledby="chart-title" data-id="chart">
             <ChartSummaryCard key={`summary-${JSON.stringify(chart.input)}`} chart={chart} />
+            <PlainReadingSection key={`plain-${JSON.stringify(chart.input)}`} chart={chart} />
             <div className="chart-head">
               <h2 id="chart-title" className="card-title">
                 {t('chart.title')}
