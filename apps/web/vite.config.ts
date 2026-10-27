@@ -20,8 +20,9 @@ export default defineConfig({
   },
   build: {
     target: 'es2022',
-    // The small art (zodiac marks, star icons) stays as files: inlined as base64 it would grow the main chunk.
-    assetsInlineLimit: (file) => (file.includes('/src/art/') ? false : undefined),
+    // Art and fonts stay as files: inlined art would grow the main chunk, and the CSP (font-src 'self') refuses
+    // data: fonts, so an inlined font subset would silently fall back to a system font.
+    assetsInlineLimit: (file) => (file.includes('/src/art/') || /\.(woff2?|ttf|otf)$/.test(file) ? false : undefined),
     sourcemap: true,
   },
 });
