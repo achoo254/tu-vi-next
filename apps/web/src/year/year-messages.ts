@@ -63,6 +63,9 @@ const vi = {
   hanLabel: 'Hạn {name}',
 
   interpretationTitle: 'Luận giải tuổi {branch} năm {year}',
+  videoTitle: 'Video tử vi {year} tuổi {branch}',
+  videoDescription: 'Video ngắn tóm tắt vận năm {year} {canChi} của người tuổi {branch}: điểm mạnh, công việc, tiền bạc và lời khuyên.',
+  videoNote: 'Video có phụ đề, xem được khi tắt tiếng. Hình và giọng đọc do AI tạo.',
   'section.overview': 'Tổng quan',
   'section.career': 'Công việc',
   'section.money': 'Tài chính',
@@ -133,6 +136,9 @@ const en: Record<YearMessageKey, string> = {
   hanLabel: 'Hạn {name}',
 
   interpretationTitle: 'The {branch} year in {year}',
+  videoTitle: '{year} horoscope video for {branch}',
+  videoDescription: 'A short video on the {year} {canChi} year for people born in a {branch} year: strengths, work, money and advice.',
+  videoNote: 'The video is in Vietnamese with burned-in subtitles, so it works muted. Pictures and voice are AI-generated.',
   'section.overview': 'Overview',
   'section.career': 'Work',
   'section.money': 'Money',

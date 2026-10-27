@@ -3,6 +3,7 @@
 #
 #   SSH_TARGET=<ssh host alias> [SSH_OPTS="-F <ssh_config>"] bash infra/deploy.sh setup     # first time; unit or nginx change
 #   SSH_TARGET=<ssh host alias> [SSH_OPTS="-F <ssh_config>"] bash infra/deploy.sh           # release
+#   SSH_TARGET=<ssh host alias> [SSH_OPTS="-F <ssh_config>"] bash infra/deploy.sh media <dir> # videos
 #
 # setup: system user `tuvi`, directories, the systemd unit and the nginx site (nginx -t before reload, the
 #   previous file restored on failure). /etc/tuvi/production.env must already exist (docs/deployment-guide.md).
@@ -11,6 +12,8 @@
 #   `current` at it, restart tuvi-server, check /healthz on loopback and https://tuvi.hoandat.com/ through the
 #   origin. On failure `current` goes back to the previous release, the service restarts, and the script exits 1.
 #   The five newest releases stay; manual rollback: docs/deployment-guide.md.
+# media: copy <dir> (a folder such as tu-vi-2027 with <slug>.mp4 and <slug>.jpg) to /var/www/tuvi/media/<dir name>/,
+#   outside the releases and served under /media/ by nginx; same-name files are replaced. Needs `setup` once.
 set -euo pipefail
 
 : "${SSH_TARGET:?set SSH_TARGET to the ssh host alias of the server}"
@@ -35,7 +38,7 @@ test -f /etc/tuvi/production.env || { echo "missing /etc/tuvi/production.env (do
 id tuvi >/dev/null 2>&1 || useradd --system --no-create-home --shell /sbin/nologin tuvi
 chown root:tuvi /etc/tuvi/production.env
 chmod 640 /etc/tuvi/production.env
-mkdir -p $remote/releases
+mkdir -p $remote/releases $remote/media
 unit=/etc/systemd/system/tuvi-server.service
 if ! cmp -s $remote/infra/tuvi-server.service \$unit; then
 	install -m 644 $remote/infra/tuvi-server.service \$unit
@@ -115,15 +118,43 @@ if ! healthy || ! origin_ok; then
 	exit 1
 fi
 echo "healthz ok, origin 200"
+media=\$(curl -sk -o /dev/null -w '%{content_type}' --resolve $host:443:127.0.0.1 https://$host/media/tu-vi-2027/mui.mp4)
+case "\$media" in video/mp4*) ;; *) echo "WARNING: /media/tu-vi-2027/ is not served (run deploy.sh media); the sign page videos are broken" >&2 ;; esac
 ls -1dt releases/*/ | tail -n +6 | xargs -r rm -rf
 EOF
+}
+
+media() {
+	local src="${1:?usage: infra/deploy.sh media <dir named tu-vi-<year>>}" name slug ext missing=""
+	[ -d "$src" ] || { echo "no such directory: $src" >&2; exit 1; }
+	name="$(basename "$src")"
+	# The pages link /media/tu-vi-<year>/<slug>.*, so the folder name is the set name and must match.
+	[[ $name =~ ^tu-vi-[0-9]{4}$ ]] || { echo "the folder must be named tu-vi-<year> (got $name)" >&2; exit 1; }
+	for slug in ty suu dan mao thin ti ngo mui than dau tuat hoi; do
+		for ext in mp4 jpg vtt; do [ -f "$src/$slug.$ext" ] || missing="$missing $slug.$ext"; done
+	done
+	[ -z "$missing" ] || { echo "missing in $src:$missing" >&2; exit 1; }
+	# -t keeps mtimes (stable ETag/Last-Modified on a re-run); -L uploads files, never symlinks nginx would follow.
+	rsync -rLtz --chmod=D755,F644 --exclude "._*" --exclude .DS_Store -e "ssh ${ssh_opts[*]}" "$src/" "$SSH_TARGET:$remote/media/$name/"
+	# Through nginx on this host, by name, without Cloudflare. The type matters: without the /media/ location the
+	# SPA fallback would answer 200 text/html.
+	local type
+	for ext in mp4 jpg vtt; do
+		type=$(ssh_run "curl -fsSk -o /dev/null -w '%{content_type}' --resolve $host:443:127.0.0.1 https://$host/media/$name/mui.$ext" </dev/null)
+		case "$ext:$type" in
+			mp4:video/mp4* | jpg:image/jpeg* | vtt:text/vtt*) ;;
+			*) echo "/media/$name/mui.$ext answered '$type' (run setup with the current nginx site?)" >&2; exit 1 ;;
+		esac
+	done
+	echo "media ok: /media/$name/ (36 files)"
 }
 
 case "$mode" in
 	setup) setup ;;
 	release) release ;;
+	media) media "${2:-}" ;;
 	*)
-		echo "usage: infra/deploy.sh [setup|release]" >&2
+		echo "usage: infra/deploy.sh [setup|release|media <dir named tu-vi-<year>>]" >&2
 		exit 2
 		;;
 esac

@@ -81,6 +81,11 @@ test('yearly page: tuổi Mùi shows its sao hạn table, relations and Thái Tu
   await expect(page.locator('[data-id=year-facts]')).toContainText('Thứ bảy, 6/2/2027');
   await expect(page.locator('[data-id=year-interpretation] h3')).toHaveText(['Tổng quan', 'Công việc', 'Tài chính', 'Tình cảm, gia đình', 'Sức khỏe', 'Lời khuyên']);
   await expect(page.locator('[data-id=nav-year]')).toHaveAttribute('aria-current', 'page');
+  // The video player: nothing downloads before play (the files live on the server under /media/, not in the build).
+  const player = page.locator('[data-id=year-video-player]');
+  await expect(player).toHaveAttribute('preload', 'none');
+  await expect(player).toHaveAttribute('poster', '/media/tu-vi-2027/mui.jpg');
+  await expect(player.locator('source')).toHaveAttribute('src', '/media/tu-vi-2027/mui.mp4');
   await expect.poll(() => page.locator('.year-hero .year-sign-art').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   for (const width of [1440, 375]) {
     await page.setViewportSize({ width, height: 900 });
@@ -123,6 +128,8 @@ test('yearly pages: the HTML itself carries the title, description and content f
   expect(html).toContain('<h1 class="doc-title">Tử vi 2027 tuổi Mùi (Dê)</h1>');
   expect(html).toContain('Thái Bạch');
   expect(html).toContain('<h3 class="year-subheading">Tài chính</h3>');
+  expect(html).toContain('"@type":"VideoObject"');
+  expect(html).toContain('"contentUrl":"https://tuvi.hoandat.com/media/tu-vi-2027/mui.mp4"');
 
   const index = await (await request.get('/tu-vi-2027')).text();
   expect(index).toContain('<title>Tử vi 2027 Đinh Mùi: sao hạn, Thái Tuế của 12 con giáp · ');

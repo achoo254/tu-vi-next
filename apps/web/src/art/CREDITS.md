@@ -30,3 +30,11 @@ Bộ thứ hai vẽ ngày 26/10/2026 trên ComfyUI của máy nhà (skill `inet-
 
 Prompt và seed của từng ảnh nằm trong báo cáo của đợt vẽ (`plans/dattqh/reports/fullstack-261026-tuvi-offline-art.md`
 ở repo workspace).
+
+## Video tử vi 2027 (không nằm trong repo)
+
+12 video dọc trên trang `/tu-vi-2027/tuoi-*`, phục vụ từ `/media/tu-vi-2027/` trên máy chủ (`infra/deploy.sh media`).
+Dựng ngày 28/10/2026 trên ComfyUI của máy nhà: cảnh vẽ bằng FLUX.2 klein 4B lấy con giáp trong `zodiac/` làm ảnh mẫu,
+chuyển động Wan 2.2 14B I2V (LoRA lightx2v 4 bước), khung chèn RIFE 4.9, giọng đọc VieNeu-TTS v3 Turbo (giọng có sẵn,
+không nhân bản giọng người thật), nhạc ACE-Step 1.5. Model đều Apache-2.0 hoặc MIT. Lời đọc là
+`content/video-2027/<tuổi>.json`. AI-generated for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).

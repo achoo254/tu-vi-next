@@ -75,6 +75,21 @@ Kiểm sau release:
 - Đăng nhập rồi đăng xuất được; lưu một lá số, tải lại trang, mở lại được.
 - RSS của service (mục tiêu < 120 MB): `systemctl show tuvi-server -p MemoryCurrent`.
 
+## Video (`/media/`)
+
+Video và poster của các trang năm không nằm trong repo hay trong release: chúng ở `/var/www/tuvi/media/<bộ>/` trên
+máy chủ, nginx phục vụ dưới `/media/` (cache một ngày, hỗ trợ tua). Release và rollback không đụng tới thư mục này.
+
+```sh
+SSH_TARGET=<alias> [SSH_OPTS="-F <ssh_config>"] bash infra/deploy.sh media <thư mục>/tu-vi-2027
+```
+
+Thư mục nguồn chứa `<tuổi>.mp4`, `<tuổi>.jpg` và phụ đề `<tuổi>.vtt` (12 tuổi, tên theo `ZODIAC_SLUGS`); bản gốc giữ trên PC dựng video
+(`C:\AI\content\tu-vi-2027\final\`). File trùng tên bị ghi đè; sau khi ghi đè, trình duyệt và Cloudflare có thể giữ bản
+cũ tối đa một ngày (purge cache trên Cloudflare nếu cần ngay). Thư mục nguồn phải tên `tu-vi-<năm>` (lệnh từ chối
+tên khác và báo thiếu file trước khi gửi); release chỉ cảnh báo, không dừng, khi `/media/tu-vi-2027/` chưa có. Lệnh cần `setup` đã chạy với bản nginx có `location /media/`. Trang chỉ trỏ tới video khi năm đó có trong
+`apps/web/src/year/year-video.ts`, nên tải video lên **trước** release có trang trỏ tới chúng.
+
 ## Rollback
 
 Release hỏng tự quay về bản trước (mục Release). Quay về tay:

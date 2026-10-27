@@ -54,6 +54,26 @@ describe('yearly pages', () => {
     expect(yearPageHead({ year: 2027, branchIndex: null }).image.path).toBe('/og-image.png');
   });
 
+  it('shows each sign video from /media with its poster, loading nothing before play', () => {
+    for (let branch = 0; branch < 12; branch++) {
+      show(branch);
+      const player = document.querySelector('video[data-id=year-video-player]');
+      expect(player?.getAttribute('preload'), String(branch)).toBe('none');
+      expect(player?.getAttribute('poster')).toMatch(/^\/media\/tu-vi-2027\/[a-z]+\.jpg$/);
+      expect(player?.querySelector('source')?.getAttribute('src')).toMatch(/^\/media\/tu-vi-2027\/[a-z]+\.mp4$/);
+      expect(player?.querySelector('track[kind=captions]')?.getAttribute('src')).toMatch(/^\/media\/tu-vi-2027\/[a-z]+\.vtt$/);
+      cleanup();
+    }
+    show(7);
+    expect(screen.getByRole('heading', { name: 'Video tử vi 2027 tuổi Mùi' })).toBeTruthy();
+    expect(document.querySelector('[data-id=year-video-player] source')?.getAttribute('src')).toBe('/media/tu-vi-2027/mui.mp4');
+    cleanup();
+    show(null);
+    expect(document.querySelector('[data-id=year-video]')).toBeNull();
+    expect(yearPageHead({ year: 2027, branchIndex: 7 }).video).toMatchObject({ contentPath: '/media/tu-vi-2027/mui.mp4', seconds: 28 });
+    expect(yearPageHead({ year: 2027, branchIndex: null }).video).toBeUndefined();
+  });
+
   it('renders all six interpretation sections on each of the 12 pages', () => {
     for (let branch = 0; branch < 12; branch++) {
       show(branch);

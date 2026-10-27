@@ -25,6 +25,7 @@ import { ZODIAC_NAME_KEYS } from '../i18n/messages';
 import { INTERPRETATION_FIELDS, LUNAR_YEAR_FACTS, type LunarYearFacts, interpretation } from './year-content';
 import { HAN_NOTES, STAR_NOTES, TAI_SUI_SHORT, TAI_SUI_TERMS, YEAR_MESSAGES, type YearMessageKey } from './year-messages';
 import { type YearRoute, yearIndexPath, yearSignPath } from './year-routes';
+import { type YearVideo, yearVideo } from './year-video';
 
 /** Oldest birth year listed in the sao hạn tables (tuổi mụ 82 in 2027). */
 const FIRST_BIRTH_YEAR = 1946;
@@ -77,6 +78,8 @@ export interface PageHead {
   image: { path: string; width: number; height: number };
   /** schema.org Article, without the URLs (the caller knows the origin). */
   article: { headline: string; description: string; datePublished: string; inLanguage: string };
+  /** schema.org VideoObject of the page's video, by paths on this site; sign pages with a video only. */
+  video?: { name: string; description: string; contentPath: string; thumbnailPath: string; uploadDate: string; seconds: number };
 }
 
 /** The head of a yearly page; in Vietnamese by default (what search engines and link previews read). */
@@ -99,12 +102,23 @@ export function yearPageHead(route: YearRoute, locale: Locale = 'vi'): PageHead 
   const signVars = { ...vars, branch: branchName(branchIndex), animal: animal(t, branchIndex), births: births.join(', ') };
   const description = y('headSignDescription', signVars);
   const art = zodiacArt(branchIndex, 'large');
+  const video = yearVideo(year, branchIndex);
   return {
     title: `${y('headSignTitle', signVars)} · ${brand.appName}`,
     description,
     path: yearSignPath(branchIndex, year),
     image: art ? { path: art, width: 256, height: 256 } : SITE_OG_IMAGE,
     article: { headline: y('signTitle', signVars), description, datePublished: PUBLISHED, inLanguage: locale },
+    ...(video && {
+      video: {
+        name: y('videoTitle', signVars),
+        description: y('videoDescription', signVars),
+        contentPath: video.src,
+        thumbnailPath: video.poster,
+        uploadDate: video.uploaded,
+        seconds: video.seconds,
+      },
+    }),
   };
 }
 
@@ -329,6 +343,22 @@ function Interpretation({ year, branchIndex, y }: { year: number; branchIndex: n
   );
 }
 
+function SignVideo({ video, title, y }: { video: YearVideo; title: string; y: YearTranslate }): ReactNode {
+  return (
+    <section className="year-section year-video-section" aria-labelledby="year-video-title" data-id="year-video">
+      <h2 id="year-video-title" className="doc-heading">
+        {title}
+      </h2>
+      {/* Nothing downloads until the visitor presses play; the subtitles are burned in, so it reads with the sound off. */}
+      <video className="year-video" controls playsInline preload="none" poster={video.poster} width={video.width} height={video.height} aria-labelledby="year-video-title" data-id="year-video-player">
+        <source src={video.src} type="video/mp4" />
+        <track kind="captions" src={video.captions} srcLang="vi" label="Tiếng Việt" />
+      </video>
+      <p className="help">{y('videoNote')}</p>
+    </section>
+  );
+}
+
 function Closing({ year, y }: { year: number; y: YearTranslate }): ReactNode {
   return (
     <>
@@ -370,6 +400,7 @@ function SignPage({ year, branchIndex }: { year: number; branchIndex: number }):
   const { t, locale } = useI18n();
   const y = yearTranslator(locale);
   const vars = { year, canChi: yearCanChi(year), branch: branchName(branchIndex), animal: animal(t, branchIndex) };
+  const video = yearVideo(year, branchIndex);
   return (
     <article className="card doc year-page" data-id="year-sign">
       <nav className="year-breadcrumb" aria-label={y('breadcrumb', { year })}>
@@ -384,6 +415,7 @@ function SignPage({ year, branchIndex }: { year: number; branchIndex: number }):
           <p className="intro-lead">{y('signLead', vars)}</p>
         </div>
       </header>
+      {video && <SignVideo video={video} title={y('videoTitle', vars)} y={y} />}
       <Interpretation year={year} branchIndex={branchIndex} y={y} />
       <FortuneTable year={year} branchIndex={branchIndex} y={y} locale={locale} />
       <Relations year={year} branchIndex={branchIndex} y={y} locale={locale} />

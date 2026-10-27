@@ -18,6 +18,8 @@ interface LegalDoc {
 export type LegalPageKind = 'privacy' | 'terms' | 'credits';
 
 const ICON_LICENCE = 'AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
+const VIDEO_LICENCE =
+  'AI-generated with open models (FLUX.2 klein 4B and Wan 2.2 for pictures and motion, RIFE for in-between frames, VieNeu-TTS preset voices, ACE-Step 1.5 for music; Apache-2.0 or MIT) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 const OPEN_ART_LICENCE = 'AI-generated with open models (Qwen-Image, Z-Image-Turbo, FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 
 const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
@@ -185,6 +187,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
               OPEN_ART_LICENCE,
           ],
         },
+        { heading: 'Video tử vi 2027', paragraphs: ['12 video trên các trang tuổi (hình, chuyển động, giọng đọc, nhạc): ' + VIDEO_LICENCE] },
         { heading: 'Mã nguồn', paragraphs: ['Mã nguồn của app theo giấy phép MIT.'] },
       ],
     },
@@ -231,6 +234,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
               OPEN_ART_LICENCE,
           ],
         },
+        { heading: '2027 horoscope videos', paragraphs: ['The 12 videos on the sign pages (pictures, motion, voice, music): ' + VIDEO_LICENCE] },
         { heading: 'Source code', paragraphs: ["The app's source code is under the MIT licence."] },
       ],
     },

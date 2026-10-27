@@ -84,6 +84,18 @@ export function renderPageHtml(template: string, page: RenderedPage, origin: str
     mainEntityOfPage: url,
     author: { '@type': 'Organization', name: appName, url: origin },
     publisher: { '@type': 'Organization', name: appName, url: origin },
+    ...(head.video && {
+      video: {
+        '@type': 'VideoObject',
+        name: head.video.name,
+        description: head.video.description,
+        contentUrl: `${origin}${head.video.contentPath}`,
+        thumbnailUrl: `${origin}${head.video.thumbnailPath}`,
+        uploadDate: head.video.uploadDate,
+        duration: `PT${head.video.seconds}S`,
+        inLanguage: head.article.inLanguage,
+      },
+    }),
   };
   // "<" is escaped inside the JSON so the text can never close the script element.
   const jsonLdTag = `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}</script>`;

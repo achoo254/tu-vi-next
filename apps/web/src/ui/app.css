@@ -1127,6 +1127,16 @@ button {
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-2);
 }
+/* The vertical (9:16) video: phone-sized on every screen, so the burned-in subtitles stay readable. */
+.year-video {
+  justify-self: center;
+  width: min(100%, 360px);
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--c-border-subtle);
+  background: var(--c-border-subtle);
+}
 .year-subheading {
   font-size: 15px;
   font-weight: 600;

@@ -50,6 +50,22 @@ describe('prerendered page HTML', () => {
     expect(JSON.parse(jsonLd)).toMatchObject({ '@type': 'Article', headline: 'Tử vi 2027 tuổi Mùi', url: 'https://tuvi.hoandat.com/tu-vi-2027/tuoi-mui' });
   });
 
+  it('nests the page video in the JSON-LD as a VideoObject with absolute URLs', () => {
+    const video = { name: 'Video tử vi 2027 tuổi Mùi', description: 'Video ngắn', contentPath: '/media/tu-vi-2027/mui.mp4', thumbnailPath: '/media/tu-vi-2027/mui.jpg', uploadDate: '2026-10-28T00:00:00+07:00', seconds: 28 };
+    const html = renderPageHtml(TEMPLATE, { ...PAGE, head: { ...PAGE.head, video } }, 'https://tuvi.hoandat.com');
+    const jsonLd: unknown = JSON.parse(/<script type="application\/ld\+json">(.*)<\/script>/.exec(html)?.[1] ?? '{}');
+    expect(jsonLd).toMatchObject({
+      video: {
+        '@type': 'VideoObject',
+        contentUrl: 'https://tuvi.hoandat.com/media/tu-vi-2027/mui.mp4',
+        thumbnailUrl: 'https://tuvi.hoandat.com/media/tu-vi-2027/mui.jpg',
+        uploadDate: '2026-10-28T00:00:00+07:00',
+        duration: 'PT28S',
+      },
+    });
+    expect(renderPageHtml(TEMPLATE, PAGE, 'https://x')).not.toContain('VideoObject');
+  });
+
   it('fails loudly when the template lacks a tag it must replace', () => {
     expect(() => renderPageHtml(TEMPLATE.replace('<meta name="description" content="site" />', ''), PAGE, 'https://x')).toThrow(/description/);
   });
