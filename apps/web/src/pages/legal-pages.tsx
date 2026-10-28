@@ -18,6 +18,7 @@ interface LegalDoc {
 export type LegalPageKind = 'privacy' | 'terms' | 'credits';
 
 const ICON_LICENCE = 'AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
+const APP_ICON_LICENCE = 'AI-generated with open models (FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 const VIDEO_LICENCE =
   'AI-generated with open models (FLUX.2 klein 4B and Wan 2.2 for pictures and motion, RIFE for in-between frames, VieNeu-TTS preset voices, ACE-Step 1.5 for music; Apache-2.0 or MIT) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 const OPEN_ART_LICENCE = 'AI-generated with open models (Qwen-Image, Z-Image-Turbo, FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
@@ -178,7 +179,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             { text: 'Inter', href: 'https://rsms.me/inter/', note: 'và JetBrains Mono, giấy phép SIL Open Font License 1.1.' },
           ],
         },
-        { heading: 'Biểu tượng app', paragraphs: [ICON_LICENCE] },
+        { heading: 'Biểu tượng app', paragraphs: [APP_ICON_LICENCE] },
         {
           heading: 'Hình minh hoạ',
           paragraphs: [
@@ -225,7 +226,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             { text: 'Inter', href: 'https://rsms.me/inter/', note: 'and JetBrains Mono, SIL Open Font License 1.1.' },
           ],
         },
-        { heading: 'App icon', paragraphs: [ICON_LICENCE] },
+        { heading: 'App icon', paragraphs: [APP_ICON_LICENCE] },
         {
           heading: 'Illustrations',
           paragraphs: [

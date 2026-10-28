@@ -21,7 +21,9 @@ import { BRAND_GENERATED_DIR, BRAND_ROOT, MANIFEST_OPTIONS, OG_IMAGE, loadTuviBr
 const MASTER = new URL('brand/app-icon-master-1024.png', BRAND_ROOT);
 const OG_ART = new URL('apps/web/src/art/illustrations/hero-1200.webp', BRAND_ROOT);
 const PUBLIC_DIR = new URL('apps/web/public/', BRAND_ROOT);
-const ICON_LICENCE = 'AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0)';
+/** The night blue at the edge of the icon tile, behind the maskable icon so the artwork can sit inside the safe zone. */
+const TILE = '#16203e';
+const ICON_LICENCE = 'AI-generated with open models (FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0)';
 
 /** The master scaled to `size` px and encoded by the browser, as a data URL. */
 async function encodeMaster(page: Page, masterDataUrl: string, size: number, type: 'image/webp' | 'image/png'): Promise<string> {
@@ -77,7 +79,7 @@ async function main(): Promise<void> {
     const page = await browser.newPage({ deviceScaleFactor: 1 });
     const webp512 = await encodeMaster(page, masterDataUrl, 512, 'image/webp');
     writeFileSync(new URL(brand.icon, BRAND_ROOT), iconSvg(webp512, brand.appName));
-    writeFileSync(new URL(brand.iconMaskable, BRAND_ROOT), maskableSvg(webp512, brand.colors.primary, brand.appName));
+    writeFileSync(new URL(brand.iconMaskable, BRAND_ROOT), maskableSvg(webp512, TILE, brand.appName));
     writeFileSync(new URL('brand-mark-96.webp', PUBLIC_DIR), dataUrlBytes(await encodeMaster(page, masterDataUrl, 96, 'image/webp')));
 
     await page.setViewportSize({ width: OG_IMAGE.width, height: OG_IMAGE.height });

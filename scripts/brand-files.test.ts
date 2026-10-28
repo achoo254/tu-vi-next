@@ -11,7 +11,7 @@ describe('generated brand files', () => {
 
   it('embed the AI-drawn master with its licence line', () => {
     const svg = readFileSync(new URL('brand/app-icon.svg', BRAND_ROOT), 'utf8');
-    expect(svg).toContain('AI-generated with OpenAI gpt-image for the hoandat ecosystem');
+    expect(svg).toContain('AI-generated with open models (FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem');
     expect(svg).toContain('data:image/webp;base64,');
   });
 });
