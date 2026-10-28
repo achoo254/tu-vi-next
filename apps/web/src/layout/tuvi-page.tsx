@@ -2,7 +2,7 @@ import { PublicPage, type ShellBrand, type ShellLink } from '@achoo254/app-shell
 import { type ReactNode, useState } from 'react';
 import { LOGIN_PATH, type SessionState, loginPageHref, signOut } from '../api/session-api';
 import { brand } from '../brand';
-import { LOCALES, isLocale, useI18n } from '../i18n/i18n';
+import { LOCALES, useI18n } from '../i18n/i18n';
 import { FEATURED_YEAR, parseYearRoute, yearIndexPath } from '../year/year-routes';
 
 /** The app as the shared shell names it; the AI-drawn mark is apps/web/public/brand-mark-96.webp (pnpm brand:gen). */
@@ -23,7 +23,7 @@ function SignOutButton(): ReactNode {
   }
 
   return (
-    <button type="button" className="shell-topbar-link topbar-button" onClick={() => void onSignOut()} disabled={signingOut} data-id="nav-sign-out">
+    <button type="button" className="shell-topbar-link" onClick={() => void onSignOut()} disabled={signingOut} data-id="nav-sign-out">
       {t('layout.signOut')}
     </button>
   );
@@ -52,33 +52,23 @@ export function TuviPage({ path, session, layout = 'flow', children }: TuviPageP
   let accountSlot: ReactNode;
   if (session.status === 'ready' && session.signedIn) accountSlot = <SignOutButton />;
   // Sign-in is not configured on this server: no pill that would only come back with "not open yet".
-  else if (session.status === 'ready' && !session.signInAvailable) accountSlot = <></>;
+  else if (session.status === 'ready' && !session.signInAvailable) accountSlot = null;
 
   return (
     <PublicPage
       brand={SHELL_BRAND}
       locale={locale}
       locales={LOCALES}
-      onLocaleChange={(next) => {
-        if (isLocale(next)) setLocale(next);
-      }}
+      onLocaleChange={setLocale}
       signInHref={loginPageHref(path)}
       signInCurrent={path === LOGIN_PATH}
       navLinks={navLinks}
       accountSlot={accountSlot}
       footerLinks={footerLinks}
+      footerNote={t('layout.disclaimer')}
       layout={layout}
     >
-      {layout === 'center' ? (
-        children
-      ) : (
-        <div className="page">
-          {children}
-          <p className="disclaimer" data-id="foot-disclaimer">
-            {t('layout.disclaimer')}
-          </p>
-        </div>
-      )}
+      {layout === 'center' ? children : <div className="page">{children}</div>}
     </PublicPage>
   );
 }

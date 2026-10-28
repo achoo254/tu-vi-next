@@ -37,7 +37,7 @@ button {
   outline: 2px solid var(--c-primary);
   outline-offset: 2px;
 }
-/* layout: the body of every page inside the shared frame, the disclaimer last */
+/* layout: the body of every page inside the shared frame (the disclaimer is the footer note) */
 .page {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -49,15 +49,6 @@ button {
   font-weight: 600;
   color: var(--c-text-muted);
   text-align: center;
-}
-/* The sign-out control in the shared header's place of the sign-in pill. */
-.topbar-button {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-.topbar-button:disabled {
-  cursor: progress;
 }
 .card {
   background: var(--c-surface);

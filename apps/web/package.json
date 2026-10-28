@@ -11,7 +11,7 @@
     "e2e": "playwright test -c e2e/playwright.config.ts"
   },
   "dependencies": {
-    "@achoo254/app-shell": "github:achoo254/shared-next#v0.8.0&path:/packages/app-shell",
+    "@achoo254/app-shell": "github:achoo254/shared-next#v0.9.1&path:/packages/app-shell",
     "@achoo254/brand": "github:achoo254/shared-next#v0.8.0&path:/packages/brand",
     "@fontsource/inter": "^5.2.0",
     "@fontsource/jetbrains-mono": "^5.2.0",

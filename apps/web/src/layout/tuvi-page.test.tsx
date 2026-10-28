@@ -53,13 +53,13 @@ describe('page frame', () => {
     expect(document.querySelector('[data-id=lang-switch]')).not.toBeNull();
     expect(document.querySelector('[data-id=theme-switch]')).not.toBeNull();
     expect(document.querySelector('[data-id=foot-credits]')?.getAttribute('href')).toBe('/credits');
-    expect(document.querySelector('[data-id=foot-disclaimer]')?.textContent).toContain('giải trí');
+    expect(document.querySelector('[data-id=foot-note]')?.textContent).toContain('giải trí');
   });
 
   it('switches the language and keeps it in the shared cookie', () => {
     show('/', SIGNED_OUT);
     fireEvent.click(screen.getByRole('button', { name: 'English' }));
-    expect(document.querySelector('[data-id=foot-disclaimer]')?.textContent).toBe('For entertainment and reference only.');
+    expect(document.querySelector('[data-id=foot-note]')?.textContent).toBe('For entertainment and reference only.');
     expect(document.cookie).toContain('hd_lang=en');
     expect(document.documentElement.lang).toBe('en');
   });
@@ -67,7 +67,7 @@ describe('page frame', () => {
   it('opens in the language picked before the shared choice', () => {
     window.localStorage.setItem('tuvi.lang', 'en');
     show('/', SIGNED_OUT);
-    expect(document.querySelector('[data-id=foot-disclaimer]')?.textContent).toBe('For entertainment and reference only.');
+    expect(document.querySelector('[data-id=foot-note]')?.textContent).toBe('For entertainment and reference only.');
   });
 
   it('offers sign-out instead of sign-in once signed in', () => {
