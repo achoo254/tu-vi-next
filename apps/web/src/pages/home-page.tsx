@@ -216,6 +216,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 chart={chart}
                 horoscope={horoscope}
                 signedIn={signedIn}
+                signInToSaveHref={showSignIn ? signInHref(locale, '/') : undefined}
                 onSave={async () => {
                   await saveChart(chart.input);
                   await refresh();

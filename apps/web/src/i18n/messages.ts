@@ -98,6 +98,7 @@ export const vi = {
   'chart.reload': 'Tải lại trang',
 
   'actions.save': 'Lưu lá số',
+  'actions.signInToSave': 'Đăng nhập để lưu',
   'actions.saving': 'Đang lưu…',
   'actions.saved': 'Đã lưu',
   'actions.export': 'Tải ảnh PNG',
@@ -301,6 +302,7 @@ export const en: Messages = {
   'chart.reload': 'Reload the page',
 
   'actions.save': 'Save chart',
+  'actions.signInToSave': 'Sign in to save',
   'actions.saving': 'Saving…',
   'actions.saved': 'Saved',
   'actions.export': 'Download PNG',

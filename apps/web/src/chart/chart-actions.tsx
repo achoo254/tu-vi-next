@@ -33,8 +33,9 @@ interface ChartActionsProps {
   chart: Chart;
   /** The lưu niên shown on the board, drawn on the image too. */
   horoscope: YearHoroscope | null;
-  /** Only a signed-in visitor can save; the page's sign-in card offers the rest a way in. */
   signedIn: boolean;
+  /** Where a signed-out visitor signs in to save (back to this page); undefined when sign-in is unavailable. */
+  signInToSaveHref: string | undefined;
   /** Saves the chart's input; resolves when it is stored. */
   onSave(): Promise<void>;
 }
@@ -42,7 +43,7 @@ interface ChartActionsProps {
 type SaveState = 'idle' | 'saving' | 'saved';
 
 /** Save (signed in), download the full chart as a PNG, share it (Web Share API). */
-export function ChartActions({ chart, horoscope, signedIn, onSave }: ChartActionsProps): ReactNode {
+export function ChartActions({ chart, horoscope, signedIn, signInToSaveHref, onSave }: ChartActionsProps): ReactNode {
   const { t } = useI18n();
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const [exporting, setExporting] = useState(false);
@@ -82,10 +83,16 @@ export function ChartActions({ chart, horoscope, signedIn, onSave }: ChartAction
 
   return (
     <div className="chart-actions" data-id="chart-actions">
-      {signedIn && (
+      {signedIn ? (
         <button type="button" className="btn btn-primary" onClick={() => void save()} disabled={saveState !== 'idle'} data-id="chart-save">
           {saveState === 'saving' ? t('actions.saving') : saveState === 'saved' ? t('actions.saved') : t('actions.save')}
         </button>
+      ) : (
+        signInToSaveHref !== undefined && (
+          <a className="btn btn-secondary" href={signInToSaveHref} data-id="chart-sign-in-to-save">
+            {t('actions.signInToSave')}
+          </a>
+        )
       )}
       <button type="button" className="btn btn-secondary" onClick={() => void exportImage(false)} disabled={exporting} data-id="chart-export">
         {exporting ? t('actions.exporting') : t('actions.export')}

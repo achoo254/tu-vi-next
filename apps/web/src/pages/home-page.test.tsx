@@ -29,8 +29,9 @@ describe('home page, signed out', () => {
     expect(board.querySelectorAll('.palace')).toHaveLength(12);
     expect(board.textContent).toContain('ngày 1 tháng 1 năm Đinh Hợi');
     expect(JSON.parse(window.localStorage.getItem('tuvi.last-input') ?? 'null')).toMatchObject({ year: 2007, month: 2, day: 17 });
-    // One way to sign in on the page: the shared card's call to action, back to home after the IdP.
-    expect(screen.getAllByRole('link', { name: /Đăng nhập/ }).map((link) => link.getAttribute('href'))).toEqual(['/auth/login?return=%2F&lang=vi']);
+    // The shared card's call to action, and saving the chart beside it: both back to home after the IdP.
+    expect(screen.getByRole('link', { name: 'Đăng nhập bằng hoandat.com' }).getAttribute('href')).toBe('/auth/login?return=%2F&lang=vi');
+    expect(screen.getByRole('link', { name: 'Đăng nhập để lưu' }).getAttribute('href')).toBe('/auth/login?return=%2F&lang=vi');
     // Lưu niên: the featured year (or the current one once it has passed), its marks on the board, the yearly page link.
     const select = screen.getByLabelText('Lưu niên');
     expect(select.querySelectorAll('option').length).toBeGreaterThan(0);
