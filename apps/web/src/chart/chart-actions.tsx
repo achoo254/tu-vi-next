@@ -1,7 +1,6 @@
 import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type ReactNode, useEffect, useState } from 'react';
 import { ApiError } from '../api/api-client';
-import { signInHref } from '../api/session-api';
 import { useI18n } from '../i18n/i18n';
 import { chartTitle } from './chart-facts';
 
@@ -34,8 +33,8 @@ interface ChartActionsProps {
   chart: Chart;
   /** The lưu niên shown on the board, drawn on the image too. */
   horoscope: YearHoroscope | null;
+  /** Only a signed-in visitor can save; the page's sign-in card offers the rest a way in. */
   signedIn: boolean;
-  signInAvailable: boolean;
   /** Saves the chart's input; resolves when it is stored. */
   onSave(): Promise<void>;
 }
@@ -43,8 +42,8 @@ interface ChartActionsProps {
 type SaveState = 'idle' | 'saving' | 'saved';
 
 /** Save (signed in), download the full chart as a PNG, share it (Web Share API). */
-export function ChartActions({ chart, horoscope, signedIn, signInAvailable, onSave }: ChartActionsProps): ReactNode {
-  const { t, locale } = useI18n();
+export function ChartActions({ chart, horoscope, signedIn, onSave }: ChartActionsProps): ReactNode {
+  const { t } = useI18n();
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const [exporting, setExporting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -83,16 +82,10 @@ export function ChartActions({ chart, horoscope, signedIn, signInAvailable, onSa
 
   return (
     <div className="chart-actions" data-id="chart-actions">
-      {signedIn ? (
+      {signedIn && (
         <button type="button" className="btn btn-primary" onClick={() => void save()} disabled={saveState !== 'idle'} data-id="chart-save">
           {saveState === 'saving' ? t('actions.saving') : saveState === 'saved' ? t('actions.saved') : t('actions.save')}
         </button>
-      ) : (
-        signInAvailable && (
-          <a className="btn btn-secondary" href={signInHref(locale)} data-id="chart-sign-in-to-save">
-            {t('actions.signInToSave')}
-          </a>
-        )
       )}
       <button type="button" className="btn btn-secondary" onClick={() => void exportImage(false)} disabled={exporting} data-id="chart-export">
         {exporting ? t('actions.exporting') : t('actions.export')}

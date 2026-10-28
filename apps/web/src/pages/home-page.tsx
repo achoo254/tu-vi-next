@@ -1,8 +1,9 @@
+import { type FeatureItem, FeatureList, Hero, SignInCard } from '@achoo254/app-shell';
 import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type BirthInput, MAX_BIRTH_YEAR, MIN_BIRTH_YEAR } from '@tuvi/chart/schema';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type SavedChart, deleteChart, listCharts, saveChart } from '../api/charts-api';
-import type { SessionState } from '../api/session-api';
+import { type SessionState, signInHref } from '../api/session-api';
 import { BirthForm } from '../chart/birth-form';
 import { ChartActions } from '../chart/chart-actions';
 import { ChartBoard } from '../chart/chart-board';
@@ -19,6 +20,7 @@ import { FEATURED_YEAR } from '../year/year-routes';
 import { YearPagesTeaser } from './year-pages-teaser';
 import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/illustrations';
 import { type Translate, useI18n } from '../i18n/i18n';
+import { SHELL_BRAND } from '../layout/tuvi-page';
 
 type Cast = { chart: Chart; error: null } | { chart: null; error: string | null };
 
@@ -62,9 +64,18 @@ function loginNotice(t: Translate): string | null {
   return null;
 }
 
+/** What the app does, for a visitor who has not signed in. */
+function features(t: Translate): FeatureItem[] {
+  return (['calendar', 'plain', 'yearly', 'story', 'private', 'save'] as const).map((id) => ({
+    id,
+    title: t(`features.${id}.title`),
+    description: t(`features.${id}.text`),
+  }));
+}
+
 /** Intro, the birth form and the chart; the saved charts when signed in. */
 export function HomePage({ session }: { session: SessionState }): ReactNode {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const engine = useChartEngine();
   const [input, setInput] = useState<BirthInput | null>(loadLastInput);
   const [formKey, setFormKey] = useState(0);
@@ -76,6 +87,8 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   const [yearChoice, setYearChoice] = useState<number | null>(null);
   const { years, horoscope } = useMemo(() => yearly(engine, chart, yearChoice), [engine, chart, yearChoice]);
   const signedIn = session.status === 'ready' && session.signedIn;
+  // The card waits for the session, so a signed-in visitor never sees it flash.
+  const showSignIn = session.status === 'ready' && !session.signedIn && session.signInAvailable;
   const notice = loginNotice(t);
 
   // Only a chart that could be cast is remembered (in this browser only).
@@ -131,23 +144,34 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           {notice}
         </p>
       )}
-      <div className={`intro-row${signedIn ? '' : ' intro-row-hero'}`}>
-        <section className="intro" data-id="intro">
-          <h1 className="intro-title">{t('intro.title')}</h1>
-          <p className="intro-lead">{t('intro.lead')}</p>
-          <p className="intro-note">{signedIn ? t('intro.point.save') : t('intro.point.private')}</p>
-          <details className="intro-why" data-id="intro-why">
-            <summary>{t('intro.why')}</summary>
-            <p>{t('intro.point.calendar')}</p>
-          </details>
-        </section>
+      <Hero
+        title={t('intro.title')}
+        lede={t('intro.lead')}
+        aside={
+          showSignIn ? (
+            <SignInCard
+              brand={SHELL_BRAND}
+              locale={locale}
+              signInHref={signInHref(locale, '/')}
+              title={t('signIn.title')}
+              description={t('signIn.lead')}
+              headingLevel={2}
+            />
+          ) : undefined
+        }
+      >
+        <p className="intro-note">{signedIn ? t('intro.point.save') : t('intro.point.private')}</p>
+        <details className="intro-why" data-id="intro-why">
+          <summary>{t('intro.why')}</summary>
+          <p>{t('intro.point.calendar')}</p>
+        </details>
         {/* The signed-out welcome only: signed-in visitors come back for their charts. Decorative. */}
         {!signedIn && (
           <img
             className="intro-hero"
             src={HERO_1200_URL}
             srcSet={`${HERO_640_URL} 640w, ${HERO_1200_URL} 1200w`}
-            sizes="(min-width: 900px) 480px, 100vw"
+            sizes="(min-width: 1120px) 620px, 100vw"
             width={HERO_WIDTH}
             height={HERO_HEIGHT}
             alt=""
@@ -156,7 +180,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
             data-id="intro-hero"
           />
         )}
-      </div>
+      </Hero>
       <div className="home-grid">
         <div className="home-side">
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
@@ -192,7 +216,6 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 chart={chart}
                 horoscope={horoscope}
                 signedIn={signedIn}
-                signInAvailable={session.status === 'ready' && session.signInAvailable}
                 onSave={async () => {
                   await saveChart(chart.input);
                   await refresh();
@@ -216,6 +239,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           </section>
         )}
       </div>
+      {!signedIn && <FeatureList id="features" title={t('features.title')} items={features(t)} />}
       <YearPagesTeaser />
     </div>
   );

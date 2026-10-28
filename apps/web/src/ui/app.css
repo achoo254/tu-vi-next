@@ -1,6 +1,7 @@
-/* Page styles. Every colour, radius and spacing step comes from tokens.css (checked by `pnpm check:tokens`).
-   The shell (top bar, container, cards, buttons, footer) follows auth-next static/css/app.css so every
-   hoandat.com app looks like one family; the board and star styles below are the app's own. */
+/* Page styles. Every colour, radius and spacing step comes from a token (@achoo254/app-shell tokens.css and the
+   app's own tokens.css, checked by `pnpm check:tokens`), so the dark theme follows. The header, frame, footer,
+   hero, sign-in card and feature list are the shared shell's (@achoo254/app-shell app-shell.css); the cards,
+   buttons and forms below follow the same account-app look, and the board and star styles are the app's own. */
 
 *,
 *::before,
@@ -10,23 +11,14 @@
 html {
   -webkit-text-size-adjust: 100%;
 }
+/* The shared frame (.shell) draws the grid backdrop; the body only matches it past the page's ends. */
 body {
   margin: 0;
-  min-height: 100dvh;
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.55;
   color: var(--c-text);
   background-color: var(--c-bg);
-  background-image: linear-gradient(var(--c-grid) 1px, transparent 1px), linear-gradient(90deg, var(--c-grid) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
-  background-position: -1px -1px;
-  -webkit-font-smoothing: antialiased;
-}
-#root {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
 }
 h1,
 h2,
@@ -45,98 +37,27 @@ button {
   outline: 2px solid var(--c-primary);
   outline-offset: 2px;
 }
-.container {
-  width: 100%;
-  max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+/* layout: the body of every page inside the shared frame, the disclaimer last */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-6) var(--space-5);
 }
-
-/* top bar + wordmark (auth-next .topbar / .idp-brand) */
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: color-mix(in srgb, var(--c-bg) 82%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--c-border-subtle);
-}
-.topbar-inner {
-  min-height: var(--topbar-h);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-}
-.app-brand {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  gap: var(--space-2);
-  color: var(--c-text);
-  text-decoration: none;
-}
-.app-brand b {
-  color: var(--c-primary);
-  white-space: nowrap;
-}
-.app-brand-mark {
-  flex: none;
-  width: 24px;
-  height: 24px;
-}
-.topbar-nav {
-  display: flex;
-  align-items: center;
-  gap: var(--space-1);
-}
-.topbar-link {
-  font-family: var(--font-mono);
-  font-size: 13px;
+.disclaimer {
+  font-size: 14px;
   font-weight: 600;
   color: var(--c-text-muted);
-  text-decoration: none;
-  white-space: nowrap;
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
-  transition:
-    background-color var(--dur-fast) var(--ease-standard),
-    color var(--dur-fast) var(--ease-standard);
+  text-align: center;
 }
+/* The sign-out control in the shared header's place of the sign-in pill. */
 .topbar-button {
   border: 0;
   background: transparent;
   cursor: pointer;
 }
-.topbar-link:hover {
-  color: var(--c-text);
-  background: color-mix(in srgb, var(--c-text) 6%, transparent);
-}
-.topbar-link[aria-current="page"] {
-  color: var(--c-primary);
-  background: color-mix(in srgb, var(--c-primary) 10%, transparent);
-}
-@media (pointer: coarse), (max-width: 479px) {
-  .topbar-link,
-  .foot-link,
-  .lang-option {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-  }
-}
-@media (max-width: 379px) {
-  .topbar-link {
-    padding-inline: var(--space-1);
-  }
-}
-
-/* layout */
-.page {
-  flex: 1;
-  padding-block: var(--space-6) var(--space-7);
+.topbar-button:disabled {
+  cursor: progress;
 }
 .card {
   background: var(--c-surface);
@@ -304,42 +225,21 @@ button {
 /* home */
 .home {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
 }
-.intro {
-  display: grid;
-  gap: var(--space-3);
-  max-width: 760px;
+/* The page already has its top space and the form should stay near the top: the hero gives up its own. */
+.home .shell-hero {
+  padding-block: 0;
 }
-.intro-row {
-  display: grid;
-  gap: var(--space-5);
-  align-items: center;
-}
-@media (min-width: 900px) {
-  .intro-row-hero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
-  }
-}
-/* A short banner on phones so the form stays near the top; the full picture beside the intro on wide screens. */
+/* A short banner, so the form stays near the top on phones too. */
 .intro-hero {
   width: 100%;
+  max-width: 620px;
   height: auto;
   aspect-ratio: 21 / 9;
   object-fit: cover;
   border-radius: var(--radius-lg);
-}
-@media (min-width: 900px) {
-  .intro-hero {
-    aspect-ratio: 1200 / 669;
-  }
-}
-.intro-title {
-  font-family: var(--font-sans);
-  font-weight: 800;
-  font-size: clamp(26px, 4vw, 36px);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
 }
 .intro-lead {
   font-size: 17px;
@@ -1032,66 +932,6 @@ button {
 }
 .doc .btn {
   justify-self: start;
-}
-
-/* footer (auth-next .page-foot) */
-.page-foot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  padding-bottom: var(--space-7);
-}
-.disclaimer {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--c-text-muted);
-  text-align: center;
-}
-.lang-switch {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2px;
-  padding: 2px;
-  border: 1px solid var(--c-border);
-  border-radius: var(--radius-full);
-  background: var(--c-surface);
-}
-.lang-option {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--c-text-muted);
-  background: transparent;
-  cursor: pointer;
-  padding: var(--space-1) var(--space-3);
-  border: 1px solid transparent;
-  border-radius: var(--radius-full);
-}
-.lang-option:hover {
-  color: var(--c-text);
-}
-.lang-option[aria-current="true"] {
-  color: var(--c-primary);
-  background: color-mix(in srgb, var(--c-primary) 8%, var(--c-surface));
-  border-color: color-mix(in srgb, var(--c-primary) 30%, var(--c-surface));
-}
-.foot-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  column-gap: var(--space-4);
-}
-.foot-link {
-  font-size: 13px;
-  color: var(--c-text-muted);
-  text-decoration: none;
-}
-.foot-link:hover {
-  color: var(--c-text);
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 /* yearly pages (/tu-vi-2027 and one per con giáp) and their teaser on the home page */

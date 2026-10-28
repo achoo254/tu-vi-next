@@ -1,12 +1,13 @@
-import { type ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { readPreferences, subscribePreferences } from '@achoo254/app-shell/preferences';
+import { type ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { brand } from '../brand';
 import { type MessageKey, type Messages, en, vi } from './messages';
 
 export const LOCALES = ['vi', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
-export const LOCALE_NAMES: Record<Locale, string> = { vi: 'Tiếng Việt', en: 'English' };
 
-const STORAGE_KEY = 'tuvi.lang';
+/** Where the language was kept before the choice shared by every hoandat.com app (cookie `hd_lang`). */
+export const LEGACY_LANG_KEY = 'tuvi.lang';
 const DICTIONARIES: Record<Locale, Messages> = { vi, en };
 
 export type Translate = (key: MessageKey, vars?: Record<string, string | number>) => string;
@@ -25,26 +26,24 @@ export function translator(locale: Locale): Translate {
   return (key, vars) => format(dictionary[key], vars);
 }
 
-const isLocale = (value: unknown): value is Locale => value === 'vi' || value === 'en';
+export const isLocale = (value: unknown): value is Locale => value === 'vi' || value === 'en';
 
 /** `?lang=` wins (a shared link), then the saved choice, then Vietnamese. */
-export function initialLocale(search: string, stored: string | null): Locale {
+export function initialLocale(search: string, stored: Locale | undefined): Locale {
   const fromQuery = new URLSearchParams(search).get('lang');
   if (isLocale(fromQuery)) return fromQuery;
-  return isLocale(stored) ? stored : 'vi';
+  return stored ?? 'vi';
 }
 
-function readStoredLocale(): string | null {
-  try {
-    return window.localStorage.getItem(STORAGE_KEY);
-  } catch {
-    return null;
-  }
+/** The language picked in any hoandat.com app (or here before the shared choice), if any. */
+function storedLocale(): Locale | undefined {
+  return readPreferences({ domain: brand.primaryTenant.domain, legacyLangKey: LEGACY_LANG_KEY }).lang;
 }
 
 interface I18n {
   locale: Locale;
   t: Translate;
+  /** Shows the page in `locale`; the footer's language switch has already stored the choice. */
   setLocale(locale: Locale): void;
 }
 
@@ -52,19 +51,22 @@ const I18nContext = createContext<I18n | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }): ReactNode {
   // Pages prerendered at build time (no window) are rendered in Vietnamese.
-  const [locale, setLocaleState] = useState<Locale>(() => (typeof window === 'undefined' ? 'vi' : initialLocale(window.location.search, readStoredLocale())));
+  const [locale, setLocale] = useState<Locale>(() => (typeof window === 'undefined' ? 'vi' : initialLocale(window.location.search, storedLocale())));
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
-  const setLocale = useCallback((next: Locale) => {
-    setLocaleState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // Private mode without storage: the choice lasts for this page only.
-    }
+  // A language picked in another app's tab shows here when this tab is viewed again. Only a change counts, so a
+  // shared `?lang=` link keeps its language until someone picks one.
+  useEffect(() => {
+    let last = storedLocale();
+    return subscribePreferences(() => {
+      const next = storedLocale();
+      if (next === undefined || next === last) return;
+      last = next;
+      setLocale(next);
+    });
   }, []);
-  const value = useMemo(() => ({ locale, t: translator(locale), setLocale }), [locale, setLocale]);
+  const value = useMemo(() => ({ locale, t: translator(locale), setLocale }), [locale]);
   return <I18nContext value={value}>{children}</I18nContext>;
 }
 

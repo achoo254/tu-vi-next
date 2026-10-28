@@ -29,7 +29,8 @@ describe('home page, signed out', () => {
     expect(board.querySelectorAll('.palace')).toHaveLength(12);
     expect(board.textContent).toContain('ngày 1 tháng 1 năm Đinh Hợi');
     expect(JSON.parse(window.localStorage.getItem('tuvi.last-input') ?? 'null')).toMatchObject({ year: 2007, month: 2, day: 17 });
-    expect(screen.getByRole('link', { name: 'Đăng nhập để lưu' }).getAttribute('href')).toMatch(/^\/auth\/login\?return=%2F/);
+    // One way to sign in on the page: the shared card's call to action, back to home after the IdP.
+    expect(screen.getAllByRole('link', { name: /Đăng nhập/ }).map((link) => link.getAttribute('href'))).toEqual(['/auth/login?return=%2F&lang=vi']);
     // Lưu niên: the featured year (or the current one once it has passed), its marks on the board, the yearly page link.
     const select = screen.getByLabelText('Lưu niên');
     expect(select.querySelectorAll('option').length).toBeGreaterThan(0);
@@ -39,6 +40,35 @@ describe('home page, signed out', () => {
     // The written readings load on their own: the cục text in the centre.
     expect((await screen.findByText(/./, { selector: '[data-id=cuc-reading]' })).textContent?.length).toBeGreaterThan(40);
     // (The star and palace dialogs use <dialog>.showModal, which jsdom lacks: covered by the E2E run.)
+  });
+
+  it('welcomes with the shared hero, sign-in card and feature list', () => {
+    render(
+      <I18nProvider>
+        <HomePage session={{ status: 'ready', signedIn: false, signInAvailable: true }} />
+      </I18nProvider>,
+    );
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Xem lá số tử vi của bạn trong 10 giây');
+    expect(document.querySelector('[data-id=sign-in-cta]')?.textContent).toBe('Đăng nhập bằng hoandat.com');
+    expect(document.querySelectorAll('[data-id=features] [data-id^=feature-]')).toHaveLength(6);
+  });
+
+  it('has no sign-in card or feature list once signed in, nor while the session loads', () => {
+    for (const session of [{ status: 'ready', signedIn: true, signInAvailable: true }, { status: 'loading' }] as const) {
+      render(
+        <I18nProvider>
+          <HomePage session={session} />
+        </I18nProvider>,
+      );
+      expect(document.querySelector('[data-id=sign-in-card]')).toBeNull();
+      cleanup();
+    }
+    render(
+      <I18nProvider>
+        <HomePage session={{ status: 'ready', signedIn: true, signInAvailable: true }} />
+      </I18nProvider>,
+    );
+    expect(document.querySelector('[data-id=features]')).toBeNull();
   });
 
   it('explains a date that does not exist', async () => {

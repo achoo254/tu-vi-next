@@ -2,19 +2,34 @@
  * `pnpm check:tokens`: design-token guard of the web app.
  *
  * 1. No colour literal in apps/web/src (ts, tsx, css) or apps/web/index.html outside src/ui/tokens.css.
- * 2. Every text/background pair the UI and the PNG export use meets WCAG 2 AA (text 4.5:1) in light and
- *    dark.
+ * 2. src/ui/tokens.css holds only the app's own tokens (none of the shared @achoo254/app-shell tokens.css,
+ *    loaded before it), and its two dark blocks (OS preference, data-theme="dark") are identical.
+ * 3. Every text/background pair the UI and the PNG export use meets WCAG 2 AA (text 4.5:1) in light and
+ *    dark, with the shared tokens and the app's together as the browser sees them.
  *
  * Exits 1 on any failure, printing file:line for literals and the ratio of each failing pair.
  */
 import { readFile, readdir } from 'node:fs/promises';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { type LiteralViolation, type TokenMap, contrastRatio, findColourLiterals, mixHex, parseThemes } from './token-contrast';
+import {
+  type LiteralViolation,
+  type TokenMap,
+  contrastRatio,
+  darkBlockDrift,
+  findColourLiterals,
+  mergeThemes,
+  mixHex,
+  parseThemes,
+  sharedNames,
+} from './token-contrast';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const WEB = path.join(ROOT, 'apps/web');
 const TOKENS_FILE = path.join(WEB, 'src/ui/tokens.css');
+/** The shared tokens, as the web app imports them (main.tsx). */
+const SHARED_TOKENS_FILE = createRequire(path.join(WEB, 'package.json')).resolve('@achoo254/app-shell/tokens.css');
 const SCANNED = new Set(['.ts', '.tsx', '.css']);
 const AA_TEXT = 4.5;
 
@@ -65,7 +80,20 @@ async function main(): Promise<number> {
     console.log('✓ No colour literals outside tokens.css');
   }
 
-  const themes = parseThemes(await readFile(TOKENS_FILE, 'utf8'));
+  const shared = parseThemes(await readFile(SHARED_TOKENS_FILE, 'utf8'));
+  const own = parseThemes(await readFile(TOKENS_FILE, 'utf8'));
+  const repeated = sharedNames(own.light, shared.light);
+  if (repeated.length > 0) {
+    failed = true;
+    console.error(`✗ apps/web/src/ui/tokens.css repeats shared tokens of @achoo254/app-shell: ${repeated.join(', ')}`);
+  }
+  const drift = darkBlockDrift(own);
+  if (drift.length > 0) {
+    failed = true;
+    console.error(`✗ apps/web/src/ui/tokens.css: the two dark blocks differ on ${drift.join(', ')}`);
+  }
+  if (repeated.length === 0 && drift.length === 0) console.log('✓ App tokens add to the shared ones, dark blocks identical');
+  const themes = mergeThemes(shared, own);
   let checked = 0;
   const failures: string[] = [];
   for (const [theme, tokens] of [['light', themes.light], ['dark', themes.dark]] as const) {

@@ -17,6 +17,6 @@ describe('i18n', () => {
   it('picks ?lang= first, then the saved choice, then Vietnamese', () => {
     expect(initialLocale('?lang=en', 'vi')).toBe('en');
     expect(initialLocale('', 'en')).toBe('en');
-    expect(initialLocale('?lang=fr', 'xx')).toBe('vi');
+    expect(initialLocale('?lang=fr', undefined)).toBe('vi');
   });
 });

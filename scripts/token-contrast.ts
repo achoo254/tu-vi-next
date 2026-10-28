@@ -1,6 +1,6 @@
 /**
- * Pieces of `pnpm check:tokens`: reading apps/web/src/ui/tokens.css, the WCAG 2 contrast ratio, and the
- * colour-literal scan of the web sources.
+ * Pieces of `pnpm check:tokens`: reading the token files (the shared @achoo254/app-shell tokens.css and the app's
+ * apps/web/src/ui/tokens.css), the WCAG 2 contrast ratio, and the colour-literal scan of the web sources.
  */
 
 export type TokenMap = ReadonlyMap<string, string>;
@@ -8,9 +8,14 @@ export type TokenMap = ReadonlyMap<string, string>;
 export interface ThemeTokens {
   light: TokenMap;
   dark: TokenMap;
+  /** Declarations of the OS-preference dark block alone. */
+  darkMedia: TokenMap;
+  /** Declarations of the `:root[data-theme="dark"]` block alone; empty when the file has none. */
+  forcedDark: TokenMap;
 }
 
 const DARK_MEDIA = '@media (prefers-color-scheme: dark)';
+const FORCED_DARK = ':root[data-theme="dark"]';
 
 function declarations(css: string): Map<string, string> {
   const tokens = new Map<string, string>();
@@ -21,24 +26,52 @@ function declarations(css: string): Map<string, string> {
   return tokens;
 }
 
-/** The light tokens (everything outside the dark block) and the dark ones (light overridden by the dark block). */
-export function parseThemes(css: string): ThemeTokens {
-  const source = css.replace(/\/\*[\s\S]*?\*\//g, '');
-  const start = source.indexOf(DARK_MEDIA);
-  if (start < 0) throw new Error(`tokens.css has no "${DARK_MEDIA}" block`);
+/** Where the block opening at the first `{` after `start` ends (just after its closing brace). */
+function blockEnd(source: string, start: number): number {
   let depth = 0;
-  let end = -1;
-  for (let i = source.indexOf('{', start); i < source.length; i++) {
+  for (let i = source.indexOf('{', start); i >= 0 && i < source.length; i++) {
     if (source[i] === '{') depth++;
-    else if (source[i] === '}' && --depth === 0) {
-      end = i + 1;
-      break;
-    }
+    else if (source[i] === '}' && --depth === 0) return i + 1;
   }
-  if (end < 0) throw new Error('tokens.css: unclosed dark block');
-  const light = declarations(source.slice(0, start) + source.slice(end));
-  const dark = new Map([...light, ...declarations(source.slice(start, end))]);
-  return { light, dark };
+  throw new Error('tokens.css: unclosed block');
+}
+
+/**
+ * The light tokens (everything outside the dark blocks) and the dark ones (light overridden by the OS-preference
+ * dark block), with the dark block and the forced dark block (`data-theme="dark"`) on their own.
+ */
+export function parseThemes(css: string): ThemeTokens {
+  let source = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  const cut = (marker: string): string => {
+    const start = source.indexOf(marker);
+    if (start < 0) return '';
+    const end = blockEnd(source, start);
+    const block = source.slice(start, end);
+    source = source.slice(0, start) + source.slice(end);
+    return block;
+  };
+  const darkBlock = cut(DARK_MEDIA);
+  if (darkBlock === '') throw new Error(`tokens.css has no "${DARK_MEDIA}" block`);
+  const forcedBlock = cut(FORCED_DARK);
+  const light = declarations(source);
+  const darkMedia = declarations(darkBlock);
+  return { light, dark: new Map([...light, ...darkMedia]), darkMedia, forcedDark: declarations(forcedBlock) };
+}
+
+/** The tokens of the shared file with the app's file loaded after it, per theme. */
+export function mergeThemes(shared: ThemeTokens, app: ThemeTokens): Pick<ThemeTokens, 'light' | 'dark'> {
+  return { light: new Map([...shared.light, ...app.light]), dark: new Map([...shared.dark, ...app.dark]) };
+}
+
+/** Names declared in both maps. */
+export function sharedNames(a: TokenMap, b: TokenMap): string[] {
+  return [...a.keys()].filter((name) => b.has(name));
+}
+
+/** Differences between the OS-preference and the forced dark blocks (which must be identical). */
+export function darkBlockDrift(themes: ThemeTokens): string[] {
+  const names = new Set([...themes.darkMedia.keys(), ...themes.forcedDark.keys()]);
+  return [...names].filter((name) => themes.darkMedia.get(name) !== themes.forcedDark.get(name));
 }
 
 function channel(hex: string, offset: number): number {

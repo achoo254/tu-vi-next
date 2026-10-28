@@ -1,12 +1,13 @@
 import { type ReactNode, useEffect, useMemo } from 'react';
-import { useSession } from './api/session-api';
+import { LOGIN_PATH, useSession } from './api/session-api';
 import { NOT_FOUND_URL } from './art/illustrations';
 import { brand } from './brand';
 import { useI18n } from './i18n/i18n';
-import { PageShell } from './layout/page-shell';
+import { TuviPage } from './layout/tuvi-page';
 import { HomePage } from './pages/home-page';
 import type * as LegalPagesModule from './pages/legal-pages';
 import type { LegalPageKind } from './pages/legal-pages';
+import { LoginPage } from './pages/login-page';
 import type * as YearPagesModule from './year/year-page';
 import { parseYearRoute } from './year/year-routes';
 
@@ -67,7 +68,7 @@ function PageLoadFailed(): ReactNode {
   );
 }
 
-/** The page for the current path inside the shell. */
+/** The page for the current path inside the shared frame. */
 export function App({ pathname, modules = NO_MODULES }: { pathname: string; modules?: PageModules }): ReactNode {
   const { t, locale } = useI18n();
   const session = useSession();
@@ -83,6 +84,7 @@ export function App({ pathname, modules = NO_MODULES }: { pathname: string; modu
     }
     let page: string;
     if (path === '/') page = t('intro.title');
+    else if (path === LOGIN_PATH) page = t('signIn.title');
     else if (legal && legalPages) page = legalPages.legalTitle(legal, locale);
     else if (legal || yearRoute) page = t('page.loadFailed');
     else page = t('notFound.title');
@@ -91,13 +93,14 @@ export function App({ pathname, modules = NO_MODULES }: { pathname: string; modu
 
   let page: ReactNode;
   if (path === '/') page = <HomePage session={session} />;
+  else if (path === LOGIN_PATH) page = <LoginPage session={session} />;
   else if (legal) page = legalPages ? <legalPages.LegalPage kind={legal} /> : <PageLoadFailed />;
   else if (yearRoute) page = yearPages ? <yearPages.YearPage route={yearRoute} /> : <PageLoadFailed />;
   else page = <NotFound />;
 
   return (
-    <PageShell path={path} session={session}>
+    <TuviPage path={path} session={session} layout={path === LOGIN_PATH ? 'center' : 'flow'}>
       {page}
-    </PageShell>
+    </TuviPage>
   );
 }

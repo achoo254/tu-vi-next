@@ -6,7 +6,7 @@
 import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 import { I18nProvider } from '../i18n/i18n';
-import { PageShell } from '../layout/page-shell';
+import { TuviPage } from '../layout/tuvi-page';
 import { type PageHead, YearPage, yearPageHead } from './year-page';
 import { parseYearRoute } from './year-routes';
 
@@ -26,9 +26,9 @@ export function renderYearPage(path: string): RenderedPage | null {
   const html = renderToString(
     <StrictMode>
       <I18nProvider>
-        <PageShell path={path} session={{ status: 'loading' }}>
+        <TuviPage path={path} session={{ status: 'loading' }}>
           <YearPage route={route} />
-        </PageShell>
+        </TuviPage>
       </I18nProvider>
     </StrictMode>,
   );

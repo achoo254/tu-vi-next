@@ -1,73 +1,25 @@
 /* =====================================================================
-   TỬ VI DESIGN TOKENS
-   The ONLY file of the web app allowed to hold colour literals (checked by
-   `pnpm check:tokens` and `pnpm check:brand`). Every stylesheet, component and
-   the PNG export read these custom properties.
+   TỬ VI DESIGN TOKENS (the app's own)
+   With @achoo254/app-shell tokens.css (loaded first: the palette, spacing,
+   radii and type of every hoandat.com app, light and dark), the ONLY
+   colour literals of the web app (checked by `pnpm check:tokens` and
+   `pnpm check:brand`). Every stylesheet, component and the PNG export read
+   these custom properties. None of the shared tokens is repeated here
+   (`pnpm check:tokens` fails if one is).
 
-   Base palette: the account app's (auth-next static/css/tokens.css, itself
-   Localman's, Radix Colors v3, MIT): accent violet, neutral slate, so the top
-   bar, cards and buttons match every hoandat.com app. Chart accents are the
-   app's own: plum for the Mệnh palace and lucky stars, red for malefic stars,
-   amber for the four transformations, all checked for contrast.
+   Chart accents are the app's own: plum for the Mệnh palace and lucky
+   stars, red for malefic stars, amber for the four transformations, all
+   checked for contrast on the shared surfaces in light and dark.
 
-   Blocks: [1] light (default) · [2] dark via OS preference.
+   Blocks, as in the shared file: [1] light (default) · [2] dark via OS
+   preference unless data-theme="light" · [3] dark forced by
+   data-theme="dark". [2] and [3] must stay identical (checked).
    ===================================================================== */
 
-/* [1] light (default) + theme-independent scales */
+/* [1] light (default) + theme-independent values */
 :root {
-  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 999px;
-
-  --dur-fast: 150ms;
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --gutter: 16px;
-  --container: 1120px;
-  --topbar-h: 64px;
-  --grid-size: 100px;
   /* Narrowest board cell before the chart switches to the palace list. */
   --palace-min: 150px;
-
-  color-scheme: light;
-  --c-bg: #f9f9fb; /* slate-2 */
-  --c-grid: #e8e8ec; /* slate-4 */
-  --c-surface: #ffffff;
-  --c-surface-subtle: #f9f9fb; /* slate-2 */
-  --c-text: #1c2024; /* slate-12 */
-  --c-text-muted: #60646c; /* slate-11 */
-  --c-border-strong: #8b8d98; /* slate-9 */
-  --c-border: #cdced6; /* slate-7 */
-  --c-border-subtle: #d9d9e0; /* slate-6 */
-  --c-primary: #6550b9; /* violet-11 */
-  --c-primary-solid: #6e56cf; /* violet-9 */
-  --c-primary-solid-hover: #654dc4; /* violet-10 */
-  --c-on-primary: #ffffff;
-  --c-error: #ce2c31; /* red-11 */
-  --c-error-text: #641723; /* red-12 */
-  --c-success: #218358; /* green-11 */
-  --c-info: #0d74ce; /* blue-11 */
-  --c-warning: #ab6400; /* amber-11 */
-  --c-warning-text: #4f3422; /* amber-12 */
-  --c-backdrop: rgb(28 32 36 / 0.45);
-  --shadow-sm: 0 1px 2px rgb(28 32 36 / 0.05), 0 1px 3px rgb(28 32 36 / 0.06);
-  --shadow-lg: 0 24px 48px -12px rgb(28 32 36 / 0.3);
-  --shadow-glow-primary: 0 6px 16px -6px color-mix(in srgb, var(--c-primary) 60%, transparent);
-  --shadow-focus-primary: 0 0 0 3px color-mix(in srgb, var(--c-primary) 22%, transparent);
 
   /* chart */
   --c-star-major: #641723; /* red-12: chính tinh */
@@ -96,38 +48,9 @@
   --c-export-mutagen: #4f3422;
 }
 
-@media (min-width: 768px) {
-  :root {
-    --gutter: 24px;
-  }
-}
-
-/* [2] dark via OS preference */
+/* [2] dark via OS preference unless the visitor picked light */
 @media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --c-bg: #111113;
-    --c-grid: #212225;
-    --c-surface: #18191b;
-    --c-surface-subtle: #111113;
-    --c-text: #edeef0;
-    --c-text-muted: #b0b4ba;
-    --c-border-strong: #696e77;
-    --c-border: #43484e;
-    --c-border-subtle: #363a3f;
-    --c-primary: #baa7ff;
-    --c-primary-solid: #6e56cf;
-    --c-primary-solid-hover: #654dc4;
-    --c-on-primary: #ffffff;
-    --c-error: #ff9592;
-    --c-error-text: #ff9592;
-    --c-success: #3dd68c;
-    --c-info: #70b8ff;
-    --c-warning: #ffca16;
-    --c-warning-text: #ffca16;
-    --c-backdrop: rgb(0 0 0 / 0.65);
-    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
-    --shadow-lg: 0 24px 48px -12px rgb(0 0 0 / 0.8);
+  :root:not([data-theme="light"]) {
     --c-star-major: #ffd1d9; /* red-12 dark */
     --c-star-auspicious: #e796f3; /* plum-11 dark */
     --c-star-malefic: #ff9592; /* red-11 dark */
@@ -139,8 +62,14 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-fast: 1ms;
-  }
+/* [3] dark picked in the footer's theme switch (keep identical to [2]) */
+:root[data-theme="dark"] {
+  --c-star-major: #ffd1d9; /* red-12 dark */
+  --c-star-auspicious: #e796f3; /* plum-11 dark */
+  --c-star-malefic: #ff9592; /* red-11 dark */
+  --c-star-minor: #b0b4ba;
+  --c-mutagen: #ffca16; /* amber-11 dark */
+  --c-soul: #e796f3;
+  /* dark: cells stay opaque over the (light) sky paper, so contrast is the plain surface's */
+  --cell-opacity: 100%;
 }

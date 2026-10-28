@@ -3,6 +3,8 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/jetbrains-mono/600.css';
+import '@achoo254/app-shell/tokens.css';
+import '@achoo254/app-shell/app-shell.css';
 import './ui/tokens.css';
 import './ui/app.css';
 import { StrictMode } from 'react';
