@@ -12,9 +12,10 @@ vào đây; dùng alias SSH (`SSH_TARGET`) và placeholder như `<SERVER_65_IP>`
 | API (Node, Express 5, một file bundle) | systemd `tuvi-server`, loopback `127.0.0.1:5290`, Node 22 ở `/opt/node22` |
 | Database | Postgres đang chạy trên `.65`, database `tuvi`, role `tuvi`; migration chạy khi server khởi động |
 | Đường vào | Cloudflare (proxied, SSL "full") → nginx `conf.d/tuvi.hoandat.com.conf` → `/api/`, `/auth/`, `/healthz` sang API |
-| Đăng nhập | client BFF `tuvi-web` trên `auth.hoandat.com`, scope `openid`, callback `https://tuvi.hoandat.com/auth/callback` |
+| Đăng nhập | client BFF `tuvi-web` trên `auth.hoandat.com`, scope `openid profile email`, callback `https://tuvi.hoandat.com/auth/callback`; tên, email, ảnh lấy từ userinfo lúc đăng nhập, lưu ở bảng `users` cho menu tài khoản |
 
-Lá số được tính trên trình duyệt; server chỉ giữ phiên đăng nhập và dữ liệu đầu vào của lá số đã lưu, nên nhẹ.
+Lá số được tính trên trình duyệt; server chỉ giữ phiên đăng nhập, tên/email/địa chỉ ảnh của tài khoản và dữ liệu đầu
+vào của lá số đã lưu, nên nhẹ.
 Unit giới hạn `MemoryHigh=160M`, `MemoryMax=256M`.
 
 Các file: [`infra/nginx/tuvi.hoandat.com.conf`](../infra/nginx/tuvi.hoandat.com.conf),
@@ -69,7 +70,9 @@ hỏng thì script tự trỏ `current` về bản trước, restart, in log và
 chứa `._*` hay `.DS_Store` (`COPYFILE_DISABLE=1` và `--exclude`).
 Server không cần `pnpm install`: bundle đã gồm mọi thư viện.
 
-**CSP.** Trang không có script inline nào (Tử Vi chỉ có một giao diện, không cần script đặt theme trước lần vẽ đầu),
+**CSP.** `img-src` cho phép ảnh tài khoản của Google (`https://lh3.googleusercontent.com`) và GitHub
+(`https://avatars.githubusercontent.com`) trên menu tài khoản; test `apps/web/index-html.test.ts` giữ đúng danh sách đó.
+CSP chỉ đổi khi chạy `setup` (dưới đây). Trang không có script inline nào (Tử Vi chỉ có một giao diện, không cần script đặt theme trước lần vẽ đầu),
 nên `script-src` trong site nginx chỉ gồm `'self'` và Cloudflare Web Analytics; test `apps/web/index-html.test.ts` báo
 lỗi nếu `index.html` có lại script inline hoặc CSP có lại hash. Release không cài lại site nginx, chỉ `setup` làm việc
 đó: CSP cũ (còn hash của script theme đã bỏ) vẫn chạy được với bản web mới, nên chạy `setup` lúc nào cũng được.
@@ -77,7 +80,8 @@ lỗi nếu `index.html` có lại script inline hoặc CSP có lại hash. Rele
 Kiểm sau release:
 
 - `curl -fsS https://tuvi.hoandat.com/healthz` trả `ok`.
-- Đăng nhập rồi đăng xuất được; lưu một lá số, tải lại trang, mở lại được.
+- Đăng nhập thấy ảnh (hoặc chữ cái đầu) và tên trên header; mở menu, đăng xuất được; lưu một lá số, tải lại trang,
+  mở lại được.
 - RSS của service (mục tiêu < 120 MB): `systemctl show tuvi-server -p MemoryCurrent`.
 
 ## Video (`/media/`)

@@ -1,9 +1,16 @@
 import { boolean, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
-/** An account of the hoandat.com IdP that signed in here; only its `sub` is known (scope openid). */
+/**
+ * An account of the hoandat.com IdP that signed in here: its `sub`, and the name, email and picture its userinfo
+ * gave at the latest sign-in (scope `openid profile email`), shown in the header's account menu. The three are
+ * null for an account that has not signed in since the app started asking for them, or that has none.
+ */
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
   sub: text('sub').notNull().unique(),
+  name: text('name'),
+  email: text('email'),
+  picture: text('picture'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
 });
 

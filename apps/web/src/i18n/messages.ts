@@ -3,7 +3,6 @@
  * Vietnamese in both: those are the terms of the art. `{app}` is replaced by the brand name.
  */
 export const vi = {
-  'layout.signOut': 'Đăng xuất',
   'layout.credits': 'Ghi công',
   'layout.disclaimer': 'Nội dung mang tính giải trí, tham khảo.',
   'layout.skip': 'Bỏ qua tới nội dung',
@@ -217,7 +216,6 @@ export const ZODIAC_NAME_KEYS = [
 ] as const satisfies readonly MessageKey[];
 
 export const en: Messages = {
-  'layout.signOut': 'Sign out',
   'layout.credits': 'Credits',
   'layout.disclaimer': 'For entertainment and reference only.',
   'layout.skip': 'Skip to content',

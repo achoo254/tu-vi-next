@@ -1,7 +1,8 @@
+import { AccountMenu } from '@achoo254/app-shell';
 import { writePreference } from '@achoo254/app-shell/preferences';
 import { type ReactNode, useState } from 'react';
-import { LOGIN_PATH, type SessionState, loginPageHref, signOut } from '../api/session-api';
-import { BRAND_MARK_SRC, ECOSYSTEM_URL, brand } from '../brand';
+import { LOGIN_PATH, type SessionState, type SessionUser, loginPageHref, signOut } from '../api/session-api';
+import { BRAND_MARK_SRC, ECOSYSTEM_URL, IDP_ACCOUNT_URL, brand } from '../brand';
 import { LOCALES, type Locale, useI18n } from '../i18n/i18n';
 import { FEATURED_YEAR, parseYearRoute, yearIndexPath } from '../year/year-routes';
 
@@ -47,9 +48,12 @@ function LanguageSwitch(): ReactNode {
   );
 }
 
-/** The sign-out control in place of the header's sign-in pill. */
-function SignOutButton(): ReactNode {
-  const { t } = useI18n();
+/**
+ * The signed-in account in place of the header's sign-in pill: the shared account menu (avatar and name, the
+ * hoandat.com account pages, sign-out), dressed in the night-sky look by app.css.
+ */
+function AccountButton({ user }: { user: SessionUser | undefined }): ReactNode {
+  const { locale } = useI18n();
   const [signingOut, setSigningOut] = useState(false);
 
   async function onSignOut(): Promise<void> {
@@ -62,16 +66,20 @@ function SignOutButton(): ReactNode {
   }
 
   return (
-    <button type="button" className="pill" onClick={() => void onSignOut()} disabled={signingOut} data-id="nav-sign-out">
-      {t('layout.signOut')}
-    </button>
+    <AccountMenu
+      user={user ?? {}}
+      locale={locale}
+      domain={brand.primaryTenant.domain}
+      idpAccountUrl={IDP_ACCOUNT_URL}
+      signOut={{ onClick: () => void onSignOut(), busy: signingOut }}
+    />
   );
 }
 
-/** The sign-in pill, the sign-out button, or nothing while the session loads or when sign-in is not set up. */
+/** The sign-in pill, the account menu, or nothing while the session loads or when sign-in is not set up. */
 function AccountControl({ path, session }: { path: string; session: SessionState }): ReactNode {
   const { t } = useI18n();
-  if (session.status === 'ready' && session.signedIn) return <SignOutButton />;
+  if (session.status === 'ready' && session.signedIn) return <AccountButton user={session.user} />;
   // Sign-in is not configured on this server: no pill that would only come back with "not open yet".
   if (session.status === 'ready' && !session.signInAvailable) return null;
   return (

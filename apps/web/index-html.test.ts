@@ -16,6 +16,12 @@ describe('index.html and the CSP', () => {
     expect(html).toContain('<script type="module" src="/src/main.tsx"></script>');
   });
 
+  it('allows images from the site and the account pictures of Google and GitHub sign-ins only', () => {
+    const imgSrcs = readFileSync(file('../../infra/nginx/tuvi.hoandat.com.conf'), 'utf8').match(/img-src [^;"]*/g) ?? [];
+    expect(imgSrcs.length).toBeGreaterThan(0);
+    for (const imgSrc of imgSrcs) expect(imgSrc.trim()).toBe("img-src 'self' data: blob: https://lh3.googleusercontent.com https://avatars.githubusercontent.com");
+  });
+
   it('allows scripts from the site and Cloudflare Web Analytics only', () => {
     const scriptSrcs = readFileSync(file('../../infra/nginx/tuvi.hoandat.com.conf'), 'utf8').match(/script-src [^;"]*/g) ?? [];
     expect(scriptSrcs.length).toBeGreaterThan(0);

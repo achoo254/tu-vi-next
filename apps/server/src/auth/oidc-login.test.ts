@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { codeChallenge, newLoginState, openState, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
+import { codeChallenge, newLoginState, openState, profileFromUserinfo, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
 
 const KEY = 'k'.repeat(40);
 const b64 = (value: unknown): string => Buffer.from(JSON.stringify(value)).toString('base64url');
@@ -55,5 +55,28 @@ describe('ID token checks', () => {
   it('rejects what is not a JWT', () => {
     expect(subFromIdToken('garbage', expect_, now)).toBeNull();
     expect(subFromIdToken('a.!!!.c', expect_, now)).toBeNull();
+  });
+});
+
+describe('userinfo profile', () => {
+  it('keeps the name, an email-shaped email and an https picture of the signed-in account', () => {
+    expect(profileFromUserinfo({ sub: 's1', name: ' Văn A ', email: 'a@example.com', picture: 'https://lh3.googleusercontent.com/a', telegram_linked: true }, 's1')).toEqual({
+      name: 'Văn A',
+      email: 'a@example.com',
+      picture: 'https://lh3.googleusercontent.com/a',
+    });
+    expect(profileFromUserinfo({ sub: 's1', preferred_username: 'van-a', email: 'not-an-email', picture: 'javascript:alert(1)' }, 's1')).toEqual({
+      name: 'van-a',
+      email: null,
+      picture: null,
+    });
+    expect(profileFromUserinfo({ sub: 's1', name: 'x'.repeat(201), picture: 'not a url' }, 's1')).toEqual({ name: null, email: null, picture: null });
+  });
+
+  it('ignores an answer about another account or not an object', () => {
+    expect(profileFromUserinfo({ sub: 'other', name: 'B' }, 's1')).toBeNull();
+    expect(profileFromUserinfo({ name: 'B' }, 's1')).toBeNull();
+    expect(profileFromUserinfo(null, 's1')).toBeNull();
+    expect(profileFromUserinfo('s1', 's1')).toBeNull();
   });
 });

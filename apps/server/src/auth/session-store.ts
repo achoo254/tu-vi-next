@@ -15,13 +15,33 @@ export function hashToken(token: string): string {
   return createHash('sha256').update(token).digest('hex');
 }
 
-/** The user row of an IdP account, created on its first sign-in. */
-export async function upsertUser(db: Db, sub: string, now: Date): Promise<string> {
-  const [created] = await db.insert(users).values({ sub, createdAt: now }).onConflictDoNothing({ target: users.sub }).returning({ id: users.id });
-  if (created) return created.id;
+/** What the IdP's userinfo says of the account; a missing field is null. */
+export interface AccountProfile {
+  name: string | null;
+  email: string | null;
+  picture: string | null;
+}
+
+/**
+ * The user row of an IdP account, created on its first sign-in. A `profile` (userinfo answered) replaces the
+ * stored one, so a name or picture removed at the IdP goes here too; `null` (userinfo failed) keeps it.
+ */
+export async function upsertUser(db: Db, sub: string, profile: AccountProfile | null, now: Date): Promise<string> {
+  const insert = db.insert(users).values({ sub, ...profile, createdAt: now });
+  const [row] = await (profile
+    ? insert.onConflictDoUpdate({ target: users.sub, set: profile })
+    : insert.onConflictDoNothing({ target: users.sub })
+  ).returning({ id: users.id });
+  if (row) return row.id;
   const [existing] = await db.select({ id: users.id }).from(users).where(eq(users.sub, sub));
   if (!existing) throw new Error('user upsert found no row');
   return existing.id;
+}
+
+/** The stored profile of a user, for the header's account menu. */
+export async function findProfile(db: Db, userId: string): Promise<AccountProfile | null> {
+  const [row] = await db.select({ name: users.name, email: users.email, picture: users.picture }).from(users).where(eq(users.id, userId));
+  return row ?? null;
 }
 
 export async function createSession(db: Db, userId: string, now: Date): Promise<string> {

@@ -5,6 +5,8 @@ import '@fontsource/inter/700.css';
 import '@fontsource/cormorant-garamond/600.css';
 import '@fontsource/cormorant-garamond/700.css';
 import './ui/tokens.css';
+// The shared account menu's rules (shell-* classes only); app.css dresses them in the night-sky look.
+import '@achoo254/app-shell/app-shell.css';
 import './ui/app.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

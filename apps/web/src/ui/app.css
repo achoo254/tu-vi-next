@@ -279,6 +279,69 @@ button {
   color: var(--c-on-primary);
 }
 
+/* The shared account menu (@achoo254/app-shell AccountMenu, layout from app-shell.css) in the night-sky look:
+   a pill like the others, the picture ringed in gold like the owl, a glass panel. app-shell.css reads the same
+   token names as tokens.css; the three it needs beyond them are mapped here, on the menu only. */
+.shell-account {
+  --font-mono: var(--font-sans);
+  --c-icon-muted: var(--c-text-muted);
+  --icon-stroke: 1.75;
+}
+.shell-account-trigger {
+  min-height: var(--tap);
+  padding: 0 var(--space-3) 0 var(--space-1);
+  border: 1px solid color-mix(in srgb, var(--c-text) 18%, transparent);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--c-text) 6%, transparent);
+  color: var(--c-text);
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard);
+}
+.shell-account-trigger:hover,
+.shell-account[open] > .shell-account-trigger {
+  border-color: color-mix(in srgb, var(--c-primary) 60%, transparent);
+  background: color-mix(in srgb, var(--c-primary) 10%, transparent);
+}
+.shell-account-trigger .shell-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--c-primary) 75%, transparent);
+}
+.shell-avatar-initial {
+  background: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+.shell-account-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.shell-account-panel {
+  background: color-mix(in srgb, var(--c-surface) var(--glass-opacity), transparent);
+  border-color: color-mix(in srgb, var(--c-primary) 25%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.shell-account-head-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--c-primary);
+}
+.shell-account-item:hover {
+  background: color-mix(in srgb, var(--c-primary) 10%, transparent);
+}
+/* Phones: the avatar alone (app-shell.css hides the name), a round button. */
+@media (max-width: 639px) {
+  .shell-account-trigger {
+    padding: 0 var(--space-1);
+  }
+  .shell-account-trigger > .shell-icon {
+    display: none;
+  }
+}
+
 .main {
   flex: 1 0 auto;
 }

@@ -1,30 +1,43 @@
 /**
  * Sign-in with a hoandat.com account (BFF): /auth/login sends the browser to auth-next (Code + PKCE, scope
- * openid), /auth/callback exchanges the code server-side with client_secret_basic and opens the app's own
- * session; POST /auth/logout ends it. GET /api/session tells the web app whether it is signed in.
+ * `openid profile email`), /auth/callback exchanges the code server-side with client_secret_basic, reads the
+ * account's name, email and picture from userinfo with the access token (then drops the token) and opens the
+ * app's own session; POST /auth/logout ends it. GET /api/session tells the web app whether it is signed in, and
+ * as whom (the header's account menu).
  */
 import express, { type Router } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import { z } from 'zod';
 import type { AuthConfig, ServerConfig } from '../config';
 import type { Db } from '../db/client';
-import { codeChallenge, newLoginState, openState, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
+import { codeChallenge, newLoginState, openState, profileFromUserinfo, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
 import { clearSessionCookie, readCookie, readSessionToken, setSessionCookie } from './session-cookie';
 import { safeErrorText } from '../log-error';
-import { createSession, deleteSessionByToken, findSession, purgeExpiredSessions, upsertUser } from './session-store';
+import {
+  type AccountProfile,
+  createSession,
+  deleteSessionByToken,
+  findProfile,
+  findSession,
+  purgeExpiredSessions,
+  upsertUser,
+} from './session-store';
 
 const LOGIN_COOKIE = 'tuvi_login';
 const DISCOVERY_TTL_MS = 60 * 60 * 1000;
 const IDP_TIMEOUT_MS = 10_000;
+/** What the app asks the IdP for: the account, and its name, picture and email for the account menu. */
+export const SIGN_IN_SCOPE = 'openid profile email';
 
 const DiscoverySchema = z.object({
   issuer: z.string().min(1),
   authorization_endpoint: z.url(),
   token_endpoint: z.url(),
+  userinfo_endpoint: z.url().optional(),
 });
 type Discovery = z.infer<typeof DiscoverySchema>;
 
-const TokenResponseSchema = z.object({ id_token: z.string().min(1) });
+const TokenResponseSchema = z.object({ id_token: z.string().min(1), access_token: z.string().min(1).optional() });
 
 export interface AuthRoutesOptions {
   config: ServerConfig;
@@ -44,6 +57,26 @@ function discoveryClient(auth: AuthConfig): () => Promise<Discovery> {
     cached = { at: Date.now(), doc };
     return doc;
   };
+}
+
+/**
+ * The account's profile from the userinfo endpoint, or null when there is none to read or it does not answer
+ * properly: sign-in goes on, the stored profile stays as it was. Only the status is logged, never the answer.
+ */
+async function fetchProfile(doc: Discovery, accessToken: string | undefined, sub: string): Promise<AccountProfile | null> {
+  if (!doc.userinfo_endpoint || !accessToken) return null;
+  try {
+    const res = await fetch(doc.userinfo_endpoint, {
+      headers: { Authorization: `Bearer ${accessToken}`, Accept: 'application/json' },
+      signal: AbortSignal.timeout(IDP_TIMEOUT_MS),
+    });
+    const profile = res.ok ? profileFromUserinfo(await res.json().catch(() => null), sub) : null;
+    if (!profile) console.warn('userinfo not used', res.status);
+    return profile;
+  } catch (error) {
+    console.warn('userinfo failed', safeErrorText(error));
+    return null;
+  }
 }
 
 /** `?login=<result>` on the return path, so the page can say what happened. */
@@ -71,7 +104,8 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
   router.get('/api/session', async (req, res) => {
     const token = readSessionToken(req, config);
     const session = token ? await findSession(db, token, now()) : null;
-    res.set('Cache-Control', 'no-store').json({ signedIn: session !== null, signInAvailable: auth !== null });
+    const user = session ? await findProfile(db, session.userId) : null;
+    res.set('Cache-Control', 'no-store').json(user ? { signedIn: true, signInAvailable: auth !== null, user } : { signedIn: false, signInAvailable: auth !== null });
   });
 
   router.get('/auth/login', signInLimit, async (req, res) => {
@@ -90,7 +124,7 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
         client_id: auth.clientId,
         redirect_uri: auth.redirectUri,
         response_type: 'code',
-        scope: 'openid',
+        scope: SIGN_IN_SCOPE,
         state: state.state,
         nonce: state.nonce,
         code_challenge: codeChallenge(state.verifier),
@@ -130,8 +164,9 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
         fail();
         return;
       }
+      const profile = await fetchProfile(doc, body.data?.access_token, sub);
       const at = now();
-      const userId = await upsertUser(db, sub, at);
+      const userId = await upsertUser(db, sub, profile, at);
       // Signing in again replaces the browser's previous session; expired rows of anyone go too.
       const previous = readSessionToken(req, config);
       if (previous) await deleteSessionByToken(db, previous);

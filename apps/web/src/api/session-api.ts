@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import * as z from 'zod/mini';
 import { apiFetch } from './api-client';
 
-const SessionSchema = z.object({ signedIn: z.boolean(), signInAvailable: z.boolean() });
+/** The signed-in account as the IdP named it at the latest sign-in; any field may be null. */
+const SessionUserSchema = z.object({ name: z.nullable(z.string()), email: z.nullable(z.string()), picture: z.nullable(z.string()) });
+export type SessionUser = z.infer<typeof SessionUserSchema>;
+
+const SessionSchema = z.object({ signedIn: z.boolean(), signInAvailable: z.boolean(), user: z.optional(SessionUserSchema) });
 export type SessionInfo = z.infer<typeof SessionSchema>;
 
 export type SessionState = { status: 'loading' } | ({ status: 'ready' } & SessionInfo);

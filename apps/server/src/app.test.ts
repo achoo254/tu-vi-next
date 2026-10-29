@@ -6,6 +6,7 @@ import { MAX_CHARTS_PER_USER } from './charts/chart-store';
 
 const CLIENT_ID = 'tuvi-web';
 const SECRET = 'test-secret-'.padEnd(40, 'x');
+const PROFILE_A = { name: 'Nguyễn Văn A', email: 'a@example.com', picture: 'https://lh3.googleusercontent.com/a/photo', telegram_linked: false };
 
 const birth = {
   name: 'Bé Na',
@@ -37,7 +38,7 @@ async function signIn(server: TestServer): Promise<string> {
   const start = await fetch(`${server.origin}/auth/login?return=/saved`, { redirect: 'manual' });
   expect(start.status).toBe(302);
   const authorize = new URL(location(start));
-  expect(authorize.searchParams.get('scope')).toBe('openid');
+  expect(authorize.searchParams.get('scope')).toBe('openid profile email');
   expect(authorize.searchParams.get('code_challenge_method')).toBe('S256');
   expect(authorize.searchParams.get('redirect_uri')).toBe(`${server.origin}/auth/callback`);
   const loginCookie = cookieFrom(start, 'tuvi_login');
@@ -95,7 +96,7 @@ describe('signed in through the hoandat.com account', () => {
   let server: TestServer;
 
   beforeAll(async () => {
-    idp = await startFakeIdp({ clientId: CLIENT_ID, clientSecret: SECRET, sub: 'account-a' });
+    idp = await startFakeIdp({ clientId: CLIENT_ID, clientSecret: SECRET, sub: 'account-a', profile: PROFILE_A });
     server = await startTestServer({ AUTH_ISSUER: idp.issuer, AUTH_CLIENT_SECRET: SECRET });
   });
   afterAll(async () => {
@@ -106,10 +107,40 @@ describe('signed in through the hoandat.com account', () => {
   it('opens a session from Code + PKCE and ends it on logout', async () => {
     const session = await signIn(server);
     expect(session).toMatch(/^tuvi_session=[A-Za-z0-9_-]{43}$/);
-    expect(await (await api(server, '/api/session', { cookie: session })).json()).toEqual({ signedIn: true, signInAvailable: true });
+    expect(await (await api(server, '/api/session', { cookie: session })).json()).toEqual({
+      signedIn: true,
+      signInAvailable: true,
+      user: { name: 'Nguyễn Văn A', email: 'a@example.com', picture: 'https://lh3.googleusercontent.com/a/photo' },
+    });
     const logout = await api(server, '/auth/logout', { method: 'POST', cookie: session });
     expect(logout.status).toBe(204);
     expect(await (await api(server, '/api/session', { cookie: session })).json()).toMatchObject({ signedIn: false });
+  });
+
+  it('keeps the name, email and picture of the latest sign-in, and the stored ones when userinfo fails', async () => {
+    const session = (cookie: string): Promise<unknown> => api(server, '/api/session', { cookie }).then((res) => res.json());
+    idp.setSub('account-profile');
+    try {
+      // No picture and no name at the IdP: the username stands in, the picture is cleared.
+      idp.setProfile({ preferred_username: 'van-b', email: 'b@example.com', picture: 'http://insecure.example/b.png' });
+      expect(await session(await signIn(server))).toMatchObject({ user: { name: 'van-b', email: 'b@example.com', picture: null } });
+      idp.setProfile({ name: 'Văn B', email: 'b@example.com', picture: 'https://avatars.githubusercontent.com/u/1' });
+      const second = await signIn(server);
+      expect(await session(second)).toMatchObject({ user: { name: 'Văn B', picture: 'https://avatars.githubusercontent.com/u/1' } });
+      // Userinfo down: sign-in still works, the profile stays as it was.
+      idp.failUserinfo(true);
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+      try {
+        expect(await session(await signIn(server))).toMatchObject({ user: { name: 'Văn B', email: 'b@example.com' } });
+        expect(warn).toHaveBeenCalledWith('userinfo not used', 500);
+      } finally {
+        warn.mockRestore();
+      }
+    } finally {
+      idp.failUserinfo(false);
+      idp.setProfile(PROFILE_A);
+      idp.setSub('account-a');
+    }
   });
 
   it('rejects a callback without the login cookie or with another state', async () => {

@@ -83,7 +83,8 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await expect(page).toHaveURL(/\/login$/);
   await expect(page.locator('[data-id=sign-in-cta]')).toHaveText('Đăng nhập bằng hoandat.com');
   await page.click('[data-id=sign-in-cta]');
-  await expect(page.locator('[data-id=nav-sign-out]')).toBeVisible();
+  // The header shows the account the fake IdP's userinfo named (no picture: its initial).
+  await expect(page.locator('[data-id=topbar-account]')).toContainText('Người Thử E2E');
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator('[data-id=saved-charts]')).toContainText('Chưa có lá số nào');
   await expect(page.locator('[data-id=intro-hero]')).toHaveCount(0);
@@ -116,7 +117,9 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await page.click('[data-id=confirm-dialog-confirm]');
   await expect(page.locator('[data-id=saved-charts]')).toContainText('Chưa có lá số nào');
 
-  await page.click('[data-id=nav-sign-out]');
+  await page.click('[data-id=topbar-account]');
+  await expect(page.locator('[data-id=account-menu]')).toContainText('e2e@example.com');
+  await page.click('[data-id=account-menu-sign-out]');
   await expect(page.locator('[data-id=public-sign-in]')).toBeVisible();
   await expect(page.locator('[data-id=sign-in-card]')).toBeVisible();
 });

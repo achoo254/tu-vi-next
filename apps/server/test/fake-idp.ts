@@ -1,7 +1,8 @@
 /**
- * Test-only stand-in for auth-next: discovery, an authorize endpoint that consents at once, and a token
- * endpoint that checks client_secret_basic, the redirect URI and PKCE before returning an ID token. Used by
- * the server tests and the Playwright E2E; the app itself always talks to the real IdP's endpoints.
+ * Test-only stand-in for auth-next: discovery, an authorize endpoint that consents at once, a token endpoint
+ * that checks client_secret_basic, the redirect URI and PKCE before returning an ID token and an access token,
+ * and a userinfo endpoint that answers for those access tokens. Used by the server tests and the Playwright
+ * E2E; the app itself always talks to the real IdP's endpoints.
  */
 import { createHash, randomBytes } from 'node:crypto';
 import type { Server } from 'node:http';
@@ -15,6 +16,8 @@ export interface FakeIdpOptions {
   sub: string;
   /** Fixed port (E2E); 0 or unset picks a free one. */
   port?: number;
+  /** Userinfo claims besides `sub` (name, email, picture…) of the next sign-in (setProfile switches them). */
+  profile?: Record<string, unknown>;
 }
 
 export interface FakeIdp {
@@ -23,6 +26,10 @@ export interface FakeIdp {
   issuedCodes(): number;
   /** The account the next sign-in is for. */
   setSub(sub: string): void;
+  /** The userinfo claims besides `sub` of the next sign-in. */
+  setProfile(profile: Record<string, unknown>): void;
+  /** Makes userinfo answer 500 (true) or normally (false). */
+  failUserinfo(fail: boolean): void;
   close(): Promise<void>;
 }
 
@@ -38,11 +45,15 @@ export async function startFakeIdp(options: FakeIdpOptions): Promise<FakeIdp> {
   const app = express();
   const codes = new Map<string, PendingCode>();
   let issued = 0;
+  /** Access token -> the userinfo answer it gets, fixed when the token is handed out. */
+  const accessTokens = new Map<string, Record<string, unknown>>();
   let sub = options.sub;
+  let profile = options.profile ?? {};
+  let userinfoFails = false;
   let issuer = '';
 
   app.get('/.well-known/openid-configuration', (_req, res) => {
-    res.json({ issuer, authorization_endpoint: `${issuer}/authorize`, token_endpoint: `${issuer}/token` });
+    res.json({ issuer, authorization_endpoint: `${issuer}/authorize`, token_endpoint: `${issuer}/token`, userinfo_endpoint: `${issuer}/me` });
   });
 
   app.get('/authorize', (req, res) => {
@@ -50,7 +61,7 @@ export async function startFakeIdp(options: FakeIdpOptions): Promise<FakeIdp> {
     if (
       q.client_id !== options.clientId ||
       q.response_type !== 'code' ||
-      q.scope !== 'openid' ||
+      q.scope !== 'openid profile email' ||
       q.code_challenge_method !== 'S256' ||
       typeof q.code_challenge !== 'string' ||
       typeof q.redirect_uri !== 'string' ||
@@ -92,7 +103,22 @@ export async function startFakeIdp(options: FakeIdpOptions): Promise<FakeIdp> {
     const claims = { iss: issuer, aud: options.clientId, sub, nonce: pending.nonce, iat: now, exp: now + 300 };
     // The relying party does not verify the signature (it got the token over TLS from the token endpoint).
     const idToken = `${b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }))}.${b64url(JSON.stringify(claims))}.${b64url('fake-signature')}`;
-    res.json({ access_token: b64url(randomBytes(16)), token_type: 'Bearer', expires_in: 300, id_token: idToken });
+    const accessToken = b64url(randomBytes(16));
+    accessTokens.set(accessToken, { ...profile, sub });
+    res.json({ access_token: accessToken, token_type: 'Bearer', expires_in: 300, id_token: idToken });
+  });
+
+  app.get('/me', (req, res) => {
+    const claims = accessTokens.get((req.headers.authorization ?? '').replace(/^Bearer /, ''));
+    if (!claims) {
+      res.status(401).json({ error: 'invalid_token' });
+      return;
+    }
+    if (userinfoFails) {
+      res.status(500).json({ error: 'server_error' });
+      return;
+    }
+    res.json(claims);
   });
 
   const server = await new Promise<Server>((resolve) => {
@@ -104,6 +130,12 @@ export async function startFakeIdp(options: FakeIdpOptions): Promise<FakeIdp> {
     issuedCodes: () => issued,
     setSub: (next) => {
       sub = next;
+    },
+    setProfile: (next) => {
+      profile = next;
+    },
+    failUserinfo: (fail) => {
+      userinfoFails = fail;
     },
     close: () => new Promise<void>((resolve, reject) => server.close((err) => (err ? reject(err) : resolve()))),
   };

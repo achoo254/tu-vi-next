@@ -1,5 +1,5 @@
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type SessionState, loginPageHref, loginReturnPath, safeReturnPath, signInHref } from '../api/session-api';
 import { brand } from '../brand';
 import { I18nProvider } from '../i18n/i18n';
@@ -87,16 +87,50 @@ describe('page frame', () => {
     expect(document.querySelector('[data-id=foot-note]')?.textContent).toBe('For entertainment and reference only.');
   });
 
-  it('offers sign-out instead of sign-in once signed in', () => {
-    show('/', { status: 'ready', signedIn: true, signInAvailable: true });
+  it('shows the account (picture and name) instead of sign-in once signed in, with its menu', () => {
+    const user = { name: 'Nguyễn Văn A', email: 'a@example.com', picture: 'https://lh3.googleusercontent.com/a/photo' };
+    show('/', { status: 'ready', signedIn: true, signInAvailable: true, user });
     expect(document.querySelector('[data-id=public-sign-in]')).toBeNull();
-    expect(screen.getByRole('button', { name: 'Đăng xuất' })).not.toBeNull();
+    const trigger = document.querySelector('[data-id=public-header] [data-id=topbar-account]');
+    expect(trigger?.textContent).toContain('Nguyễn Văn A');
+    expect(trigger?.querySelector('img')?.getAttribute('src')).toBe(user.picture);
+    const menu = document.querySelector('[data-id=account-menu]');
+    expect(menu?.textContent).toContain('a@example.com');
+    expect(document.querySelector('[data-id=account-menu-idp-email]')?.getAttribute('href')).toBe('https://auth.hoandat.com/account#account-email');
+    expect(document.querySelector('[data-id=account-menu-sign-out]')?.textContent).toBe('Đăng xuất');
+  });
+
+  it('shows the initial, or the word "account", for an account the app has no picture or name of yet', () => {
+    show('/', { status: 'ready', signedIn: true, signInAvailable: true, user: { name: 'văn b', email: null, picture: null } });
+    expect(document.querySelector('[data-id=topbar-account] [data-initial]')?.getAttribute('data-initial')).toBe('V');
+    cleanup();
+    show('/', { status: 'ready', signedIn: true, signInAvailable: true, user: { name: null, email: null, picture: null } });
+    expect(document.querySelector('[data-id=topbar-account]')?.textContent).toBe('Tài khoản');
+  });
+
+  it('signs out from the account menu, then goes home', async () => {
+    const calls: Array<[string, string | undefined]> = [];
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
+      calls.push([String(input), init?.method]);
+      return new Response(null, { status: 204 });
+    });
+    const assign = vi.fn();
+    vi.stubGlobal('location', { ...window.location, assign });
+    try {
+      show('/', { status: 'ready', signedIn: true, signInAvailable: true, user: { name: 'A', email: null, picture: null } });
+      fireEvent.click(screen.getByRole('button', { name: 'Đăng xuất' }));
+      await waitFor(() => expect(assign).toHaveBeenCalledWith('/'));
+      expect(calls).toEqual([['/auth/logout', 'POST']]);
+    } finally {
+      fetchSpy.mockRestore();
+      vi.unstubAllGlobals();
+    }
   });
 
   it('has no sign-in pill when sign-in is not configured', () => {
     show('/', { status: 'ready', signedIn: false, signInAvailable: false });
     expect(document.querySelector('[data-id=public-sign-in]')).toBeNull();
-    expect(document.querySelector('[data-id=nav-sign-out]')).toBeNull();
+    expect(document.querySelector('[data-id=account-menu]')).toBeNull();
   });
 });
 
