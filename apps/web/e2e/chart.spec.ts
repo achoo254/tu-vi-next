@@ -78,7 +78,7 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
 
 test('signed in: save a chart, reload, open it again, delete it', async ({ page }) => {
   await page.goto('/');
-  // The header's pill opens the shared sign-in card; its one link goes to the IdP and back home.
+  // The header's pill opens the sign-in card; its one link goes to the IdP and back home.
   await page.click('[data-id=public-sign-in]');
   await expect(page).toHaveURL(/\/login$/);
   await expect(page.locator('[data-id=sign-in-cta]')).toHaveText('Đăng nhập bằng hoandat.com');
@@ -121,7 +121,7 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await expect(page.locator('[data-id=sign-in-card]')).toBeVisible();
 });
 
-test('layout: shared header and footer, legal pages in both languages, the theme kept across pages', async ({ page }) => {
+test('layout: own header and footer, legal pages in both languages, the language kept across pages', async ({ page }) => {
   await page.goto('/credits');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Ghi công');
   await expect(page.locator('[data-id=legal-credits]')).toContainText('iztro');
@@ -133,12 +133,10 @@ test('layout: shared header and footer, legal pages in both languages, the theme
   await expect(page.locator('[data-id=foot-home]')).toHaveText('An app from hoandat.com');
   await page.goto('/privacy');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Privacy');
-  // The footer's theme switch: the shared cookie, applied before the next page paints.
-  await page.click('[data-id=theme-dark]');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await page.goto('/tu-vi-2027');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await expect(page.locator('[data-id=theme-dark]')).toHaveAttribute('aria-pressed', 'true');
+  // One designed theme: no theme switch. The language picked in the header's pill stays on the next page.
+  await expect(page.locator('[data-id=theme-switch]')).toHaveCount(0);
+  await expect(page.locator('[data-id=public-header] [data-id=lang-en]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('[data-id=foot-privacy]')).toHaveAttribute('aria-current', 'page');
   await page.goto('/terms?lang=vi');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Điều khoản sử dụng');
   await page.goto('/no-such-page?lang=vi');

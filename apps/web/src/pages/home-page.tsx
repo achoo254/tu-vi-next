@@ -1,4 +1,3 @@
-import { type FeatureItem, FeatureList, Hero, SignInCard } from '@achoo254/app-shell';
 import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type BirthInput, MAX_BIRTH_YEAR, MIN_BIRTH_YEAR } from '@tuvi/chart/schema';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -20,7 +19,7 @@ import { FEATURED_YEAR } from '../year/year-routes';
 import { YearPagesTeaser } from './year-pages-teaser';
 import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/illustrations';
 import { type Translate, useI18n } from '../i18n/i18n';
-import { SHELL_BRAND } from '../layout/tuvi-page';
+import { SignInCard } from '../layout/sign-in-card';
 
 type Cast = { chart: Chart; error: null } | { chart: null; error: string | null };
 
@@ -64,13 +63,26 @@ function loginNotice(t: Translate): string | null {
   return null;
 }
 
-/** What the app does, for a visitor who has not signed in. */
-function features(t: Translate): FeatureItem[] {
-  return (['calendar', 'plain', 'yearly', 'story', 'private', 'save'] as const).map((id) => ({
-    id,
-    title: t(`features.${id}.title`),
-    description: t(`features.${id}.text`),
-  }));
+const FEATURE_IDS = ['calendar', 'plain', 'yearly', 'story', 'private', 'save'] as const;
+
+/** What the app does, for a visitor who has not signed in: a grid of short cards. */
+function FeatureList(): ReactNode {
+  const { t } = useI18n();
+  return (
+    <section className="features" id="features" aria-labelledby="features-title" data-id="features">
+      <h2 id="features-title" className="section-title">
+        {t('features.title')}
+      </h2>
+      <ul className="feature-grid">
+        {FEATURE_IDS.map((id) => (
+          <li key={id} className="card feature" data-id={`feature-${id}`}>
+            <h3 className="feature-title">{t(`features.${id}.title`)}</h3>
+            <p className="feature-text">{t(`features.${id}.text`)}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
 
 /** Intro, the birth form and the chart; the saved charts when signed in. */
@@ -144,43 +156,39 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           {notice}
         </p>
       )}
-      <Hero
-        title={t('intro.title')}
-        lede={t('intro.lead')}
-        aside={
-          showSignIn ? (
-            <SignInCard
-              brand={SHELL_BRAND}
-              locale={locale}
-              signInHref={signInHref(locale, '/')}
-              title={t('signIn.title')}
-              description={t('signIn.lead')}
-              headingLevel={2}
-            />
-          ) : undefined
-        }
-      >
-        <p className="intro-note">{signedIn ? t('intro.point.save') : t('intro.point.private')}</p>
-        <details className="intro-why" data-id="intro-why">
-          <summary>{t('intro.why')}</summary>
-          <p>{t('intro.point.calendar')}</p>
-        </details>
-        {/* The signed-out welcome only: signed-in visitors come back for their charts. Decorative. */}
-        {!signedIn && (
-          <img
-            className="intro-hero"
-            src={HERO_1200_URL}
-            srcSet={`${HERO_640_URL} 640w, ${HERO_1200_URL} 1200w`}
-            sizes="(min-width: 1120px) 620px, 100vw"
-            width={HERO_WIDTH}
-            height={HERO_HEIGHT}
-            alt=""
-            fetchPriority="high"
-            decoding="async"
-            data-id="intro-hero"
-          />
+      <section className={showSignIn ? 'hero hero-split' : 'hero'} data-id="hero">
+        <div className="hero-intro">
+          <h1 className="hero-title">{t('intro.title')}</h1>
+          <p className="hero-lede">{t('intro.lead')}</p>
+          <p className="intro-note">{signedIn ? t('intro.point.save') : t('intro.point.private')}</p>
+          <details className="intro-why" data-id="intro-why">
+            <summary>{t('intro.why')}</summary>
+            <p>{t('intro.point.calendar')}</p>
+          </details>
+          {/* The signed-out welcome only: signed-in visitors come back for their charts. Decorative. */}
+          {!signedIn && (
+            <div className="intro-hero-frame">
+              <img
+                className="intro-hero"
+                src={HERO_1200_URL}
+                srcSet={`${HERO_640_URL} 640w, ${HERO_1200_URL} 1200w`}
+                sizes="(min-width: 1120px) 620px, 100vw"
+                width={HERO_WIDTH}
+                height={HERO_HEIGHT}
+                alt=""
+                fetchPriority="high"
+                decoding="async"
+                data-id="intro-hero"
+              />
+            </div>
+          )}
+        </div>
+        {showSignIn && (
+          <div className="hero-aside">
+            <SignInCard href={signInHref(locale, '/')} title={t('signIn.title')} description={t('signIn.lead')} headingLevel={2} />
+          </div>
         )}
-      </Hero>
+      </section>
       <div className="home-grid">
         <div className="home-side">
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
@@ -240,7 +248,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           </section>
         )}
       </div>
-      {!signedIn && <FeatureList id="features" title={t('features.title')} items={features(t)} />}
+      {!signedIn && <FeatureList />}
       <YearPagesTeaser />
     </div>
   );

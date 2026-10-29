@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { type SessionState, loginPageHref, loginReturnPath, safeReturnPath, signInHref } from '../api/session-api';
+import { brand } from '../brand';
 import { I18nProvider } from '../i18n/i18n';
 import { LoginPage } from '../pages/login-page';
 import { TuviPage } from './tuvi-page';
@@ -45,14 +46,28 @@ describe('sign-in links', () => {
 });
 
 describe('page frame', () => {
-  it('has the shared header and footer with the language and theme switches', () => {
+  it("has the app's own header and footer: brand, year link, language pill, sign-in pill, no theme switch", () => {
     show('/tu-vi-2027', SIGNED_OUT);
-    expect(document.querySelector('[data-id=public-header]')).not.toBeNull();
+    expect(document.querySelector('[data-id=public-header] [data-id=public-home]')?.textContent).toBe(brand.appName);
     expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('href')).toBe('/login?return=%2Ftu-vi-2027');
-    expect(document.querySelector('[data-id=nav-year]')?.getAttribute('aria-current')).toBe('page');
-    expect(document.querySelector('[data-id=lang-switch]')).not.toBeNull();
-    expect(document.querySelector('[data-id=theme-switch]')).not.toBeNull();
-    expect(document.querySelector('[data-id=foot-credits]')?.getAttribute('href')).toBe('/credits');
+    expect(document.querySelector('[data-id=public-header] [data-id=nav-year]')?.getAttribute('aria-current')).toBe('page');
+    expect(document.querySelector('[data-id=public-header] [data-id=lang-switch]')).not.toBeNull();
+    expect(document.querySelector('[data-id=lang-vi]')?.getAttribute('aria-pressed')).toBe('true');
+    expect(document.querySelector('[data-id=theme-switch]')).toBeNull();
+    expect(document.querySelector('[data-id=skip-link]')?.getAttribute('href')).toBe('#main');
+    expect(document.querySelector('main#main')).not.toBeNull();
+  });
+
+  it('says in the footer that the app belongs to hoandat.com, with the privacy, terms and credits pages', () => {
+    show('/credits', SIGNED_OUT);
+    const home = document.querySelector('[data-id=foot-home]');
+    expect(home?.textContent).toBe('Một app của hoandat.com');
+    expect(home?.getAttribute('href')).toBe('https://hoandat.com');
+    expect(document.querySelector('[data-id=foot-privacy]')?.getAttribute('href')).toBe('/privacy');
+    expect(document.querySelector('[data-id=foot-terms]')?.getAttribute('href')).toBe('/terms');
+    expect(document.querySelector('[data-id=foot-credits]')?.getAttribute('aria-current')).toBe('page');
+    // The header's year link, repeated for phones (where the header hides it).
+    expect(document.querySelector('[data-id=foot-nav-year]')?.getAttribute('href')).toBe('/tu-vi-2027');
     expect(document.querySelector('[data-id=foot-note]')?.textContent).toContain('giải trí');
   });
 
@@ -60,6 +75,8 @@ describe('page frame', () => {
     show('/', SIGNED_OUT);
     fireEvent.click(screen.getByRole('button', { name: 'English' }));
     expect(document.querySelector('[data-id=foot-note]')?.textContent).toBe('For entertainment and reference only.');
+    expect(document.querySelector('[data-id=foot-home]')?.textContent).toBe('An app from hoandat.com');
+    expect(document.querySelector('[data-id=lang-en]')?.getAttribute('aria-pressed')).toBe('true');
     expect(document.cookie).toContain('hd_lang=en');
     expect(document.documentElement.lang).toBe('en');
   });
@@ -84,7 +101,7 @@ describe('page frame', () => {
 });
 
 describe('sign-in page', () => {
-  it('has the shared card whose one link goes to the IdP and back to the page the visitor came from', () => {
+  it('has the sign-in card whose one link goes to the IdP and back to the page the visitor came from', () => {
     window.history.replaceState(null, '', '/login?return=%2Ftu-vi-2027');
     render(
       <I18nProvider>
@@ -95,6 +112,8 @@ describe('sign-in page', () => {
     );
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Lưu lá số của bạn');
     expect(document.querySelector('[data-id=sign-in-cta]')?.getAttribute('href')).toBe('/auth/login?return=%2Ftu-vi-2027&lang=vi');
+    expect(document.querySelector('[data-id=sign-in-cta]')?.textContent).toBe('Đăng nhập bằng hoandat.com');
+    expect(document.querySelector('[data-id=sign-in-card]')?.textContent).toContain('App không bao giờ thấy mật khẩu của bạn.');
     expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('aria-current')).toBe('page');
   });
 });

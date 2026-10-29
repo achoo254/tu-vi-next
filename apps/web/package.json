@@ -13,8 +13,8 @@
   "dependencies": {
     "@achoo254/app-shell": "github:achoo254/shared-next#v0.9.1&path:/packages/app-shell",
     "@achoo254/brand": "github:achoo254/shared-next#v0.8.0&path:/packages/brand",
+    "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/inter": "^5.2.0",
-    "@fontsource/jetbrains-mono": "^5.2.0",
     "@tuvi/chart": "workspace:*",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",

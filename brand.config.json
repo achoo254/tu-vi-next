@@ -4,9 +4,9 @@
   "shortName": "Tử Vi",
   "description": "Lập lá số tử vi tiếng Việt theo âm lịch Việt Nam, xem nghĩa từng sao, lưu và chia sẻ lá số thành ảnh.",
   "colors": {
-    "primary": "#6e56cf",
-    "background": "#f9f9fb",
-    "backgroundDark": "#111113"
+    "primary": "#e2b453",
+    "background": "#0a0c22",
+    "backgroundDark": "#0a0c22"
   },
   "icon": "brand/app-icon.svg",
   "iconMaskable": "brand/app-icon-maskable.svg",

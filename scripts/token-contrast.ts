@@ -1,77 +1,22 @@
 /**
- * Pieces of `pnpm check:tokens`: reading the token files (the shared @achoo254/app-shell tokens.css and the app's
- * apps/web/src/ui/tokens.css), the WCAG 2 contrast ratio, and the colour-literal scan of the web sources.
+ * Pieces of `pnpm check:tokens`: reading the app's token file (apps/web/src/ui/tokens.css, its one theme), the
+ * WCAG 2 contrast ratio, and the colour-literal scan of the web sources.
  */
 
 export type TokenMap = ReadonlyMap<string, string>;
 
-export interface ThemeTokens {
-  light: TokenMap;
-  dark: TokenMap;
-  /** Declarations of the OS-preference dark block alone. */
-  darkMedia: TokenMap;
-  /** Declarations of the `:root[data-theme="dark"]` block alone; empty when the file has none. */
-  forcedDark: TokenMap;
-}
-
-const DARK_MEDIA = '@media (prefers-color-scheme: dark)';
-const FORCED_DARK = ':root[data-theme="dark"]';
-
-function declarations(css: string): Map<string, string> {
+/**
+ * Every custom property declared in `css`, comments left out. A name declared twice (a media query that
+ * changes a size) keeps its last value; colours are declared once.
+ */
+export function parseTokens(css: string): TokenMap {
+  const source = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const tokens = new Map<string, string>();
-  for (const match of css.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) {
+  for (const match of source.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) {
     const [, name, value] = match;
     if (name && value) tokens.set(name, value.trim());
   }
   return tokens;
-}
-
-/** Where the block opening at the first `{` after `start` ends (just after its closing brace). */
-function blockEnd(source: string, start: number): number {
-  let depth = 0;
-  for (let i = source.indexOf('{', start); i >= 0 && i < source.length; i++) {
-    if (source[i] === '{') depth++;
-    else if (source[i] === '}' && --depth === 0) return i + 1;
-  }
-  throw new Error('tokens.css: unclosed block');
-}
-
-/**
- * The light tokens (everything outside the dark blocks) and the dark ones (light overridden by the OS-preference
- * dark block), with the dark block and the forced dark block (`data-theme="dark"`) on their own.
- */
-export function parseThemes(css: string): ThemeTokens {
-  let source = css.replace(/\/\*[\s\S]*?\*\//g, '');
-  const cut = (marker: string): string => {
-    const start = source.indexOf(marker);
-    if (start < 0) return '';
-    const end = blockEnd(source, start);
-    const block = source.slice(start, end);
-    source = source.slice(0, start) + source.slice(end);
-    return block;
-  };
-  const darkBlock = cut(DARK_MEDIA);
-  if (darkBlock === '') throw new Error(`tokens.css has no "${DARK_MEDIA}" block`);
-  const forcedBlock = cut(FORCED_DARK);
-  const light = declarations(source);
-  const darkMedia = declarations(darkBlock);
-  return { light, dark: new Map([...light, ...darkMedia]), darkMedia, forcedDark: declarations(forcedBlock) };
-}
-
-/** The tokens of the shared file with the app's file loaded after it, per theme. */
-export function mergeThemes(shared: ThemeTokens, app: ThemeTokens): Pick<ThemeTokens, 'light' | 'dark'> {
-  return { light: new Map([...shared.light, ...app.light]), dark: new Map([...shared.dark, ...app.dark]) };
-}
-
-/** Names declared in both maps. */
-export function sharedNames(a: TokenMap, b: TokenMap): string[] {
-  return [...a.keys()].filter((name) => b.has(name));
-}
-
-/** Differences between the OS-preference and the forced dark blocks (which must be identical). */
-export function darkBlockDrift(themes: ThemeTokens): string[] {
-  const names = new Set([...themes.darkMedia.keys(), ...themes.forcedDark.keys()]);
-  return [...names].filter((name) => themes.darkMedia.get(name) !== themes.forcedDark.get(name));
 }
 
 function channel(hex: string, offset: number): number {

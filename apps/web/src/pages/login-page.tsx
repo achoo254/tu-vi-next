@@ -1,12 +1,11 @@
-import { SignInCard } from '@achoo254/app-shell';
 import { type ReactNode, useEffect } from 'react';
 import { type SessionState, loginReturnPath, signInHref } from '../api/session-api';
 import { useI18n } from '../i18n/i18n';
-import { SHELL_BRAND } from '../layout/tuvi-page';
+import { SignInCard } from '../layout/sign-in-card';
 
 /**
- * /login, where the header's sign-in pill goes: the shared sign-in card. Charts need no account; signing in
- * only keeps them. The card's link is the server's route to the IdP, back to the page the visitor came from.
+ * /login, where the header's sign-in pill goes: the sign-in card. Charts need no account; signing in only keeps
+ * them. The card's link is the server's route to the IdP, back to the page the visitor came from.
  */
 export function LoginPage({ session }: { session: SessionState }): ReactNode {
   const { t, locale } = useI18n();
@@ -19,7 +18,7 @@ export function LoginPage({ session }: { session: SessionState }): ReactNode {
   }, [signedIn, returnTo]);
 
   return (
-    <SignInCard brand={SHELL_BRAND} locale={locale} signInHref={signInHref(locale, returnTo)} title={t('signIn.title')} description={t('signIn.lead')}>
+    <SignInCard href={signInHref(locale, returnTo)} title={t('signIn.title')} description={t('signIn.lead')} headingLevel={1}>
       {session.status === 'ready' && !session.signInAvailable && (
         <p className="alert alert-info" role="status" data-id="sign-in-unavailable">
           {t('login.unavailable')}

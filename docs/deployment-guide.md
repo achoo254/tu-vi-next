@@ -69,11 +69,10 @@ hỏng thì script tự trỏ `current` về bản trước, restart, in log và
 chứa `._*` hay `.DS_Store` (`COPYFILE_DISABLE=1` và `--exclude`).
 Server không cần `pnpm install`: bundle đã gồm mọi thư viện.
 
-**CSP và script theme.** Mỗi trang có một script inline nhỏ trong `<head>` (script theme của gói
-`@achoo254/app-shell`, đặt `data-theme` trước lần vẽ đầu). `script-src` trong site nginx cho phép đúng script đó
-bằng hash `sha256-…`; test `apps/web/vite-theme-bootstrap.test.ts` báo lỗi và in hash mới khi gói đổi script. Release
-không cài lại site nginx, chỉ `setup` làm việc đó: khi hash đổi, chạy `setup` **trước** release (CSP mới vẫn cho phép
-bản web cũ), rồi kiểm header `Content-Security-Policy` trên `https://tuvi.hoandat.com/` có hash mới.
+**CSP.** Trang không có script inline nào (Tử Vi chỉ có một giao diện, không cần script đặt theme trước lần vẽ đầu),
+nên `script-src` trong site nginx chỉ gồm `'self'` và Cloudflare Web Analytics; test `apps/web/index-html.test.ts` báo
+lỗi nếu `index.html` có lại script inline hoặc CSP có lại hash. Release không cài lại site nginx, chỉ `setup` làm việc
+đó: CSP cũ (còn hash của script theme đã bỏ) vẫn chạy được với bản web mới, nên chạy `setup` lúc nào cũng được.
 
 Kiểm sau release:
 

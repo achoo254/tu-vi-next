@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
+import { brand } from '../brand';
 import { I18nProvider } from '../i18n/i18n';
 import { HomePage } from './home-page';
 
@@ -29,7 +30,7 @@ describe('home page, signed out', () => {
     expect(board.querySelectorAll('.palace')).toHaveLength(12);
     expect(board.textContent).toContain('ngày 1 tháng 1 năm Đinh Hợi');
     expect(JSON.parse(window.localStorage.getItem('tuvi.last-input') ?? 'null')).toMatchObject({ year: 2007, month: 2, day: 17 });
-    // The shared card's call to action, and saving the chart beside it: both back to home after the IdP.
+    // The sign-in card's call to action, and saving the chart beside it: both back to home after the IdP.
     expect(screen.getByRole('link', { name: 'Đăng nhập bằng hoandat.com' }).getAttribute('href')).toBe('/auth/login?return=%2F&lang=vi');
     expect(screen.getByRole('link', { name: 'Đăng nhập để lưu' }).getAttribute('href')).toBe('/auth/login?return=%2F&lang=vi');
     // Lưu niên: the featured year (or the current one once it has passed), its marks on the board, the yearly page link.
@@ -43,14 +44,18 @@ describe('home page, signed out', () => {
     // (The star and palace dialogs use <dialog>.showModal, which jsdom lacks: covered by the E2E run.)
   });
 
-  it('welcomes with the shared hero, sign-in card and feature list', () => {
+  it('welcomes with the title, the zodiac wheel, the sign-in card and the feature list', () => {
     render(
       <I18nProvider>
         <HomePage session={{ status: 'ready', signedIn: false, signInAvailable: true }} />
       </I18nProvider>,
     );
     expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Xem lá số tử vi của bạn trong 10 giây');
+    expect(document.querySelector('[data-id=intro-hero]')).not.toBeNull();
+    expect(screen.getByRole('heading', { level: 2, name: 'Lưu lá số của bạn' })).not.toBeNull();
     expect(document.querySelector('[data-id=sign-in-cta]')?.textContent).toBe('Đăng nhập bằng hoandat.com');
+    expect(document.querySelector('[data-id=sign-in-card]')?.textContent).toContain('App không bao giờ thấy mật khẩu của bạn.');
+    expect(screen.getByRole('heading', { level: 2, name: `${brand.appName} làm được gì` })).not.toBeNull();
     expect(document.querySelectorAll('[data-id=features] [data-id^=feature-]')).toHaveLength(6);
   });
 

@@ -1,40 +1,111 @@
 /* =====================================================================
-   TỬ VI DESIGN TOKENS (the app's own)
-   With @achoo254/app-shell tokens.css (loaded first: the palette, spacing,
-   radii and type of every hoandat.com app, light and dark), the ONLY
-   colour literals of the web app (checked by `pnpm check:tokens` and
-   `pnpm check:brand`). Every stylesheet, component and the PNG export read
-   these custom properties. None of the shared tokens is repeated here
-   (`pnpm check:tokens` fails if one is).
+   TỬ VI DESIGN TOKENS: the night sky
+   The app's one designed theme (no light/dark switch): a deep midnight
+   indigo sky, warm moon-white text, the astrologer's gold for what can
+   be pressed, lavender and moon blue as quieter accents. This file holds
+   the ONLY colour literals of the web app (checked by `pnpm check:tokens`
+   and `pnpm check:brand`); every stylesheet and component reads these
+   custom properties, the PNG export its --c-export-* ones.
 
-   Chart accents are the app's own: plum for the Mệnh palace and lucky
-   stars, red for malefic stars, amber for the four transformations, all
-   checked for contrast on the shared surfaces in light and dark.
-
-   Blocks, as in the shared file: [1] light (default) · [2] dark via OS
-   preference unless data-theme="light" · [3] dark forced by
-   data-theme="dark". [2] and [3] must stay identical (checked).
+   `pnpm check:tokens` checks every text colour below on every surface
+   (plain, and as a glass card over the brightest glow of the sky) at
+   WCAG AA 4.5:1, and the export colours on the export's light paper.
    ===================================================================== */
 
-/* [1] light (default) + theme-independent values */
 :root {
+  color-scheme: dark;
+
+  /* type: Inter for reading (the chart, forms, help), Cormorant Garamond for titles; both self-hosted with the
+     Vietnamese subset (@fontsource, main.tsx), so every diacritic draws in the same face */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+
+  /* spacing, sizes, radii, motion */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --gutter: 16px;
+  --container: 1160px;
+  --topbar-h: 64px;
+  --tap: 44px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   /* Narrowest board cell before the chart switches to the palace list. */
   --palace-min: 150px;
 
-  /* chart */
-  --c-star-major: #641723; /* red-12: chính tinh */
-  --c-star-auspicious: #953ea3; /* plum-11: cát tinh */
-  --c-star-malefic: #ce2c31; /* red-11: sát tinh */
-  --c-star-minor: #60646c; /* slate-11: phụ tinh, tạp diệu */
-  --c-mutagen: #4f3422; /* amber-12: Hóa Lộc/Quyền/Khoa/Kỵ (amber-11 is 4.38:1 on slate-2) */
-  --c-soul: #953ea3; /* plum-11: the Mệnh palace outline */
+  /* the sky */
+  --c-bg: #0a0c22; /* page: midnight indigo */
+  --c-bg-deep: #05061a; /* the sky's darkest edge */
+  --c-nebula-violet: #2a1c66;
+  --c-nebula-blue: #0e2558;
+  --c-nebula-gold: #3a2c18;
+  /* The brightest point of the nebula glows: glass cards are checked over it as their worst case. */
+  --c-sky-brightest: #2a1c66;
+  --c-star-light: #fff6dc;
+  --c-star-cool: #cfc8ff;
 
-  /* AI art layer (apps/web/src/art): board cells are --cell-opacity of the surface over the sky paper. The
-     darkest pixel of art/decor/sky.webp is recorded here so check:tokens tests text over the worst case. */
+  /* surfaces: cards are --glass-opacity of --c-surface over the sky */
+  --c-surface: #141a3e;
+  --c-surface-subtle: #0f1433;
+  --c-surface-raised: #1c2352;
+  --glass-opacity: 90%;
+  --c-topbar: #0a0c22;
+
+  /* text and lines */
+  --c-text: #f4efe1; /* moon white */
+  --c-text-muted: #b9b6d8; /* lavender grey */
+  --c-border: #2f3770;
+  --c-border-subtle: #252c5c;
+  --c-border-strong: #6d76b6; /* form-control outlines: 3:1 on every surface */
+
+  /* the astrologer's gold: links and accents (text), solid buttons (fill) */
+  --c-primary: #ecc771;
+  --c-primary-solid: #e2b453;
+  --c-primary-solid-hover: #f1cb72;
+  --c-on-primary: #1b1436;
+  --c-lavender: #c4b5ff;
+  --c-yearly: #93d4ff; /* moon blue: lưu niên marks, quieter than the natal chart */
+
+  /* status */
+  --c-error: #ff9e9a;
+  --c-info: #8ec9ff;
+  --c-backdrop: rgb(3 4 16 / 0.72);
+
+  /* shadows and glows */
+  --shadow-card: 0 18px 48px -18px rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.05);
+  --shadow-lg: 0 32px 80px -20px rgb(0 0 0 / 0.85);
+  --shadow-gold: 0 10px 30px -10px rgb(226 180 83 / 0.65);
+  --shadow-focus: 0 0 0 3px rgb(236 199 113 / 0.35);
+
+  /* chart: chính tinh peach-white and bold, cát tinh orchid, sát tinh coral, phụ tinh lavender grey, Tứ Hóa
+     gold, the Mệnh palace a gold outline; cells are --cell-opacity of the surface over the board's sky */
+  --c-star-major: #ffdcc4;
+  --c-star-auspicious: #e2abff;
+  --c-star-malefic: #ff958c;
+  --c-star-minor: #b9b6d8;
+  --c-mutagen: #ffd166;
+  --c-soul: #f2c75c;
+  --cell-opacity: 90%;
+
+  /* Faint constellations over the sky (Bắc Đẩu, a W and a belt of three), one 640px tile. */
+  --sky-constellations: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640' viewBox='0 0 640 640'%3E%3Cg fill='none' stroke='%23ecd9a2' stroke-opacity='.16' stroke-width='1'%3E%3Cpath d='M60 120L120 96L176 118L214 170L282 182L300 240L240 256L214 170'/%3E%3Cpath d='M380 70L410 112L440 82L470 124L502 88'/%3E%3Cpath d='M450 360L470 430L500 442L530 454L560 370M470 430L452 528M530 454L566 518'/%3E%3C/g%3E%3Cg fill='%23fff3d0' fill-opacity='.6'%3E%3Ccircle cx='60' cy='120' r='1.6'/%3E%3Ccircle cx='120' cy='96' r='1.8'/%3E%3Ccircle cx='176' cy='118' r='1.6'/%3E%3Ccircle cx='214' cy='170' r='2'/%3E%3Ccircle cx='282' cy='182' r='1.7'/%3E%3Ccircle cx='300' cy='240' r='1.9'/%3E%3Ccircle cx='240' cy='256' r='1.6'/%3E%3Ccircle cx='380' cy='70' r='1.5'/%3E%3Ccircle cx='410' cy='112' r='1.7'/%3E%3Ccircle cx='440' cy='82' r='1.5'/%3E%3Ccircle cx='470' cy='124' r='1.8'/%3E%3Ccircle cx='502' cy='88' r='1.5'/%3E%3Ccircle cx='450' cy='360' r='2'/%3E%3Ccircle cx='560' cy='370' r='1.8'/%3E%3Ccircle cx='470' cy='430' r='1.6'/%3E%3Ccircle cx='500' cy='442' r='1.6'/%3E%3Ccircle cx='530' cy='454' r='1.6'/%3E%3Ccircle cx='452' cy='528' r='1.8'/%3E%3Ccircle cx='566' cy='518' r='1.7'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* AI art of the PNG export (apps/web/src/art): the darkest pixel of art/decor/sky.webp, so check:tokens tests
+     the export's text over the worst case of its paper */
   --c-art-sky-darkest: #d9c7e1;
-  --cell-opacity: 86%;
 
-  /* PNG export: always light, whatever the screen theme; cells cover the sky paper at this opacity */
+  /* PNG export: a light sheet, whatever the screen shows; cells cover the sky paper at this opacity */
   --export-cell-opacity: 86%;
   --c-export-bg: #ffffff;
   --c-export-panel: #f9f9fb;
@@ -48,28 +119,16 @@
   --c-export-mutagen: #4f3422;
 }
 
-/* [2] dark via OS preference unless the visitor picked light */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --c-star-major: #ffd1d9; /* red-12 dark */
-    --c-star-auspicious: #e796f3; /* plum-11 dark */
-    --c-star-malefic: #ff9592; /* red-11 dark */
-    --c-star-minor: #b0b4ba;
-    --c-mutagen: #ffca16; /* amber-11 dark */
-    --c-soul: #e796f3;
-    /* dark: cells stay opaque over the (light) sky paper, so contrast is the plain surface's */
-    --cell-opacity: 100%;
+@media (min-width: 768px) {
+  :root {
+    --gutter: 24px;
   }
 }
 
-/* [3] dark picked in the footer's theme switch (keep identical to [2]) */
-:root[data-theme="dark"] {
-  --c-star-major: #ffd1d9; /* red-12 dark */
-  --c-star-auspicious: #e796f3; /* plum-11 dark */
-  --c-star-malefic: #ff9592; /* red-11 dark */
-  --c-star-minor: #b0b4ba;
-  --c-mutagen: #ffca16; /* amber-11 dark */
-  --c-soul: #e796f3;
-  /* dark: cells stay opaque over the (light) sky paper, so contrast is the plain surface's */
-  --cell-opacity: 100%;
+/* Reduced motion: every duration collapses, so transitions stop too (animations are switched off in app.css). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+  }
 }
