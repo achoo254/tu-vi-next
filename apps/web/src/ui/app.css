@@ -10,7 +10,7 @@
 }
 html {
   -webkit-text-size-adjust: 100%;
-  background-color: var(--c-bg-deep);
+  background-color: var(--c-bg);
 }
 body {
   margin: 0;
@@ -63,18 +63,21 @@ button {
   min-height: 100dvh;
   isolation: isolate;
 }
-/* The sky runs under everything, the notch and the home bar included. */
+/* The sky covers the whole page, however long, the notch and the home bar included: one layer as tall as the
+   page (not fixed to the viewport), its glows sized in px so a long page never stretches them or shows a seam. */
 .sky {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 55% at 12% -5%, var(--c-nebula-violet), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 95% 25%, var(--c-nebula-blue), transparent 72%),
-    radial-gradient(ellipse 80% 40% at 50% 108%, var(--c-nebula-gold), transparent 70%),
-    linear-gradient(180deg, var(--c-bg) 0%, var(--c-bg-deep) 100%);
+    radial-gradient(900px 620px at 8% 0, var(--c-nebula-violet), transparent 70%),
+    radial-gradient(820px 640px at 100% 320px, var(--c-nebula-blue), transparent 72%),
+    radial-gradient(760px 900px at 0 1500px, color-mix(in srgb, var(--c-nebula-violet) 55%, transparent), transparent 70%),
+    radial-gradient(760px 900px at 100% 2600px, color-mix(in srgb, var(--c-nebula-blue) 60%, transparent), transparent 70%),
+    radial-gradient(1400px 520px at 50% 100%, var(--c-nebula-gold), transparent 70%),
+    var(--c-bg);
 }
 .sky-stars,
 .sky-constellations {
@@ -139,15 +142,15 @@ button {
   transform: none;
 }
 
+/* Solid night: nothing scrolled under the header is readable through it. */
 .topbar {
   position: sticky;
   top: 0;
   z-index: 20;
   padding-top: env(safe-area-inset-top, 0px);
-  background: color-mix(in srgb, var(--c-topbar) 90%, transparent);
+  background: var(--c-topbar);
   border-bottom: 1px solid color-mix(in srgb, var(--c-primary) 20%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 10px 30px -18px var(--c-bg-deep);
 }
 .topbar-inner {
   display: flex;
