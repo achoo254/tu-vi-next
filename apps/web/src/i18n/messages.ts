@@ -14,7 +14,7 @@ export const vi = {
   'layout.terms': 'Điều khoản',
   'layout.footLinks': 'Liên kết cuối trang',
   'signIn.cta': 'Đăng nhập bằng {domain}',
-  'signIn.note': 'Dùng tài khoản {domain}: đăng nhập bằng Google hoặc GitHub. App không bao giờ thấy mật khẩu của bạn.',
+  'signIn.note': 'Dùng tài khoản {domain}: đăng nhập bằng Google, GitHub hoặc Apple. App không bao giờ thấy mật khẩu của bạn.',
 
   'intro.title': 'Xem lá số tử vi của bạn trong 10 giây',
   'intro.lead': 'Nhập ngày giờ sinh là có ngay 12 cung kèm lời giải dễ hiểu. Ưng thì lưu thành thẻ story khoe bạn bè 💜',
@@ -227,7 +227,7 @@ export const en: Messages = {
   'layout.terms': 'Terms',
   'layout.footLinks': 'Footer links',
   'signIn.cta': 'Sign in with {domain}',
-  'signIn.note': 'Use your {domain} account: sign in with Google or GitHub. The app never sees your password.',
+  'signIn.note': 'Use your {domain} account: sign in with Google, GitHub or Apple. The app never sees your password.',
 
   'intro.title': 'Your tử vi chart in 10 seconds',
   'intro.lead': 'Enter your birth date and time to get all 12 palaces with plain-language readings. Like it? Save it as a story card for your friends 💜',
