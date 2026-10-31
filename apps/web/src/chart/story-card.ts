@@ -15,7 +15,7 @@ export const STORY_HEIGHT = 1920;
 const SANS = 'Inter, system-ui, sans-serif';
 const PANEL = { x: 80, y: 860, width: 920, radius: 56, pad: 64 };
 
-interface StoryPalette {
+export interface StoryPalette {
   bg: string;
   text: string;
   muted: string;
@@ -23,7 +23,8 @@ interface StoryPalette {
   soul: string;
 }
 
-function readPalette(): StoryPalette {
+/** The export colours (--c-export-*), shared by the story card and the quẻ card. */
+export function readPalette(): StoryPalette {
   const style = getComputedStyle(document.documentElement);
   const token = (name: string): string => {
     const value = style.getPropertyValue(`--c-export-${name}`).trim();
@@ -33,7 +34,7 @@ function readPalette(): StoryPalette {
   return { bg: token('bg'), text: token('text'), muted: token('muted'), accent: token('accent'), soul: token('soul') };
 }
 
-function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number): void {
+export function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number): void {
   ctx.beginPath();
   ctx.roundRect(x, y, width, height, radius);
 }

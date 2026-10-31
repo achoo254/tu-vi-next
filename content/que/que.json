@@ -1,0 +1,597 @@
+{
+  "que": [
+    {
+      "title": "Trăng lên đầu núi",
+      "verse": [
+        "Trăng lên sáng tỏ đầu non",
+        "Đường xa bỗng hoá lối mòn thân quen"
+      ],
+      "meaning": "Điều tưởng rối hôm qua sẽ sáng dần khi bạn bình tĩnh nhìn lại từ đầu. Ngày hợp để sắp xếp và chọn việc chính.",
+      "advice": "Viết ra ba việc quan trọng nhất hôm nay và làm việc đầu tiên trước buổi trưa."
+    },
+    {
+      "title": "Mưa xuân thấm đất",
+      "verse": [
+        "Mưa xuân lất phất qua vườn",
+        "Hạt nằm dưới đất đã vươn lá non"
+      ],
+      "meaning": "Những cố gắng nhỏ bạn bỏ ra thời gian qua đang âm thầm có kết quả. Không cần vội, mọi thứ đang lớn lên đúng nhịp.",
+      "advice": "Ghi nhận một tiến bộ nhỏ của chính mình, dù chỉ là một dòng trong sổ."
+    },
+    {
+      "title": "Thuyền xuôi gió thuận",
+      "verse": [
+        "Buồm căng gió thuận ra khơi",
+        "Nước xuôi một dải, thuyền trôi nhẹ nhàng"
+      ],
+      "meaning": "Hôm nay mọi việc dễ trôi chảy hơn thường lệ. Đây là lúc tốt để bắt đầu điều bạn đã chuẩn bị.",
+      "advice": "Mạnh dạn gửi đi tin nhắn hay đề xuất bạn còn để trong bản nháp."
+    },
+    {
+      "title": "Cây tùng đứng gió",
+      "verse": [
+        "Gió lay cành lá xôn xao",
+        "Gốc tùng vẫn vững như bao năm rồi"
+      ],
+      "meaning": "Có thể có vài lời qua tiếng lại hay thay đổi bất ngờ, nhưng bạn đủ vững để giữ nhịp của mình.",
+      "advice": "Trước khi trả lời điều làm bạn phật lòng, hãy hít thở chậm ba lần."
+    },
+    {
+      "title": "Đèn sáng bên song",
+      "verse": [
+        "Đêm khuya một ngọn đèn hồng",
+        "Sách mở trang mới, trong lòng sáng ra"
+      ],
+      "meaning": "Ngày hợp để học thêm, đọc thêm hay tìm hiểu một điều mới. Điều bạn học hôm nay sẽ có ích về sau.",
+      "advice": "Dành hai mươi phút đọc hoặc nghe về một chủ đề bạn tò mò."
+    },
+    {
+      "title": "Suối nhỏ ra sông",
+      "verse": [
+        "Suối con len lỏi qua ghềnh",
+        "Ngày mai ra tới sông xanh rộng dài"
+      ],
+      "meaning": "Con đường của bạn có thể quanh co một chút, nhưng hướng đi vẫn đúng. Sự bền bỉ là điểm mạnh hôm nay.",
+      "advice": "Chia một việc lớn thành từng bước nhỏ và hoàn thành bước đầu tiên."
+    },
+    {
+      "title": "Hoa nở đúng mùa",
+      "verse": [
+        "Đào chờ tháng Chạp mới hồng",
+        "Mai chờ gió Tết mới bông vàng tươi"
+      ],
+      "meaning": "Mỗi việc có thời điểm của nó. Điều bạn mong có thể chưa đến hôm nay, và như vậy cũng không sao.",
+      "advice": "Thôi so sánh mình với người khác trong một ngày, chỉ so với chính mình hôm qua."
+    },
+    {
+      "title": "Bạn cũ ghé thăm",
+      "verse": [
+        "Cổng ngoài ai gọi tên quen",
+        "Chén trà nối lại những phen chuyện trò"
+      ],
+      "meaning": "Các mối quan hệ cũ mang lại niềm vui, có khi cả một gợi ý hay. Người quen là điểm tựa của bạn hôm nay.",
+      "advice": "Nhắn hỏi thăm một người bạn đã lâu chưa liên lạc."
+    },
+    {
+      "title": "Giếng trong nước mát",
+      "verse": [
+        "Giếng làng nước mát trong veo",
+        "Ai qua cũng ghé, múc theo một gầu"
+      ],
+      "meaning": "Sự tử tế và kiên nhẫn của bạn khiến người khác tìm đến. Hôm nay bạn có thể là chỗ dựa cho ai đó.",
+      "advice": "Lắng nghe trọn vẹn một người mà không vội đưa lời khuyên."
+    },
+    {
+      "title": "Mây tan trời rạng",
+      "verse": [
+        "Mây đen rồi cũng tan đi",
+        "Trời xanh trở lại, có gì phải lo"
+      ],
+      "meaning": "Nỗi bận lòng gần đây đang nhẹ dần. Hãy để tâm trí nghỉ ngơi một chút, câu trả lời sẽ tự rõ.",
+      "advice": "Đi bộ ngoài trời ít phút và để điện thoại ở chế độ im lặng."
+    },
+    {
+      "title": "Ong chăm làm mật",
+      "verse": [
+        "Ong chăm từng đoá hoa thơm",
+        "Mùa sau mật ngọt đầy hơn mọi mùa"
+      ],
+      "meaning": "Những việc lặp lại hằng ngày tưởng nhỏ nhưng đang tích luỹ thành thành quả. Chăm chỉ hôm nay rất đáng.",
+      "advice": "Giữ một thói quen tốt thêm một ngày nữa, dù chỉ năm phút."
+    },
+    {
+      "title": "Cầu tre nối bờ",
+      "verse": [
+        "Cầu tre lắt lẻo qua sông",
+        "Đi chậm từng bước, sang xong nhẹ lòng"
+      ],
+      "meaning": "Có một việc cần sự cẩn thận và từng bước. Đi chậm mà chắc sẽ đưa bạn tới nơi.",
+      "advice": "Đọc lại một lần trước khi gửi email hay nhận lời việc gì."
+    },
+    {
+      "title": "Nắng sớm trên đồi",
+      "verse": [
+        "Nắng mai trải khắp sườn đồi",
+        "Cỏ cây thức dậy, đất trời reo vui"
+      ],
+      "meaning": "Năng lượng buổi sáng của bạn hôm nay dồi dào. Làm việc khó vào đầu ngày sẽ thuận hơn.",
+      "advice": "Bắt đầu ngày bằng việc khó nhất trước khi mở mạng xã hội."
+    },
+    {
+      "title": "Hai tay vỗ thành tiếng",
+      "verse": [
+        "Một tay vỗ chẳng nên vang",
+        "Hai tay chung nhịp rộn ràng tiếng ca"
+      ],
+      "meaning": "Hợp tác là chìa khoá hôm nay. Việc làm cùng người khác sẽ nhanh và vui hơn làm một mình.",
+      "advice": "Rủ một người cùng làm việc bạn đang ngại làm một mình."
+    },
+    {
+      "title": "Lúa trổ đòng đòng",
+      "verse": [
+        "Đồng xanh lúa trổ đòng đòng",
+        "Chờ thêm mấy nắng là bông chín vàng"
+      ],
+      "meaning": "Thành quả đang gần, chỉ cần thêm một chút kiên nhẫn. Đừng bỏ dở khi đã đi gần hết đường.",
+      "advice": "Hoàn tất một việc đang làm dở thay vì mở thêm việc mới."
+    },
+    {
+      "title": "Gương hồ soi bóng",
+      "verse": [
+        "Mặt hồ phẳng lặng như gương",
+        "Soi ra bóng núi, soi đường mình đi"
+      ],
+      "meaning": "Ngày hợp để nhìn lại bản thân: điều gì làm bạn vui, điều gì làm bạn mệt. Hiểu mình giúp bạn chọn đúng.",
+      "advice": "Trước khi ngủ, viết một câu về điều bạn biết ơn hôm nay."
+    },
+    {
+      "title": "Chim về tổ ấm",
+      "verse": [
+        "Chiều buông chim lại về rừng",
+        "Tổ xưa ấm áp, lòng mừng biết bao"
+      ],
+      "meaning": "Gia đình và nhà cửa là nguồn vui lớn trong ngày. Thời gian bên người thân hôm nay rất quý.",
+      "advice": "Ăn một bữa cùng người nhà và cất điện thoại trong bữa ăn."
+    },
+    {
+      "title": "Rồng gặp mây lành",
+      "verse": [
+        "Rồng bay gặp đám mây lành",
+        "Cơ hội đã tới, nhanh tay đón chào"
+      ],
+      "meaning": "Một cơ hội nhỏ có thể đến qua lời mời hay câu chuyện tình cờ. Hãy để ý và đáp lời sớm.",
+      "advice": "Nhận lời một lời mời hợp lý mà bình thường bạn hay từ chối."
+    },
+    {
+      "title": "Bếp hồng giữ lửa",
+      "verse": [
+        "Bếp hồng một chút lửa con",
+        "Đêm đông vẫn ấm, sớm còn than tươi"
+      ],
+      "meaning": "Không cần bùng nổ, sự đều đặn và ấm áp mới là sức mạnh của bạn hôm nay.",
+      "advice": "Làm một việc nhỏ khiến người bên cạnh thấy được quan tâm."
+    },
+    {
+      "title": "Tre già măng mọc",
+      "verse": [
+        "Tre già rợp bóng sân đình",
+        "Măng non lặng lẽ tự mình vươn lên"
+      ],
+      "meaning": "Học từ người đi trước và sẵn lòng chỉ lại cho người đến sau. Sự truyền nối mang lại may mắn.",
+      "advice": "Hỏi một người có kinh nghiệm về điều bạn đang băn khoăn."
+    },
+    {
+      "title": "Gió mát trưa hè",
+      "verse": [
+        "Trưa hè gió thổi hiên nhà",
+        "Võng đưa kẽo kẹt, lòng ta thảnh thơi"
+      ],
+      "meaning": "Hôm nay nên chậm lại một nhịp. Nghỉ ngơi đúng lúc giúp bạn làm tốt hơn vào ngày mai.",
+      "advice": "Cho mình một khoảng nghỉ thật sự, không làm gì, ít nhất mười lăm phút."
+    },
+    {
+      "title": "Sao Mai lấp lánh",
+      "verse": [
+        "Sao Mai lấp lánh cuối trời",
+        "Báo tin ngày mới rạng ngời phía đông"
+      ],
+      "meaning": "Một khởi đầu mới đang chờ. Ý tưởng chợt đến hôm nay đáng được ghi lại.",
+      "advice": "Ghi ý tưởng vào điện thoại ngay khi nó xuất hiện, đừng để trôi mất."
+    },
+    {
+      "title": "Nước chảy đá mòn",
+      "verse": [
+        "Giọt rơi đều đặn tháng ngày",
+        "Đá kia cứng mấy cũng thay hình hài"
+      ],
+      "meaning": "Kiên trì sẽ thắng điều tưởng chừng không thể. Việc bạn theo đuổi cần thêm thời gian, không cần thêm lo lắng.",
+      "advice": "Làm tiếp việc dài hơi của bạn đúng hai mươi lăm phút, rồi nghỉ."
+    },
+    {
+      "title": "Thư nhà tin vui",
+      "verse": [
+        "Phong thư ai gửi về làng",
+        "Mở ra chữ viết rộn ràng tin vui"
+      ],
+      "meaning": "Tin tức hôm nay nghiêng về phía dễ chịu. Bạn cũng có thể là người mang tin vui cho người khác.",
+      "advice": "Gửi một lời khen thật lòng tới đồng nghiệp hoặc người thân."
+    },
+    {
+      "title": "Vườn rau sau nhà",
+      "verse": [
+        "Vườn sau mấy luống cải xanh",
+        "Chăm tay tưới nước, ngày lành có ăn"
+      ],
+      "meaning": "Niềm vui đến từ những việc giản dị, tự tay làm. Ngày hợp để chăm sóc nhà cửa và bản thân.",
+      "advice": "Dọn gọn một góc bàn hoặc một ngăn tủ."
+    },
+    {
+      "title": "Cánh diều no gió",
+      "verse": [
+        "Diều lên no gió chiều quê",
+        "Dây trong tay giữ, chẳng hề lạc bay"
+      ],
+      "meaning": "Bạn có thể bay cao khi vẫn giữ được điều cốt lõi. Tự do và kỷ luật hôm nay đi cùng nhau.",
+      "advice": "Đặt một giới hạn rõ ràng cho thời gian dùng điện thoại tối nay."
+    },
+    {
+      "title": "Đường xa có bạn",
+      "verse": [
+        "Đường xa có bạn cùng đi",
+        "Nắng mưa cũng nhẹ, ngại gì dặm xa"
+      ],
+      "meaning": "Bạn không phải gánh mọi việc một mình. Một lời nhờ giúp đúng lúc sẽ làm ngày nhẹ hơn nhiều.",
+      "advice": "Nhờ ai đó một việc nhỏ và cảm ơn họ thật cụ thể."
+    },
+    {
+      "title": "Mầm non đội đất",
+      "verse": [
+        "Mầm non đội đất mà lên",
+        "Mong manh nhưng vẫn vững bền vươn cao"
+      ],
+      "meaning": "Việc mới bắt đầu có thể còn vụng, nhưng sức sống của nó rất mạnh. Cho phép mình làm chưa hoàn hảo.",
+      "advice": "Bắt đầu điều mới với phiên bản đơn giản nhất có thể."
+    },
+    {
+      "title": "Trống đình mở hội",
+      "verse": [
+        "Trống đình rộn rã ngày xuân",
+        "Người xa người gần, quây quần vui chung"
+      ],
+      "meaning": "Năng lượng giao tiếp của bạn đang tốt. Ngày hợp để gặp gỡ, trò chuyện và kết nối.",
+      "advice": "Bắt chuyện với một người mới hoặc hỏi thăm một người hàng xóm."
+    },
+    {
+      "title": "Thuyền neo bến đợi",
+      "verse": [
+        "Thuyền neo bến cũ chờ triều",
+        "Nước lên sẽ chở bao nhiêu hàng về"
+      ],
+      "meaning": "Có lúc nên tiến, có lúc nên chờ. Hôm nay thuận cho việc chuẩn bị hơn là quyết định lớn.",
+      "advice": "Chuẩn bị kỹ một việc của tuần tới thay vì vội chốt điều gì hôm nay."
+    },
+    {
+      "title": "Ngọc trong đá",
+      "verse": [
+        "Hòn đá xù xì bên đường",
+        "Mài ra mới thấy ngọc vương sắc trong"
+      ],
+      "meaning": "Có điều quý giá ẩn trong một việc tưởng tẻ nhạt. Chú tâm hơn một chút, bạn sẽ thấy giá trị của nó.",
+      "advice": "Làm một việc quen thuộc chậm rãi và chú tâm hơn thường ngày."
+    },
+    {
+      "title": "Trăng rằm tròn vạnh",
+      "verse": [
+        "Trăng rằm tròn vạnh trên sân",
+        "Cả nhà ngồi ngắm, xa gần chung vui"
+      ],
+      "meaning": "Ngày của sự trọn vẹn và đủ đầy. Hãy tận hưởng những gì đang có thay vì chỉ nghĩ đến điều còn thiếu.",
+      "advice": "Kể ra ba điều bạn đang có mà một năm trước bạn từng mong."
+    },
+    {
+      "title": "Lá cũ nhường xuân",
+      "verse": [
+        "Thu sang lá rụng ven hồ",
+        "Cây buông lá cũ, đợi chờ xuân sang"
+      ],
+      "meaning": "Buông bớt một thói quen hay một nỗi lo cũ sẽ nhường chỗ cho điều mới. Nhẹ đi là để lớn lên.",
+      "advice": "Bỏ đi một thứ không còn dùng tới, trong nhà hoặc trong điện thoại."
+    },
+    {
+      "title": "Ngựa hay đường dài",
+      "verse": [
+        "Đường dài mới biết ngựa hay",
+        "Bền gan từng dặm, có ngày tới nơi"
+      ],
+      "meaning": "Năng lực thật của bạn hiện ra qua sự bền bỉ chứ không qua một lần bứt tốc. Hôm nay cứ giữ nhịp đều.",
+      "advice": "Đặt một mục tiêu vừa sức cho hôm nay và làm cho xong."
+    },
+    {
+      "title": "Sương mai trên lá",
+      "verse": [
+        "Sương mai đọng lá long lanh",
+        "Nắng lên tan hết, ngày xanh bắt đầu"
+      ],
+      "meaning": "Điều làm bạn băn khoăn lúc sáng sẽ qua nhanh. Đừng để nó định giọng cho cả ngày.",
+      "advice": "Nếu buổi sáng chưa như ý, hãy bắt đầu lại từ bữa trưa bằng một việc dễ chịu."
+    },
+    {
+      "title": "Bút nghiên sẵn sàng",
+      "verse": [
+        "Bút nghiên giấy mực sẵn sàng",
+        "Ý hay chữ đẹp, từng trang thành hình"
+      ],
+      "meaning": "Ngày thuận cho việc viết, lên kế hoạch hay trình bày ý tưởng. Suy nghĩ của bạn hôm nay mạch lạc.",
+      "advice": "Viết ra kế hoạch cho một việc bạn còn để trong đầu."
+    },
+    {
+      "title": "Cửa mở đón gió",
+      "verse": [
+        "Mở toang cánh cửa sớm mai",
+        "Gió lành ùa đến, chẳng ai ngăn đường"
+      ],
+      "meaning": "Sự cởi mở hôm nay mang lại may mắn. Thử một cách làm khác, một món ăn lạ hay một con đường mới.",
+      "advice": "Đổi một thói quen nhỏ: đi đường khác, ngồi chỗ khác hoặc thử món mới."
+    },
+    {
+      "title": "Gánh nhẹ vai êm",
+      "verse": [
+        "Gánh hàng chia lại hai đầu",
+        "Vai êm bước nhẹ, qua cầu thong dong"
+      ],
+      "meaning": "Có thể bạn đang ôm quá nhiều việc. Sắp xếp lại, bớt đi hoặc san sẻ, mọi thứ sẽ nhẹ hơn.",
+      "advice": "Gạch bớt một việc không thật cần thiết khỏi danh sách hôm nay."
+    },
+    {
+      "title": "Hạc bay trời rộng",
+      "verse": [
+        "Hạc vàng sải cánh trời xanh",
+        "Bay cao mới thấy non thành nhỏ xinh"
+      ],
+      "meaning": "Nhìn xa hơn chuyện trước mắt, vấn đề hôm nay sẽ bớt lớn. Một góc nhìn rộng giúp bạn bình tâm.",
+      "advice": "Tự hỏi: một năm nữa, chuyện này còn quan trọng không?"
+    },
+    {
+      "title": "Nồi cơm nhà ấm",
+      "verse": [
+        "Nồi cơm bốc khói thơm lừng",
+        "Bữa chiều đông đủ, vui mừng sum vầy"
+      ],
+      "meaning": "Hạnh phúc giản dị đang ở rất gần. Ngày hợp để chăm lo bữa ăn và giấc ngủ của mình.",
+      "advice": "Tự nấu hoặc chọn một bữa ăn tử tế cho bản thân, ăn chậm và ngon miệng."
+    },
+    {
+      "title": "Kim chỉ khâu áo",
+      "verse": [
+        "Mũi kim đường chỉ đều tay",
+        "Áo lành từ những đêm ngày chăm khâu"
+      ],
+      "meaning": "Sự tỉ mỉ của bạn được đền đáp. Những chi tiết nhỏ hôm nay tạo nên kết quả chỉn chu.",
+      "advice": "Kiểm tra lại một chi tiết nhỏ mà bạn hay bỏ qua."
+    },
+    {
+      "title": "Núi cao có lối",
+      "verse": [
+        "Núi cao chót vót mây che",
+        "Vẫn còn lối nhỏ người đi đã mòn"
+      ],
+      "meaning": "Việc khó nào cũng có người từng vượt qua. Tìm lời khuyên hay cách làm có sẵn sẽ giúp bạn nhanh hơn.",
+      "advice": "Tìm đọc kinh nghiệm của người đã làm điều bạn đang định làm."
+    },
+    {
+      "title": "Sen nở giữa đầm",
+      "verse": [
+        "Giữa đầm sen nở thơm hương",
+        "Bùn kia chẳng nhuốm, gió vương mùi trời"
+      ],
+      "meaning": "Dù xung quanh có ồn ào, bạn vẫn giữ được sự trong trẻo của mình. Hôm nay hợp để sống đúng với giá trị riêng.",
+      "advice": "Từ chối nhẹ nhàng một điều không hợp với bạn, không cần giải thích dài."
+    },
+    {
+      "title": "Tiếng đàn bên sông",
+      "verse": [
+        "Tiếng đàn ai gảy bên sông",
+        "Ngân nga trong gió, ấm lòng người nghe"
+      ],
+      "meaning": "Ngày hợp cho âm nhạc, nghệ thuật và những gì làm tâm hồn mềm lại. Cảm hứng sáng tạo đang đến.",
+      "advice": "Nghe trọn một bài hát bạn yêu thích mà không làm việc gì khác."
+    },
+    {
+      "title": "Cá chép vượt sóng",
+      "verse": [
+        "Cá chép vượt sóng Vũ Môn",
+        "Gắng thêm một nhịp, sóng dồn cũng qua"
+      ],
+      "meaning": "Bạn đang đứng trước một thử thách vừa sức. Thêm một chút nỗ lực là có thể vượt lên.",
+      "advice": "Làm thêm một bước cho việc khó nhất, rồi tự thưởng cho mình."
+    },
+    {
+      "title": "Hiên nhà đón nắng",
+      "verse": [
+        "Hiên nhà nắng sớm chan hoà",
+        "Cây xanh chậu nhỏ, mở ra ngày hiền"
+      ],
+      "meaning": "Một ngày yên ả, không có gì phải vội. Niềm vui đến từ việc tận hưởng khoảnh khắc hiện tại.",
+      "advice": "Uống một tách trà hay cà phê thật chậm, không nhìn màn hình."
+    },
+    {
+      "title": "Chuông chiều vọng lại",
+      "verse": [
+        "Chuông chiều vọng lại từ xa",
+        "Lòng người lắng xuống, phiền hà nhẹ tan"
+      ],
+      "meaning": "Ngày hợp để tĩnh lặng và lắng nghe bên trong. Bình an trong lòng giúp bạn quyết định sáng suốt.",
+      "advice": "Ngồi yên năm phút, chỉ để ý đến hơi thở của mình."
+    },
+    {
+      "title": "Nhịp cầu bắc ngang",
+      "verse": [
+        "Hai bờ cách một dòng sông",
+        "Cầu kia bắc lại, chung lòng qua chơi"
+      ],
+      "meaning": "Một hiểu lầm nhỏ có thể được hoá giải nếu bạn chủ động mở lời. Hôm nay thuận cho sự làm lành.",
+      "advice": "Nói một câu xin lỗi hoặc cảm ơn mà bạn còn nợ ai đó."
+    },
+    {
+      "title": "Sân phơi đầy thóc",
+      "verse": [
+        "Sân phơi vàng óng thóc mùa",
+        "Nắng lên ấm áp, gió đùa trên tay"
+      ],
+      "meaning": "Đây là lúc nhìn lại những gì mình đã gặt hái. Bạn đã làm được nhiều hơn bạn nghĩ.",
+      "advice": "Liệt kê những việc bạn đã hoàn thành trong tuần này."
+    },
+    {
+      "title": "Ngọn hải đăng",
+      "verse": [
+        "Đêm khuya biển rộng mênh mông",
+        "Hải đăng vẫn sáng, thuyền không lạc đường"
+      ],
+      "meaning": "Hãy giữ mục tiêu chính trong tầm mắt. Khi mọi thứ rối ren, điều bạn thật sự muốn sẽ dẫn đường.",
+      "advice": "Viết mục tiêu quan trọng nhất của tháng này lên giấy và đặt ở chỗ dễ thấy."
+    },
+    {
+      "title": "Gió đổi trời quang",
+      "verse": [
+        "Sớm còn mây kéo về tây",
+        "Trưa sang gió đổi, trời đầy nắng tươi"
+      ],
+      "meaning": "Kế hoạch có thể thay đổi giữa chừng, và thay đổi đó lại mở ra hướng tốt hơn. Linh hoạt là lợi thế của bạn.",
+      "advice": "Chuẩn bị sẵn một phương án dự phòng cho việc chính hôm nay."
+    },
+    {
+      "title": "Mặt trời đứng bóng",
+      "verse": [
+        "Mặt trời đứng bóng giữa trưa",
+        "Sáng soi khắp chốn, nắng chưa nhạt màu"
+      ],
+      "meaning": "Bạn đang ở trạng thái tốt để thể hiện mình. Đừng ngại nhận phần việc được nhiều người nhìn thấy.",
+      "advice": "Nói lên ý kiến của bạn trong cuộc họp hoặc nhóm trò chuyện hôm nay."
+    },
+    {
+      "title": "Rễ sâu cây vững",
+      "verse": [
+        "Rễ đâm sâu xuống đất lành",
+        "Gió về cây vẫn cành xanh lá đầy"
+      ],
+      "meaning": "Nền tảng bạn xây dựng đang giúp bạn đứng vững. Ngày hợp để chăm chút những điều căn bản.",
+      "advice": "Đi ngủ sớm hơn thường lệ ba mươi phút tối nay."
+    },
+    {
+      "title": "Đom đóm soi đường",
+      "verse": [
+        "Đêm quê đom đóm lập loè",
+        "Từng đốm nho nhỏ, sáng hè lối đi"
+      ],
+      "meaning": "Không cần ánh sáng lớn, những bước nhỏ cũng đủ soi đường cho bạn hôm nay. Cứ đi từng chút một.",
+      "advice": "Chỉ tập trung vào bước tiếp theo, chưa cần nghĩ đến cả chặng đường."
+    },
+    {
+      "title": "Mai vàng trước ngõ",
+      "verse": [
+        "Mai vàng nở trước ngõ nhà",
+        "Khách qua dừng ngắm, cười xoà chào nhau"
+      ],
+      "meaning": "Vẻ tươi tắn của bạn hôm nay dễ lan sang người khác. Một nụ cười có thể mở ra cuộc trò chuyện đẹp.",
+      "advice": "Chào ai đó bằng một nụ cười, kể cả người bạn chỉ gặp thoáng qua."
+    },
+    {
+      "title": "Giấy dó mực tàu",
+      "verse": [
+        "Giấy dó một nét mực tàu",
+        "Lời hay ý đẹp, ngàn sau còn truyền"
+      ],
+      "meaning": "Lời nói hôm nay có sức nặng. Chọn lời tử tế và rõ ràng, người nghe sẽ nhớ lâu.",
+      "advice": "Trước khi nói điều quan trọng, hãy nghĩ cách nói ngắn gọn và dịu dàng nhất."
+    },
+    {
+      "title": "Đường làng sau mưa",
+      "verse": [
+        "Mưa qua đường đất còn trơn",
+        "Đi chậm một chút, chẳng sờn gót chân"
+      ],
+      "meaning": "Có chút trở ngại nhỏ cần để ý, không đáng lo nếu bạn bước cẩn thận. Chậm mà chắc.",
+      "advice": "Dành thêm thời gian dự phòng cho các cuộc hẹn và việc đi lại hôm nay."
+    },
+    {
+      "title": "Trái ngọt cuối mùa",
+      "verse": [
+        "Cuối mùa còn trái trên cành",
+        "Ngọt hơn trái sớm, để dành người sau"
+      ],
+      "meaning": "Điều tốt đẹp đôi khi đến muộn hơn mong đợi nhưng ngọt ngào hơn. Đừng vội kết luận khi việc chưa xong.",
+      "advice": "Cho một việc đang chờ thêm thời gian, hẹn mình xem lại vào cuối tuần."
+    },
+    {
+      "title": "Én về làm tổ",
+      "verse": [
+        "Đầu xuân én lượn ngang trời",
+        "Tha bùn làm tổ, rộn lời gọi nhau"
+      ],
+      "meaning": "Ngày hợp để xây dựng và vun đắp: nhà cửa, một dự định hay một mối quan hệ. Từng chút một sẽ thành.",
+      "advice": "Làm một việc nhỏ cho dự định dài hạn bạn đang ấp ủ."
+    },
+    {
+      "title": "Gánh nước đầy chum",
+      "verse": [
+        "Sớm hôm gánh nước đầy chum",
+        "Cả nhà đủ dùng, vui chung tháng ngày"
+      ],
+      "meaning": "Chuẩn bị chu đáo hôm nay giúp những ngày tới nhẹ nhàng hơn. Lo xa một chút là món quà cho chính mình.",
+      "advice": "Chuẩn bị sẵn đồ đạc hoặc lịch cho ngày mai trước khi đi ngủ."
+    },
+    {
+      "title": "Bông lúa cúi đầu",
+      "verse": [
+        "Lúa chín bông nặng cúi đầu",
+        "Càng nhiều hạt mẩy, càng sâu nghĩa tình"
+      ],
+      "meaning": "Sự khiêm tốn hôm nay làm bạn được quý mến. Thành công đẹp nhất khi đi cùng lòng biết ơn.",
+      "advice": "Cảm ơn một người đã giúp bạn đi tới chỗ hôm nay."
+    },
+    {
+      "title": "Trời quang mây tạnh",
+      "verse": [
+        "Trời quang mây tạnh gió hoà",
+        "Đường về thoáng đãng, nhà nhà vui tươi"
+      ],
+      "meaning": "Một ngày thuận hoà, ít trắc trở. Hãy tận dụng để giải quyết những việc còn tồn đọng.",
+      "advice": "Xử lý dứt điểm một việc nhỏ bạn đã để dành từ lâu."
+    },
+    {
+      "title": "Đèn lồng đêm rằm",
+      "verse": [
+        "Đèn lồng đỏ thắm trong tay",
+        "Trẻ con ca hát, đêm nay trăng tròn"
+      ],
+      "meaning": "Hãy để đứa trẻ bên trong bạn được vui. Một chút hồn nhiên hôm nay giúp bạn thấy nhẹ lòng.",
+      "advice": "Làm một điều vui chỉ vì nó vui, không cần lý do."
+    },
+    {
+      "title": "Ngã ba chọn lối",
+      "verse": [
+        "Ngã ba đường rẽ đôi bên",
+        "Lắng lòng chọn lối, vững bền bước đi"
+      ],
+      "meaning": "Nếu đang cân nhắc giữa hai hướng, hôm nay hợp để tìm hiểu thêm hơn là quyết vội. Cảm giác bình an là chiếc la bàn tốt.",
+      "advice": "Viết ra điểm được và chưa được của từng lựa chọn, rồi để đó một đêm."
+    }
+  ],
+  "stars": {
+    "Tử Vi": "Sao Tử Vi ở Mệnh nhắc bạn giữ phong thái điềm tĩnh: hôm nay người khác dễ tìm đến bạn để hỏi ý.",
+    "Thiên Cơ": "Sao Thiên Cơ ở Mệnh nhắc bạn tin vào sự nhanh nhạy của mình: một ý nhỏ có thể gỡ được việc lớn.",
+    "Thái Dương": "Sao Thái Dương ở Mệnh nhắc bạn chủ động sẻ chia: sự nhiệt tình của bạn dễ lan sang người khác.",
+    "Vũ Khúc": "Sao Vũ Khúc ở Mệnh nhắc bạn làm việc có kế hoạch rõ ràng: sự quyết đoán hôm nay rất có ích.",
+    "Thiên Đồng": "Sao Thiên Đồng ở Mệnh nhắc bạn giữ sự vui vẻ, nhẹ nhàng: thái độ dễ chịu giúp mọi việc trôi chảy.",
+    "Liêm Trinh": "Sao Liêm Trinh ở Mệnh nhắc bạn giữ nguyên tắc nhưng mềm mỏng trong lời nói: bạn sẽ được tin cậy hơn.",
+    "Thiên Phủ": "Sao Thiên Phủ ở Mệnh nhắc bạn chăm lo sự ổn định: sắp xếp gọn gàng là cách bạn đón may mắn.",
+    "Thái Âm": "Sao Thái Âm ở Mệnh nhắc bạn lắng nghe cảm xúc của mình: sự tinh tế giúp bạn hiểu người khác.",
+    "Tham Lang": "Sao Tham Lang ở Mệnh nhắc bạn dành chút thời gian cho sở thích: niềm vui sẽ tiếp thêm năng lượng.",
+    "Cự Môn": "Sao Cự Môn ở Mệnh nhắc bạn chọn lời rõ ràng và tử tế: lời nói của bạn hôm nay có sức thuyết phục.",
+    "Thiên Tướng": "Sao Thiên Tướng ở Mệnh nhắc bạn giúp một người đang cần: sự công bằng của bạn được ghi nhận.",
+    "Thiên Lương": "Sao Thiên Lương ở Mệnh nhắc bạn sẵn lòng góp lời khi được hỏi: sự che chở của bạn là món quà.",
+    "Thất Sát": "Sao Thất Sát ở Mệnh nhắc bạn dồn sức vào một việc chính: sự quả cảm của bạn sẽ mở đường.",
+    "Phá Quân": "Sao Phá Quân ở Mệnh nhắc bạn thử đổi mới một chút, nhưng giữ lại những gì đang tốt."
+  },
+  "noMajorStar": "Cung Mệnh không có chính tinh nên bạn linh hoạt, dễ thích nghi: hôm nay hợp để học từ người xung quanh."
+}

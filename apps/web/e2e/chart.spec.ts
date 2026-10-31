@@ -88,6 +88,7 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await expect(page).toHaveURL(/\/$/);
   await expect(page.locator('[data-id=saved-charts]')).toContainText('Chưa có lá số nào');
   await expect(page.locator('[data-id=intro-hero]')).toHaveCount(0);
+  await expect(page.locator('[data-id=que-no-chart]')).toBeVisible();
 
   await castChart(page, { name: 'Tết Đinh Hợi', day: '17', month: '2', year: '2007', time: '23:30' });
   await expect(page.locator('[data-id=chart-centre]')).toContainText('tính sang ngày hôm sau');
@@ -104,6 +105,15 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await saved.getByRole('button', { name: 'Mở' }).click();
   await expect(page.locator('[data-id=chart-centre]')).toContainText('ngày 2 tháng 1 năm Đinh Hợi');
   await expect(page.locator('[data-id=birth-form-year]')).toHaveValue('2007');
+
+  // Today's quẻ for the saved chart: drawn once, then shown at once on the next visit the same day.
+  await page.click('[data-id=que-draw]');
+  await expect(page.locator('[data-id=que-name]')).not.toBeEmpty();
+  await expect(page.locator('[data-id=que-streak]')).toContainText('Ngày đầu tiên');
+  const queName = await page.locator('[data-id=que-name]').textContent();
+  await page.reload();
+  await expect(page.locator('[data-id=que-name]')).toHaveText(queName ?? '');
+  await expect(page.locator('[data-id=que-draw]')).toHaveCount(0);
 
   // The app asks with its own dialog (never window.confirm): cancel keeps the chart, confirm deletes it.
   const confirmDialog = page.locator('[data-id=confirm-dialog]');

@@ -183,6 +183,26 @@ describe('signed in through the hoandat.com account', () => {
     expect(malformed.status).toBe(400);
   });
 
+  it('keeps the daily quẻ streak behind sign-in and records today\'s draw once', async () => {
+    expect((await api(server, '/api/que')).status).toBe(401);
+    expect((await api(server, '/api/que/draw', { method: 'POST' })).status).toBe(401);
+    idp.setSub('account-que');
+    try {
+      const session = await signIn(server);
+      const before = (await (await api(server, '/api/que', { cookie: session })).json()) as { day: string; streak: number; drawnToday: boolean };
+      expect(before).toMatchObject({ streak: 0, drawnToday: false });
+      expect(before.day).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      for (let i = 0; i < 2; i++) {
+        const draw = await api(server, '/api/que/draw', { method: 'POST', cookie: session });
+        expect(draw.status).toBe(200);
+        expect(await draw.json()).toEqual({ day: before.day, streak: 1, drawnToday: true });
+      }
+      expect(await (await api(server, '/api/que', { cookie: session })).json()).toEqual({ day: before.day, streak: 1, drawnToday: true });
+    } finally {
+      idp.setSub('account-a');
+    }
+  });
+
   it('refuses state changes from another origin (CSRF)', async () => {
     const session = await signIn(server);
     const crossSite = await fetch(`${server.origin}/api/charts`, {

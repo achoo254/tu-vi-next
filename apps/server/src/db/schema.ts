@@ -1,4 +1,4 @@
-import { boolean, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { boolean, date, index, integer, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 /**
  * An account of the hoandat.com IdP that signed in here: its `sub`, and the name, email and picture its userinfo
@@ -50,3 +50,15 @@ export const charts = pgTable(
   },
   (table) => [index('charts_user_id_created_at_idx').on(table.userId, table.createdAt)],
 );
+
+/**
+ * The "Quẻ hôm nay" streak of an account: the latest Vietnam (UTC+7) day it drew its quẻ and how many days in a row
+ * it has done so up to that day. One row per account; the quẻ itself is never stored (it is derived in the browser).
+ */
+export const queStreaks = pgTable('que_streaks', {
+  userId: uuid('user_id')
+    .primaryKey()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  lastDay: date('last_day', { mode: 'string' }).notNull(),
+  streak: integer('streak').notNull(),
+});

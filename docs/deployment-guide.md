@@ -14,8 +14,9 @@ vào đây; dùng alias SSH (`SSH_TARGET`) và placeholder như `<SERVER_65_IP>`
 | Đường vào | Cloudflare (proxied, SSL "full") → nginx `conf.d/tuvi.hoandat.com.conf` → `/api/`, `/auth/`, `/healthz` sang API |
 | Đăng nhập | client BFF `tuvi-web` trên `auth.hoandat.com`, scope `openid profile email`, callback `https://tuvi.hoandat.com/auth/callback`; tên, email, ảnh lấy từ userinfo lúc đăng nhập, lưu ở bảng `users` cho menu tài khoản |
 
-Lá số được tính trên trình duyệt; server chỉ giữ phiên đăng nhập, tên/email/địa chỉ ảnh của tài khoản và dữ liệu đầu
-vào của lá số đã lưu, nên nhẹ.
+Lá số và quẻ hằng ngày được tính trên trình duyệt; server chỉ giữ phiên đăng nhập, tên/email/địa chỉ ảnh của tài
+khoản, dữ liệu đầu vào của lá số đã lưu và chuỗi ngày xem quẻ (bảng `que_streaks`: ngày gần nhất và số ngày liên
+tiếp), nên nhẹ.
 Unit giới hạn `MemoryHigh=160M`, `MemoryMax=256M`.
 
 Các file: [`infra/nginx/tuvi.hoandat.com.conf`](../infra/nginx/tuvi.hoandat.com.conf),

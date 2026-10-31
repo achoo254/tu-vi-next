@@ -15,6 +15,13 @@
       "when": 1793264232239,
       "tag": "0001_account-profile",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793463526194,
+      "tag": "0002_que-streaks",
+      "breakpoints": true
     }
   ]
 }

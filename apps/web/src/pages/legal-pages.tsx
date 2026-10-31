@@ -42,6 +42,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             'Tên, email và địa chỉ ảnh được lưu cùng tài khoản trên máy chủ của app và cập nhật mỗi lần bạn đăng nhập, chỉ để hiện trong menu tài khoản ở đầu trang. App không gửi email cho bạn, không dùng chúng vào việc khác và không chia sẻ chúng với ai.',
             'Ảnh đại diện do trình duyệt tải thẳng từ nơi giữ ảnh (Google hoặc GitHub, tuỳ cách bạn đăng nhập), không kèm địa chỉ trang đang xem; app không lưu bản sao của ảnh. Đăng nhập bằng Apple thì không có ảnh đại diện, vì Apple không chia sẻ ảnh.',
             'Lá số bạn bấm "Lưu" được giữ dưới dạng dữ liệu đầu vào (họ tên nếu có, ngày giờ sinh, lịch, giới tính), tối đa 50 lá số mỗi tài khoản. Lá số luôn được tính lại trên trình duyệt.',
+            'Quẻ hôm nay: máy chủ chỉ lưu ngày gần nhất bạn xin quẻ và số ngày liên tiếp, để hiện chuỗi ngày. Quẻ được chọn trên trình duyệt từ lá số đã lưu và ngày hôm đó, không lưu lại; lá số chọn để xin quẻ chỉ được nhớ trên trình duyệt này.',
             'Một cookie phiên (__Host-tuvi_session) giữ bạn đăng nhập tối đa 30 ngày; máy chủ chỉ lưu bản băm của nó.',
             'Bạn xoá được từng lá số bất cứ lúc nào; đăng xuất là huỷ phiên trên máy chủ.',
           ],
@@ -54,7 +55,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         {
           heading: 'Liên hệ',
-          paragraphs: ['Muốn hỏi hay yêu cầu xoá dữ liệu (tên, email, ảnh và các lá số đã lưu của tài khoản): nhắn Trang Facebook Hoandat Apps.'],
+          paragraphs: ['Muốn hỏi hay yêu cầu xoá dữ liệu (tên, email, ảnh, các lá số đã lưu và chuỗi ngày xem quẻ của tài khoản): nhắn Trang Facebook Hoandat Apps.'],
         },
       ],
     },
@@ -75,6 +76,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             'The name, email and picture address are stored with your account on the app\'s server and updated each time you sign in, only to show in the account menu at the top of the page. The app sends you no email, uses them for nothing else and shares them with no one.',
             'Your browser loads the profile picture straight from where it is kept (Google or GitHub, depending on how you sign in), without the address of the page you are on; the app keeps no copy of it. Signing in with Apple gives no picture, because Apple does not share one.',
             'Charts you save are kept as the inputs (name if given, birth date and time, calendar, gender), at most 50 per account. The chart itself is always computed again in the browser.',
+            'Quẻ of the day: the server keeps only the latest day you drew a quẻ and how many days in a row, to show your streak. The quẻ is picked in the browser from the saved chart and the day and is not stored; the chart you draw for is remembered in this browser only.',
             'A session cookie (__Host-tuvi_session) keeps you signed in for up to 30 days; the server stores only its hash.',
             'You can delete any saved chart at any time; signing out ends the session on the server.',
           ],
@@ -87,7 +89,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         {
           heading: 'Contact',
-          paragraphs: ['Questions or data deletion requests (the name, email, picture and saved charts of your account): message the Hoandat Apps Facebook Page.'],
+          paragraphs: ['Questions or data deletion requests (the name, email, picture, saved charts and quẻ streak of your account): message the Hoandat Apps Facebook Page.'],
         },
       ],
     },

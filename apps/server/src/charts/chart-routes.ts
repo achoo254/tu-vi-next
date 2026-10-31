@@ -2,8 +2,7 @@
 import { BirthInputSchema, birthDateExists } from '@tuvi/chart/input';
 import express, { type Request, type Router } from 'express';
 import { z } from 'zod';
-import { readSessionToken } from '../auth/session-cookie';
-import { findSession } from '../auth/session-store';
+import { requireUserId } from '../auth/require-user';
 import type { ServerConfig } from '../config';
 import type { Db } from '../db/client';
 import { HttpError } from '../http-error';
@@ -20,12 +19,7 @@ const ChartId = z.uuid();
 export function chartRoutes({ config, db, now }: ChartRoutesOptions): Router {
   const router = express.Router();
 
-  async function userIdOf(req: Request): Promise<string> {
-    const token = readSessionToken(req, config);
-    const session = token ? await findSession(db, token, now()) : null;
-    if (!session) throw new HttpError(401, 'sign-in-required');
-    return session.userId;
-  }
+  const userIdOf = (req: Request): Promise<string> => requireUserId(req, config, db, now());
 
   router.get('/api/charts', async (req, res) => {
     const userId = await userIdOf(req);

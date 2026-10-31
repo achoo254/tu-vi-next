@@ -8,6 +8,7 @@ import type { ServerConfig } from './config';
 import type { Db } from './db/client';
 import { HttpError } from './http-error';
 import { safeErrorText } from './log-error';
+import { queRoutes } from './que/que-routes';
 
 export interface AppDeps {
   config: ServerConfig;
@@ -15,7 +16,7 @@ export interface AppDeps {
   now?: () => Date;
 }
 
-/** The API: health check, sign-in, saved charts. The web app itself is static (nginx in production). */
+/** The API: health check, sign-in, saved charts, the daily quẻ streak. The web app itself is static (nginx in production). */
 export function createApp({ config, db, now = () => new Date() }: AppDeps): Express {
   const app = express();
   app.disable('x-powered-by');
@@ -32,6 +33,7 @@ export function createApp({ config, db, now = () => new Date() }: AppDeps): Expr
   app.use(express.json({ limit: '4kb' }));
   app.use(authRoutes({ config, db, now }));
   app.use(chartRoutes({ config, db, now }));
+  app.use(queRoutes({ config, db, now }));
 
   app.use('/api', (_req, _res, next) => next(new HttpError(404, 'not-found')));
 

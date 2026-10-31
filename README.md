@@ -8,7 +8,10 @@ lá số, bấm vào từng sao để đọc nghĩa ngắn, xuất lá số thà
 (video dọc 9:16) đã điền sẵn con giáp, chính tinh ở Mệnh, cục và một câu luận giải; link chỉ mang các giá trị đó và tên,
 không mang ngày giờ sinh; query chỉ có id mẫu và id hình, còn tên và các dòng chữ nằm trong `#fragment` nên không tới
 log máy chủ nào (`apps/web/src/chart/chart-video-link.ts`). Âm lịch tính theo giờ Việt Nam (UTC+7). Chưa đăng nhập thì mọi
-thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Nội dung mang tính giải trí,
+thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Đã đăng nhập và có lá số đã lưu thì mỗi ngày
+xin được một "Quẻ hôm nay" cho lá số đó (64 quẻ tự viết, lưu tĩnh ở [`content/que`](content/que/SOURCES.md), chọn theo
+id lá số và ngày giờ Việt Nam, không gọi AI), kèm chuỗi ngày xem liên tiếp lưu trên máy chủ và ảnh quẻ 1080×1350 để
+chia sẻ; khách thấy thẻ giới thiệu và nút đăng ký. Nội dung mang tính giải trí,
 tham khảo.
 
 ## Cấu trúc
@@ -17,7 +20,7 @@ tham khảo.
 |---|---|
 | [`packages/chart`](packages/chart) | `@tuvi/chart`: âm lịch Việt Nam và lớp bọc duy nhất quanh `iztro` ([`astrolabe.ts`](packages/chart/src/astrolabe.ts)); chạy được trên trình duyệt và Node |
 | [`apps/web`](apps/web) | `@tuvi/web`: React 19 + Vite. Form, bàn lá số 4×4 (màn hẹp thành danh sách cung), nghĩa sao, xuất PNG, Web Share, trang pháp lý |
-| [`apps/server`](apps/server) | `@tuvi/server`: Express 5 + drizzle + Postgres (PGlite khi dev/test). Đăng nhập BFF qua auth-next, phiên riêng, `/api/charts`, `/healthz` |
+| [`apps/server`](apps/server) | `@tuvi/server`: Express 5 + drizzle + Postgres (PGlite khi dev/test). Đăng nhập BFF qua auth-next, phiên riêng, `/api/charts`, `/api/que` (chuỗi ngày xem quẻ), `/healthz` |
 | [`infra`](infra) | nginx, unit systemd, script deploy |
 | [`brand`](brand) | Biểu tượng AI gốc và các file sinh từ nó (`pnpm brand:gen`) |
 

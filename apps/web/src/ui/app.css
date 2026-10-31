@@ -1779,3 +1779,69 @@ button {
     border: 1px solid ButtonText;
   }
 }
+
+/* ---------- "Quẻ hôm nay": the daily quẻ beside the form ---------- */
+.que-card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  scroll-margin-top: calc(var(--topbar-h) + env(safe-area-inset-top, 0px) + var(--space-4));
+}
+@media (min-width: 480px) {
+  .que-card {
+    padding: var(--space-5);
+  }
+}
+.que-card > .btn {
+  justify-self: start;
+}
+.que-lead {
+  font-size: 15px;
+  line-height: 1.55;
+}
+.que-drawn {
+  display: grid;
+  gap: var(--space-3);
+  animation: rise-in 420ms var(--ease-standard) both;
+}
+.que-meta {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--c-text-muted);
+}
+.que-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--c-primary);
+}
+.que-verse {
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.6;
+  padding-left: var(--space-3);
+  border-left: 2px solid color-mix(in srgb, var(--c-primary) 55%, transparent);
+}
+.que-meaning,
+.que-advice,
+.que-star {
+  font-size: 15px;
+  line-height: 1.55;
+}
+.que-star {
+  color: var(--c-text-muted);
+}
+.que-streak {
+  font-weight: 700;
+  color: var(--c-soul);
+}
+.que-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.que-jump {
+  justify-self: start;
+}

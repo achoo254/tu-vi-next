@@ -22,6 +22,7 @@ import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/ill
 import { BRAND_MARK_SRC, brand } from '../brand';
 import { type Translate, useI18n } from '../i18n/i18n';
 import { SignInCard } from '../layout/sign-in-card';
+import { QueCard } from '../que/que-card';
 
 type Cast = { chart: Chart; error: null } | { chart: null; error: string | null };
 
@@ -193,7 +194,9 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
       </section>
       <div className="home-grid">
         <div className="home-side">
+          {signedIn && <QueCard charts={saved} signedIn signInHref={undefined} engine={engine} />}
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
+          {showSignIn && <QueCard charts={null} signedIn={false} signInHref={signInHref(locale, '/')} engine={engine} />}
           {signedIn && <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={setPendingDelete} />}
           <ConfirmDialog
             message={pendingDelete ? t('saved.confirmDelete', { name: pendingDelete.input.name || t('chart.unnamed') }) : null}
@@ -222,8 +225,14 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 brand={{ appName: brand.appName, domain: brand.primaryTenant.domain, markSrc: BRAND_MARK_SRC }}
                 locale={locale}
                 signInHref={signInHref(locale, '/')}
-                benefits={[t('accountValue.save'), t('accountValue.devices')]}
+                benefits={[t('accountValue.save'), t('accountValue.devices'), t('accountValue.que')]}
               />
+            )}
+            {/* The daily quẻ sits beside the form (above it on phones): one tap back to it from the chart. */}
+            {signedIn && (
+              <a className="btn btn-secondary que-jump" href="#que-today" data-id="que-jump">
+                {t('que.open')}
+              </a>
             )}
             <PlainReadingSection key={`plain-${JSON.stringify(chart.input)}`} chart={chart} />
             <div className="chart-head">
