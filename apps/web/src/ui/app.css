@@ -441,6 +441,27 @@ button {
   }
 }
 
+/* The shared "what a free account keeps" card (@achoo254/app-shell AccountValueCard) under a guest's chart, in
+   the night-sky look: a glass card like .card and the gold button like .btn-primary. The tokens app-shell.css
+   reads beyond tokens.css are mapped here, on the card only. */
+.shell-value-card {
+  --font-mono: var(--font-sans);
+  --shadow-sm: var(--shadow-card);
+  --shadow-glow-primary: var(--shadow-gold);
+  max-width: none;
+  background: color-mix(in srgb, var(--c-surface) var(--glass-opacity), transparent);
+  border-color: color-mix(in srgb, var(--c-primary) 16%, var(--c-border));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.shell-value-card .shell-btn-primary {
+  background: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
+}
+.shell-value-card .shell-btn-cta {
+  width: auto;
+  justify-self: start;
+}
+
 /* ---------- shared pieces: cards, buttons, alerts, forms ---------- */
 .card {
   position: relative;

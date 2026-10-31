@@ -1,5 +1,5 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, onTestFinished } from 'vitest';
 import { brand } from '../brand';
 import { I18nProvider } from '../i18n/i18n';
 import { HomePage } from './home-page';
@@ -75,6 +75,49 @@ describe('home page, signed out', () => {
       </I18nProvider>,
     );
     expect(document.querySelector('[data-id=features]')).toBeNull();
+  });
+
+  it('shows what a free account keeps under a guest\'s chart, never to the signed-in', async () => {
+    function castChart(): void {
+      fill(/^Ngày$/, '17');
+      fill(/^Tháng$/, '2');
+      fill(/^Năm$/, '2007');
+      fill(/Giờ sinh/, '10:00');
+      fireEvent.click(screen.getByRole('button', { name: 'Lập lá số' }));
+    }
+    // jsdom has no scrolling; the chart scrolls into view once cast.
+    const scrollIntoView = Object.getOwnPropertyDescriptor(Element.prototype, 'scrollIntoView');
+    Element.prototype.scrollIntoView = () => undefined;
+    onTestFinished(() => {
+      if (scrollIntoView) Object.defineProperty(Element.prototype, 'scrollIntoView', scrollIntoView);
+      else Reflect.deleteProperty(Element.prototype, 'scrollIntoView');
+    });
+    render(
+      <I18nProvider>
+        <HomePage session={{ status: 'ready', signedIn: false, signInAvailable: true }} />
+      </I18nProvider>,
+    );
+    // Not before the first chart.
+    expect(document.querySelector('[data-id=account-value-card]')).toBeNull();
+    castChart();
+    await screen.findByRole('group', { name: /Bàn lá số/ });
+    const card = document.querySelector('[data-id=chart] [data-id=account-value-card]');
+    expect(card?.textContent).toContain('Lưu lá số để xem lại bất cứ lúc nào (tối đa 50)');
+    expect(card?.textContent).toContain('Xem lá số trên mọi máy của bạn');
+    expect(card?.textContent).toContain(`Một tài khoản dùng cho mọi app của ${brand.primaryTenant.domain}`);
+    const cta = card?.querySelector('[data-id=account-value-cta]');
+    expect(cta?.textContent).toBe('Đăng ký miễn phí');
+    expect(cta?.getAttribute('href')).toBe('/auth/login?return=%2F&lang=vi');
+    cleanup();
+
+    render(
+      <I18nProvider>
+        <HomePage session={{ status: 'ready', signedIn: true, signInAvailable: true }} />
+      </I18nProvider>,
+    );
+    // The last chart reopens from this browser; a signed-in visitor sees it without the card.
+    await screen.findByRole('group', { name: /Bàn lá số/ });
+    expect(document.querySelector('[data-id=account-value-card]')).toBeNull();
   });
 
   it('explains a date that does not exist', async () => {

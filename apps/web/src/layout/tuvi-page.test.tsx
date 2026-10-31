@@ -50,6 +50,9 @@ describe('page frame', () => {
     show('/tu-vi-2027', SIGNED_OUT);
     expect(document.querySelector('[data-id=public-header] [data-id=public-home]')?.textContent).toBe(brand.appName);
     expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('href')).toBe('/login?return=%2Ftu-vi-2027');
+    // A first sign-in makes the account: the pill invites a sign-up, in short on phones.
+    expect(document.querySelector('[data-id=public-sign-in] .hide-phone')?.textContent).toBe('Đăng ký miễn phí');
+    expect(document.querySelector('[data-id=public-sign-in] .only-phone')?.textContent).toBe('Đăng ký');
     expect(document.querySelector('[data-id=public-header] [data-id=nav-year]')?.getAttribute('aria-current')).toBe('page');
     expect(document.querySelector('[data-id=public-header] [data-id=lang-switch]')).not.toBeNull();
     expect(document.querySelector('[data-id=lang-vi]')?.getAttribute('aria-pressed')).toBe('true');

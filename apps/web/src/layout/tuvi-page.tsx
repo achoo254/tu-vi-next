@@ -84,7 +84,9 @@ function AccountControl({ path, session }: { path: string; session: SessionState
   if (session.status === 'ready' && !session.signInAvailable) return null;
   return (
     <a className="pill pill-gold" href={loginPageHref(path)} data-id="public-sign-in" aria-current={path === LOGIN_PATH ? 'page' : undefined}>
-      {t('layout.signIn')}
+      {/* Signing in for the first time makes the account, so the pill invites a sign-up; short on phones. */}
+      <span className="hide-phone">{t('layout.signIn')}</span>
+      <span className="only-phone">{t('layout.signInShort')}</span>
     </a>
   );
 }

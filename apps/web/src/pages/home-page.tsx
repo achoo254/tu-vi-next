@@ -1,3 +1,4 @@
+import { AccountValueCard } from '@achoo254/app-shell';
 import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type BirthInput, MAX_BIRTH_YEAR, MIN_BIRTH_YEAR } from '@tuvi/chart/schema';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -18,6 +19,7 @@ import { YearlyPanel } from '../chart/yearly-panel';
 import { FEATURED_YEAR } from '../year/year-routes';
 import { YearPagesTeaser } from './year-pages-teaser';
 import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/illustrations';
+import { BRAND_MARK_SRC, brand } from '../brand';
 import { type Translate, useI18n } from '../i18n/i18n';
 import { SignInCard } from '../layout/sign-in-card';
 
@@ -214,6 +216,15 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
         {chart && (
           <section className="chart" ref={chartRef} aria-labelledby="chart-title" data-id="chart">
             <ChartSummaryCard key={`summary-${JSON.stringify(chart.input)}`} chart={chart} />
+            {/* A guest's first chart is the moment a free account has something to keep. Never for the signed-in. */}
+            {showSignIn && (
+              <AccountValueCard
+                brand={{ appName: brand.appName, domain: brand.primaryTenant.domain, markSrc: BRAND_MARK_SRC }}
+                locale={locale}
+                signInHref={signInHref(locale, '/')}
+                benefits={[t('accountValue.save'), t('accountValue.devices')]}
+              />
+            )}
             <PlainReadingSection key={`plain-${JSON.stringify(chart.input)}`} chart={chart} />
             <div className="chart-head">
               <h2 id="chart-title" className="card-title">
