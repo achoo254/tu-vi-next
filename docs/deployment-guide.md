@@ -20,7 +20,9 @@ tiếp), nên nhẹ.
 Unit giới hạn `MemoryHigh=160M`, `MemoryMax=256M`.
 
 Các file: [`infra/nginx/tuvi.hoandat.com.conf`](../infra/nginx/tuvi.hoandat.com.conf),
-[`infra/tuvi-server.service`](../infra/tuvi-server.service), [`infra/deploy.sh`](../infra/deploy.sh).
+[`infra/tuvi-server.service`](../infra/tuvi-server.service), [`infra/deploy.sh`](../infra/deploy.sh),
+[`infra/activate-incoming.sh`](../infra/activate-incoming.sh), [`infra/setup-deploy-user.sh`](../infra/setup-deploy-user.sh),
+[`.github/workflows/ci.yml`](../.github/workflows/ci.yml), [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml).
 
 ## Biến môi trường
 
@@ -56,6 +58,43 @@ không bao giờ trong repo. Trên server là `/etc/tuvi/production.env` (`root:
 5. **Cài unit và nginx:** `SSH_TARGET=<alias> bash infra/deploy.sh setup`. Chạy lại sau khi sửa unit hay site nginx:
    unit đổi thì service đang chạy được restart ngay.
 6. **Release:** `SSH_TARGET=<alias> bash infra/deploy.sh`.
+7. **User CI:** tạo user hạn chế `tuvi-deploy` và secret của repo (mục Deploy tự động).
+
+## Deploy tự động (CI)
+
+**Mỗi lần push lên `main` là tự deploy.** `ci` (lint, typecheck, test, build) xanh thì `deploy.yml` chạy:
+
+1. Job `build` (không có secret nào) cài thư viện, `pnpm build`, gói `apps/web/dist`, `apps/server/dist`,
+   `apps/server/drizzle` thành artifact; mã bản dạng `YYYYMMDD-HHMMSS-<sha12>`.
+2. Job `deploy` (environment `production`) chỉ tải artifact, rsync lên `/var/www/tuvi/ci-incoming/<mã bản>` bằng
+   user `tuvi-deploy`, rồi chạy lệnh sudo duy nhất user đó có: `sudo -n /usr/local/sbin/tuvi-activate-incoming <mã bản>`.
+3. Lệnh đó (bản cài của `infra/activate-incoming.sh`, root sở hữu) kiểm mã bản, chuyển bản tải lên vào thư mục chỉ
+   root đọc được rồi mới kiểm (không link hay tệp đặc biệt; đủ `index.html`, bundle server, `drizzle/meta/_journal.json`),
+   ghi mã bản vào `apps/web/dist/RELEASE`, đổi bản như mục Release, hỏng thì quay về bản trước và thoát mã khác 0.
+4. Kiểm từ ngoài: `https://tuvi.hoandat.com/` trả 200, `/healthz` trả `ok`, `/RELEASE` trả đúng mã bản vừa lên.
+
+User `tuvi-deploy` chỉ ghi được `/var/www/tuvi/ci-incoming` và chạy đúng lệnh trên qua sudo (`/etc/sudoers.d/tuvi-deploy`);
+khoá trong `authorized_keys` có `restrict` (không forward, không pty). CI không đổi được nginx, unit hay script root:
+những thứ đó chỉ đổi qua `deploy.sh setup`/`deploy.sh` chạy bằng root.
+
+Secret của repo (Settings → Secrets → Actions): `DEPLOY_SSH_KEY` (khoá riêng ed25519 của `tuvi-deploy`),
+`DEPLOY_KNOWN_HOSTS` (`ssh-keyscan -p <cổng> -t ed25519,ecdsa,rsa <máy chủ>`), `DEPLOY_HOST`, `DEPLOY_PORT`.
+
+**Tạo hoặc đổi khoá** (lần đầu, hay khi lộ khoá):
+
+```sh
+ssh-keygen -t ed25519 -N '' -C tuvi-deploy -f tuvi-deploy
+ssh <alias> 'bash /var/www/tuvi/infra/setup-deploy-user.sh' < tuvi-deploy.pub   # ghi đè khoá cũ
+gh secret set DEPLOY_SSH_KEY -R achoo254/tu-vi-next < tuvi-deploy
+rm tuvi-deploy tuvi-deploy.pub
+```
+
+`setup-deploy-user.sh` với stdin rỗng (`< /dev/null`) giữ khoá đang có, chỉ cài lại lệnh sudo. Script cần
+`/var/www/tuvi/infra` đã có (chạy `deploy.sh setup` hoặc `deploy.sh` một lần trước).
+
+**Deploy tay khi nào:** lần đầu, khi đổi unit/nginx (`setup`), khi sửa `infra/activate-incoming.sh` (mỗi lần chạy
+`setup` hay release tay đều cài lại `/usr/local/sbin/tuvi-activate-incoming`; CI không tự làm), tải video (`media`),
+hoặc khi CI hỏng. Deploy tay dùng chung bước đổi bản với CI.
 
 ## Release
 
@@ -65,7 +104,8 @@ SSH_TARGET=<alias> [SSH_OPTS="-F <ssh_config>"] bash infra/deploy.sh
 
 Script từ chối chạy khi cây làm việc còn thay đổi chưa commit (`git status --porcelain` khác rỗng): bản release mang
 tên commit `HEAD` nên phải đúng là `HEAD`. Sau đó chạy `pnpm lint`, `typecheck`, `test`, `build` trên máy dev, đẩy `apps/web/dist`, `apps/server/dist`,
-`apps/server/drizzle` vào `/var/www/tuvi/releases/<thời điểm>-<commit>`, trỏ `current` sang bản mới, restart
+`apps/server/drizzle` vào `/var/www/tuvi/ci-incoming/<thời điểm>-<commit 12 ký tự>`, rồi chạy cùng lệnh đổi bản với CI
+(`/usr/local/sbin/tuvi-activate-incoming`, cài lại từ `infra/` ngay trước đó): chuyển bản sang `releases/<mã bản>`, trỏ `current` sang bản mới, restart
 `tuvi-server`, rồi kiểm `/healthz` trên loopback và `https://tuvi.hoandat.com/` qua origin. Một trong hai bước kiểm
 hỏng thì script tự trỏ `current` về bản trước, restart, in log và thoát mã 1. Giữ 5 bản gần nhất. Gói release không
 chứa `._*` hay `.DS_Store` (`COPYFILE_DISABLE=1` và `--exclude`).
@@ -80,7 +120,8 @@ lỗi nếu `index.html` có lại script inline hoặc CSP có lại hash. Rele
 
 Kiểm sau release:
 
-- `curl -fsS https://tuvi.hoandat.com/healthz` trả `ok`.
+- `curl -fsS https://tuvi.hoandat.com/healthz` trả `ok`; `curl -fsS https://tuvi.hoandat.com/RELEASE` trả mã bản đang chạy
+  (bản cũ trước khi có CI không có tệp này).
 - Đăng nhập thấy ảnh (hoặc chữ cái đầu) và tên trên header; mở menu, đăng xuất được; lưu một lá số, tải lại trang,
   mở lại được.
 - RSS của service (mục tiêu < 120 MB): `systemctl show tuvi-server -p MemoryCurrent`.
@@ -102,7 +143,7 @@ tên khác và báo thiếu file trước khi gửi); release chỉ cảnh báo,
 
 ## Rollback
 
-Release hỏng tự quay về bản trước (mục Release). Quay về tay:
+Release hỏng (CI hay tay) tự quay về bản trước (mục Release). Quay về tay:
 
 ```sh
 ssh <alias> 'cd /var/www/tuvi && ls -1dt releases/*/'          # chọn bản trước
