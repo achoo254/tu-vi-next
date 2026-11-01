@@ -59,12 +59,12 @@ interface QueCardProps {
   charts: SavedChart[] | 'error' | null;
   signedIn: boolean;
   /** Where a guest signs up; undefined when sign-in is unavailable (the card then only says what it is). */
-  signInHref: string | undefined;
+  signUpHref: string | undefined;
   engine: ChartEngineState;
 }
 
 /** "Quẻ hôm nay": one quẻ a day for a saved chart, with a streak, for signed-in accounts; an invitation for guests. */
-export function QueCard({ charts, signedIn, signInHref, engine }: QueCardProps): ReactNode {
+export function QueCard({ charts, signedIn, signUpHref, engine }: QueCardProps): ReactNode {
   const { t } = useI18n();
   return (
     <section className="card que-card" id="que-today" aria-labelledby="que-title" data-id="que-today">
@@ -76,8 +76,8 @@ export function QueCard({ charts, signedIn, signInHref, engine }: QueCardProps):
       ) : (
         <>
           <p className="que-lead">{t('que.guest.lead')}</p>
-          {signInHref !== undefined && (
-            <a className="btn btn-primary" href={signInHref} data-id="que-sign-up">
+          {signUpHref !== undefined && (
+            <a className="btn btn-primary" href={signUpHref} data-id="que-sign-up">
               {t('que.guest.cta')}
             </a>
           )}

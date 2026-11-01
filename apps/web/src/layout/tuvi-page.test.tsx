@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { type SessionState, loginPageHref, loginReturnPath, safeReturnPath, signInHref } from '../api/session-api';
+import { type SessionState, loginReturnPath, safeReturnPath, signInHref, signUpHref } from '../api/session-api';
 import { brand } from '../brand';
 import { I18nProvider } from '../i18n/i18n';
 import { LoginPage } from '../pages/login-page';
@@ -36,12 +36,12 @@ describe('sign-in links', () => {
     for (const unsafe of ['https://evil.example', '//evil.example', '/\\evil', '', null, '/login', '/login?return=/x']) expect(safeReturnPath(unsafe)).toBe('/');
   });
 
-  it('sends the header pill to /login with the page to come back to', () => {
-    expect(loginPageHref('/')).toBe('/login');
-    expect(loginPageHref('/tu-vi-2027/tuoi-ty')).toBe('/login?return=%2Ftu-vi-2027%2Ftuoi-ty');
+  it('asks the IdP for its sign-up screen from sign-up links only, back to a page of this site', () => {
     expect(loginReturnPath('?return=%2Ftu-vi-2027')).toBe('/tu-vi-2027');
     expect(loginReturnPath('?return=https%3A%2F%2Fevil.example')).toBe('/');
     expect(signInHref('en', '/credits')).toBe('/auth/login?return=%2Fcredits&lang=en');
+    expect(signUpHref('vi', '/tu-vi-2027/tuoi-ty')).toBe('/auth/login?return=%2Ftu-vi-2027%2Ftuoi-ty&lang=vi&signup=1');
+    expect(signUpHref('en', 'https://evil.example')).toBe('/auth/login?return=%2F&lang=en&signup=1');
   });
 });
 
@@ -49,8 +49,9 @@ describe('page frame', () => {
   it("has the app's own header and footer: brand, year link, language pill, sign-in pill, no theme switch", () => {
     show('/tu-vi-2027', SIGNED_OUT);
     expect(document.querySelector('[data-id=public-header] [data-id=public-home]')?.textContent).toBe(brand.appName);
-    expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('href')).toBe('/login?return=%2Ftu-vi-2027');
-    // A first sign-in makes the account: the pill invites a sign-up, in short on phones.
+    // The pill is a sign-up button: straight to making an account at the IdP, back to this page.
+    expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('href')).toBe('/auth/login?return=%2Ftu-vi-2027&lang=vi&signup=1');
+    // In short on phones.
     expect(document.querySelector('[data-id=public-sign-in] .hide-phone')?.textContent).toBe('Đăng ký miễn phí');
     expect(document.querySelector('[data-id=public-sign-in] .only-phone')?.textContent).toBe('Đăng ký');
     expect(document.querySelector('[data-id=public-header] [data-id=nav-year]')?.getAttribute('aria-current')).toBe('page');
@@ -151,6 +152,7 @@ describe('sign-in page', () => {
     expect(document.querySelector('[data-id=sign-in-cta]')?.getAttribute('href')).toBe('/auth/login?return=%2Ftu-vi-2027&lang=vi');
     expect(document.querySelector('[data-id=sign-in-cta]')?.textContent).toBe('Đăng nhập bằng hoandat.com');
     expect(document.querySelector('[data-id=sign-in-card]')?.textContent).toContain('App không bao giờ thấy mật khẩu của bạn.');
-    expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('aria-current')).toBe('page');
+    // The sign-up pill there goes back to the same page as the card.
+    expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('href')).toBe('/auth/login?return=%2Ftu-vi-2027&lang=vi&signup=1');
   });
 });

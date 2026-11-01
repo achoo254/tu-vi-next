@@ -11,8 +11,10 @@ log máy chủ nào (`apps/web/src/chart/chart-video-link.ts`). Âm lịch tính
 thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Đã đăng nhập và có lá số đã lưu thì mỗi ngày
 xin được một "Quẻ hôm nay" cho lá số đó (64 quẻ tự viết, lưu tĩnh ở [`content/que`](content/que/SOURCES.md), chọn theo
 id lá số và ngày giờ Việt Nam, không gọi AI), kèm chuỗi ngày xem liên tiếp lưu trên máy chủ và ảnh quẻ 1080×1350 để
-chia sẻ; khách thấy thẻ giới thiệu và nút đăng ký. Nội dung mang tính giải trí,
-tham khảo.
+chia sẻ; khách thấy thẻ giới thiệu và nút đăng ký. Mọi nút "Đăng ký…" (nút ở header, thẻ dưới lá số đầu tiên,
+"Đăng ký miễn phí để lưu", thẻ quẻ) mở thẳng màn tạo tài khoản hoandat.com (`/auth/login?signup=1`, máy chủ thêm
+`prompt=create`); nút "Đăng nhập" thì không. Các nút giữ lá số quay về `/?keep=1` và lưu lá số đang xem (nhớ trên trình
+duyệt, không đi qua URL) vào tài khoản một lần, bỏ qua nếu tài khoản đã có. Nội dung mang tính giải trí, tham khảo.
 
 ## Cấu trúc
 

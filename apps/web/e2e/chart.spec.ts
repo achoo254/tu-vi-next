@@ -78,11 +78,9 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
 
 test('signed in: save a chart, reload, open it again, delete it', async ({ page }) => {
   await page.goto('/');
-  // The header's pill opens the sign-in card; its one link goes to the IdP and back home.
+  // The header's pill is a sign-up button: straight to the IdP's sign-up screen, then back home signed in.
+  await expect(page.locator('[data-id=public-sign-in]')).toHaveAttribute('href', /signup=1/);
   await page.click('[data-id=public-sign-in]');
-  await expect(page).toHaveURL(/\/login$/);
-  await expect(page.locator('[data-id=sign-in-cta]')).toHaveText('Đăng nhập bằng hoandat.com');
-  await page.click('[data-id=sign-in-cta]');
   // The header shows the account the fake IdP's userinfo named (no picture: its initial).
   await expect(page.locator('[data-id=topbar-account]')).toContainText('Người Thử E2E');
   await expect(page).toHaveURL(/\/$/);

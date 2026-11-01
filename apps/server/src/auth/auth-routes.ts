@@ -115,6 +115,9 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
       return;
     }
     const lang = req.query.lang === 'en' ? 'en' : 'vi';
+    // `signup=1`: the person pressed a sign-up button, so the IdP opens on making an account (its screen links to
+    // sign-in for people who already have one). Plain sign-in links never send it.
+    const signUp = req.query.signup === '1';
     try {
       const doc = await discover();
       const state = newLoginState(returnTo, now().getTime());
@@ -130,6 +133,7 @@ export function authRoutes({ config, db, now }: AuthRoutesOptions): Router {
         code_challenge: codeChallenge(state.verifier),
         code_challenge_method: 'S256',
         ui_locales: lang,
+        ...(signUp ? { prompt: 'create' } : {}),
       }).toString();
       res.redirect(url.href);
     } catch (error) {

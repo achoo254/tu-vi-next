@@ -133,7 +133,7 @@ export const vi = {
   'chart.reload': 'Tải lại trang',
 
   'actions.save': 'Lưu lá số',
-  'actions.signInToSave': 'Đăng nhập để lưu',
+  'actions.signUpToSave': 'Đăng ký miễn phí để lưu',
   'actions.saving': 'Đang lưu…',
   'actions.saved': 'Đã lưu',
   'actions.export': 'Tải ảnh PNG',
@@ -166,6 +166,7 @@ export const vi = {
   'saved.confirmDelete': 'Xoá lá số "{name}"?',
   'saved.loadError': 'Không tải được danh sách lá số.',
   'saved.deleteError': 'Không xoá được lá số, thử lại sau.',
+  'saved.kept': 'Đã lưu lá số này vào tài khoản. Bạn mở lại được trên mọi máy.',
 
   'login.fail': 'Đăng nhập chưa thành công. Thử lại nhé.',
   'login.unavailable': 'Đăng nhập tạm thời chưa mở. Bạn vẫn lập và tải ảnh lá số được.',
@@ -372,7 +373,7 @@ export const en: Messages = {
   'chart.reload': 'Reload the page',
 
   'actions.save': 'Save chart',
-  'actions.signInToSave': 'Sign in to save',
+  'actions.signUpToSave': 'Sign up free to save',
   'actions.saving': 'Saving…',
   'actions.saved': 'Saved',
   'actions.export': 'Download PNG',
@@ -405,6 +406,7 @@ export const en: Messages = {
   'saved.confirmDelete': 'Delete the chart "{name}"?',
   'saved.loadError': 'Could not load your charts.',
   'saved.deleteError': 'Could not delete the chart, try again later.',
+  'saved.kept': 'This chart is now saved to your account. Open it on any device.',
 
   'login.fail': 'Sign-in did not go through. Please try again.',
   'login.unavailable': 'Sign-in is not open yet. You can still cast charts and download them.',

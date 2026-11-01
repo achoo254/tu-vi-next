@@ -41,6 +41,8 @@ async function signIn(server: TestServer): Promise<string> {
   expect(authorize.searchParams.get('scope')).toBe('openid profile email');
   expect(authorize.searchParams.get('code_challenge_method')).toBe('S256');
   expect(authorize.searchParams.get('redirect_uri')).toBe(`${server.origin}/auth/callback`);
+  // A plain sign-in never asks the IdP to open on making an account.
+  expect(authorize.searchParams.get('prompt')).toBeNull();
   const loginCookie = cookieFrom(start, 'tuvi_login');
   const consent = await fetch(authorize, { redirect: 'manual' });
   const callback = await fetch(location(consent), { redirect: 'manual', headers: { cookie: loginCookie } });
@@ -141,6 +143,20 @@ describe('signed in through the hoandat.com account', () => {
       idp.setProfile(PROFILE_A);
       idp.setSub('account-a');
     }
+  });
+
+  it('opens the IdP on making an account when a sign-up button sent the person, and still comes back', async () => {
+    const start = await fetch(`${server.origin}/auth/login?return=/saved&lang=en&signup=1`, { redirect: 'manual' });
+    const authorize = new URL(location(start));
+    expect(authorize.searchParams.get('prompt')).toBe('create');
+    expect(authorize.searchParams.get('client_id')).toBe(CLIENT_ID);
+    expect(authorize.searchParams.get('ui_locales')).toBe('en');
+    // Any other value is a plain sign-in.
+    const other = new URL(location(await fetch(`${server.origin}/auth/login?signup=yes`, { redirect: 'manual' })));
+    expect(other.searchParams.get('prompt')).toBeNull();
+    const consent = await fetch(authorize, { redirect: 'manual' });
+    const callback = await fetch(location(consent), { redirect: 'manual', headers: { cookie: cookieFrom(start, 'tuvi_login') } });
+    expect(location(callback)).toBe('/saved');
   });
 
   it('rejects a callback without the login cookie or with another state', async () => {

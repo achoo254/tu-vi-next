@@ -3,7 +3,8 @@ import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type BirthInput, MAX_BIRTH_YEAR, MIN_BIRTH_YEAR } from '@tuvi/chart/schema';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type SavedChart, deleteChart, listCharts, saveChart } from '../api/charts-api';
-import { type SessionState, signInHref } from '../api/session-api';
+import { ApiError } from '../api/api-client';
+import { type SessionState, signInHref, signUpHref } from '../api/session-api';
 import { BirthForm } from '../chart/birth-form';
 import { ChartActions } from '../chart/chart-actions';
 import { ChartBoard } from '../chart/chart-board';
@@ -12,6 +13,7 @@ import { ChartErrorBoundary } from '../chart/chart-error-boundary';
 import { ChartSummaryCard } from '../chart/chart-summary';
 import { PlainReadingSection } from '../chart/plain-reading-section';
 import { ConfirmDialog } from '../chart/confirm-dialog';
+import { keepReturnPath, sameInput, useKeepAfterSignUp } from '../chart/keep-after-sign-up';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
 import { SavedCharts } from '../chart/saved-charts';
 import { vietnamToday, yearOptions } from '../chart/yearly-marks';
@@ -97,6 +99,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   const [saved, setSaved] = useState<SavedChart[] | 'error' | null>(null);
   const [savedMessage, setSavedMessage] = useState<string | null>(null);
   const [pendingDelete, setPendingDelete] = useState<SavedChart | null>(null);
+  const [kept, setKept] = useState(false);
   const chartRef = useRef<HTMLElement>(null);
   const { chart, error } = useMemo(() => cast(engine, input, t), [engine, input, t]);
   const [yearChoice, setYearChoice] = useState<number | null>(null);
@@ -118,6 +121,28 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
       setSaved('error');
     }
   }, []);
+
+  // Back from a "sign up to keep it" button: the chart on screen goes to the new account.
+  const keep = useCallback(
+    async (next: BirthInput) => {
+      try {
+        await saveChart(next);
+        setKept(true);
+      } catch (failure) {
+        setSavedMessage(failure instanceof ApiError && failure.code === 'chart-limit' ? t('actions.error.chart-limit') : t('actions.error.generic'));
+      }
+      await refresh();
+    },
+    [refresh, t],
+  );
+  useKeepAfterSignUp({
+    signedIn: session.status === 'ready' ? session.signedIn : null,
+    input: chart?.input ?? null,
+    engineSettled: engine !== 'loading',
+    saved,
+    keep,
+  });
+  const chartSaved = chart !== null && Array.isArray(saved) && saved.some((item) => sameInput(item.input, chart.input));
 
   useEffect(() => {
     if (!signedIn) return;
@@ -159,6 +184,11 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           {notice}
         </p>
       )}
+      {kept && (
+        <p className="alert alert-info" role="status" data-id="chart-kept">
+          {t('saved.kept')}
+        </p>
+      )}
       <section className={showSignIn ? 'hero hero-split' : 'hero'} data-id="hero">
         <div className="hero-intro">
           <h1 className="hero-title">{t('intro.title')}</h1>
@@ -194,9 +224,9 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
       </section>
       <div className="home-grid">
         <div className="home-side">
-          {signedIn && <QueCard charts={saved} signedIn signInHref={undefined} engine={engine} />}
+          {signedIn && <QueCard charts={saved} signedIn signUpHref={undefined} engine={engine} />}
           <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
-          {showSignIn && <QueCard charts={null} signedIn={false} signInHref={signInHref(locale, '/')} engine={engine} />}
+          {showSignIn && <QueCard charts={null} signedIn={false} signUpHref={signUpHref(locale, keepReturnPath('#que-today'))} engine={engine} />}
           {signedIn && <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={setPendingDelete} />}
           <ConfirmDialog
             message={pendingDelete ? t('saved.confirmDelete', { name: pendingDelete.input.name || t('chart.unnamed') }) : null}
@@ -219,12 +249,13 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
         {chart && (
           <section className="chart" ref={chartRef} aria-labelledby="chart-title" data-id="chart">
             <ChartSummaryCard key={`summary-${JSON.stringify(chart.input)}`} chart={chart} />
-            {/* A guest's first chart is the moment a free account has something to keep. Never for the signed-in. */}
+            {/* A guest's first chart is the moment a free account has something to keep. Never for the signed-in.
+                Its button signs up and comes back saving this chart. */}
             {showSignIn && (
               <AccountValueCard
                 brand={{ appName: brand.appName, domain: brand.primaryTenant.domain, markSrc: BRAND_MARK_SRC }}
                 locale={locale}
-                signInHref={signInHref(locale, '/')}
+                signInHref={signUpHref(locale, keepReturnPath())}
                 benefits={[t('accountValue.save'), t('accountValue.devices'), t('accountValue.que')]}
               />
             )}
@@ -244,7 +275,8 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
                 chart={chart}
                 horoscope={horoscope}
                 signedIn={signedIn}
-                signInToSaveHref={showSignIn ? signInHref(locale, '/') : undefined}
+                alreadySaved={chartSaved}
+                signUpToSaveHref={showSignIn ? signUpHref(locale, keepReturnPath()) : undefined}
                 onSave={async () => {
                   await saveChart(chart.input);
                   await refresh();

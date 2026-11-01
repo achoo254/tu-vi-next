@@ -1,7 +1,7 @@
 import { AccountMenu } from '@achoo254/app-shell';
 import { writePreference } from '@achoo254/app-shell/preferences';
 import { type ReactNode, useState } from 'react';
-import { LOGIN_PATH, type SessionState, type SessionUser, loginPageHref, signOut } from '../api/session-api';
+import { LOGIN_PATH, type SessionState, type SessionUser, loginReturnPath, signOut, signUpHref } from '../api/session-api';
 import { BRAND_MARK_SRC, ECOSYSTEM_URL, IDP_ACCOUNT_URL, brand } from '../brand';
 import { LOCALES, type Locale, useI18n } from '../i18n/i18n';
 import { FEATURED_YEAR, parseYearRoute, yearIndexPath } from '../year/year-routes';
@@ -76,14 +76,18 @@ function AccountButton({ user }: { user: SessionUser | undefined }): ReactNode {
   );
 }
 
-/** The sign-in pill, the account menu, or nothing while the session loads or when sign-in is not set up. */
+/**
+ * The sign-up pill, the account menu, or nothing when sign-in is not set up. The pill is a sign-up button: it goes
+ * straight to making an account at the IdP and back to this page (from /login, to the page that sent the visitor).
+ */
 function AccountControl({ path, session }: { path: string; session: SessionState }): ReactNode {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   if (session.status === 'ready' && session.signedIn) return <AccountButton user={session.user} />;
   // Sign-in is not configured on this server: no pill that would only come back with "not open yet".
   if (session.status === 'ready' && !session.signInAvailable) return null;
+  const back = path === LOGIN_PATH ? loginReturnPath(window.location.search) : path;
   return (
-    <a className="pill pill-gold" href={loginPageHref(path)} data-id="public-sign-in" aria-current={path === LOGIN_PATH ? 'page' : undefined}>
+    <a className="pill pill-gold" href={signUpHref(locale, back)} data-id="public-sign-in">
       {/* Signing in for the first time makes the account, so the pill invites a sign-up; short on phones. */}
       <span className="hide-phone">{t('layout.signIn')}</span>
       <span className="only-phone">{t('layout.signInShort')}</span>

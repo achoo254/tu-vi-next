@@ -34,8 +34,10 @@ interface ChartActionsProps {
   /** The lưu niên shown on the board, drawn on the image too. */
   horoscope: YearHoroscope | null;
   signedIn: boolean;
-  /** Where a signed-out visitor signs in to save (back to this page); undefined when sign-in is unavailable. */
-  signInToSaveHref: string | undefined;
+  /** The account already keeps this chart: the save button says so instead of saving it twice. */
+  alreadySaved: boolean;
+  /** Where a signed-out visitor signs up to save it (back here, saving it); undefined when sign-in is unavailable. */
+  signUpToSaveHref: string | undefined;
   /** Saves the chart's input; resolves when it is stored. */
   onSave(): Promise<void>;
 }
@@ -43,12 +45,13 @@ interface ChartActionsProps {
 type SaveState = 'idle' | 'saving' | 'saved';
 
 /** Save (signed in), download the full chart as a PNG, share it (Web Share API). */
-export function ChartActions({ chart, horoscope, signedIn, signInToSaveHref, onSave }: ChartActionsProps): ReactNode {
+export function ChartActions({ chart, horoscope, signedIn, alreadySaved, signUpToSaveHref, onSave }: ChartActionsProps): ReactNode {
   const { t } = useI18n();
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const [exporting, setExporting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [shareable] = useState(canShareFiles);
+  const shownSaveState: SaveState = alreadySaved ? 'saved' : saveState;
 
   useEffect(() => {
     // Prefetch only; a failure here is retried (and reported) when the person presses Download or Share.
@@ -84,13 +87,13 @@ export function ChartActions({ chart, horoscope, signedIn, signInToSaveHref, onS
   return (
     <div className="chart-actions" data-id="chart-actions">
       {signedIn ? (
-        <button type="button" className="btn btn-primary" onClick={() => void save()} disabled={saveState !== 'idle'} data-id="chart-save">
-          {saveState === 'saving' ? t('actions.saving') : saveState === 'saved' ? t('actions.saved') : t('actions.save')}
+        <button type="button" className="btn btn-primary" onClick={() => void save()} disabled={shownSaveState !== 'idle'} data-id="chart-save">
+          {shownSaveState === 'saving' ? t('actions.saving') : shownSaveState === 'saved' ? t('actions.saved') : t('actions.save')}
         </button>
       ) : (
-        signInToSaveHref !== undefined && (
-          <a className="btn btn-secondary" href={signInToSaveHref} data-id="chart-sign-in-to-save">
-            {t('actions.signInToSave')}
+        signUpToSaveHref !== undefined && (
+          <a className="btn btn-secondary" href={signUpToSaveHref} data-id="chart-sign-up-to-save">
+            {t('actions.signUpToSave')}
           </a>
         )
       )}

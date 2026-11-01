@@ -19,7 +19,7 @@ export async function signOut(): Promise<void> {
   await apiFetch('/auth/logout', { method: 'POST' });
 }
 
-/** The app's sign-in page, where the header's sign-in pill goes. */
+/** The app's sign-in page (a sign-in card for a link or bookmark that opens it). */
 export const LOGIN_PATH = '/login';
 
 /** The paths sign-in may come back to: this site only, as the server checks (apps/server oidc-login.ts). */
@@ -29,20 +29,28 @@ export function safeReturnPath(value: string | null | undefined): string {
   return value === LOGIN_PATH || value.startsWith(`${LOGIN_PATH}?`) ? '/' : value;
 }
 
-/** The sign-in page, remembering the page the visitor was on (home needs no reminder). */
-export function loginPageHref(path: string): string {
-  const back = safeReturnPath(path);
-  return back === '/' ? LOGIN_PATH : `${LOGIN_PATH}?${new URLSearchParams({ return: back }).toString()}`;
-}
-
 /** Where the sign-in page sends the visitor back to (its `?return=`), home by default. */
 export function loginReturnPath(search: string): string {
   return safeReturnPath(new URLSearchParams(search).get('return'));
 }
 
-/** The server's sign-in route: to the IdP in `locale`, then back to `returnTo`. */
+function authLoginHref(locale: string, returnTo: string, signUp: boolean): string {
+  const query = new URLSearchParams({ return: safeReturnPath(returnTo), lang: locale });
+  if (signUp) query.set('signup', '1');
+  return `/auth/login?${query.toString()}`;
+}
+
+/** The server's sign-in route: to the IdP in `locale`, then back to `returnTo`. For "Đăng nhập" links. */
 export function signInHref(locale: string, returnTo: string): string {
-  return `/auth/login?${new URLSearchParams({ return: safeReturnPath(returnTo), lang: locale }).toString()}`;
+  return authLoginHref(locale, returnTo, false);
+}
+
+/**
+ * The same route for a sign-up button ("Đăng ký…"): the IdP opens on making an account (`prompt=create`, which
+ * links to sign-in for people who have one). Only sign-up buttons use it: the IdP's log counts these as sign-ups.
+ */
+export function signUpHref(locale: string, returnTo: string): string {
+  return authLoginHref(locale, returnTo, true);
 }
 
 /** The session, once; an unreachable API counts as signed out with sign-in unavailable. */
