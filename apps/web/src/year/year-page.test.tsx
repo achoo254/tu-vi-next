@@ -31,6 +31,16 @@ describe('yearly pages', () => {
     expect(headings).toEqual(['Tổng quan', 'Công việc', 'Tài chính', 'Tình cảm, gia đình', 'Sức khỏe', 'Lời khuyên']);
   });
 
+  it('invites the reader to cast a chart at the top, and to make an account at the end', () => {
+    show(0);
+    expect(document.querySelector('[data-id=year-hero-cast-cta]')?.getAttribute('href')).toBe('/');
+    const signUp = document.querySelector('[data-id=year-sign-up-cta]')?.getAttribute('href') ?? '';
+    const url = new URL(signUp, 'https://tuvi.hoandat.com');
+    expect(url.pathname).toBe('/auth/login');
+    expect(url.searchParams.get('signup')).toBe('1');
+    expect(url.searchParams.get('return')).toBe('/');
+  });
+
   it('says plainly when a sign does not meet Thái Tuế', () => {
     show(2);
     expect(document.querySelector('[data-id=year-sign-tai-sui]')?.textContent).toContain('không gặp Thái Tuế');

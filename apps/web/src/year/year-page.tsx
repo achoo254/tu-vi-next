@@ -18,6 +18,7 @@ import {
 } from '@tuvi/chart/year';
 import type { SolarDate } from '@tuvi/chart';
 import type { ReactNode } from 'react';
+import { signUpHref } from '../api/session-api';
 import { brand } from '../brand';
 import { zodiacArt } from '../chart/chart-art';
 import { type Locale, type Translate, format, translator, useI18n } from '../i18n/i18n';
@@ -359,13 +360,19 @@ function SignVideo({ video, title, y }: { video: YearVideo; title: string; y: Ye
   );
 }
 
-function Closing({ year, y }: { year: number; y: YearTranslate }): ReactNode {
+function Closing({ year, y, locale }: { year: number; y: YearTranslate; locale: Locale }): ReactNode {
   return (
     <>
       <p className="disclaimer year-disclaimer">{y('disclaimer')}</p>
       <a className="btn btn-primary year-cta" href="/" data-id="year-cast-cta">
         {y('castCta', { year })}
       </a>
+      {/* A sign-up button (prompt=create): the account keeps charts and the daily quẻ. */}
+      <p className="help">
+        <a href={signUpHref(locale, '/')} data-id="year-sign-up-cta">
+          {y('signUpCta')}
+        </a>
+      </p>
       <p className="help">{y('sources')}</p>
     </>
   );
@@ -391,7 +398,7 @@ function IndexPage({ year }: { year: number }): ReactNode {
       </nav>
       <YearFacts year={year} y={y} locale={locale} />
       <TaiSuiTable year={year} y={y} />
-      <Closing year={year} y={y} />
+      <Closing year={year} y={y} locale={locale} />
     </article>
   );
 }
@@ -413,6 +420,9 @@ function SignPage({ year, branchIndex }: { year: number; branchIndex: number }):
         <div>
           <h1 className="doc-title">{y('signTitle', vars)}</h1>
           <p className="intro-lead">{y('signLead', vars)}</p>
+          <a className="btn btn-primary year-cta" href="/" data-id="year-hero-cast-cta">
+            {y('heroCta')}
+          </a>
         </div>
       </header>
       {video && <SignVideo video={video} title={y('videoTitle', vars)} y={y} />}
@@ -420,7 +430,7 @@ function SignPage({ year, branchIndex }: { year: number; branchIndex: number }):
       <FortuneTable year={year} branchIndex={branchIndex} y={y} locale={locale} />
       <Relations year={year} branchIndex={branchIndex} y={y} locale={locale} />
       <YearFacts year={year} y={y} locale={locale} />
-      <Closing year={year} y={y} />
+      <Closing year={year} y={y} locale={locale} />
       <nav aria-label={y('otherSigns')}>
         <h2 className="doc-heading">{y('otherSigns')}</h2>
         <SignGrid year={year} y={y} current={branchIndex} />

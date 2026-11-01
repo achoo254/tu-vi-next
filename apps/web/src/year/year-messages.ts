@@ -75,6 +75,8 @@ const vi = {
 
   disclaimer: 'Sao hạn, Thái Tuế, hợp xung là quan niệm dân gian, mang tính giải trí, tham khảo.',
   castCta: 'Lập lá số của bạn để xem lưu niên {year} trên 12 cung',
+  heroCta: 'Lập lá số miễn phí',
+  signUpCta: 'Tạo tài khoản Hoandat miễn phí để lưu lá số và nhận quẻ hôm nay mỗi ngày',
   otherSigns: 'Tuổi khác',
   signCard: 'Tuổi {branch}',
   sources: 'Nguồn bảng tra: sao Cửu Diệu và Bát Hạn theo cách đếm của Báo Hà Tĩnh và Báo La Văn Sử, đối chiếu đủ 71 năm sinh trong bảng năm 2027 của ngaydep.com; quan hệ địa chi theo boi.vn và 4T Human.',
@@ -148,6 +150,8 @@ const en: Record<YearMessageKey, string> = {
 
   disclaimer: 'Sao hạn, Thái Tuế, harmonies and clashes are folk beliefs, for entertainment and reference only.',
   castCta: 'Cast your chart to see {year} on the 12 palaces',
+  heroCta: 'Cast your chart for free',
+  signUpCta: 'Make a free Hoandat account to keep your chart and get a daily reading',
   otherSigns: 'Other signs',
   signCard: '{branch} year',
   sources:
