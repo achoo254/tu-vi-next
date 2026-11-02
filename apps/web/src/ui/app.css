@@ -1845,3 +1845,22 @@ button {
 .que-jump {
   justify-self: start;
 }
+.que-reminder {
+  display: grid;
+  gap: var(--space-1);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--c-border);
+}
+.que-reminder-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  font-weight: 600;
+  cursor: pointer;
+}
+.que-reminder-switch input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--c-primary-solid);
+}

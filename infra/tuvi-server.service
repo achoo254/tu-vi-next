@@ -7,7 +7,7 @@ Wants=network-online.target postgresql.service
 [Service]
 User=tuvi
 Group=tuvi
-# NODE_ENV=production, PORT=5290, PUBLIC_URL, DATABASE_URL, AUTH_ISSUER, AUTH_CLIENT_ID, AUTH_CLIENT_SECRET:
+# NODE_ENV=production, PORT=5290, PUBLIC_URL, DATABASE_URL, AUTH_ISSUER, AUTH_CLIENT_ID, AUTH_CLIENT_SECRET, VAPID_* (optional):
 # written on the server from the env folder outside git (docs/deployment-guide.md), never in the repo.
 EnvironmentFile=/etc/tuvi/production.env
 WorkingDirectory=/var/www/tuvi/current

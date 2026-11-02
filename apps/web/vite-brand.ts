@@ -7,8 +7,9 @@
  * - the icons (brand/generated/icons/, made by pnpm brand:gen from the AI-drawn master) and the web manifest
  *   at the site root, served in dev and emitted in builds.
  *
- * No service worker: installing only adds a launcher entry that opens start_url "/" in scope "/", so the
- * sign-in redirects stay inside the installed app.
+ * Installing only adds a launcher entry that opens start_url "/" in scope "/", so the sign-in redirects stay
+ * inside the installed app. The only service worker (public/sw.js) is registered when someone turns on the daily
+ * quẻ reminder, and it caches nothing.
  */
 import { readFileSync } from 'node:fs';
 import {

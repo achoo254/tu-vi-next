@@ -43,6 +43,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             'Ảnh đại diện do trình duyệt tải thẳng từ nơi giữ ảnh (Google hoặc GitHub, tuỳ cách bạn đăng nhập), không kèm địa chỉ trang đang xem; app không lưu bản sao của ảnh. Đăng nhập bằng Apple thì không có ảnh đại diện, vì Apple không chia sẻ ảnh.',
             'Lá số bạn bấm "Lưu" được giữ dưới dạng dữ liệu đầu vào (họ tên nếu có, ngày giờ sinh, lịch, giới tính), tối đa 50 lá số mỗi tài khoản. Lá số luôn được tính lại trên trình duyệt.',
             'Quẻ hôm nay: máy chủ chỉ lưu ngày gần nhất bạn xin quẻ và số ngày liên tiếp, để hiện chuỗi ngày. Quẻ được chọn trên trình duyệt từ lá số đã lưu và ngày hôm đó, không lưu lại; lá số chọn để xin quẻ chỉ được nhớ trên trình duyệt này.',
+            'Nhắc quẻ hôm nay (chỉ khi bạn bật): với mỗi máy bật nhắc, máy chủ lưu địa chỉ nhận thông báo (push endpoint) và khoá mã hoá mà trình duyệt cấp, cùng ngôn ngữ của lời nhắc, chỉ để mỗi sáng gửi một thông báo "quẻ hôm nay đã sẵn sàng" qua dịch vụ thông báo của trình duyệt (Google, Mozilla, Apple hoặc Microsoft, tuỳ trình duyệt). Lời nhắc không chứa tên hay ngày giờ sinh. Máy chủ ghi thêm ngày gần nhất đã gửi để mỗi ngày chỉ gửi một lần. Địa chỉ đó bị xoá khi bạn tắt nhắc trên máy đó, hoặc khi trình duyệt huỷ việc nhận thông báo.',
             'Một cookie phiên (__Host-tuvi_session) giữ bạn đăng nhập tối đa 30 ngày; máy chủ chỉ lưu bản băm của nó.',
             'Bạn xoá được từng lá số bất cứ lúc nào; đăng xuất là huỷ phiên trên máy chủ.',
           ],
@@ -55,7 +56,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         {
           heading: 'Liên hệ',
-          paragraphs: ['Muốn hỏi hay yêu cầu xoá dữ liệu (tên, email, ảnh, các lá số đã lưu và chuỗi ngày xem quẻ của tài khoản): nhắn Trang Facebook Hoandat Apps.'],
+          paragraphs: ['Muốn hỏi hay yêu cầu xoá dữ liệu (tên, email, ảnh, các lá số đã lưu, chuỗi ngày xem quẻ và các máy bật nhắc quẻ của tài khoản): nhắn Trang Facebook Hoandat Apps.'],
         },
       ],
     },
@@ -77,6 +78,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             'Your browser loads the profile picture straight from where it is kept (Google or GitHub, depending on how you sign in), without the address of the page you are on; the app keeps no copy of it. Signing in with Apple gives no picture, because Apple does not share one.',
             'Charts you save are kept as the inputs (name if given, birth date and time, calendar, gender), at most 50 per account. The chart itself is always computed again in the browser.',
             'Quẻ of the day: the server keeps only the latest day you drew a quẻ and how many days in a row, to show your streak. The quẻ is picked in the browser from the saved chart and the day and is not stored; the chart you draw for is remembered in this browser only.',
+            'Quẻ reminder (only if you turn it on): for each device you turn it on in, the server keeps the push address (push endpoint) and encryption keys the browser gives, and the language of the reminder, only to send one "today\'s quẻ is ready" notification each morning through the browser\'s push service (Google, Mozilla, Apple or Microsoft, depending on the browser). The reminder carries no name or birth data. The server also notes the latest day it sent one, so it sends at most one a day. The address is removed when you turn the reminder off on that device, or when the browser drops the subscription.',
             'A session cookie (__Host-tuvi_session) keeps you signed in for up to 30 days; the server stores only its hash.',
             'You can delete any saved chart at any time; signing out ends the session on the server.',
           ],
@@ -89,7 +91,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         {
           heading: 'Contact',
-          paragraphs: ['Questions or data deletion requests (the name, email, picture, saved charts and quẻ streak of your account): message the Hoandat Apps Facebook Page.'],
+          paragraphs: ['Questions or data deletion requests (the name, email, picture, saved charts, quẻ streak and reminder devices of your account): message the Hoandat Apps Facebook Page.'],
         },
       ],
     },

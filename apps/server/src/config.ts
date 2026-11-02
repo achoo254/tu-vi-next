@@ -19,6 +19,10 @@ const Env = z.object({
   AUTH_CLIENT_ID: z.preprocess(emptyIsUnset, z.string().min(1).default(DEFAULT_CLIENT_ID)),
   /** Secret of the confidential client tuvi-web. Unset: sign-in is off (the app still casts charts). */
   AUTH_CLIENT_SECRET: z.preprocess(emptyIsUnset, z.string().min(32).optional()),
+  /** Web Push (VAPID) for the daily quẻ reminder: the key pair and the sender's contact. All three or none (push off). */
+  VAPID_PUBLIC_KEY: z.preprocess(emptyIsUnset, z.string().regex(/^[A-Za-z0-9_-]{80,100}$/).optional()),
+  VAPID_PRIVATE_KEY: z.preprocess(emptyIsUnset, z.string().regex(/^[A-Za-z0-9_-]{40,50}$/).optional()),
+  VAPID_SUBJECT: z.preprocess(emptyIsUnset, z.string().regex(/^(mailto:\S+@\S+|https:\/\/\S+)$/).optional()),
 });
 
 export interface AuthConfig {
@@ -26,6 +30,15 @@ export interface AuthConfig {
   clientId: string;
   clientSecret: string;
   redirectUri: string;
+}
+
+/** Web Push of the daily quẻ reminder. */
+export interface PushConfig {
+  /** Public key (base64url) browsers subscribe with; served by GET /api/push/key. */
+  publicKey: string;
+  privateKey: string;
+  /** `mailto:` or `https:` contact the push services may use to reach the sender. */
+  subject: string;
 }
 
 export interface ServerConfig {
@@ -43,6 +56,16 @@ export interface ServerConfig {
    * real client IP is the one nginx forwards (Cloudflare's real-IP restore is global on the host).
    */
   signInLimitPer15Min: number;
+  /** The daily quẻ reminder by Web Push; null (off, nothing runs) when the VAPID keys are not set. */
+  push: PushConfig | null;
+}
+
+/** Env keys that only work together: all set or none; some set is a startup error naming the rest. */
+function requireAllOrNone(group: string, values: Record<string, string | undefined>): void {
+  const missing = Object.keys(values).filter((key) => values[key] === undefined);
+  if (missing.length > 0 && missing.length < Object.keys(values).length) {
+    throw new Error(`Invalid server env: ${group} needs ${missing.join(', ')} too`);
+  }
 }
 
 /** Validates env once at startup; throws naming the offending keys so the process fails fast. */
@@ -69,6 +92,7 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
   if (e.AUTH_CLIENT_SECRET && env.NODE_TLS_REJECT_UNAUTHORIZED === '0') {
     throw new Error('Invalid server env: NODE_TLS_REJECT_UNAUTHORIZED=0 is not allowed with sign-in');
   }
+  requireAllOrNone('Web Push', { VAPID_PUBLIC_KEY: e.VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY: e.VAPID_PRIVATE_KEY, VAPID_SUBJECT: e.VAPID_SUBJECT });
   return {
     nodeEnv: e.NODE_ENV,
     port: e.PORT,
@@ -84,5 +108,9 @@ export function loadConfig(env: Record<string, string | undefined> = process.env
         }
       : null,
     signInLimitPer15Min: 100,
+    push:
+      e.VAPID_PUBLIC_KEY && e.VAPID_PRIVATE_KEY && e.VAPID_SUBJECT
+        ? { publicKey: e.VAPID_PUBLIC_KEY, privateKey: e.VAPID_PRIVATE_KEY, subject: e.VAPID_SUBJECT }
+        : null,
   };
 }

@@ -62,3 +62,33 @@ export const queStreaks = pgTable('que_streaks', {
   lastDay: date('last_day', { mode: 'string' }).notNull(),
   streak: integer('streak').notNull(),
 });
+
+/**
+ * Browsers that turned on the daily quẻ reminder (Web Push): the push service endpoint and the keys to encrypt for
+ * it, one row per browser. An endpoint belongs to one browser, so it is unique: whoever turned the reminder on there
+ * last gets it. `locale` is the language of the reminder's words. Deleted when turned off or when the push service
+ * answers that the subscription is gone.
+ */
+export const pushSubscriptions = pgTable(
+  'push_subscriptions',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    endpoint: text('endpoint').notNull().unique(),
+    p256dh: text('p256dh').notNull(),
+    auth: text('auth').notNull(),
+    locale: text('locale', { enum: ['vi', 'en'] }).notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+  },
+  (table) => [index('push_subscriptions_user_id_idx').on(table.userId)],
+);
+
+/** The latest Vietnam day the daily quẻ reminder went out to an account: claimed before sending, so at most once a day. */
+export const queReminders = pgTable('que_reminders', {
+  userId: uuid('user_id')
+    .primaryKey()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  lastDay: date('last_day', { mode: 'string' }).notNull(),
+});

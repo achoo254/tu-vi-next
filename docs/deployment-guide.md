@@ -15,8 +15,8 @@ vào đây; dùng alias SSH (`SSH_TARGET`) và placeholder như `<SERVER_65_IP>`
 | Đăng nhập | client BFF `tuvi-web` trên `auth.hoandat.com`, scope `openid profile email`, callback `https://tuvi.hoandat.com/auth/callback`; tên, email, ảnh lấy từ userinfo lúc đăng nhập, lưu ở bảng `users` cho menu tài khoản |
 
 Lá số và quẻ hằng ngày được tính trên trình duyệt; server chỉ giữ phiên đăng nhập, tên/email/địa chỉ ảnh của tài
-khoản, dữ liệu đầu vào của lá số đã lưu và chuỗi ngày xem quẻ (bảng `que_streaks`: ngày gần nhất và số ngày liên
-tiếp), nên nhẹ.
+khoản, dữ liệu đầu vào của lá số đã lưu, chuỗi ngày xem quẻ (bảng `que_streaks`: ngày gần nhất và số ngày liên
+tiếp) và, khi bật Web Push, các trình duyệt bật "Nhắc quẻ hôm nay" (bảng `push_subscriptions`, `que_reminders`), nên nhẹ.
 Unit giới hạn `MemoryHigh=160M`, `MemoryMax=256M`.
 
 Các file: [`infra/nginx/tuvi.hoandat.com.conf`](../infra/nginx/tuvi.hoandat.com.conf),
@@ -38,6 +38,13 @@ không bao giờ trong repo. Trên server là `/etc/tuvi/production.env` (`root:
 | `AUTH_ISSUER` | `https://auth.hoandat.com` |
 | `AUTH_CLIENT_ID` | `tuvi-web` |
 | `AUTH_CLIENT_SECRET` | secret của client `tuvi-web`, cùng giá trị với `TUVI_WEB_CLIENT_SECRET` trên IdP (≥ 32 ký tự) |
+| `VAPID_PUBLIC_KEY` | khoá công khai VAPID (base64url, 87 ký tự); trình duyệt đăng ký nhận thông báo bằng khoá này |
+| `VAPID_PRIVATE_KEY` | khoá riêng VAPID (base64url, 43 ký tự); bí mật, chỉ ở thư mục env và `/etc/tuvi/production.env` |
+| `VAPID_SUBJECT` | địa chỉ liên hệ cho dịch vụ đẩy: `mailto:noreply@hoandat.com` (hoặc một URL `https://`) |
+
+Ba biến `VAPID_*` đi cùng nhau (mục Nhắc quẻ hằng ngày): đặt đủ ba thì bật, không đặt biến nào thì tắt hẳn (không có
+nút bật nhắc, không chạy hẹn giờ gửi, không nạp thư viện `web-push`), đặt thiếu hay sai dạng thì server từ chối khởi
+động và log nêu tên biến. Deploy trước khi có khoá là an toàn.
 
 ## Lần đầu
 
@@ -126,6 +133,46 @@ Kiểm sau release:
   mở lại được.
 - RSS của service (mục tiêu < 120 MB): `systemctl show tuvi-server -p MemoryCurrent`.
 
+## Nhắc quẻ hằng ngày (Web Push)
+
+Người đã đăng nhập, có lá số đã lưu, bật công tắc "Nhắc quẻ hôm nay" trên thẻ quẻ: trình duyệt đăng ký service worker
+`/sw.js` và gửi địa chỉ nhận thông báo lên `POST /api/push/subscriptions`. Mỗi sáng từ **07:30 giờ Việt Nam** server gửi
+một thông báo ("Quẻ hôm nay của bạn đã sẵn sàng", bấm vào mở `/#que-today`) tới mọi trình duyệt đã bật của tài khoản.
+
+- **Chạy ở đâu:** hẹn giờ ngay trong `tuvi-server` (cùng kiểu với việc xoá phiên hết hạn), kiểm mỗi 5 phút và lúc
+  khởi động; không có timer systemd riêng. Server tắt lúc 07:30 thì khi chạy lại trong ngày sẽ gửi bù.
+- **Mỗi ngày một lần:** trước khi gửi, server ghi ngày hôm nay vào `que_reminders` của tài khoản trong một câu upsert;
+  lần chạy sau trong ngày (restart, hai lượt chồng nhau) không gửi lại. Bỏ qua tài khoản không còn lá số nào, tài
+  khoản đã xin quẻ hôm nay trước giờ gửi, và trình duyệt bật sau 07:30 hôm đó (đợi sáng mai).
+- **Dọn đăng ký chết:** dịch vụ đẩy trả 404/410 thì xoá dòng đó; lỗi khác chỉ đếm, giữ dòng.
+- **Log:** một dòng mỗi ngày có gửi: `que reminders <ngày>: N account(s), sent X, gone Y, failed Z`; lỗi gửi chỉ ghi
+  mã (`push-429`, `push-network`). Không bao giờ ghi endpoint hay khoá.
+- Chỉ nhận endpoint của dịch vụ đẩy thật của trình duyệt (`fcm.googleapis.com`, `updates.push.services.mozilla.com`,
+  `*.push.apple.com`, `*.notify.windows.com`, https, không cổng): server không gọi tới địa chỉ tuỳ ý. Tối đa 10 trình
+  duyệt mỗi tài khoản. Trên iPhone/iPad, Safari chỉ cho nhận thông báo khi app đã được thêm vào Màn hình chính.
+
+**Bật trên production** (theo thứ tự):
+
+1. Release bản có tính năng này (migration `0003_push-reminders` tự chạy khi server khởi động; chỉ thêm bảng). Chưa
+   có khoá thì log khởi động ghi `que reminder push: off (VAPID keys unset)`.
+2. Tạo cặp khoá **một lần** trên máy dev, không in ra màn hình, ghi thẳng vào thư mục env trên iCloud
+   (`ENV production/tu-vi-next/`):
+
+   ```sh
+   cd apps/server && pnpm exec web-push generate-vapid-keys --json > "<thư mục env>/tu-vi-next/vapid-keys.json"
+   ```
+
+   Thêm `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` và `VAPID_SUBJECT=mailto:noreply@hoandat.com` vào env production.
+3. Ghi lại `/etc/tuvi/production.env` từ thư mục env qua ssh stdin (như bước Env của mục Lần đầu), rồi
+   `ssh <alias> 'systemctl restart tuvi-server'`.
+4. Kiểm: `journalctl -u tuvi-server -n 20` có `que reminder push: on`; `curl -fsS https://tuvi.hoandat.com/api/push/key`
+   trả `publicKey` khác `null`. Đăng nhập, có lá số, bật công tắc trên thẻ quẻ; sáng hôm sau 07:30 nhận thông báo.
+
+**Đổi khoá:** chỉ khi khoá riêng bị lộ. Mọi đăng ký cũ gắn với khoá công khai cũ, nên sau khi đổi, dịch vụ đẩy từ
+chối chúng (log `failed`), người dùng phải tắt rồi bật lại nhắc. Muốn dọn: `DELETE FROM push_subscriptions;` trên
+database `tuvi`. **Tắt hẳn:** xoá ba biến `VAPID_*` khỏi env rồi restart; dữ liệu đăng ký giữ nguyên, bật lại thì
+gửi tiếp.
+
 ## Video (`/media/`)
 
 Video và poster của các trang năm không nằm trong repo hay trong release: chúng ở `/var/www/tuvi/media/<bộ>/` trên
@@ -162,5 +209,6 @@ xoá `/etc/nginx/conf.d/tuvi.hoandat.com.conf` (`nginx -t` rồi reload), xoá b
 
 `journalctl -u tuvi-server`; nginx: `/var/log/nginx/tuvi.hoandat.com.{access,error}.log`. Log của server chỉ ghi
 lỗi và trạng thái đăng nhập, không ghi ngày sinh hay tên: lỗi truy vấn chỉ ghi mã và thông báo của Postgres, không
-ghi câu SQL hay tham số (`apps/server/src/log-error.ts`, có test). Phiên hết hạn bị xoá khi server khởi động, mỗi giờ
+ghi câu SQL hay tham số (`apps/server/src/log-error.ts`, có test). Nhắc quẻ chỉ ghi số đếm mỗi ngày và mã lỗi, không ghi endpoint
+hay khoá đẩy. Phiên hết hạn bị xoá khi server khởi động, mỗi giờ
 và mỗi lần đăng nhập. Mất kết nối Postgres (Postgres chung restart) không làm sập service.

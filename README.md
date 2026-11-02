@@ -11,7 +11,9 @@ log máy chủ nào (`apps/web/src/chart/chart-video-link.ts`). Âm lịch tính
 thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Đã đăng nhập và có lá số đã lưu thì mỗi ngày
 xin được một "Quẻ hôm nay" cho lá số đó (64 quẻ tự viết, lưu tĩnh ở [`content/que`](content/que/SOURCES.md), chọn theo
 id lá số và ngày giờ Việt Nam, không gọi AI), kèm chuỗi ngày xem liên tiếp lưu trên máy chủ và ảnh quẻ 1080×1350 để
-chia sẻ; khách thấy thẻ giới thiệu và nút đăng ký. Mọi nút "Đăng ký…" (nút ở header, thẻ dưới lá số đầu tiên,
+chia sẻ; khách thấy thẻ giới thiệu và nút đăng ký. Trên thẻ quẻ, người có lá số đã lưu bật được "Nhắc quẻ hôm nay":
+mỗi sáng 07:30 giờ Việt Nam trình duyệt nhận một thông báo Web Push mở thẳng thẻ quẻ (chỉ khi server có khoá VAPID,
+[`docs/deployment-guide.md`](docs/deployment-guide.md#nhắc-quẻ-hằng-ngày-web-push)). Mọi nút "Đăng ký…" (nút ở header, thẻ dưới lá số đầu tiên,
 "Đăng ký miễn phí để lưu", thẻ quẻ) mở thẳng màn tạo tài khoản hoandat.com (`/auth/login?signup=1`, máy chủ thêm
 `prompt=create`); nút "Đăng nhập" thì không. Các nút giữ lá số quay về `/?keep=1` và lưu lá số đang xem (nhớ trên trình
 duyệt, không đi qua URL) vào tài khoản một lần, bỏ qua nếu tài khoản đã có. Nội dung mang tính giải trí, tham khảo.
@@ -22,7 +24,7 @@ duyệt, không đi qua URL) vào tài khoản một lần, bỏ qua nếu tài 
 |---|---|
 | [`packages/chart`](packages/chart) | `@tuvi/chart`: âm lịch Việt Nam và lớp bọc duy nhất quanh `iztro` ([`astrolabe.ts`](packages/chart/src/astrolabe.ts)); chạy được trên trình duyệt và Node |
 | [`apps/web`](apps/web) | `@tuvi/web`: React 19 + Vite. Form, bàn lá số 4×4 (màn hẹp thành danh sách cung), nghĩa sao, xuất PNG, Web Share, trang pháp lý |
-| [`apps/server`](apps/server) | `@tuvi/server`: Express 5 + drizzle + Postgres (PGlite khi dev/test). Đăng nhập BFF qua auth-next, phiên riêng, `/api/charts`, `/api/que` (chuỗi ngày xem quẻ), `/healthz` |
+| [`apps/server`](apps/server) | `@tuvi/server`: Express 5 + drizzle + Postgres (PGlite khi dev/test). Đăng nhập BFF qua auth-next, phiên riêng, `/api/charts`, `/api/que` (chuỗi ngày xem quẻ), `/api/push` (nhắc quẻ hằng ngày), `/healthz` |
 | [`infra`](infra) | nginx, unit systemd, script deploy |
 | [`brand`](brand) | Biểu tượng AI gốc và các file sinh từ nó (`pnpm brand:gen`) |
 

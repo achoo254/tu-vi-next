@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { type FakeIdp, startFakeIdp } from '../test/fake-idp';
+import { api, cookieFrom, location, signIn } from '../test/sign-in';
 import { type TestServer, startTestServer } from '../test/test-server';
 import { MAX_CHARTS_PER_USER } from './charts/chart-store';
 
@@ -19,44 +20,6 @@ const birth = {
   minute: 15,
   gender: 'female',
 } as const;
-
-/** Set-Cookie header of a response, as the `name=value` the next request sends. */
-function cookieFrom(res: Response, name: string): string {
-  const header = res.headers.getSetCookie().find((c) => c.startsWith(`${name}=`));
-  if (!header) throw new Error(`no ${name} cookie`);
-  return header.split(';')[0] ?? '';
-}
-
-function location(res: Response): string {
-  const value = res.headers.get('location');
-  if (!value) throw new Error(`no redirect (status ${res.status})`);
-  return value;
-}
-
-/** The whole browser round trip through the fake IdP; returns the session cookie. */
-async function signIn(server: TestServer): Promise<string> {
-  const start = await fetch(`${server.origin}/auth/login?return=/saved`, { redirect: 'manual' });
-  expect(start.status).toBe(302);
-  const authorize = new URL(location(start));
-  expect(authorize.searchParams.get('scope')).toBe('openid profile email');
-  expect(authorize.searchParams.get('code_challenge_method')).toBe('S256');
-  expect(authorize.searchParams.get('redirect_uri')).toBe(`${server.origin}/auth/callback`);
-  // A plain sign-in never asks the IdP to open on making an account.
-  expect(authorize.searchParams.get('prompt')).toBeNull();
-  const loginCookie = cookieFrom(start, 'tuvi_login');
-  const consent = await fetch(authorize, { redirect: 'manual' });
-  const callback = await fetch(location(consent), { redirect: 'manual', headers: { cookie: loginCookie } });
-  expect(location(callback)).toBe('/saved');
-  return cookieFrom(callback, 'tuvi_session');
-}
-
-function api(server: TestServer, path: string, init: RequestInit & { cookie?: string } = {}): Promise<Response> {
-  const headers = new Headers(init.headers);
-  headers.set('origin', server.origin);
-  if (init.cookie) headers.set('cookie', init.cookie);
-  if (init.body) headers.set('content-type', 'application/json');
-  return fetch(`${server.origin}${path}`, { ...init, headers });
-}
 
 describe('without sign-in configured', () => {
   let server: TestServer;

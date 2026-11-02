@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import type { SavedChart } from '../api/charts-api';
 import type { ChartEngineState } from '../chart/chart-engine';
 import { chartSummary } from '../chart/chart-video-link';
@@ -6,6 +6,7 @@ import { type Translate, useI18n } from '../i18n/i18n';
 import { type QueState, drawQue, fetchQueState } from './que-api';
 import type { Que, QueDeck } from './que-content';
 import { displayDay, queIndex, starLine } from './que-pick';
+import { QueReminder } from './que-reminder';
 import { useQueDeck } from './use-que-deck';
 
 type ShareModules = [typeof import('./que-share-png'), typeof import('../chart/export-png')];
@@ -19,6 +20,9 @@ function loadShare(): Promise<ShareModules> {
   });
   return shareModules;
 }
+
+/** The card's anchor: links, the sign-up return and the morning reminder open the page on it. */
+const QUE_ANCHOR = 'que-today';
 
 /** The saved chart the quẻ is drawn for, remembered in this browser. */
 export const QUE_CHART_KEY = 'tuvi.que-chart';
@@ -66,8 +70,15 @@ interface QueCardProps {
 /** "Quẻ hôm nay": one quẻ a day for a saved chart, with a streak, for signed-in accounts; an invitation for guests. */
 export function QueCard({ charts, signedIn, signUpHref, engine }: QueCardProps): ReactNode {
   const { t } = useI18n();
+  const ref = useRef<HTMLElement>(null);
+  // The browser looks for `#que-today` before the app has drawn the card, so the app scrolls to it itself.
+  useEffect(() => {
+    if (window.location.hash !== `#${QUE_ANCHOR}`) return;
+    const frame = requestAnimationFrame(() => ref.current?.scrollIntoView?.({ block: 'start' }));
+    return () => cancelAnimationFrame(frame);
+  }, []);
   return (
-    <section className="card que-card" id="que-today" aria-labelledby="que-title" data-id="que-today">
+    <section ref={ref} className="card que-card" id={QUE_ANCHOR} aria-labelledby="que-title" data-id="que-today">
       <h2 id="que-title" className="card-title">
         {t('que.title')}
       </h2>
@@ -174,6 +185,7 @@ function SignedInQue({ charts, engine }: { charts: SavedChart[] | 'error' | null
           )}
         </>
       )}
+      <QueReminder />
     </>
   );
 }

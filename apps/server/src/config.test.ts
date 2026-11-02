@@ -35,4 +35,30 @@ describe('server config', () => {
     expect(() => loadConfig({ AUTH_CLIENT_SECRET: 'short' })).toThrow(/AUTH_CLIENT_SECRET/);
     expect(() => loadConfig({ AUTH_CLIENT_SECRET: SECRET, NODE_TLS_REJECT_UNAUTHORIZED: '0' })).toThrow(/TLS/);
   });
+
+  it('keeps push off without the VAPID keys, on with all three, and refuses to start with only some', () => {
+    const vapid = {
+      VAPID_PUBLIC_KEY: 'B'.repeat(87),
+      VAPID_PRIVATE_KEY: 'p'.repeat(43),
+      VAPID_SUBJECT: 'mailto:noreply@hoandat.com',
+    };
+    expect(loadConfig({}).push).toBeNull();
+    expect(loadConfig({ VAPID_PUBLIC_KEY: '', VAPID_PRIVATE_KEY: '', VAPID_SUBJECT: '' }).push).toBeNull();
+    expect(loadConfig(vapid).push).toEqual({ publicKey: vapid.VAPID_PUBLIC_KEY, privateKey: vapid.VAPID_PRIVATE_KEY, subject: vapid.VAPID_SUBJECT });
+    expect(loadConfig({ ...vapid, VAPID_SUBJECT: 'https://tuvi.hoandat.com' }).push?.subject).toBe('https://tuvi.hoandat.com');
+    expect(() => loadConfig({ VAPID_PUBLIC_KEY: vapid.VAPID_PUBLIC_KEY })).toThrow(/Web Push needs VAPID_PRIVATE_KEY, VAPID_SUBJECT too/);
+    expect(() => loadConfig({ ...vapid, VAPID_SUBJECT: '' })).toThrow(/VAPID_SUBJECT too/);
+    expect(() => loadConfig({ ...vapid, VAPID_SUBJECT: 'noreply@hoandat.com' })).toThrow(/VAPID_SUBJECT/);
+    expect(() => loadConfig({ ...vapid, VAPID_PRIVATE_KEY: 'not a key' })).toThrow(/VAPID_PRIVATE_KEY/);
+  });
+
+  it('never puts the VAPID private key in an error', () => {
+    const privateKey = 'q'.repeat(43);
+    try {
+      loadConfig({ VAPID_PRIVATE_KEY: privateKey });
+      expect.unreachable();
+    } catch (error) {
+      expect(String(error)).not.toContain(privateKey);
+    }
+  });
 });
