@@ -234,13 +234,16 @@ button {
 }
 .pill-gold {
   border-color: transparent;
-  background: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
+  /* The solid colour sits under the gradient so hover only drops the gradient: replacing the whole background
+     reset background-color to transparent and the transition faded it in from nothing, a dark flash. */
+  background-color: var(--c-primary-solid-hover);
+  background-image: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
   color: var(--c-on-primary);
   box-shadow: var(--shadow-gold);
 }
 .pill-gold:hover:not(:disabled) {
   border-color: transparent;
-  background: var(--c-primary-solid-hover);
+  background-image: none;
   transform: translateY(-1px);
 }
 .pill-gold[aria-current="page"] {
@@ -455,7 +458,12 @@ button {
   -webkit-backdrop-filter: blur(10px);
 }
 .shell-value-card .shell-btn-primary {
-  background: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
+  background-color: var(--c-primary-solid-hover);
+  background-image: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
+}
+.shell-value-card .shell-btn-primary:hover {
+  background-color: var(--c-primary-solid-hover);
+  background-image: none;
 }
 .shell-value-card .shell-btn-cta {
   width: auto;
@@ -526,12 +534,14 @@ button {
   opacity: 0.7;
 }
 .btn-primary {
-  background: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
+  /* Same layering as .pill-gold: hover drops the gradient instead of fading in from a transparent colour. */
+  background-color: var(--c-primary-solid-hover);
+  background-image: linear-gradient(180deg, var(--c-primary-solid-hover), var(--c-primary-solid));
   color: var(--c-on-primary);
   box-shadow: var(--shadow-gold);
 }
 .btn-primary:hover:not(:disabled) {
-  background: var(--c-primary-solid-hover);
+  background-image: none;
   transform: translateY(-1px);
 }
 .btn-secondary {
