@@ -13,6 +13,7 @@ vào đây; dùng alias SSH (`SSH_TARGET`) và placeholder như `<SERVER_65_IP>`
 | Database | Postgres đang chạy trên `.65`, database `tuvi`, role `tuvi`; migration chạy khi server khởi động |
 | Đường vào | Cloudflare (proxied, SSL "full") → nginx `conf.d/tuvi.hoandat.com.conf` → `/api/`, `/auth/`, `/healthz` sang API |
 | Đăng nhập | client BFF `tuvi-web` trên `auth.hoandat.com`, scope `openid profile email`, callback `https://tuvi.hoandat.com/auth/callback`; tên, email, ảnh lấy từ userinfo lúc đăng nhập, lưu ở bảng `users` cho menu tài khoản |
+| Xoá tài khoản | chỉ ở `auth.hoandat.com/account` (ADR 0018 của `auth-next`); IdP gửi SET ký ES256 tới `POST https://tuvi.hoandat.com/api/idp/account-deleted`, server kiểm bằng JWKS của IdP rồi xoá ngay dòng `users` và mọi thứ cascade theo (mục Xoá tài khoản) |
 
 Lá số và quẻ hằng ngày được tính trên trình duyệt; server chỉ giữ phiên đăng nhập, tên/email/địa chỉ ảnh của tài
 khoản, dữ liệu đầu vào của lá số đã lưu, chuỗi ngày xem quẻ (bảng `que_streaks`: ngày gần nhất và số ngày liên
@@ -66,6 +67,23 @@ nút bật nhắc, không chạy hẹn giờ gửi, không nạp thư viện `we
    unit đổi thì service đang chạy được restart ngay.
 6. **Release:** `SSH_TARGET=<alias> bash infra/deploy.sh`.
 7. **User CI:** tạo user hạn chế `tuvi-deploy` và secret của repo (mục Deploy tự động).
+
+## Xoá tài khoản
+
+Tài khoản chỉ bị xoá ở `auth.hoandat.com/account`; app không có nút hay API xoá riêng. IdP báo bằng
+`POST https://tuvi.hoandat.com/api/idp/account-deleted` ([`account-deleted.ts`](../apps/server/src/auth/account-deleted.ts)),
+body là SET (RFC 8417, `Content-Type: application/secevent+jwt`): header `alg` ES256, `typ` `secevent+jwt`; `iss` là
+`AUTH_ISSUER`; `aud` đúng `PUBLIC_URL/api/idp/account-deleted`; `exp` chưa qua (lệch giờ 60 giây); event
+`urn:hoandat:auth:event:account.deleted`; chữ ký kiểm bằng `jwks_uri` trong discovery của IdP. Hợp lệ thì xoá dòng
+`users` của `sub` đó, cascade theo: phiên, lá số đã lưu, chuỗi quẻ, máy bật nhắc, ngày nhắc. Không có gì dùng chung
+giữa các tài khoản nên không chuyển chủ.
+
+Trả `202` khi đã xoá, khi không có tài khoản mang `sub` đó, hay khi nhận lại (IdP thử lại); `400` khi body không phải
+SET; `401` khi SET sai (chữ ký, `iss`, `aud`, hết hạn, event); `503` khi đăng nhập đang tắt, không đọc được khoá của IdP
+hay xoá lỗi, để IdP thử lại. Log chỉ ghi id nội bộ và kết quả, không ghi SET hay `sub`.
+
+URL `https://tuvi.hoandat.com/api/idp/account-deleted` phải có trong `ACCOUNT_DELETED_URLS` của env IdP (`auth-next`)
+và phải đúng từng ký tự với `PUBLIC_URL` + `/api/idp/account-deleted`. nginx chuyển sẵn qua `location ~ ^/(api|auth)/`.
 
 ## Deploy tự động (CI)
 

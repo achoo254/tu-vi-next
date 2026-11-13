@@ -17,6 +17,9 @@ interface LegalDoc {
 
 export type LegalPageKind = 'privacy' | 'terms' | 'credits';
 
+/** Where a hoandat.com account is deleted (auth-next ADR 0018): the app has no deletion of its own. */
+const ACCOUNT_DELETE_URL = 'https://auth.hoandat.com/account#account-delete';
+
 const ICON_LICENCE = 'AI-generated with OpenAI gpt-image for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 const APP_ICON_LICENCE = 'AI-generated with open models (FLUX.2 klein 4B; Apache-2.0) for the hoandat ecosystem; owned by hoandat, all rights reserved (not CC0).';
 const VIDEO_LICENCE =
@@ -46,6 +49,11 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             'Nhắc quẻ hôm nay (chỉ khi bạn bật): với mỗi máy bật nhắc, máy chủ lưu địa chỉ nhận thông báo (push endpoint) và khoá mã hoá mà trình duyệt cấp, cùng ngôn ngữ của lời nhắc, chỉ để mỗi sáng gửi một thông báo "quẻ hôm nay đã sẵn sàng" qua dịch vụ thông báo của trình duyệt (Google, Mozilla, Apple hoặc Microsoft, tuỳ trình duyệt). Lời nhắc không chứa tên hay ngày giờ sinh. Máy chủ ghi thêm ngày gần nhất đã gửi để mỗi ngày chỉ gửi một lần. Địa chỉ đó bị xoá khi bạn tắt nhắc trên máy đó, hoặc khi trình duyệt huỷ việc nhận thông báo.',
             'Một cookie phiên (__Host-tuvi_session) giữ bạn đăng nhập tối đa 30 ngày; máy chủ chỉ lưu bản băm của nó.',
             'Bạn xoá được từng lá số bất cứ lúc nào; đăng xuất là huỷ phiên trên máy chủ.',
+            {
+              text: 'Xoá tài khoản hoandat.com',
+              href: ACCOUNT_DELETE_URL,
+              note: 'là cách duy nhất để xoá tài khoản; khi đó app xoá ngay mọi dữ liệu của tài khoản ở đây: tên, email, ảnh, các lá số đã lưu, chuỗi ngày xem quẻ, các máy bật nhắc quẻ và mọi phiên đăng nhập.',
+            },
           ],
         },
         {
@@ -56,7 +64,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         {
           heading: 'Liên hệ',
-          paragraphs: ['Muốn hỏi hay yêu cầu xoá dữ liệu (tên, email, ảnh, các lá số đã lưu, chuỗi ngày xem quẻ và các máy bật nhắc quẻ của tài khoản): nhắn Trang Facebook Hoandat Apps.'],
+          paragraphs: ['Có câu hỏi: nhắn Trang Facebook Hoandat Apps.'],
         },
       ],
     },
@@ -81,6 +89,11 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
             'Quẻ reminder (only if you turn it on): for each device you turn it on in, the server keeps the push address (push endpoint) and encryption keys the browser gives, and the language of the reminder, only to send one "today\'s quẻ is ready" notification each morning through the browser\'s push service (Google, Mozilla, Apple or Microsoft, depending on the browser). The reminder carries no name or birth data. The server also notes the latest day it sent one, so it sends at most one a day. The address is removed when you turn the reminder off on that device, or when the browser drops the subscription.',
             'A session cookie (__Host-tuvi_session) keeps you signed in for up to 30 days; the server stores only its hash.',
             'You can delete any saved chart at any time; signing out ends the session on the server.',
+            {
+              text: 'Delete your hoandat.com account',
+              href: ACCOUNT_DELETE_URL,
+              note: 'is the only way to delete the account; the app then deletes everything of it here at once: the name, email, picture, saved charts, quẻ streak, reminder devices and every session.',
+            },
           ],
         },
         {
@@ -91,7 +104,7 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         {
           heading: 'Contact',
-          paragraphs: ['Questions or data deletion requests (the name, email, picture, saved charts, quẻ streak and reminder devices of your account): message the Hoandat Apps Facebook Page.'],
+          paragraphs: ['Questions: message the Hoandat Apps Facebook Page.'],
         },
       ],
     },

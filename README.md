@@ -24,7 +24,7 @@ duyệt, không đi qua URL) vào tài khoản một lần, bỏ qua nếu tài 
 |---|---|
 | [`packages/chart`](packages/chart) | `@tuvi/chart`: âm lịch Việt Nam và lớp bọc duy nhất quanh `iztro` ([`astrolabe.ts`](packages/chart/src/astrolabe.ts)); chạy được trên trình duyệt và Node |
 | [`apps/web`](apps/web) | `@tuvi/web`: React 19 + Vite. Form, bàn lá số 4×4 (màn hẹp thành danh sách cung), nghĩa sao, xuất PNG, Web Share, trang pháp lý |
-| [`apps/server`](apps/server) | `@tuvi/server`: Express 5 + drizzle + Postgres (PGlite khi dev/test). Đăng nhập BFF qua auth-next, phiên riêng, `/api/charts`, `/api/que` (chuỗi ngày xem quẻ), `/api/push` (nhắc quẻ hằng ngày), `/healthz` |
+| [`apps/server`](apps/server) | `@tuvi/server`: Express 5 + drizzle + Postgres (PGlite khi dev/test). Đăng nhập BFF qua auth-next, phiên riêng, `/api/charts`, `/api/que` (chuỗi ngày xem quẻ), `/api/push` (nhắc quẻ hằng ngày), `/api/idp/account-deleted` (IdP báo tài khoản đã xoá thì xoá ngay dữ liệu của nó, [`docs/deployment-guide.md`](docs/deployment-guide.md#xoá-tài-khoản)), `/healthz` |
 | [`infra`](infra) | nginx, unit systemd, script deploy |
 | [`brand`](brand) | Biểu tượng AI gốc và các file sinh từ nó (`pnpm brand:gen`) |
 
