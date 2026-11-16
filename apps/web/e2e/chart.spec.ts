@@ -86,6 +86,15 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
   }
 });
 
+test('phone: the whole birth form, its button included, is on the first screen', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const button = await page.locator('[data-id=birth-form-submit]').boundingBox();
+  expect(button).not.toBeNull();
+  expect((button?.y ?? 0) + (button?.height ?? 0)).toBeLessThanOrEqual(800);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+});
+
 test('signed in: save a chart, reload, open it again, delete it', async ({ page }) => {
   await page.goto('/');
   // The header's pill is a sign-up button: straight to the IdP's sign-up screen, then back home signed in.
