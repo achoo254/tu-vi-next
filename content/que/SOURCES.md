@@ -5,6 +5,7 @@
   quẻ nào có sẵn; đây không phải quẻ Kinh Dịch hay xăm của đền chùa nào.
 - `stars` có một câu cho mỗi chính tinh ở cung Mệnh (tên đúng như engine in ra), `noMajorStar` cho cung Mệnh vô chính
   diệu. Ý của sao theo cùng quy ước với `content/interpretation/` (xem `SOURCES.md` ở đó).
+- Ngày 16/11/2026 `meaning` và `advice` được viết lại theo giọng đời thường (xưng "bạn", câu ngắn), giữ nguyên tên và thơ.
 - Giọng văn giống phần luận giải: tích cực, cân bằng, không đoán điều xấu, không gây sợ hãi. Lời nhắn là việc nhỏ làm
   được ngay trong ngày; không có lời khuyên y tế, tài chính hay pháp lý. Nội dung chỉ để **giải trí và tham khảo**.
 - Văn bản lưu tĩnh trong repo; app không gọi AI lúc chạy.

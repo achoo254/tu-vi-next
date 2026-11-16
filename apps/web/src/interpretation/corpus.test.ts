@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { type Brightness, type Mutagen, buildChart } from '@tuvi/chart';
 import { describe, expect, it } from 'vitest';
+import { QUICK_READING_PALACES } from '../chart/quick-reading';
 import { buildInterpretation } from './corpus';
 
 const BRIGHTNESS: readonly Brightness[] = ['mieu', 'vuong', 'dac', 'loi', 'binh', 'bat', 'ham'];
@@ -9,6 +10,8 @@ const MAJOR_STARS = [
   'Tử Vi', 'Thiên Cơ', 'Thái Dương', 'Vũ Khúc', 'Thiên Đồng', 'Liêm Trinh', 'Thiên Phủ', // check-brand-ignore: the star Tử Vi
   'Thái Âm', 'Tham Lang', 'Cự Môn', 'Thiên Tướng', 'Thiên Lương', 'Thất Sát', 'Phá Quân',
 ];
+
+const PALACES = ['Mệnh', 'Huynh Đệ', 'Phu Thê', 'Tử Tức', 'Tài Bạch', 'Tật Ách', 'Thiên Di', 'Nô Bộc', 'Quan Lộc', 'Điền Trạch', 'Phúc Đức', 'Phụ Mẫu'];
 
 const interpretation = buildInterpretation();
 
@@ -57,6 +60,33 @@ describe('interpretation corpus', () => {
     expect(cucs.size).toBe(5);
     // Major star × palace × brightness combinations met in the sweep (all resolved above).
     expect(seen.size).toBeGreaterThan(150);
+  });
+
+  it('gives every major star a distinct short personality label', () => {
+    const labels = MAJOR_STARS.map((star) => interpretation.star(star, null, 'Mệnh')?.label ?? '');
+    for (const [i, label] of labels.entries()) {
+      expect(label.length, MAJOR_STARS[i]).toBeGreaterThan(3);
+      // It fits on one line of the result card and of the story card.
+      expect([...label].length, label).toBeLessThanOrEqual(24);
+    }
+    expect(new Set(labels).size).toBe(MAJOR_STARS.length);
+  });
+
+  it('has one short sentence per major star in each quick-reading palace, and plain readings within length', () => {
+    for (const star of MAJOR_STARS) {
+      for (const palace of QUICK_READING_PALACES) {
+        const short = interpretation.star(star, null, palace)?.inPalace?.short ?? '';
+        expect([...short].length, `${star} ${palace}`).toBeGreaterThanOrEqual(30);
+        expect([...short].length, `${star} ${palace}`).toBeLessThanOrEqual(120);
+      }
+      for (const palace of PALACES) {
+        const reading = interpretation.star(star, null, palace)?.inPalace;
+        // Short enough to read on a phone; the first sentence also stands alone on the result card and in the video.
+        expect([...(reading?.text ?? '')].length, `${star} ${palace}`).toBeLessThanOrEqual(320);
+        expect([...(reading?.text.split(/(?<=[.!?…])\s+/)[0] ?? '')].length, `${star} ${palace}`).toBeLessThanOrEqual(160);
+        expect([...(reading?.advice ?? '')].length, `${star} ${palace}`).toBeLessThanOrEqual(100);
+      }
+    }
   });
 
   it('gives nothing for the minor stars and unknown names', () => {

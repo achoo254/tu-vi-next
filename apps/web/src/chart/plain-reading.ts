@@ -27,6 +27,8 @@ export const PALACE_AREA_KEYS: Readonly<Record<string, MessageKey>> = {
 
 export interface PlainStarReading {
   name: string;
+  /** The star as a personality ("Leader điềm tĩnh"), its gloss where its name shows. */
+  label: string;
   /** How the star shows at its brightness; null when the chart gives none. */
   brightness: { level: Brightness; text: string } | null;
   text: string;
@@ -51,7 +53,7 @@ export interface PlainPalaceReading {
 }
 
 /** The palace across the board (six branches away), whose stars "shine into" this one. */
-function oppositePalace(chart: Chart, palace: ChartPalace): ChartPalace | null {
+export function oppositePalace(chart: Chart, palace: ChartPalace): ChartPalace | null {
   return chart.palaces.find((p) => p.branchIndex === (palace.branchIndex + 6) % 12) ?? null;
 }
 
@@ -60,7 +62,7 @@ function starReadings(stars: readonly ChartStar[], palace: ChartPalace, interpre
     const reading = interpretation.star(star.name, star.brightness, palace.name);
     if (!reading?.inPalace) return [];
     const brightness = star.brightness && reading.brightness ? { level: star.brightness, text: reading.brightness } : null;
-    return [{ name: star.name, brightness, text: reading.inPalace.text, advice: reading.inPalace.advice }];
+    return [{ name: star.name, label: reading.label, brightness, text: reading.inPalace.text, advice: reading.inPalace.advice }];
   });
 }
 

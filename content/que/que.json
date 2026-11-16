@@ -6,8 +6,8 @@
         "Trăng lên sáng tỏ đầu non",
         "Đường xa bỗng hoá lối mòn thân quen"
       ],
-      "meaning": "Điều tưởng rối hôm qua sẽ sáng dần khi bạn bình tĩnh nhìn lại từ đầu. Ngày hợp để sắp xếp và chọn việc chính.",
-      "advice": "Viết ra ba việc quan trọng nhất hôm nay và làm việc đầu tiên trước buổi trưa."
+      "meaning": "Chuyện hôm qua nhìn rối, hôm nay bình tĩnh nhìn lại là bạn thấy rõ dần. Ngày hợp để sắp xếp và chọn việc chính.",
+      "advice": "Viết ra ba việc quan trọng nhất hôm nay, làm việc đầu tiên trước buổi trưa."
     },
     {
       "title": "Mưa xuân thấm đất",
@@ -15,8 +15,8 @@
         "Mưa xuân lất phất qua vườn",
         "Hạt nằm dưới đất đã vươn lá non"
       ],
-      "meaning": "Những cố gắng nhỏ bạn bỏ ra thời gian qua đang âm thầm có kết quả. Không cần vội, mọi thứ đang lớn lên đúng nhịp.",
-      "advice": "Ghi nhận một tiến bộ nhỏ của chính mình, dù chỉ là một dòng trong sổ."
+      "meaning": "Mấy cố gắng nhỏ bạn bỏ ra thời gian qua đang âm thầm có kết quả. Không cần vội, mọi thứ đang lớn đúng nhịp của nó.",
+      "advice": "Ghi lại một tiến bộ nhỏ của bạn, một dòng trong ghi chú điện thoại là đủ."
     },
     {
       "title": "Thuyền xuôi gió thuận",
@@ -24,8 +24,8 @@
         "Buồm căng gió thuận ra khơi",
         "Nước xuôi một dải, thuyền trôi nhẹ nhàng"
       ],
-      "meaning": "Hôm nay mọi việc dễ trôi chảy hơn thường lệ. Đây là lúc tốt để bắt đầu điều bạn đã chuẩn bị.",
-      "advice": "Mạnh dạn gửi đi tin nhắn hay đề xuất bạn còn để trong bản nháp."
+      "meaning": "Hôm nay việc dễ trôi hơn thường lệ. Nếu có thứ bạn đã chuẩn bị kỹ, đây là lúc bắt đầu.",
+      "advice": "Gửi đi tin nhắn hay đề xuất bạn còn để trong bản nháp."
     },
     {
       "title": "Cây tùng đứng gió",
@@ -33,8 +33,8 @@
         "Gió lay cành lá xôn xao",
         "Gốc tùng vẫn vững như bao năm rồi"
       ],
-      "meaning": "Có thể có vài lời qua tiếng lại hay thay đổi bất ngờ, nhưng bạn đủ vững để giữ nhịp của mình.",
-      "advice": "Trước khi trả lời điều làm bạn phật lòng, hãy hít thở chậm ba lần."
+      "meaning": "Có thể có vài lời qua tiếng lại hoặc thay đổi bất ngờ, nhưng bạn đủ vững để giữ nhịp của mình.",
+      "advice": "Trước khi trả lời câu làm bạn phật lòng, hít thở chậm ba lần."
     },
     {
       "title": "Đèn sáng bên song",
@@ -42,7 +42,7 @@
         "Đêm khuya một ngọn đèn hồng",
         "Sách mở trang mới, trong lòng sáng ra"
       ],
-      "meaning": "Ngày hợp để học thêm, đọc thêm hay tìm hiểu một điều mới. Điều bạn học hôm nay sẽ có ích về sau.",
+      "meaning": "Ngày hợp để học thêm, đọc thêm hay tìm hiểu một thứ mới. Điều bạn nạp hôm nay sẽ có ích về sau.",
       "advice": "Dành hai mươi phút đọc hoặc nghe về một chủ đề bạn tò mò."
     },
     {
@@ -51,8 +51,8 @@
         "Suối con len lỏi qua ghềnh",
         "Ngày mai ra tới sông xanh rộng dài"
       ],
-      "meaning": "Con đường của bạn có thể quanh co một chút, nhưng hướng đi vẫn đúng. Sự bền bỉ là điểm mạnh hôm nay.",
-      "advice": "Chia một việc lớn thành từng bước nhỏ và hoàn thành bước đầu tiên."
+      "meaning": "Đường của bạn có thể quanh co một chút, nhưng hướng đi vẫn đúng. Sự bền bỉ là điểm mạnh của bạn hôm nay.",
+      "advice": "Chia một việc lớn thành các bước nhỏ và làm xong bước đầu tiên."
     },
     {
       "title": "Hoa nở đúng mùa",
@@ -60,8 +60,8 @@
         "Đào chờ tháng Chạp mới hồng",
         "Mai chờ gió Tết mới bông vàng tươi"
       ],
-      "meaning": "Mỗi việc có thời điểm của nó. Điều bạn mong có thể chưa đến hôm nay, và như vậy cũng không sao.",
-      "advice": "Thôi so sánh mình với người khác trong một ngày, chỉ so với chính mình hôm qua."
+      "meaning": "Việc nào cũng có thời điểm của nó. Thứ bạn mong có thể chưa đến hôm nay, và như vậy cũng không sao.",
+      "advice": "Hôm nay thôi so sánh với người khác, chỉ so với bạn của hôm qua."
     },
     {
       "title": "Bạn cũ ghé thăm",
@@ -69,7 +69,7 @@
         "Cổng ngoài ai gọi tên quen",
         "Chén trà nối lại những phen chuyện trò"
       ],
-      "meaning": "Các mối quan hệ cũ mang lại niềm vui, có khi cả một gợi ý hay. Người quen là điểm tựa của bạn hôm nay.",
+      "meaning": "Người quen cũ mang lại niềm vui, có khi cả một gợi ý hay. Hôm nay bạn có thể dựa vào các mối quan hệ cũ.",
       "advice": "Nhắn hỏi thăm một người bạn đã lâu chưa liên lạc."
     },
     {
@@ -78,8 +78,8 @@
         "Giếng làng nước mát trong veo",
         "Ai qua cũng ghé, múc theo một gầu"
       ],
-      "meaning": "Sự tử tế và kiên nhẫn của bạn khiến người khác tìm đến. Hôm nay bạn có thể là chỗ dựa cho ai đó.",
-      "advice": "Lắng nghe trọn vẹn một người mà không vội đưa lời khuyên."
+      "meaning": "Sự tử tế và kiên nhẫn của bạn khiến người khác muốn tìm đến. Hôm nay bạn có thể là chỗ dựa cho ai đó.",
+      "advice": "Nghe trọn một người nói mà chưa vội đưa lời khuyên."
     },
     {
       "title": "Mây tan trời rạng",
@@ -87,7 +87,7 @@
         "Mây đen rồi cũng tan đi",
         "Trời xanh trở lại, có gì phải lo"
       ],
-      "meaning": "Nỗi bận lòng gần đây đang nhẹ dần. Hãy để tâm trí nghỉ ngơi một chút, câu trả lời sẽ tự rõ.",
+      "meaning": "Chuyện làm bạn bận lòng gần đây đang nhẹ dần. Cho đầu óc nghỉ một chút, câu trả lời sẽ tự rõ.",
       "advice": "Đi bộ ngoài trời ít phút và để điện thoại ở chế độ im lặng."
     },
     {
@@ -96,8 +96,8 @@
         "Ong chăm từng đoá hoa thơm",
         "Mùa sau mật ngọt đầy hơn mọi mùa"
       ],
-      "meaning": "Những việc lặp lại hằng ngày tưởng nhỏ nhưng đang tích luỹ thành thành quả. Chăm chỉ hôm nay rất đáng.",
-      "advice": "Giữ một thói quen tốt thêm một ngày nữa, dù chỉ năm phút."
+      "meaning": "Những việc lặp lại mỗi ngày tưởng nhỏ nhưng đang cộng dồn thành thành quả. Chăm chỉ hôm nay rất đáng.",
+      "advice": "Giữ một thói quen tốt thêm một ngày nữa, năm phút cũng được."
     },
     {
       "title": "Cầu tre nối bờ",
@@ -105,7 +105,7 @@
         "Cầu tre lắt lẻo qua sông",
         "Đi chậm từng bước, sang xong nhẹ lòng"
       ],
-      "meaning": "Có một việc cần sự cẩn thận và từng bước. Đi chậm mà chắc sẽ đưa bạn tới nơi.",
+      "meaning": "Có một việc cần cẩn thận và đi từng bước. Đi chậm mà chắc sẽ đưa bạn tới nơi.",
       "advice": "Đọc lại một lần trước khi gửi email hay nhận lời việc gì."
     },
     {
@@ -114,8 +114,8 @@
         "Nắng mai trải khắp sườn đồi",
         "Cỏ cây thức dậy, đất trời reo vui"
       ],
-      "meaning": "Năng lượng buổi sáng của bạn hôm nay dồi dào. Làm việc khó vào đầu ngày sẽ thuận hơn.",
-      "advice": "Bắt đầu ngày bằng việc khó nhất trước khi mở mạng xã hội."
+      "meaning": "Sáng nay năng lượng của bạn dồi dào. Làm việc khó vào đầu ngày sẽ thuận hơn.",
+      "advice": "Làm việc khó nhất trước khi mở mạng xã hội."
     },
     {
       "title": "Hai tay vỗ thành tiếng",
@@ -123,7 +123,7 @@
         "Một tay vỗ chẳng nên vang",
         "Hai tay chung nhịp rộn ràng tiếng ca"
       ],
-      "meaning": "Hợp tác là chìa khoá hôm nay. Việc làm cùng người khác sẽ nhanh và vui hơn làm một mình.",
+      "meaning": "Hợp tác là chìa khóa hôm nay. Làm cùng người khác sẽ nhanh và vui hơn làm một mình.",
       "advice": "Rủ một người cùng làm việc bạn đang ngại làm một mình."
     },
     {
@@ -132,7 +132,7 @@
         "Đồng xanh lúa trổ đòng đòng",
         "Chờ thêm mấy nắng là bông chín vàng"
       ],
-      "meaning": "Thành quả đang gần, chỉ cần thêm một chút kiên nhẫn. Đừng bỏ dở khi đã đi gần hết đường.",
+      "meaning": "Thành quả đang gần, chỉ cần thêm chút kiên nhẫn. Đừng bỏ dở khi đã đi gần hết đường.",
       "advice": "Hoàn tất một việc đang làm dở thay vì mở thêm việc mới."
     },
     {
@@ -150,8 +150,8 @@
         "Chiều buông chim lại về rừng",
         "Tổ xưa ấm áp, lòng mừng biết bao"
       ],
-      "meaning": "Gia đình và nhà cửa là nguồn vui lớn trong ngày. Thời gian bên người thân hôm nay rất quý.",
-      "advice": "Ăn một bữa cùng người nhà và cất điện thoại trong bữa ăn."
+      "meaning": "Nhà cửa và người thân là nguồn vui lớn trong ngày. Thời gian bên gia đình hôm nay rất quý.",
+      "advice": "Ăn một bữa cùng người nhà và cất điện thoại đi trong bữa."
     },
     {
       "title": "Rồng gặp mây lành",
@@ -159,8 +159,8 @@
         "Rồng bay gặp đám mây lành",
         "Cơ hội đã tới, nhanh tay đón chào"
       ],
-      "meaning": "Một cơ hội nhỏ có thể đến qua lời mời hay câu chuyện tình cờ. Hãy để ý và đáp lời sớm.",
-      "advice": "Nhận lời một lời mời hợp lý mà bình thường bạn hay từ chối."
+      "meaning": "Một cơ hội nhỏ có thể đến qua lời mời hay câu chuyện tình cờ. Để ý và đáp lời sớm nhé.",
+      "advice": "Nhận một lời mời hợp lý mà bình thường bạn hay từ chối."
     },
     {
       "title": "Bếp hồng giữ lửa",
@@ -168,8 +168,8 @@
         "Bếp hồng một chút lửa con",
         "Đêm đông vẫn ấm, sớm còn than tươi"
       ],
-      "meaning": "Không cần bùng nổ, sự đều đặn và ấm áp mới là sức mạnh của bạn hôm nay.",
-      "advice": "Làm một việc nhỏ khiến người bên cạnh thấy được quan tâm."
+      "meaning": "Không cần bùng nổ. Sự đều đặn và ấm áp mới là sức mạnh của bạn hôm nay.",
+      "advice": "Làm một việc nhỏ để người bên cạnh thấy được quan tâm."
     },
     {
       "title": "Tre già măng mọc",
@@ -177,7 +177,7 @@
         "Tre già rợp bóng sân đình",
         "Măng non lặng lẽ tự mình vươn lên"
       ],
-      "meaning": "Học từ người đi trước và sẵn lòng chỉ lại cho người đến sau. Sự truyền nối mang lại may mắn.",
+      "meaning": "Học từ người đi trước, và sẵn lòng chỉ lại cho người đến sau. Cứ truyền nối như vậy là có lợi cho cả hai bên.",
       "advice": "Hỏi một người có kinh nghiệm về điều bạn đang băn khoăn."
     },
     {
@@ -186,8 +186,8 @@
         "Trưa hè gió thổi hiên nhà",
         "Võng đưa kẽo kẹt, lòng ta thảnh thơi"
       ],
-      "meaning": "Hôm nay nên chậm lại một nhịp. Nghỉ ngơi đúng lúc giúp bạn làm tốt hơn vào ngày mai.",
-      "advice": "Cho mình một khoảng nghỉ thật sự, không làm gì, ít nhất mười lăm phút."
+      "meaning": "Hôm nay nên chậm lại một nhịp. Nghỉ đúng lúc giúp bạn làm tốt hơn vào ngày mai.",
+      "advice": "Nghỉ thật sự mười lăm phút, không làm gì cả."
     },
     {
       "title": "Sao Mai lấp lánh",
@@ -195,8 +195,8 @@
         "Sao Mai lấp lánh cuối trời",
         "Báo tin ngày mới rạng ngời phía đông"
       ],
-      "meaning": "Một khởi đầu mới đang chờ. Ý tưởng chợt đến hôm nay đáng được ghi lại.",
-      "advice": "Ghi ý tưởng vào điện thoại ngay khi nó xuất hiện, đừng để trôi mất."
+      "meaning": "Một khởi đầu mới đang chờ bạn. Ý tưởng chợt đến hôm nay đáng được ghi lại.",
+      "advice": "Ghi ý tưởng vào điện thoại ngay khi nó xuất hiện."
     },
     {
       "title": "Nước chảy đá mòn",
@@ -204,8 +204,8 @@
         "Giọt rơi đều đặn tháng ngày",
         "Đá kia cứng mấy cũng thay hình hài"
       ],
-      "meaning": "Kiên trì sẽ thắng điều tưởng chừng không thể. Việc bạn theo đuổi cần thêm thời gian, không cần thêm lo lắng.",
-      "advice": "Làm tiếp việc dài hơi của bạn đúng hai mươi lăm phút, rồi nghỉ."
+      "meaning": "Kiên trì sẽ thắng được thứ tưởng chừng không thể. Việc bạn theo đuổi cần thêm thời gian, không cần thêm lo lắng.",
+      "advice": "Làm tiếp việc dài hơi của bạn đúng hai mươi lăm phút rồi nghỉ."
     },
     {
       "title": "Thư nhà tin vui",
@@ -214,7 +214,7 @@
         "Mở ra chữ viết rộn ràng tin vui"
       ],
       "meaning": "Tin tức hôm nay nghiêng về phía dễ chịu. Bạn cũng có thể là người mang tin vui cho người khác.",
-      "advice": "Gửi một lời khen thật lòng tới đồng nghiệp hoặc người thân."
+      "advice": "Gửi một lời khen thật lòng cho đồng nghiệp hoặc người thân."
     },
     {
       "title": "Vườn rau sau nhà",
@@ -222,7 +222,7 @@
         "Vườn sau mấy luống cải xanh",
         "Chăm tay tưới nước, ngày lành có ăn"
       ],
-      "meaning": "Niềm vui đến từ những việc giản dị, tự tay làm. Ngày hợp để chăm sóc nhà cửa và bản thân.",
+      "meaning": "Niềm vui hôm nay đến từ việc giản dị, tự tay làm. Ngày hợp để chăm chút nhà cửa và bản thân.",
       "advice": "Dọn gọn một góc bàn hoặc một ngăn tủ."
     },
     {
@@ -231,8 +231,8 @@
         "Diều lên no gió chiều quê",
         "Dây trong tay giữ, chẳng hề lạc bay"
       ],
-      "meaning": "Bạn có thể bay cao khi vẫn giữ được điều cốt lõi. Tự do và kỷ luật hôm nay đi cùng nhau.",
-      "advice": "Đặt một giới hạn rõ ràng cho thời gian dùng điện thoại tối nay."
+      "meaning": "Bạn có thể bay cao mà vẫn giữ được điều cốt lõi. Hôm nay tự do và kỷ luật đi cùng nhau.",
+      "advice": "Đặt giới hạn thời gian dùng điện thoại cho tối nay."
     },
     {
       "title": "Đường xa có bạn",
@@ -240,7 +240,7 @@
         "Đường xa có bạn cùng đi",
         "Nắng mưa cũng nhẹ, ngại gì dặm xa"
       ],
-      "meaning": "Bạn không phải gánh mọi việc một mình. Một lời nhờ giúp đúng lúc sẽ làm ngày nhẹ hơn nhiều.",
+      "meaning": "Bạn không phải gánh mọi việc một mình. Nhờ giúp đúng lúc sẽ làm ngày nhẹ hơn nhiều.",
       "advice": "Nhờ ai đó một việc nhỏ và cảm ơn họ thật cụ thể."
     },
     {
@@ -250,7 +250,7 @@
         "Mong manh nhưng vẫn vững bền vươn cao"
       ],
       "meaning": "Việc mới bắt đầu có thể còn vụng, nhưng sức sống của nó rất mạnh. Cho phép mình làm chưa hoàn hảo.",
-      "advice": "Bắt đầu điều mới với phiên bản đơn giản nhất có thể."
+      "advice": "Bắt đầu điều mới bằng phiên bản đơn giản nhất có thể."
     },
     {
       "title": "Trống đình mở hội",
@@ -259,7 +259,7 @@
         "Người xa người gần, quây quần vui chung"
       ],
       "meaning": "Năng lượng giao tiếp của bạn đang tốt. Ngày hợp để gặp gỡ, trò chuyện và kết nối.",
-      "advice": "Bắt chuyện với một người mới hoặc hỏi thăm một người hàng xóm."
+      "advice": "Bắt chuyện với một người mới hoặc hỏi thăm hàng xóm."
     },
     {
       "title": "Thuyền neo bến đợi",
@@ -276,7 +276,7 @@
         "Hòn đá xù xì bên đường",
         "Mài ra mới thấy ngọc vương sắc trong"
       ],
-      "meaning": "Có điều quý giá ẩn trong một việc tưởng tẻ nhạt. Chú tâm hơn một chút, bạn sẽ thấy giá trị của nó.",
+      "meaning": "Có thứ đáng giá ẩn trong một việc tưởng tẻ nhạt. Chú tâm hơn một chút, bạn sẽ thấy giá trị của nó.",
       "advice": "Làm một việc quen thuộc chậm rãi và chú tâm hơn thường ngày."
     },
     {
@@ -285,7 +285,7 @@
         "Trăng rằm tròn vạnh trên sân",
         "Cả nhà ngồi ngắm, xa gần chung vui"
       ],
-      "meaning": "Ngày của sự trọn vẹn và đủ đầy. Hãy tận hưởng những gì đang có thay vì chỉ nghĩ đến điều còn thiếu.",
+      "meaning": "Ngày của sự trọn vẹn và đủ đầy. Tận hưởng những gì đang có thay vì chỉ nghĩ đến điều còn thiếu.",
       "advice": "Kể ra ba điều bạn đang có mà một năm trước bạn từng mong."
     },
     {
@@ -294,8 +294,8 @@
         "Thu sang lá rụng ven hồ",
         "Cây buông lá cũ, đợi chờ xuân sang"
       ],
-      "meaning": "Buông bớt một thói quen hay một nỗi lo cũ sẽ nhường chỗ cho điều mới. Nhẹ đi là để lớn lên.",
-      "advice": "Bỏ đi một thứ không còn dùng tới, trong nhà hoặc trong điện thoại."
+      "meaning": "Buông bớt một thói quen hay nỗi lo cũ sẽ nhường chỗ cho điều mới. Nhẹ đi là để lớn lên.",
+      "advice": "Bỏ đi một thứ không còn dùng, trong nhà hoặc trong điện thoại."
     },
     {
       "title": "Ngựa hay đường dài",
@@ -303,7 +303,7 @@
         "Đường dài mới biết ngựa hay",
         "Bền gan từng dặm, có ngày tới nơi"
       ],
-      "meaning": "Năng lực thật của bạn hiện ra qua sự bền bỉ chứ không qua một lần bứt tốc. Hôm nay cứ giữ nhịp đều.",
+      "meaning": "Năng lực thật của bạn hiện ra qua sự bền bỉ, không phải một lần bứt tốc. Hôm nay cứ giữ nhịp đều.",
       "advice": "Đặt một mục tiêu vừa sức cho hôm nay và làm cho xong."
     },
     {
@@ -312,8 +312,8 @@
         "Sương mai đọng lá long lanh",
         "Nắng lên tan hết, ngày xanh bắt đầu"
       ],
-      "meaning": "Điều làm bạn băn khoăn lúc sáng sẽ qua nhanh. Đừng để nó định giọng cho cả ngày.",
-      "advice": "Nếu buổi sáng chưa như ý, hãy bắt đầu lại từ bữa trưa bằng một việc dễ chịu."
+      "meaning": "Chuyện làm bạn băn khoăn lúc sáng sẽ qua nhanh. Đừng để nó quyết định tâm trạng cả ngày.",
+      "advice": "Nếu sáng chưa như ý, bắt đầu lại từ bữa trưa bằng một việc dễ chịu."
     },
     {
       "title": "Bút nghiên sẵn sàng",
@@ -321,7 +321,7 @@
         "Bút nghiên giấy mực sẵn sàng",
         "Ý hay chữ đẹp, từng trang thành hình"
       ],
-      "meaning": "Ngày thuận cho việc viết, lên kế hoạch hay trình bày ý tưởng. Suy nghĩ của bạn hôm nay mạch lạc.",
+      "meaning": "Ngày thuận cho việc viết, lên kế hoạch hay trình bày ý tưởng. Đầu óc bạn hôm nay khá mạch lạc.",
       "advice": "Viết ra kế hoạch cho một việc bạn còn để trong đầu."
     },
     {
@@ -330,7 +330,7 @@
         "Mở toang cánh cửa sớm mai",
         "Gió lành ùa đến, chẳng ai ngăn đường"
       ],
-      "meaning": "Sự cởi mở hôm nay mang lại may mắn. Thử một cách làm khác, một món ăn lạ hay một con đường mới.",
+      "meaning": "Cởi mở hôm nay mang lại may mắn. Thử một cách làm khác, một món lạ hay một con đường mới.",
       "advice": "Đổi một thói quen nhỏ: đi đường khác, ngồi chỗ khác hoặc thử món mới."
     },
     {
@@ -339,7 +339,7 @@
         "Gánh hàng chia lại hai đầu",
         "Vai êm bước nhẹ, qua cầu thong dong"
       ],
-      "meaning": "Có thể bạn đang ôm quá nhiều việc. Sắp xếp lại, bớt đi hoặc san sẻ, mọi thứ sẽ nhẹ hơn.",
+      "meaning": "Có thể bạn đang ôm quá nhiều việc. Sắp xếp lại, bớt đi hoặc nhờ người san sẻ, mọi thứ sẽ nhẹ hơn.",
       "advice": "Gạch bớt một việc không thật cần thiết khỏi danh sách hôm nay."
     },
     {
@@ -348,8 +348,8 @@
         "Hạc vàng sải cánh trời xanh",
         "Bay cao mới thấy non thành nhỏ xinh"
       ],
-      "meaning": "Nhìn xa hơn chuyện trước mắt, vấn đề hôm nay sẽ bớt lớn. Một góc nhìn rộng giúp bạn bình tâm.",
-      "advice": "Tự hỏi: một năm nữa, chuyện này còn quan trọng không?"
+      "meaning": "Nhìn xa hơn chuyện trước mắt, vấn đề hôm nay sẽ bớt lớn. Góc nhìn rộng giúp bạn bình tâm.",
+      "advice": "Tự hỏi: một năm nữa chuyện này còn quan trọng không?"
     },
     {
       "title": "Nồi cơm nhà ấm",
@@ -358,7 +358,7 @@
         "Bữa chiều đông đủ, vui mừng sum vầy"
       ],
       "meaning": "Hạnh phúc giản dị đang ở rất gần. Ngày hợp để chăm lo bữa ăn và giấc ngủ của mình.",
-      "advice": "Tự nấu hoặc chọn một bữa ăn tử tế cho bản thân, ăn chậm và ngon miệng."
+      "advice": "Chọn hoặc nấu một bữa tử tế cho bạn, ăn chậm và ngon miệng."
     },
     {
       "title": "Kim chỉ khâu áo",
@@ -366,7 +366,7 @@
         "Mũi kim đường chỉ đều tay",
         "Áo lành từ những đêm ngày chăm khâu"
       ],
-      "meaning": "Sự tỉ mỉ của bạn được đền đáp. Những chi tiết nhỏ hôm nay tạo nên kết quả chỉn chu.",
+      "meaning": "Sự tỉ mỉ của bạn sẽ được đền đáp. Những chi tiết nhỏ hôm nay tạo nên kết quả chỉn chu.",
       "advice": "Kiểm tra lại một chi tiết nhỏ mà bạn hay bỏ qua."
     },
     {
@@ -385,7 +385,7 @@
         "Bùn kia chẳng nhuốm, gió vương mùi trời"
       ],
       "meaning": "Dù xung quanh có ồn ào, bạn vẫn giữ được sự trong trẻo của mình. Hôm nay hợp để sống đúng với giá trị riêng.",
-      "advice": "Từ chối nhẹ nhàng một điều không hợp với bạn, không cần giải thích dài."
+      "advice": "Từ chối nhẹ nhàng một việc không hợp với bạn, không cần giải thích dài."
     },
     {
       "title": "Tiếng đàn bên sông",
@@ -393,8 +393,8 @@
         "Tiếng đàn ai gảy bên sông",
         "Ngân nga trong gió, ấm lòng người nghe"
       ],
-      "meaning": "Ngày hợp cho âm nhạc, nghệ thuật và những gì làm tâm hồn mềm lại. Cảm hứng sáng tạo đang đến.",
-      "advice": "Nghe trọn một bài hát bạn yêu thích mà không làm việc gì khác."
+      "meaning": "Ngày hợp cho âm nhạc, nghệ thuật và những gì làm lòng mềm lại. Cảm hứng sáng tạo đang đến.",
+      "advice": "Nghe trọn một bài hát bạn thích mà không làm gì khác."
     },
     {
       "title": "Cá chép vượt sóng",
@@ -402,8 +402,8 @@
         "Cá chép vượt sóng Vũ Môn",
         "Gắng thêm một nhịp, sóng dồn cũng qua"
       ],
-      "meaning": "Bạn đang đứng trước một thử thách vừa sức. Thêm một chút nỗ lực là có thể vượt lên.",
-      "advice": "Làm thêm một bước cho việc khó nhất, rồi tự thưởng cho mình."
+      "meaning": "Bạn đang đứng trước một thử thách vừa sức. Thêm chút nỗ lực là có thể vượt lên.",
+      "advice": "Làm thêm một bước cho việc khó nhất, xong thì tự thưởng cho mình."
     },
     {
       "title": "Hiên nhà đón nắng",
@@ -411,8 +411,8 @@
         "Hiên nhà nắng sớm chan hoà",
         "Cây xanh chậu nhỏ, mở ra ngày hiền"
       ],
-      "meaning": "Một ngày yên ả, không có gì phải vội. Niềm vui đến từ việc tận hưởng khoảnh khắc hiện tại.",
-      "advice": "Uống một tách trà hay cà phê thật chậm, không nhìn màn hình."
+      "meaning": "Một ngày yên ả, không có gì phải vội. Niềm vui đến từ việc tận hưởng giây phút hiện tại.",
+      "advice": "Uống tách trà hay cà phê thật chậm, không nhìn màn hình."
     },
     {
       "title": "Chuông chiều vọng lại",
@@ -420,8 +420,8 @@
         "Chuông chiều vọng lại từ xa",
         "Lòng người lắng xuống, phiền hà nhẹ tan"
       ],
-      "meaning": "Ngày hợp để tĩnh lặng và lắng nghe bên trong. Bình an trong lòng giúp bạn quyết định sáng suốt.",
-      "advice": "Ngồi yên năm phút, chỉ để ý đến hơi thở của mình."
+      "meaning": "Ngày hợp để tĩnh lại và lắng nghe bên trong. Lòng bình an giúp bạn quyết định sáng suốt hơn.",
+      "advice": "Ngồi yên năm phút, chỉ để ý đến hơi thở."
     },
     {
       "title": "Nhịp cầu bắc ngang",
@@ -429,7 +429,7 @@
         "Hai bờ cách một dòng sông",
         "Cầu kia bắc lại, chung lòng qua chơi"
       ],
-      "meaning": "Một hiểu lầm nhỏ có thể được hoá giải nếu bạn chủ động mở lời. Hôm nay thuận cho sự làm lành.",
+      "meaning": "Một hiểu lầm nhỏ có thể được gỡ nếu bạn chủ động mở lời. Hôm nay thuận cho việc làm lành.",
       "advice": "Nói một câu xin lỗi hoặc cảm ơn mà bạn còn nợ ai đó."
     },
     {
@@ -447,8 +447,8 @@
         "Đêm khuya biển rộng mênh mông",
         "Hải đăng vẫn sáng, thuyền không lạc đường"
       ],
-      "meaning": "Hãy giữ mục tiêu chính trong tầm mắt. Khi mọi thứ rối ren, điều bạn thật sự muốn sẽ dẫn đường.",
-      "advice": "Viết mục tiêu quan trọng nhất của tháng này lên giấy và đặt ở chỗ dễ thấy."
+      "meaning": "Giữ mục tiêu chính trong tầm mắt. Khi mọi thứ rối, điều bạn thật sự muốn sẽ dẫn đường.",
+      "advice": "Viết mục tiêu quan trọng nhất của tháng lên giấy và để chỗ dễ thấy."
     },
     {
       "title": "Gió đổi trời quang",
@@ -456,7 +456,7 @@
         "Sớm còn mây kéo về tây",
         "Trưa sang gió đổi, trời đầy nắng tươi"
       ],
-      "meaning": "Kế hoạch có thể thay đổi giữa chừng, và thay đổi đó lại mở ra hướng tốt hơn. Linh hoạt là lợi thế của bạn.",
+      "meaning": "Kế hoạch có thể đổi giữa chừng, và thay đổi đó lại mở ra hướng tốt hơn. Linh hoạt là lợi thế của bạn.",
       "advice": "Chuẩn bị sẵn một phương án dự phòng cho việc chính hôm nay."
     },
     {
@@ -466,7 +466,7 @@
         "Sáng soi khắp chốn, nắng chưa nhạt màu"
       ],
       "meaning": "Bạn đang ở trạng thái tốt để thể hiện mình. Đừng ngại nhận phần việc được nhiều người nhìn thấy.",
-      "advice": "Nói lên ý kiến của bạn trong cuộc họp hoặc nhóm trò chuyện hôm nay."
+      "advice": "Nói ý kiến của bạn trong cuộc họp hoặc group chat hôm nay."
     },
     {
       "title": "Rễ sâu cây vững",
@@ -474,8 +474,8 @@
         "Rễ đâm sâu xuống đất lành",
         "Gió về cây vẫn cành xanh lá đầy"
       ],
-      "meaning": "Nền tảng bạn xây dựng đang giúp bạn đứng vững. Ngày hợp để chăm chút những điều căn bản.",
-      "advice": "Đi ngủ sớm hơn thường lệ ba mươi phút tối nay."
+      "meaning": "Nền tảng bạn xây thời gian qua đang giúp bạn đứng vững. Ngày hợp để chăm chút những điều căn bản.",
+      "advice": "Tối nay đi ngủ sớm hơn thường lệ ba mươi phút."
     },
     {
       "title": "Đom đóm soi đường",
@@ -483,8 +483,8 @@
         "Đêm quê đom đóm lập loè",
         "Từng đốm nho nhỏ, sáng hè lối đi"
       ],
-      "meaning": "Không cần ánh sáng lớn, những bước nhỏ cũng đủ soi đường cho bạn hôm nay. Cứ đi từng chút một.",
-      "advice": "Chỉ tập trung vào bước tiếp theo, chưa cần nghĩ đến cả chặng đường."
+      "meaning": "Không cần ánh sáng lớn, vài bước nhỏ cũng đủ soi đường cho bạn hôm nay. Cứ đi từng chút một.",
+      "advice": "Chỉ tập trung vào bước tiếp theo, chưa cần nghĩ cả chặng đường."
     },
     {
       "title": "Mai vàng trước ngõ",
@@ -501,8 +501,8 @@
         "Giấy dó một nét mực tàu",
         "Lời hay ý đẹp, ngàn sau còn truyền"
       ],
-      "meaning": "Lời nói hôm nay có sức nặng. Chọn lời tử tế và rõ ràng, người nghe sẽ nhớ lâu.",
-      "advice": "Trước khi nói điều quan trọng, hãy nghĩ cách nói ngắn gọn và dịu dàng nhất."
+      "meaning": "Lời nói của bạn hôm nay có sức nặng. Chọn lời tử tế và rõ ràng, người nghe sẽ nhớ lâu.",
+      "advice": "Trước khi nói điều quan trọng, nghĩ cách nói ngắn gọn và dịu nhất."
     },
     {
       "title": "Đường làng sau mưa",
@@ -511,7 +511,7 @@
         "Đi chậm một chút, chẳng sờn gót chân"
       ],
       "meaning": "Có chút trở ngại nhỏ cần để ý, không đáng lo nếu bạn bước cẩn thận. Chậm mà chắc.",
-      "advice": "Dành thêm thời gian dự phòng cho các cuộc hẹn và việc đi lại hôm nay."
+      "advice": "Chừa thêm thời gian dự phòng cho các cuộc hẹn và việc đi lại hôm nay."
     },
     {
       "title": "Trái ngọt cuối mùa",
@@ -519,8 +519,8 @@
         "Cuối mùa còn trái trên cành",
         "Ngọt hơn trái sớm, để dành người sau"
       ],
-      "meaning": "Điều tốt đẹp đôi khi đến muộn hơn mong đợi nhưng ngọt ngào hơn. Đừng vội kết luận khi việc chưa xong.",
-      "advice": "Cho một việc đang chờ thêm thời gian, hẹn mình xem lại vào cuối tuần."
+      "meaning": "Điều tốt đôi khi đến muộn hơn mong đợi nhưng ngọt hơn. Đừng vội kết luận khi việc chưa xong.",
+      "advice": "Để một việc đang chờ thêm thời gian, hẹn mình xem lại cuối tuần."
     },
     {
       "title": "Én về làm tổ",
@@ -528,7 +528,7 @@
         "Đầu xuân én lượn ngang trời",
         "Tha bùn làm tổ, rộn lời gọi nhau"
       ],
-      "meaning": "Ngày hợp để xây dựng và vun đắp: nhà cửa, một dự định hay một mối quan hệ. Từng chút một sẽ thành.",
+      "meaning": "Ngày hợp để xây và vun: nhà cửa, một dự định hay một mối quan hệ. Từng chút một sẽ thành.",
       "advice": "Làm một việc nhỏ cho dự định dài hạn bạn đang ấp ủ."
     },
     {
@@ -537,8 +537,8 @@
         "Sớm hôm gánh nước đầy chum",
         "Cả nhà đủ dùng, vui chung tháng ngày"
       ],
-      "meaning": "Chuẩn bị chu đáo hôm nay giúp những ngày tới nhẹ nhàng hơn. Lo xa một chút là món quà cho chính mình.",
-      "advice": "Chuẩn bị sẵn đồ đạc hoặc lịch cho ngày mai trước khi đi ngủ."
+      "meaning": "Chuẩn bị chu đáo hôm nay giúp những ngày tới nhẹ hơn. Lo xa một chút là món quà cho chính bạn.",
+      "advice": "Soạn sẵn đồ đạc hoặc lịch cho ngày mai trước khi đi ngủ."
     },
     {
       "title": "Bông lúa cúi đầu",
@@ -546,7 +546,7 @@
         "Lúa chín bông nặng cúi đầu",
         "Càng nhiều hạt mẩy, càng sâu nghĩa tình"
       ],
-      "meaning": "Sự khiêm tốn hôm nay làm bạn được quý mến. Thành công đẹp nhất khi đi cùng lòng biết ơn.",
+      "meaning": "Sự khiêm tốn hôm nay khiến bạn được quý mến. Thành công đẹp nhất khi đi cùng lòng biết ơn.",
       "advice": "Cảm ơn một người đã giúp bạn đi tới chỗ hôm nay."
     },
     {
@@ -555,7 +555,7 @@
         "Trời quang mây tạnh gió hoà",
         "Đường về thoáng đãng, nhà nhà vui tươi"
       ],
-      "meaning": "Một ngày thuận hoà, ít trắc trở. Hãy tận dụng để giải quyết những việc còn tồn đọng.",
+      "meaning": "Một ngày thuận hòa, ít trắc trở. Tận dụng để giải quyết những việc còn tồn đọng.",
       "advice": "Xử lý dứt điểm một việc nhỏ bạn đã để dành từ lâu."
     },
     {
@@ -564,7 +564,7 @@
         "Đèn lồng đỏ thắm trong tay",
         "Trẻ con ca hát, đêm nay trăng tròn"
       ],
-      "meaning": "Hãy để đứa trẻ bên trong bạn được vui. Một chút hồn nhiên hôm nay giúp bạn thấy nhẹ lòng.",
+      "meaning": "Cho đứa trẻ trong bạn được vui một chút. Chút hồn nhiên hôm nay giúp bạn thấy nhẹ lòng.",
       "advice": "Làm một điều vui chỉ vì nó vui, không cần lý do."
     },
     {
@@ -574,7 +574,7 @@
         "Lắng lòng chọn lối, vững bền bước đi"
       ],
       "meaning": "Nếu đang cân nhắc giữa hai hướng, hôm nay hợp để tìm hiểu thêm hơn là quyết vội. Cảm giác bình an là chiếc la bàn tốt.",
-      "advice": "Viết ra điểm được và chưa được của từng lựa chọn, rồi để đó một đêm."
+      "advice": "Viết ra điểm được và chưa được của từng lựa chọn, để đó một đêm."
     }
   ],
   "stars": {

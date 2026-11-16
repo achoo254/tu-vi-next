@@ -1,702 +1,758 @@
 {
   "tu-vi": {
     "menh": {
-      "text": "Tử Vi tọa Mệnh vẽ nên chân dung một người có phong thái điềm tĩnh, tự trọng và dễ khiến người khác tin tưởng giao việc lớn. Bạn thường nhìn vấn đề ở tầm bao quát, biết giữ chữ tín và có lòng độ lượng. Điều cần rèn luyện là lắng nghe nhiều hơn, bởi đôi khi sự tự tin khiến bạn quen tự quyết một mình.",
-      "advice": "Hãy để người xung quanh góp ý trước khi bạn chốt một quyết định quan trọng."
+      "text": "Bạn có kiểu bình tĩnh khiến người khác yên tâm giao việc lớn. Họp căng cỡ nào, bạn vẫn là người nói câu chốt. Điểm cần để ý: bạn quen tự quyết một mình, nghe team thêm một vòng thì quyết định sẽ chắc hơn.",
+      "advice": "Trước khi chốt việc lớn, hỏi ý một người bạn tin.",
+      "short": "Bình tĩnh, có uy, được giao việc lớn mà vẫn giữ được chữ tín."
     },
     "huynh-de": {
-      "text": "Khi sao đế vương đóng ở cung Huynh Đệ, anh chị em trong nhà thường có người đáng nể, biết chăm lo cho tập thể. Bạn có xu hướng giữ vai trò người kết nối hoặc được anh em tin cậy. Khi mỗi người đều có chính kiến mạnh, một chút nhường nhịn sẽ giúp tình thân thêm bền.",
-      "advice": "Chia việc nhà rõ ràng và cảm ơn nhau thường xuyên hơn."
+      "text": "Trong nhà hoặc nhóm bạn thân, bạn thường là người đứng ra lo chung và được tin cậy. Ai cũng có chính kiến mạnh nên đôi lúc dễ cãi nhau vì chuyện nhỏ. Nhường nhau một chút là tình thân bền hơn nhiều.",
+      "advice": "Chia việc nhà rõ ràng và nhớ cảm ơn nhau mỗi khi xong việc."
     },
     "phu-the": {
-      "text": "Người bạn đời mà lá số gợi ý thường đĩnh đạc, có lòng tự trọng cao và muốn được tôn trọng trong mối quan hệ. Hai người dễ xây dựng một gia đình nề nếp, có định hướng. Đôi lúc cả hai cùng muốn làm chủ, nên học cách chia vai trò sẽ giúp tình cảm hài hòa.",
-      "advice": "Thống nhất ai quyết việc gì để tránh giằng co không cần thiết."
+      "text": "Bạn hợp với người đàng hoàng, có lòng tự trọng và muốn được tôn trọng. Hai người dễ xây được nếp sống có định hướng. Có điều cả hai đều thích làm chủ, nên chia vai rõ ràng sẽ đỡ giằng co.",
+      "advice": "Thống nhất ai quyết việc gì để khỏi tranh nhau.",
+      "short": "Thích người đàng hoàng, cần được tôn trọng; ai cũng muốn cầm lái thì cần chia vai."
     },
     "tu-tuc": {
-      "text": "Cung Tử Tức có Tử Vi gợi ý con cái thông minh, có cá tính và sớm biết tự lập. Bạn có thể là cha mẹ đặt kỳ vọng cao, mong con nên người và thành đạt. Khi kỳ vọng đi kèm sự đồng hành nhẹ nhàng, con sẽ lớn lên tự tin và gần gũi với bạn hơn.",
+      "text": "Con cái của bạn có xu hướng thông minh, có cá tính và sớm biết tự lập. Bạn dễ đặt kỳ vọng cao cho con. Nếu đi kèm sự đồng hành nhẹ nhàng, con sẽ tự tin và gần gũi với bạn hơn.",
       "advice": "Khen nỗ lực của con thay vì chỉ khen kết quả."
     },
     "tai-bach": {
-      "text": "Tiền bạc với bạn thường đến từ uy tín và năng lực quản lý hơn là may rủi. Bạn có khả năng nhìn ra cơ hội lớn và biết sắp xếp nguồn lực một cách bài bản. Xu hướng chi tiêu cho thể diện hoặc hình ảnh đôi khi khá cao, nên một ngân sách rõ ràng sẽ giúp bạn vững vàng hơn.",
-      "advice": "Đặt hạn mức cho những khoản chi mang tính giữ thể diện."
+      "text": "Tiền của bạn đến từ uy tín và cách quản lý bài bản hơn là may rủi. Bạn nhìn ra cơ hội lớn và biết sắp xếp nguồn lực. Chỉ cần để ý khoản chi cho thể diện, vì nó dễ phình ra lúc nào không hay.",
+      "advice": "Đặt hạn mức hàng tháng cho các khoản chi giữ thể diện.",
+      "short": "Kiếm tiền nhờ uy tín và biết sắp xếp; để ý khoản chi cho thể diện."
     },
     "tat-ach": {
-      "text": "Sao chủ đóng ở cung sức khỏe thường cho thấy thể trạng khá ổn định và tinh thần biết tự chủ. Tuy vậy, người hay gánh trách nhiệm như bạn dễ để căng thẳng tích tụ mà không nói ra. Chú ý giữ sức khỏe bằng giấc ngủ đều đặn và những khoảng nghỉ thật sự sẽ giúp bạn bền bỉ lâu dài.",
-      "advice": "Lên lịch nghỉ ngơi như lên lịch một cuộc họp quan trọng."
+      "text": "Thể trạng bạn khá ổn định và tinh thần biết tự chủ. Người hay gánh trách nhiệm như bạn dễ để căng thẳng tích tụ mà không nói ra. Ngủ đều và nghỉ thật sự giữa các đợt việc sẽ giúp bạn bền hơn.",
+      "advice": "Đặt lịch nghỉ ngơi như đặt một cuộc họp quan trọng."
     },
     "thien-di": {
-      "text": "Ra ngoài xã hội, bạn dễ được nể trọng và gặp người có vị thế sẵn lòng nâng đỡ. Môi trường mới, nơi xa hay những chuyến đi công tác thường mở ra cơ hội đáng giá. Hãy giữ sự khiêm tốn khi đến chỗ lạ, vì đó chính là điều khiến người khác muốn hợp tác lâu dài với bạn.",
-      "advice": "Mỗi chuyến đi, hãy chủ động làm quen thêm ít nhất một người mới."
+      "text": "Ra ngoài, bạn dễ được nể trọng và gặp người có vị thế sẵn lòng kéo bạn một tay. Môi trường mới hay chuyến công tác xa thường mở ra cơ hội tốt. Giữ sự khiêm tốn ở chỗ lạ, người ta sẽ muốn hợp tác lâu dài với bạn.",
+      "advice": "Mỗi chuyến đi, làm quen thêm ít nhất một người mới."
     },
     "no-boc": {
-      "text": "Bạn bè và đồng nghiệp quanh bạn thường là người có năng lực, thậm chí có người giỏi hơn bạn ở nhiều mặt. Đây là nguồn hỗ trợ quý nếu bạn biết trân trọng và trao quyền đúng chỗ. Đôi khi mối quan hệ cần sự tôn trọng hai chiều để không ai cảm thấy bị lấn át.",
-      "advice": "Ghi nhận công khai đóng góp của người đồng hành."
+      "text": "Đồng nghiệp và bạn bè quanh bạn thường có năng lực, có người còn giỏi hơn bạn. Đó là nguồn hỗ trợ quý nếu bạn biết giao việc đúng chỗ. Quan hệ cần tôn trọng hai chiều để không ai thấy mình bị lấn át.",
+      "advice": "Ghi nhận công khai đóng góp của người cùng làm với bạn."
     },
     "quan-loc": {
-      "text": "Đây là vị trí đẹp cho sự nghiệp: bạn hợp với vai trò quản lý, điều phối hoặc những công việc cần tầm nhìn và trách nhiệm. Khi được giao quyền, bạn thường làm việc nghiêm túc và giữ được kỷ luật. Thử thách là học cách ủy thác, để không ôm hết mọi việc vào mình.",
-      "advice": "Chọn một việc trong tuần này để giao hẳn cho người khác làm."
+      "text": "Đây là thế mạnh cho sự nghiệp: bạn hợp vai quản lý, điều phối hoặc việc cần tầm nhìn và trách nhiệm. Được giao quyền, bạn làm nghiêm túc và giữ kỷ luật. Thử thách là học giao việc, đừng ôm hết vào mình.",
+      "advice": "Chọn một việc trong tuần này để giao hẳn cho người khác.",
+      "short": "Hợp vai dẫn dắt, điều phối; cần học cách giao việc thay vì ôm hết."
     },
     "dien-trach": {
-      "text": "Cung nhà cửa có Tử Vi gợi ý bạn coi trọng một tổ ấm vững chãi, ngăn nắp và có phần bề thế. Bạn có khả năng tích lũy tài sản cố định theo thời gian nhờ tính kiên định. Đừng vội vì muốn hoàn hảo mà trì hoãn việc tạo dựng chỗ ở phù hợp với hiện tại.",
-      "advice": "Bắt đầu từ một không gian nhỏ nhưng thật sự dễ chịu."
+      "text": "Bạn coi trọng một tổ ấm gọn gàng, vững chãi. Nhờ tính kiên định, tài sản như nhà cửa có thể tích lũy dần theo thời gian. Đừng vì muốn hoàn hảo mà hoãn mãi việc có một chỗ ở hợp với hiện tại.",
+      "advice": "Bắt đầu từ một góc nhỏ nhưng thật sự dễ chịu."
     },
     "phuc-duc": {
-      "text": "Phúc Đức có sao chủ gợi ý một đời sống tinh thần vững vàng, được truyền thống gia đình nâng đỡ. Bạn thường bình tâm trước biến động và biết giữ nếp sống tử tế. Khi lòng tự trọng quá cao, bạn có thể ngại xin giúp đỡ, trong khi chính sự sẻ chia mới làm phúc phần thêm dày.",
-      "advice": "Dành thời gian thăm hỏi người lớn tuổi trong họ hàng."
+      "text": "Đời sống tinh thần của bạn khá vững, có nếp nhà tử tế làm chỗ dựa. Bạn thường bình tĩnh trước biến động. Vì lòng tự trọng cao nên bạn ngại nhờ giúp, trong khi chia sẻ mới làm bạn nhẹ lòng hơn.",
+      "advice": "Dành chút thời gian hỏi thăm người lớn tuổi trong họ."
     },
     "phu-mau": {
-      "text": "Cha mẹ trong lá số này thường là người có nguyên tắc, nghiêm khắc nhưng thương con theo cách riêng. Bạn được thừa hưởng nền nếp và ý thức trách nhiệm từ gia đình. Đôi khi khoảng cách thế hệ khiến hai bên khó nói thật lòng, vì vậy một cuộc trò chuyện chân thành sẽ có giá trị hơn nhiều lời khuyên.",
-      "advice": "Hỏi cha mẹ về quãng đời trẻ của họ trong một bữa cơm."
+      "text": "Cha mẹ bạn thường có nguyên tắc, nghiêm nhưng thương con theo cách riêng. Bạn thừa hưởng nền nếp và ý thức trách nhiệm từ nhà. Khoảng cách thế hệ khiến hai bên khó nói thật lòng, một cuộc trò chuyện chân thành sẽ đáng giá hơn nhiều lời khuyên.",
+      "advice": "Hỏi cha mẹ về thời trẻ của họ trong một bữa cơm."
     }
   },
   "thien-co": {
     "menh": {
-      "text": "Thiên Cơ ở Mệnh cho thấy một bộ óc nhanh nhạy, thích tìm hiểu cách mọi thứ vận hành và luôn có sẵn phương án dự phòng. Bạn khéo tay, khéo lời và thích nghi tốt với thay đổi. Vì nghĩ nhiều nên đôi khi bạn dễ lo xa, cần tập tin vào lựa chọn của mình và hành động sớm hơn.",
-      "advice": "Khi phân vân, hãy đặt hạn chót cho việc suy nghĩ rồi bắt tay làm."
+      "text": "Đầu óc bạn nhanh nhạy, thích hiểu mọi thứ vận hành ra sao và luôn có sẵn phương án dự phòng. Bạn khéo tay, khéo lời, thích nghi tốt với thay đổi. Vì nghĩ nhiều nên bạn dễ lo xa, hãy tin lựa chọn của mình và bắt tay làm sớm hơn.",
+      "advice": "Khi phân vân, đặt hạn chót cho việc suy nghĩ rồi làm luôn.",
+      "short": "Nhanh trí, khéo léo, luôn có phương án B; chỉ hay nghĩ nhiều quá."
     },
     "huynh-de": {
-      "text": "Anh chị em của bạn thường lanh lợi, mỗi người một hướng đi và có nhiều ý tưởng riêng. Mối quan hệ dễ chịu nhất khi mọi người cùng trao đổi, học hỏi lẫn nhau. Do ai cũng bận rộn và thay đổi nhịp sống liên tục, việc giữ liên lạc đều đặn sẽ giúp tình thân không bị nhạt.",
-      "advice": "Lập một nhóm trò chuyện gia đình và cập nhật cho nhau mỗi tuần."
+      "text": "Anh chị em hoặc bạn thân của bạn thường lanh lợi, mỗi người một hướng đi và nhiều ý tưởng riêng. Mọi người hợp nhau khi cùng trao đổi và học hỏi. Ai cũng bận nên giữ liên lạc đều đặn thì tình thân mới không nhạt.",
+      "advice": "Lập group chat gia đình và cập nhật cho nhau mỗi tuần."
     },
     "phu-the": {
-      "text": "Ngôi sao mưu trí ở cung Phu Thê gợi ý người bạn đời hiểu biết, nói chuyện có duyên và giỏi xoay xở. Mối quan hệ dựa trên sự đồng điệu trong suy nghĩ sẽ bền hơn sự hấp dẫn bề ngoài. Cả hai có thể hay suy diễn, nên nói rõ cảm xúc sẽ giúp tránh hiểu lầm.",
-      "advice": "Hỏi thẳng thay vì đoán ý nửa kia."
+      "text": "Bạn hợp với người hiểu biết, nói chuyện có duyên và giỏi xoay xở. Hợp nhau về cách nghĩ sẽ bền hơn hợp nhau về vẻ ngoài. Cả hai hay suy diễn, nên nói thẳng cảm xúc sẽ tránh được nhiều hiểu lầm.",
+      "advice": "Hỏi thẳng thay vì đoán ý người ấy qua tin nhắn.",
+      "short": "Cần người hợp cách nghĩ, nói chuyện có duyên; đừng đoán ý nhau, hãy hỏi thẳng."
     },
     "tu-tuc": {
-      "text": "Con cái của bạn nhiều khả năng hiếu động, tò mò và học nhanh, đặc biệt với những thứ cần tư duy. Bạn có thể là người cha mẹ thích cùng con khám phá. Trẻ dễ chuyển từ sở thích này sang sở thích khác, nên kiên nhẫn đồng hành sẽ giúp con tìm ra điều mình thật sự đam mê.",
-      "advice": "Cho con thử nhiều thứ nhưng khuyến khích con đi đến cùng một việc."
+      "text": "Con cái bạn nhiều khả năng hiếu động, tò mò và học nhanh, nhất là những thứ cần tư duy. Bạn thích cùng con khám phá. Trẻ dễ đổi sở thích liên tục, nên kiên nhẫn đồng hành để con tìm được điều thật sự mê.",
+      "advice": "Cho con thử nhiều thứ nhưng khuyến khích theo đến cùng một việc."
     },
     "tai-bach": {
-      "text": "Bạn kiếm tiền tốt nhờ đầu óc: lên kế hoạch, tư vấn, kỹ thuật hoặc những việc cần tính toán khéo léo. Nguồn thu có thể linh hoạt, đến từ nhiều kênh khác nhau. Vì thích thử cái mới, bạn nên có một phần tích lũy cố định để không bị cuốn theo quá nhiều ý tưởng cùng lúc.",
-      "advice": "Tách riêng một khoản tiết kiệm tự động ngay khi có thu nhập."
+      "text": "Bạn kiếm tiền bằng đầu óc: lên kế hoạch, tư vấn, kỹ thuật hoặc việc cần tính toán khéo. Nguồn thu có thể đến từ nhiều kênh, như freelance hay side project. Thích thử cái mới nên bạn cần một phần tích lũy cố định để khỏi bị cuốn theo.",
+      "advice": "Tự động chuyển một khoản tiết kiệm ngay khi có lương.",
+      "short": "Kiếm tiền bằng đầu óc, nhiều nguồn thu; nhớ giữ một khoản tiết kiệm cố định."
     },
     "tat-ach": {
-      "text": "Người có Thiên Cơ ở cung sức khỏe thường hoạt bát nhưng đầu óc ít khi chịu nghỉ vì suy nghĩ liên tục. Chú ý giữ sức khỏe bằng cách cho đầu óc được nghỉ thật sự, nhất là trước giờ ngủ. Những hoạt động nhẹ nhàng như đi bộ hay thiền ngắn sẽ rất hợp với bạn.",
+      "text": "Bạn hoạt bát nhưng đầu óc ít khi chịu nghỉ, nhất là lúc nằm xuống giường. Cho đầu óc nghỉ thật sự trước giờ ngủ sẽ giúp bạn khỏe hơn nhiều. Đi bộ nhẹ hoặc thiền ngắn rất hợp với bạn.",
       "advice": "Tắt màn hình nửa tiếng trước khi đi ngủ."
     },
     "thien-di": {
-      "text": "Bạn thích hợp với việc di chuyển, đổi môi trường và học hỏi từ nơi mới. Khi ra ngoài, sự nhanh trí giúp bạn xử lý tình huống tốt và dễ gặp người chỉ đường đúng lúc. Lịch trình nhiều thay đổi có thể khiến bạn mệt, vì vậy sắp xếp trước một chút sẽ giúp chuyến đi trọn vẹn hơn.",
-      "advice": "Chuẩn bị danh sách việc cần làm trước mỗi chuyến đi."
+      "text": "Bạn hợp với việc di chuyển, đổi môi trường và học từ nơi mới. Ra ngoài, nhanh trí giúp bạn xử lý tình huống tốt và hay gặp người chỉ đường đúng lúc. Lịch trình dày dễ làm bạn mệt, nên sắp xếp trước một chút.",
+      "advice": "Lập danh sách việc cần làm trước mỗi chuyến đi."
     },
     "no-boc": {
-      "text": "Bạn có nhiều mối quan hệ bạn bè thông minh, hay chia sẻ thông tin và mẹo hay. Đây là mạng lưới học hỏi rất quý cho công việc. Các mối quan hệ có thể đến rồi đi theo từng giai đoạn, nên hãy chọn giữ lại vài người bạn thật sự hiểu mình.",
-      "advice": "Chủ động hẹn gặp lại một người bạn cũ đáng quý."
+      "text": "Bạn có nhiều bạn bè thông minh, hay chia sẻ thông tin và mẹo hay. Đây là mạng lưới học hỏi rất đáng giá cho công việc. Mối quan hệ có thể đến rồi đi theo từng giai đoạn, nên hãy giữ lại vài người thật sự hiểu bạn.",
+      "advice": "Chủ động hẹn cà phê một người bạn cũ đáng quý."
     },
     "quan-loc": {
-      "text": "Thiên Cơ ở Quan Lộc thuận lợi cho công việc cần tư duy hệ thống, kế hoạch, phân tích hoặc kỹ thuật. Bạn là người giỏi tìm cách làm tốt hơn và thường được tin cậy ở vai trò tham mưu. Xu hướng muốn đổi việc khi thấy nhàm có thể làm chậm tích lũy, nên hãy đổi cách làm trước khi đổi chỗ làm.",
-      "advice": "Ghi lại các cải tiến bạn đã làm để thấy rõ giá trị của mình."
+      "text": "Bạn hợp công việc cần tư duy hệ thống, lên kế hoạch, phân tích hoặc kỹ thuật. Bạn giỏi tìm cách làm tốt hơn nên hay được tin cậy ở vai trò tham mưu. Thấy nhàm là muốn nhảy việc ngay, nhưng đổi cách làm trước khi đổi chỗ làm thường có lợi hơn.",
+      "advice": "Ghi lại các cải tiến bạn đã làm để thấy rõ giá trị của mình.",
+      "short": "Giỏi phân tích, lập kế hoạch, tìm cách làm tốt hơn; dễ nhàm nên cần việc luôn có cái mới."
     },
     "dien-trach": {
-      "text": "Với nhà cửa, bạn thích sự tiện nghi, bố trí khéo léo và có thể thay đổi chỗ ở vài lần trong đời. Bạn giỏi biến một không gian nhỏ thành nơi hợp lý và dễ chịu. Trước những quyết định lớn về nhà đất, cân nhắc kỹ và hỏi người có kinh nghiệm sẽ giúp bạn yên tâm hơn.",
+      "text": "Với nhà cửa, bạn thích tiện nghi và cách bố trí khéo léo. Bạn có thể đổi chỗ ở vài lần trong đời. Bạn giỏi biến một không gian nhỏ thành nơi gọn và dễ chịu. Trước quyết định lớn về nhà đất, hỏi thêm người có kinh nghiệm sẽ yên tâm hơn.",
       "advice": "Sắp xếp lại một góc nhà để làm mới tinh thần."
     },
     "phuc-duc": {
-      "text": "Đời sống nội tâm của bạn phong phú, thích đọc, thích suy ngẫm và tìm hiểu những điều sâu xa. Gia đình thường có truyền thống hiếu học. Tâm trí ít khi đứng yên nên bạn cần những khoảng tĩnh lặng để cảm nhận niềm vui đơn giản trong hiện tại.",
+      "text": "Nội tâm bạn phong phú, thích đọc, suy ngẫm và tìm hiểu điều sâu xa. Gia đình thường có truyền thống hiếu học. Đầu óc ít khi đứng yên, nên bạn cần những khoảng lặng để thấy niềm vui đơn giản ngay lúc này.",
       "advice": "Mỗi ngày dành mười phút chỉ để ngồi yên và thở."
     },
     "phu-mau": {
-      "text": "Cha mẹ có thể là người hiểu biết, khéo léo và dạy bạn cách suy nghĩ độc lập từ sớm. Bạn thừa hưởng sự nhạy bén trong cách xử lý vấn đề. Đôi khi quan điểm hai bên khác nhau do khác thế hệ, nên việc trao đổi bằng lý lẽ nhẹ nhàng sẽ hiệu quả hơn tranh luận.",
-      "advice": "Chia sẻ với cha mẹ một điều mới bạn vừa học được."
+      "text": "Cha mẹ bạn có thể là người hiểu biết, khéo léo và dạy bạn nghĩ độc lập từ sớm. Bạn thừa hưởng sự nhạy bén khi xử lý vấn đề. Hai thế hệ đôi khi khác quan điểm, trao đổi bằng lý lẽ nhẹ nhàng sẽ hiệu quả hơn tranh luận.",
+      "advice": "Kể cho cha mẹ nghe một điều mới bạn vừa học được."
     }
   },
   "thai-duong": {
     "menh": {
-      "text": "Như mặt trời, Thái Dương ở Mệnh mang lại sự nhiệt thành, cởi mở và tinh thần sẵn sàng cho đi. Bạn thường thẳng thắn, thích làm việc có ý nghĩa và dễ truyền năng lượng tích cực cho người khác. Vì hay lo cho mọi người, bạn cần nhớ chừa sức cho chính mình.",
-      "advice": "Học cách nói không với những việc vượt quá sức bạn."
+      "text": "Bạn nhiệt thành, cởi mở và sẵn sàng cho đi. Bạn thường thẳng thắn, thích làm việc có ý nghĩa và truyền được năng lượng tích cực cho người khác. Vì hay lo cho mọi người nên bạn cần nhớ chừa sức cho chính mình.",
+      "advice": "Tập nói không với việc vượt quá sức bạn.",
+      "short": "Nhiệt thành, thẳng thắn, hay lo cho người khác; nhớ chừa sức cho mình."
     },
     "huynh-de": {
-      "text": "Trong nhà, bạn hoặc một người anh chị em thường đóng vai người sưởi ấm, hay đứng ra lo liệu khi có việc chung. Tình thân dựa trên sự hào phóng và chân thành. Người cho đi nhiều đôi khi thấy mệt, vì vậy chia đều trách nhiệm sẽ giúp ai cũng thoải mái.",
+      "text": "Trong nhà hoặc nhóm bạn, bạn hay là người sưởi ấm, đứng ra lo khi có việc chung. Tình thân của bạn dựa trên sự hào phóng và chân thành. Người cho đi nhiều đôi khi thấy mệt, nên chia đều trách nhiệm sẽ giúp ai cũng thoải mái.",
       "advice": "Rủ anh chị em cùng gánh một việc chung thay vì tự làm hết."
     },
     "phu-the": {
-      "text": "Thái Dương ở cung hôn nhân gợi ý một người bạn đời năng nổ, rộng rãi và có chí hướng rõ ràng. Mối quan hệ thường sáng sủa, ít giấu giếm. Cả hai có thể bận rộn với việc bên ngoài, nên những khoảng thời gian riêng tư cần được giữ gìn như một ưu tiên.",
-      "advice": "Giữ một buổi tối mỗi tuần chỉ dành cho hai người."
+      "text": "Bạn hợp với người năng nổ, rộng rãi và có chí hướng rõ ràng. Mối quan hệ thường sáng sủa, ít giấu giếm. Cả hai hay bận việc bên ngoài, nên giữ thời gian riêng cho nhau như một ưu tiên.",
+      "advice": "Giữ một buổi tối mỗi tuần chỉ dành cho hai người.",
+      "short": "Yêu thẳng thắn, rộng rãi, ít giấu giếm; đừng để công việc nuốt hết thời gian hai người."
     },
     "tu-tuc": {
-      "text": "Những đứa trẻ dưới ánh Thái Dương thường hoạt bát, thẳng tính và có tinh thần cầu tiến. Bạn dễ trở thành tấm gương mà con muốn noi theo. Trẻ năng lượng cao cần được vận động và thể hiện mình, vì vậy hãy tạo cho con không gian để tỏa sáng theo cách riêng.",
-      "advice": "Cùng con chơi một môn thể thao ngoài trời."
+      "text": "Con cái bạn thường hoạt bát, thẳng tính và có tinh thần cầu tiến. Bạn dễ trở thành tấm gương để con noi theo. Trẻ nhiều năng lượng cần được vận động và thể hiện, hãy cho con chỗ để tỏa sáng theo cách riêng.",
+      "advice": "Cuối tuần cùng con chơi một môn thể thao ngoài trời."
     },
     "tai-bach": {
-      "text": "Nguồn thu của bạn gắn với danh tiếng, sự hiện diện và những công việc phải xuất hiện trước người khác. Bạn kiếm được nhưng cũng hào phóng, sẵn lòng chi cho người thân và bạn bè. Một kế hoạch tài chính rõ ràng giúp sự rộng rãi ấy luôn đi kèm sự an tâm.",
-      "advice": "Ghi chép chi tiêu trong một tháng để biết tiền đi đâu."
+      "text": "Thu nhập của bạn gắn với danh tiếng, sự hiện diện và những việc phải đứng trước người khác. Bạn kiếm được nhưng cũng hào phóng, sẵn lòng chi cho người thân và bạn bè. Có kế hoạch tài chính rõ ràng thì sự rộng rãi ấy mới đi kèm yên tâm.",
+      "advice": "Ghi chép chi tiêu một tháng để biết tiền đi đâu.",
+      "short": "Kiếm tốt nhờ sự hiện diện và danh tiếng, chi tay rộng; cần kế hoạch để giữ tiền."
     },
     "tat-ach": {
-      "text": "Thể trạng của bạn thường dồi dào năng lượng, nhưng nhịp làm việc cao dễ khiến bạn quên nghỉ. Chú ý giữ sức khỏe bằng cách cho mắt và đầu óc được thư giãn sau giờ làm, tránh thức khuya kéo dài. Sự cân bằng giữa hoạt động và nghỉ ngơi là chìa khóa của bạn.",
-      "advice": "Cứ mỗi giờ nhìn màn hình, hãy rời mắt nghỉ vài phút."
+      "text": "Bạn thường dồi dào năng lượng, nhưng nhịp làm việc cao khiến bạn hay quên nghỉ. Hãy cho mắt và đầu óc thư giãn sau giờ làm, tránh thức khuya kéo dài. Cân bằng giữa hoạt động và nghỉ ngơi là chìa khóa của bạn.",
+      "advice": "Cứ mỗi giờ nhìn màn hình, rời mắt nghỉ vài phút."
     },
     "thien-di": {
-      "text": "Càng đông người, bạn càng tỏa sáng và dễ gây thiện cảm nhờ sự cởi mở và nhiệt tình. Những nơi nhộn nhịp, công việc giao tiếp hay hoạt động cộng đồng đều giúp bạn phát huy thế mạnh. Đôi khi bạn ôm đồm việc của người khác, nên biết chọn lọc sẽ giữ được sức và uy tín.",
+      "text": "Càng đông người bạn càng tỏa sáng, dễ tạo thiện cảm nhờ sự cởi mở. Nơi nhộn nhịp, việc giao tiếp hay hoạt động cộng đồng giúp bạn phát huy thế mạnh. Đôi khi bạn ôm việc của người khác, chọn lọc hơn sẽ giữ được sức và uy tín.",
       "advice": "Chỉ nhận lời giúp khi bạn thật sự có thời gian."
     },
     "no-boc": {
-      "text": "Bạn có nhiều bạn bè, đồng nghiệp quý mến vì bạn hay giúp đỡ mà không tính toán. Mạng lưới rộng này là tài sản lớn trong công việc. Để quan hệ cân bằng, bạn cũng nên mạnh dạn nhờ vả khi cần thay vì chỉ đứng ở vị trí người cho.",
+      "text": "Bạn có nhiều bạn bè và đồng nghiệp quý mến vì hay giúp mà không tính toán. Mạng lưới rộng này là tài sản lớn cho công việc. Để quan hệ cân bằng, bạn cũng nên mạnh dạn nhờ vả khi cần, đừng chỉ đứng ở vị trí người cho.",
       "advice": "Thử nhờ một người bạn hỗ trợ việc bạn đang cần."
     },
     "quan-loc": {
-      "text": "Thái Dương ở Quan Lộc rất hợp với công việc cần sự hiện diện, dẫn dắt hoặc phục vụ cộng đồng như giảng dạy, truyền thông, quản lý. Bạn làm việc hết mình và thích được công nhận. Hãy để ý nhịp độ, vì người hăng hái thường dễ bị cuốn vào quá nhiều dự án.",
-      "advice": "Chọn ba ưu tiên quan trọng nhất cho mỗi tháng."
+      "text": "Bạn hợp công việc cần sự hiện diện, dẫn dắt hoặc phục vụ cộng đồng như giảng dạy, truyền thông, quản lý. Bạn làm hết mình và thích được ghi nhận. Người hăng hái dễ ôm quá nhiều dự án, nên để ý nhịp độ của mình.",
+      "advice": "Chọn ba ưu tiên quan trọng nhất cho mỗi tháng.",
+      "short": "Hợp việc đứng trước mọi người, dẫn dắt, truyền cảm hứng; đừng ôm quá nhiều dự án."
     },
     "dien-trach": {
-      "text": "Bạn thích một ngôi nhà sáng sủa, thoáng đãng và rộng cửa đón khách. Gia đình thường có nếp cởi mở, bạn bè dễ ghé chơi. Việc tạo dựng nhà cửa nên đi từng bước chắc chắn, để niềm vui có tổ ấm không trở thành áp lực.",
+      "text": "Bạn thích ngôi nhà sáng sủa, thoáng đãng và rộng cửa đón khách. Gia đình bạn thường có nếp cởi mở, bạn bè dễ ghé chơi. Tạo dựng nhà cửa nên đi từng bước chắc chắn để tổ ấm là niềm vui chứ không thành áp lực.",
       "advice": "Mở cửa sổ đón nắng và giữ nhà luôn thoáng."
     },
     "phuc-duc": {
-      "text": "Phúc Đức có Thái Dương gợi ý gia đình có truyền thống tử tế, hay giúp người. Bạn tìm thấy niềm vui khi được làm điều có ích và lan tỏa năng lượng tốt. Nội tâm sẽ an hơn nếu bạn bớt so sánh mình với người khác và tự ghi nhận những gì đã làm được.",
+      "text": "Gia đình bạn thường có nếp tử tế, hay giúp người. Bạn thấy vui khi làm được điều có ích và lan tỏa năng lượng tốt. Nội tâm sẽ yên hơn khi bạn bớt so sánh với người khác và tự ghi nhận những gì mình đã làm được.",
       "advice": "Viết ra ba điều bạn biết ơn trước khi ngủ."
     },
     "phu-mau": {
-      "text": "Cha, hoặc người đóng vai trò trụ cột, thường có ảnh hưởng rõ nét đến cách bạn sống và làm việc. Bạn học được tinh thần trách nhiệm và sự thẳng thắn từ gia đình. Gia đình bận rộn đôi khi ít thời gian bên nhau, nên hãy chủ động tạo những lần sum họp.",
+      "text": "Cha hoặc người làm trụ cột trong nhà có ảnh hưởng rõ đến cách bạn sống và làm việc. Bạn học được tinh thần trách nhiệm và sự thẳng thắn từ gia đình. Nhà bận rộn nên ít thời gian ở bên nhau, hãy chủ động tạo những lần sum họp.",
       "advice": "Gọi điện cho cha mẹ vào một ngày cố định trong tuần."
     }
   },
   "vu-khuc": {
     "menh": {
-      "text": "Vũ Khúc ở Mệnh cho thấy một người thực tế, quyết đoán và có khả năng biến mục tiêu thành con số cụ thể. Bạn làm việc chăm chỉ, giữ lời và không ngại khó. Cái cứng rắn giúp bạn đi xa, nhưng thêm một chút mềm mỏng trong lời nói sẽ giúp bạn có thêm đồng minh.",
-      "advice": "Trước khi phản biện, hãy ghi nhận ý đúng của người kia."
+      "text": "Bạn thực tế, quyết đoán và biết biến mục tiêu thành con số cụ thể. Bạn chăm chỉ, giữ lời và không ngại việc khó. Cái cứng rắn giúp bạn đi xa, thêm chút mềm mỏng trong lời nói sẽ giúp bạn có thêm đồng minh.",
+      "advice": "Trước khi phản biện, ghi nhận ý đúng của người kia đã.",
+      "short": "Thực tế, quyết đoán, nói là làm; mềm lời thêm chút sẽ có thêm đồng minh."
     },
     "huynh-de": {
-      "text": "Trong nhà, mỗi người thường độc lập, tự lo cho mình và giỏi chuyện làm ăn. Ai cũng có lối sống riêng nên tình thân thể hiện qua hành động hơn lời nói. Khi có chuyện chung về tiền bạc, rõ ràng ngay từ đầu sẽ giữ được hòa khí lâu dài.",
-      "advice": "Việc chung có liên quan đến tiền, hãy ghi lại thỏa thuận."
+      "text": "Trong nhà hoặc nhóm bạn, mỗi người thường độc lập, tự lo cho mình và giỏi chuyện làm ăn. Tình thân thể hiện bằng hành động hơn là lời nói. Có việc chung liên quan đến tiền, nói rõ ngay từ đầu sẽ giữ hòa khí lâu dài.",
+      "advice": "Việc chung có liên quan đến tiền thì ghi lại thỏa thuận."
     },
     "phu-the": {
-      "text": "Người bạn đời mà Vũ Khúc gợi ý thường thực tế, có năng lực kinh tế và đáng tin cậy. Tình cảm thể hiện qua sự lo toan hơn là lời ngọt ngào. Hai người nên dành chỗ cho những cử chỉ lãng mạn nhỏ để mối quan hệ không chỉ xoay quanh công việc và chi tiêu.",
-      "advice": "Thỉnh thoảng tặng nhau một món quà không vì dịp gì."
+      "text": "Bạn hợp với người thực tế, tự chủ kinh tế và đáng tin. Tình cảm thể hiện qua sự lo toan hơn là lời ngọt ngào. Hãy chừa chỗ cho vài cử chỉ lãng mạn nhỏ để chuyện hai người không chỉ xoay quanh việc làm và chi tiêu.",
+      "advice": "Thỉnh thoảng tặng nhau một món quà không vì dịp gì.",
+      "short": "Yêu bằng sự lo toan, đáng tin; thêm chút lãng mạn để đỡ khô khan."
     },
     "tu-tuc": {
-      "text": "Con cái có tính tự lập, ý chí mạnh và thường biết quý trọng giá trị của lao động. Bạn có thể dạy con cách tiết kiệm và làm việc có kế hoạch từ sớm. Trẻ cá tính cần được lắng nghe nhiều hơn là ra lệnh, như vậy con sẽ hợp tác vui vẻ.",
+      "text": "Con cái bạn thường tự lập, ý chí mạnh và biết quý giá trị của lao động. Bạn có thể dạy con tiết kiệm và làm việc có kế hoạch từ sớm. Trẻ cá tính cần được lắng nghe hơn là ra lệnh, con sẽ hợp tác vui vẻ hơn.",
       "advice": "Cho con tự quản lý một khoản tiền tiêu vặt nhỏ."
     },
     "tai-bach": {
-      "text": "Đây là vị trí quen thuộc của tài tinh: bạn có đầu óc kinh tế, biết kiếm và biết giữ. Tiền bạc thường đến từ sự kiên trì và kỹ năng chuyên môn hơn là may mắn. Điều cần lưu ý là đừng để mục tiêu tài chính lấn át thời gian dành cho bản thân và người thân.",
-      "advice": "Đặt mục tiêu tích lũy rõ ràng, rồi cho phép mình tận hưởng khi đạt được."
+      "text": "Đầu óc kinh tế của bạn khá tốt: biết kiếm và biết giữ. Tiền thường đến từ sự kiên trì và chuyên môn hơn là may mắn. Chỉ cần nhớ đừng để mục tiêu tài chính lấn hết thời gian dành cho bản thân và người thân.",
+      "advice": "Đặt mục tiêu tiết kiệm rõ ràng, đạt rồi thì tự thưởng mình.",
+      "short": "Biết kiếm, biết giữ, đi lên nhờ kiên trì và chuyên môn; đừng để tiền lấn hết cuộc sống."
     },
     "tat-ach": {
-      "text": "Bạn thường có sức bền tốt và chịu được áp lực công việc. Tuy vậy, người hay dồn sức như bạn cần chú ý giữ sức khỏe đường hô hấp và giữ nhịp thở đều khi căng thẳng. Tập thể dục đều đặn và ở nơi thoáng khí sẽ giúp bạn luôn sảng khoái.",
-      "advice": "Thử vài phút hít thở sâu khi bắt đầu thấy căng thẳng."
+      "text": "Bạn có sức bền tốt và chịu được áp lực công việc. Tuy vậy người hay dồn sức như bạn nên chú ý hơi thở và nghỉ giữa giờ khi căng thẳng. Tập thể dục đều và ở nơi thoáng khí sẽ giúp bạn luôn tỉnh táo.",
+      "advice": "Thử vài phút hít thở sâu khi bắt đầu thấy căng."
     },
     "thien-di": {
-      "text": "Ra ngoài làm ăn, bạn tạo được uy tín nhờ sự nghiêm túc và đúng hẹn. Những chuyến đi liên quan đến công việc, tài chính thường mang lại kết quả rõ ràng. Ở môi trường mới, một chút cởi mở và hài hước sẽ giúp người khác dễ gần bạn hơn.",
-      "advice": "Bắt đầu cuộc gặp bằng một câu chuyện vui trước khi bàn việc."
+      "text": "Ra ngoài làm ăn, bạn tạo uy tín nhờ sự nghiêm túc và đúng hẹn. Những chuyến đi liên quan đến công việc hay tài chính thường cho kết quả rõ ràng. Ở môi trường mới, cởi mở và hài hước thêm một chút sẽ khiến người khác dễ gần bạn hơn.",
+      "advice": "Mở đầu buổi gặp bằng một chuyện vui trước khi bàn việc."
     },
     "no-boc": {
-      "text": "Bạn có xu hướng kết giao với người làm được việc, thực tế và đáng tin. Những mối quan hệ này hữu ích cho sự nghiệp nếu đôi bên rõ ràng về quyền lợi. Đừng ngại thể hiện sự quan tâm ngoài công việc, vì tình bạn bền thường bắt đầu từ những điều nhỏ.",
-      "advice": "Hỏi thăm đồng nghiệp về gia đình, sở thích của họ."
+      "text": "Bạn hay kết giao với người làm được việc, thực tế và đáng tin. Những mối quan hệ này giúp ích cho sự nghiệp khi hai bên rõ ràng về quyền lợi. Đừng ngại quan tâm nhau ngoài công việc, vì tình bạn bền thường bắt đầu từ chuyện nhỏ.",
+      "advice": "Hỏi thăm đồng nghiệp về gia đình và sở thích của họ."
     },
     "quan-loc": {
-      "text": "Vũ Khúc ở Quan Lộc hợp với lĩnh vực tài chính, kinh doanh, kỹ thuật hoặc những nơi đòi hỏi kỷ luật và kết quả đo đếm được. Bạn quyết đoán, chịu trách nhiệm và thường được giao việc khó. Học cách khích lệ đội nhóm sẽ biến năng lực cá nhân thành thành công chung.",
-      "advice": "Khen ngợi cụ thể một thành viên trong nhóm mỗi tuần."
+      "text": "Bạn hợp tài chính, kinh doanh, kỹ thuật hoặc nơi cần kỷ luật và kết quả đo đếm được. Bạn quyết đoán, chịu trách nhiệm nên hay được giao việc khó. Biết khích lệ cả team, năng lực cá nhân sẽ thành thành công chung.",
+      "advice": "Mỗi tuần khen cụ thể một thành viên trong nhóm.",
+      "short": "Hợp việc có kỷ luật, đo được kết quả; được giao việc khó, cần biết khích lệ team."
     },
     "dien-trach": {
-      "text": "Bạn có khả năng tích lũy tài sản cố định nhờ tính toán kỹ và kiên nhẫn. Nhà cửa với bạn là nền móng an toàn, nên bạn sẵn sàng đầu tư nghiêm túc. Hãy cân nhắc cả sự ấm cúng chứ không chỉ giá trị, vì tổ ấm cần cảm giác thoải mái để ai cũng muốn về.",
+      "text": "Bạn có khả năng tích lũy tài sản cố định nhờ tính toán kỹ và kiên nhẫn. Nhà cửa với bạn là nền móng an toàn nên bạn sẵn sàng đầu tư nghiêm túc. Hãy cân nhắc cả sự ấm cúng chứ không chỉ giá trị, vì ai cũng muốn về một nơi thoải mái.",
       "advice": "Thêm cây xanh hoặc ánh sáng ấm cho không gian sống."
     },
     "phuc-duc": {
-      "text": "Gia đình bạn thường coi trọng sự cần cù và tự lực. Bạn tìm thấy sự bình an khi mọi việc được sắp xếp gọn gàng và có kế hoạch. Thỉnh thoảng hãy cho phép mình buông bớt tính toán, tận hưởng những niềm vui không cần đo lường.",
+      "text": "Gia đình bạn thường coi trọng sự cần cù và tự lực. Bạn thấy bình an khi mọi việc gọn gàng và có kế hoạch. Thỉnh thoảng hãy cho phép mình buông bớt tính toán và tận hưởng niềm vui không cần đo đếm.",
       "advice": "Dành một ngày cuối tuần không nghĩ đến công việc."
     },
     "phu-mau": {
-      "text": "Cha mẹ có thể là người nghiêm khắc, coi trọng kỷ luật và dạy bạn biết quý đồng tiền. Nhờ đó bạn có nền tảng tự lập vững vàng. Tình thương trong nhà có thể ít được nói ra, nên một lời cảm ơn hay cái ôm chủ động từ bạn sẽ có ý nghĩa lớn.",
+      "text": "Cha mẹ bạn có thể là người nghiêm, coi trọng kỷ luật và dạy bạn biết quý đồng tiền. Nhờ vậy bạn có nền tảng tự lập vững. Tình thương trong nhà ít khi nói ra, nên một lời cảm ơn hay cái ôm chủ động từ bạn sẽ rất ý nghĩa.",
       "advice": "Nói lời cảm ơn cha mẹ về một bài học họ đã dạy."
     }
   },
   "thien-dong": {
     "menh": {
-      "text": "Thiên Đồng ở Mệnh mang đến tính cách hiền hòa, dễ mến và một tâm thế lạc quan hiếm có. Bạn thích nghi nhanh, biết tận hưởng cuộc sống và thường được người khác quý vì sự dễ chịu. Thử thách là giữ được động lực khi mọi thứ đã yên ổn, để tiềm năng không bị bỏ ngỏ.",
-      "advice": "Đặt cho mình một mục tiêu nhỏ có thời hạn rõ ràng."
+      "text": "Bạn hiền hòa, dễ mến và có tâm thế lạc quan hiếm có. Bạn thích nghi nhanh, biết tận hưởng cuộc sống nên được nhiều người quý. Thử thách là giữ động lực khi mọi thứ đã êm, để tiềm năng không bị bỏ quên.",
+      "advice": "Đặt cho mình một mục tiêu nhỏ có hạn chót rõ ràng.",
+      "short": "Hiền, dễ mến, sống lạc quan; cần mục tiêu để khỏi quá thoải mái."
     },
     "huynh-de": {
-      "text": "Anh chị em trong nhà thường hòa thuận, ít va chạm và dễ chia sẻ niềm vui với nhau. Bạn là người góp phần giữ không khí gia đình nhẹ nhàng. Vì ngại xung đột, mọi người có thể né những chuyện cần bàn, nên đôi khi nói thẳng một cách tử tế lại tốt hơn.",
-      "advice": "Đừng để chuyện nhỏ chưa nói thành khoảng cách lớn."
+      "text": "Anh chị em hoặc bạn thân của bạn thường hòa thuận, ít va chạm và dễ chia vui với nhau. Bạn góp phần giữ không khí nhẹ nhàng. Vì ngại xung đột nên mọi người hay né chuyện cần bàn, nói thẳng một cách tử tế đôi khi lại tốt hơn.",
+      "advice": "Chuyện nhỏ chưa nói ra hôm nay, đừng để thành khoảng cách."
     },
     "phu-the": {
-      "text": "Ngôi sao phúc hậu ở cung Phu Thê gợi ý người bạn đời dịu dàng, biết vun vén và trân trọng những niềm vui bình dị. Hai người dễ tạo nên một không khí gia đình thoải mái. Để tình cảm luôn mới, cả hai nên cùng nhau đặt ra những kế hoạch chung và thực hiện đến cùng.",
-      "advice": "Cùng nhau lên kế hoạch cho một chuyến đi ngắn."
+      "text": "Bạn hợp với người dịu dàng, biết vun vén và trân trọng niềm vui bình dị. Hai người dễ tạo không khí thoải mái ở bên nhau. Để tình cảm luôn mới, cả hai nên cùng đặt kế hoạch chung và làm cho tới nơi.",
+      "advice": "Cùng nhau lên kế hoạch cho một chuyến đi ngắn cuối tuần.",
+      "short": "Yêu nhẹ nhàng, êm ấm, thích niềm vui bình dị; cần thêm kế hoạch chung để tình không nhạt."
     },
     "tu-tuc": {
-      "text": "Con cái nhiều khả năng ngoan, vui vẻ và gần gũi với cha mẹ. Bạn là kiểu cha mẹ thoải mái, ít áp đặt. Trẻ có tính dễ chịu đôi khi thiếu kỷ luật, nên vài nếp sinh hoạt rõ ràng sẽ giúp con vừa vui vừa biết tự giác.",
-      "advice": "Xây dựng cùng con một thời gian biểu đơn giản."
+      "text": "Con cái bạn nhiều khả năng ngoan, vui vẻ và gần gũi với cha mẹ. Bạn là kiểu cha mẹ thoải mái, ít áp đặt. Trẻ dễ tính đôi khi thiếu kỷ luật, vài nếp sinh hoạt rõ ràng sẽ giúp con vừa vui vừa tự giác.",
+      "advice": "Cùng con xây một thời gian biểu đơn giản."
     },
     "tai-bach": {
-      "text": "Tiền bạc của bạn thường đến khá thuận, có lúc nhờ quý nhân hoặc những cơ hội bất ngờ. Bạn không quá nặng chuyện vật chất và biết hưởng thụ thành quả. Điều nên làm là lập thói quen tiết kiệm đều đặn để sự dễ chịu hôm nay không ảnh hưởng đến sự an tâm ngày mai.",
-      "advice": "Trích một phần thu nhập cố định trước khi chi tiêu."
+      "text": "Tiền của bạn thường đến khá thuận, có lúc nhờ người giúp hoặc cơ hội bất ngờ. Bạn không nặng chuyện vật chất và biết hưởng thành quả. Hãy lập thói quen tiết kiệm đều để sự dễ chịu hôm nay không làm ảnh hưởng ngày mai.",
+      "advice": "Trích một phần lương cố định trước khi chi tiêu.",
+      "short": "Tiền đến khá thuận, biết hưởng thụ; nên tiết kiệm đều để yên tâm về sau."
     },
     "tat-ach": {
-      "text": "Tinh thần lạc quan là lợi thế lớn cho sức khỏe của bạn. Tuy vậy, sự thích thoải mái đôi khi khiến bạn lơ là vận động hoặc ăn uống chưa điều độ. Chú ý giữ sức khỏe bằng những thói quen nhỏ mà đều đặn, như đi bộ mỗi ngày và ăn đúng bữa.",
+      "text": "Tinh thần lạc quan là lợi thế lớn cho sức khỏe của bạn. Có điều thích thoải mái nên bạn dễ lơ là vận động, ăn uống thất thường. Thói quen nhỏ mà đều, như đi bộ mỗi ngày và ăn đúng bữa, sẽ giúp bạn nhiều.",
       "advice": "Chọn một môn vận động nhẹ mà bạn thấy vui để duy trì."
     },
     "thien-di": {
-      "text": "Ở nơi lạ, bạn dễ được giúp đỡ nhờ tính hiền hòa và cách cư xử dễ chịu. Những chuyến đi thường thú vị, mang lại trải nghiệm thư giãn. Khi cần đạt mục tiêu ở nơi mới, hãy chủ động hơn một chút thay vì chờ cơ hội tự đến.",
-      "advice": "Chủ động đề xuất ý tưởng của mình trong môi trường mới."
+      "text": "Ở nơi lạ, bạn dễ được giúp nhờ tính hiền hòa và cách cư xử dễ chịu. Những chuyến đi thường thú vị và thư giãn. Khi cần đạt mục tiêu ở môi trường mới, chủ động hơn một chút thay vì chờ cơ hội tự tìm đến.",
+      "advice": "Chủ động nêu ý tưởng của mình khi vào môi trường mới."
     },
     "no-boc": {
-      "text": "Bạn có nhiều bạn bè thân thiện, dễ chơi và sẵn lòng hỗ trợ khi cần. Các mối quan hệ của bạn thường không phức tạp. Để mạng lưới thêm giá trị, bạn có thể kết nối với cả những người có tham vọng, giúp bạn có thêm động lực phát triển.",
-      "advice": "Tham gia một nhóm học hỏi cùng sở thích."
+      "text": "Bạn có nhiều bạn bè thân thiện, dễ chơi và sẵn lòng giúp khi cần. Quan hệ của bạn thường không phức tạp. Muốn mạng lưới thêm giá trị, hãy kết nối cả với những người có tham vọng để có thêm động lực.",
+      "advice": "Tham gia một nhóm học hỏi theo sở thích."
     },
     "quan-loc": {
-      "text": "Thiên Đồng ở Quan Lộc hợp với công việc có tính phục vụ, chăm sóc, sáng tạo hoặc môi trường ổn định, ít cạnh tranh gay gắt. Bạn làm việc với tinh thần vui vẻ và dễ hòa đồng với tập thể. Để thăng tiến, hãy đặt mục tiêu nghề nghiệp rõ ràng và rèn tính kiên trì.",
-      "advice": "Viết ra mục tiêu nghề nghiệp của mình cho ba năm tới."
+      "text": "Bạn hợp việc có tính phục vụ, chăm sóc, sáng tạo hoặc môi trường ổn định, ít cạnh tranh gay gắt. Bạn làm việc vui vẻ và dễ hòa đồng với tập thể. Muốn thăng tiến, hãy đặt mục tiêu nghề nghiệp rõ ràng và rèn thêm sự kiên trì.",
+      "advice": "Viết ra mục tiêu nghề nghiệp của bạn cho ba năm tới.",
+      "short": "Hợp môi trường ổn định, hòa đồng, ít áp lực; muốn lên cao cần mục tiêu rõ."
     },
     "dien-trach": {
-      "text": "Bạn thích một ngôi nhà ấm cúng, tiện nghi và là nơi để thư giãn thực sự. Chuyện nhà cửa thường đến khá suôn sẻ khi bạn sẵn sàng. Việc lên kế hoạch tài chính sớm sẽ giúp bạn biến mong muốn có tổ ấm riêng thành hiện thực nhanh hơn.",
+      "text": "Bạn thích ngôi nhà ấm cúng, tiện nghi và là chốn thư giãn thật sự. Chuyện nhà cửa thường khá suôn sẻ khi bạn sẵn sàng. Lên kế hoạch tài chính sớm sẽ giúp ước muốn có tổ ấm riêng thành hiện thực nhanh hơn.",
       "advice": "Tạo một góc thư giãn yêu thích ngay trong nhà."
     },
     "phuc-duc": {
-      "text": "Phúc Đức có Thiên Đồng gợi ý một đời sống tinh thần nhẹ nhõm, biết vui với những gì mình có. Bạn ít ôm giữ phiền muộn lâu và dễ tìm lại cân bằng. Chính sự thanh thản ấy sẽ càng bền khi bạn tìm được một điều ý nghĩa để theo đuổi lâu dài.",
-      "advice": "Nuôi dưỡng một sở thích giúp bạn thấy mình có ích."
+      "text": "Nội tâm bạn nhẹ nhõm, biết vui với những gì mình có. Bạn ít ôm phiền muộn lâu và dễ lấy lại cân bằng. Sự thanh thản ấy sẽ bền hơn khi bạn có một điều ý nghĩa để theo đuổi lâu dài.",
+      "advice": "Nuôi một sở thích giúp bạn thấy mình có ích."
     },
     "phu-mau": {
-      "text": "Cha mẹ thường hiền lành, dễ gần và tạo cho bạn một tuổi thơ khá êm đềm. Bạn học được sự bao dung và cách sống thoải mái từ gia đình. Khi trưởng thành, việc chủ động chăm lo, hỏi han cha mẹ sẽ là cách đáp lại tình thương ấy.",
-      "advice": "Cùng cha mẹ làm lại một món ăn quen thuộc thời nhỏ."
+      "text": "Cha mẹ bạn thường hiền lành, dễ gần và cho bạn một tuổi thơ khá êm đềm. Bạn học được sự bao dung và cách sống thoải mái từ nhà. Khi lớn, chủ động hỏi han và chăm lo cha mẹ là cách đáp lại tình thương ấy.",
+      "advice": "Cùng cha mẹ nấu lại một món quen thuộc thời nhỏ."
     }
   },
   "liem-trinh": {
     "menh": {
-      "text": "Bạn mang trong mình một bộ nguyên tắc riêng và giữ nó khá chặt: nói là làm, ghét sự mập mờ. Liêm Trinh tại Mệnh cho thấy nhiệt huyết, ý chí cầu tiến và sức hút khó giải thích khiến người khác để ý. Cảm xúc của bạn đôi khi mạnh hơn lời nói, nên lúc căng thẳng dễ cứng nhắc hoặc tự ái.",
-      "advice": "Giữ nguyên tắc nhưng chừa chỗ cho sự linh hoạt, bạn sẽ thấy mọi việc nhẹ hơn nhiều."
+      "text": "Bạn có bộ nguyên tắc riêng và giữ khá chặt: nói là làm, ghét sự mập mờ. Nhiệt huyết và sức hút của bạn khiến người khác dễ để ý. Điểm cần để ý là cảm xúc mạnh hơn lời nói, nên lúc căng thẳng bạn dễ cứng nhắc hoặc tự ái.",
+      "advice": "Giữ nguyên tắc nhưng chừa chỗ linh hoạt, việc sẽ nhẹ hơn nhiều.",
+      "short": "Bạn sống có nguyên tắc, nói là làm, và cảm xúc đến mạnh hơn bạn tưởng."
     },
     "huynh-de": {
-      "text": "Anh chị em hoặc bạn thân cùng trang lứa thường là người có cá tính, sống thẳng và có chính kiến. Hai bên dễ tôn trọng nhau vì cùng coi trọng chữ tín. Thỉnh thoảng có thể va chạm do ai cũng muốn mình đúng, nhưng sau tranh luận lại hiểu nhau hơn.",
-      "advice": "Khi bất đồng, hãy nói rõ điều mình cần thay vì cố thắng cuộc tranh luận."
+      "text": "Anh chị em hoặc bạn thân của bạn thường sống thẳng, có chính kiến. Hai bên tôn trọng nhau vì cùng coi trọng chữ tín. Thỉnh thoảng cãi nhau vì ai cũng muốn mình đúng, nhưng cãi xong lại hiểu nhau hơn.",
+      "advice": "Khi bất đồng, nói rõ điều mình cần thay vì cố thắng cuộc cãi."
     },
     "phu-the": {
-      "text": "Trong tình cảm, bạn yêu nồng nhiệt và mong một mối quan hệ rõ ràng, có cam kết. Người bạn đời thường cuốn hút, có năng lực và cũng khá mạnh mẽ. Hai cái tôi lớn gặp nhau cần học cách nhường nhịn, nhất là trong những lúc mệt mỏi hay áp lực công việc.",
-      "advice": "Dành thời gian lắng nghe nửa kia trước khi đưa ra kết luận."
+      "text": "Bạn yêu nồng nhiệt và muốn một mối quan hệ rõ ràng, có cam kết. Người ấy thường cuốn hút, giỏi giang và cũng khá mạnh mẽ. Hai cái tôi lớn gặp nhau cần biết nhường, nhất là những tuần deadline dồn dập.",
+      "advice": "Nghe người ấy nói hết rồi hãy đưa ra kết luận.",
+      "short": "Bạn yêu nồng nhiệt, cần sự rõ ràng, và cần học cách nhường khi cả hai đều mệt."
     },
     "tu-tuc": {
-      "text": "Con cái theo gợi ý của Liêm Trinh thường lanh lợi, có chí và sớm biết mình muốn gì. Bạn có xu hướng đặt kỳ vọng cao và dạy con bằng kỷ luật. Sự nghiêm khắc sẽ phát huy tốt nhất khi đi kèm những lời khen đúng lúc và sự tin tưởng.",
-      "advice": "Hãy để con được thử và sai trong giới hạn an toàn."
+      "text": "Con cái thường lanh lợi, có chí và sớm biết mình muốn gì. Bạn hay đặt kỳ vọng cao và dạy con bằng kỷ luật. Kỷ luật sẽ hiệu quả nhất khi đi kèm lời khen đúng lúc và sự tin tưởng.",
+      "advice": "Để con được thử và sai trong giới hạn an toàn."
     },
     "tai-bach": {
-      "text": "Tiền bạc đến với bạn chủ yếu nhờ năng lực, sự chăm chỉ và tinh thần trách nhiệm trong công việc. Bạn có khả năng quản lý tài chính theo kế hoạch, rạch ròi giữa chi tiêu cá nhân và việc chung. Đôi khi cảm xúc hoặc thể diện có thể khiến bạn chi mạnh tay hơn dự tính.",
-      "advice": "Đặt một ngân sách cố định cho những khoản chi theo cảm hứng."
+      "text": "Tiền đến với bạn chủ yếu nhờ năng lực, sự chăm chỉ và tinh thần trách nhiệm. Bạn biết lập kế hoạch và tách bạch chi tiêu cá nhân với việc chung. Đôi khi cảm xúc hoặc sĩ diện khiến bạn chi tay mạnh hơn dự tính.",
+      "advice": "Đặt một ngân sách cố định cho các khoản chi theo cảm hứng.",
+      "short": "Bạn kiếm tiền bằng năng lực thật, chỉ cần canh những lần chi vì cảm xúc."
     },
     "tat-ach": {
-      "text": "Năng lượng của bạn dồi dào nhưng hay dồn hết vào công việc và cảm xúc. Liêm Trinh ở đây nhắc rằng căng thẳng tích tụ lâu ngày dễ làm cơ thể mệt mỏi. Chú ý giữ sức khỏe bằng giấc ngủ đều, vận động nhẹ và những khoảng nghỉ thật sự.",
-      "advice": "Mỗi tuần dành ít nhất một buổi để thư giãn không gắn với công việc."
+      "text": "Bạn nhiều năng lượng nhưng hay dồn hết vào công việc và cảm xúc. Căng thẳng tích lâu ngày dễ làm bạn kiệt sức. Giấc ngủ đều, vận động nhẹ và những quãng nghỉ thật sự sẽ giúp bạn giữ nhịp tốt.",
+      "advice": "Mỗi tuần có một buổi nghỉ không dính tới công việc."
     },
     "thien-di": {
-      "text": "Ra ngoài xã hội, bạn dễ tạo ấn tượng là người đáng tin, có lập trường và làm việc tới nơi tới chốn. Những chuyến đi xa, môi trường mới thường giúp bạn trưởng thành và mở rộng quan hệ. Hãy để ý cách phản ứng khi gặp người trái ý để giữ hình ảnh điềm tĩnh.",
-      "advice": "Mềm mỏng hơn một chút khi làm việc với người lạ, cơ hội sẽ đến nhanh hơn."
+      "text": "Ra ngoài, bạn tạo ấn tượng là người đáng tin, có lập trường và làm việc tới nơi tới chốn. Môi trường mới thường giúp bạn trưởng thành và mở rộng quan hệ. Để ý cách phản ứng khi gặp người trái ý để giữ hình ảnh điềm tĩnh.",
+      "advice": "Mềm mỏng hơn một chút với người mới gặp, cơ hội sẽ đến nhanh hơn."
     },
     "no-boc": {
-      "text": "Bạn bè, đồng nghiệp quanh bạn thường là những người có năng lực và cá tính rõ ràng. Bạn quý những ai sòng phẳng và thẳng thắn, đồng thời cũng khiến họ nể vì sự công bằng. Mối quan hệ bền hơn khi bạn chia sẻ công lao và không ôm hết trách nhiệm.",
-      "advice": "Ghi nhận đóng góp của người khác thường xuyên hơn."
+      "text": "Bạn bè và đồng nghiệp quanh bạn thường có năng lực và cá tính rõ. Bạn quý người sòng phẳng, thẳng thắn, và họ nể bạn vì sự công bằng. Quan hệ bền hơn khi bạn chia công lao và đừng ôm hết trách nhiệm về mình.",
+      "advice": "Ghi nhận đóng góp của đồng nghiệp thường xuyên hơn."
     },
     "quan-loc": {
-      "text": "Sự nghiệp là nơi Liêm Trinh tỏa sáng: bạn hợp với môi trường có quy trình, kỷ luật và mục tiêu rõ như quản lý, kỹ thuật, tổ chức hay các ngành cần sự chính xác. Tham vọng giúp bạn tiến xa. Điều cần rèn là biết chọn trận, không phải việc nào cũng phải dốc toàn lực.",
-      "advice": "Ưu tiên ba mục tiêu quan trọng nhất mỗi quý thay vì ôm mọi thứ."
+      "text": "Công việc là nơi bạn tỏa sáng, nhất là môi trường có quy trình, kỷ luật và mục tiêu rõ như quản lý, kỹ thuật hay vận hành. Tham vọng giúp bạn đi xa. Điều cần rèn là biết chọn trận, không phải việc nào cũng phải dốc hết sức.",
+      "advice": "Mỗi quý chọn ba mục tiêu quan trọng nhất thay vì ôm mọi thứ.",
+      "short": "Bạn hợp môi trường có quy trình và mục tiêu rõ, cần học cách chọn việc đáng dốc sức."
     },
     "dien-trach": {
-      "text": "Bạn thích một không gian sống ngăn nắp, có trật tự và mang dấu ấn riêng. Chuyện nhà cửa thường được xây dần bằng nỗ lực tự thân hơn là may mắn bất ngờ. Khi quyết định những việc lớn liên quan đến chỗ ở, nên bàn kỹ với người thân để có thêm góc nhìn.",
-      "advice": "Lập kế hoạch dài hơi cho tổ ấm và đi từng bước chắc chắn."
+      "text": "Bạn thích một chỗ ở ngăn nắp, có trật tự và mang dấu ấn riêng. Tổ ấm của bạn thường được xây dần bằng nỗ lực tự thân hơn là may mắn bất ngờ. Với quyết định lớn về nhà cửa, bàn thêm với người thân sẽ cho góc nhìn đầy đủ hơn.",
+      "advice": "Lập kế hoạch dài hơi cho tổ ấm và đi từng bước chắc."
     },
     "phuc-duc": {
-      "text": "Đời sống tinh thần của bạn gắn với cảm giác sống đúng với giá trị của mình. Bạn tìm thấy bình an khi làm việc có ích và giữ được lòng tự trọng. Đôi lúc bạn tự đặt áp lực quá lớn lên bản thân, nên học cách tha thứ cho chính mình là một món quà quý.",
-      "advice": "Viết ra những điều bạn biết ơn mỗi tối để tâm trí dịu lại."
+      "text": "Bạn thấy bình an khi sống đúng với giá trị của mình và làm việc có ích. Lòng tự trọng là thứ bạn giữ rất kỹ. Có lúc bạn tự đặt áp lực quá lớn lên bản thân, nên học cách tha thứ cho chính mình.",
+      "advice": "Mỗi tối viết ra một điều bạn biết ơn để đầu óc dịu lại."
     },
     "phu-mau": {
-      "text": "Cha mẹ hoặc người dìu dắt thường là người nghiêm túc, đề cao nề nếp và dạy bạn tinh thần trách nhiệm từ sớm. Có thể hai thế hệ khác quan điểm ở vài chuyện, nhưng đó là cơ hội để hiểu nhau. Sự tôn trọng hai chiều giúp mối quan hệ gần gũi hơn theo năm tháng.",
-      "advice": "Chủ động hỏi han cha mẹ bằng những câu chuyện nhỏ hằng ngày."
+      "text": "Cha mẹ hoặc người dìu dắt thường nghiêm túc, đề cao nề nếp và dạy bạn tinh thần trách nhiệm từ sớm. Hai thế hệ có lúc khác quan điểm, nhưng đó cũng là dịp để hiểu nhau. Tôn trọng hai chiều sẽ làm quan hệ gần hơn theo năm tháng.",
+      "advice": "Hỏi thăm cha mẹ bằng vài chuyện nhỏ mỗi ngày."
     }
   },
   "thien-phu": {
     "menh": {
-      "text": "Thiên Phủ được ví như một kho tàng vững chãi, và bạn cũng toát ra cảm giác đáng tin như thế. Bạn điềm đạm, biết tính toán, giỏi giữ gìn những gì đã có và thường được người khác nhờ cậy. Đôi khi sự cẩn trọng khiến bạn chần chừ trước thay đổi hoặc ngại rời vùng an toàn.",
-      "advice": "Thỉnh thoảng thử một điều mới nhỏ để giữ cho mình sự tươi mới."
+      "text": "Bạn toát ra cảm giác vững vàng, đáng tin, nên hay được nhờ cậy. Bạn điềm đạm, biết tính toán và giữ gìn tốt những gì đã có. Đôi khi sự cẩn trọng khiến bạn chần chừ trước thay đổi hoặc ngại rời vùng an toàn.",
+      "advice": "Thỉnh thoảng thử một điều mới thật nhỏ để giữ sự tươi mới.",
+      "short": "Bạn vững vàng, đáng tin, giữ gìn giỏi, chỉ hơi ngại thay đổi."
     },
     "huynh-de": {
-      "text": "Quan hệ anh chị em thường êm ấm, có sự đùm bọc và hỗ trợ lẫn nhau khi cần. Bạn hay là người giữ hòa khí, điều phối mọi việc chung trong gia đình. Hãy để ý đừng gánh quá nhiều phần việc chỉ vì ngại nói không.",
-      "advice": "Chia việc chung rõ ràng để tình thân không bị hao mòn vì mệt mỏi."
+      "text": "Quan hệ anh chị em của bạn thường êm ấm, có đùm bọc và hỗ trợ khi cần. Bạn hay là người giữ hòa khí, điều phối việc chung trong gia đình. Đừng gánh quá nhiều phần việc chỉ vì ngại nói không.",
+      "advice": "Chia việc chung rõ ràng để tình thân không hao vì mệt."
     },
     "phu-the": {
-      "text": "Bạn tìm kiếm một mối quan hệ ổn định, nơi hai người cùng xây dựng nền tảng lâu dài. Người bạn đời có xu hướng chu đáo, thực tế và biết vun vén. Cuộc sống chung dễ trở nên quá an toàn, nên những bất ngờ nhỏ sẽ giúp giữ lửa.",
-      "advice": "Lên lịch một buổi hẹn hò riêng tư mỗi tháng, dù bận đến đâu."
+      "text": "Bạn tìm một mối quan hệ ổn định, nơi hai người cùng xây nền tảng lâu dài. Người ấy thường chu đáo, thực tế và biết vun vén. Cuộc sống chung dễ thành quá an toàn, nên vài bất ngờ nhỏ sẽ giữ lửa cho cả hai.",
+      "advice": "Hẹn hò riêng một buổi mỗi tháng, dù bận đến đâu.",
+      "short": "Bạn muốn một tình yêu ổn định, cùng xây lâu dài, và cần thêm chút bất ngờ để giữ lửa."
     },
     "tu-tuc": {
-      "text": "Con cái thường hiền lành, biết điều và được bạn chăm lo rất chu toàn. Thiên Phủ ở cung Tử Tức gợi ý bạn là phụ huynh tạo được nền tảng vững vàng cho thế hệ sau. Chỉ cần lưu ý đừng bao bọc quá mức để con có dịp tự lập.",
-      "advice": "Giao cho con những trách nhiệm nhỏ phù hợp với tuổi."
+      "text": "Con cái thường hiền, biết điều và được bạn chăm lo chu toàn. Bạn là kiểu phụ huynh dựng được nền tảng vững cho con. Chỉ cần đừng bao bọc quá mức để con có dịp tự lập.",
+      "advice": "Giao cho con vài trách nhiệm nhỏ hợp với tuổi."
     },
     "tai-bach": {
-      "text": "Đây là vị trí rất hợp với Thiên Phủ: bạn có năng khiếu tích lũy, quản lý chi tiêu và giữ tiền khá giỏi. Tài chính thường đi lên đều đặn nhờ sự kiên nhẫn hơn là may rủi. Mặt trái nhỏ là đôi khi quá thận trọng nên bỏ lỡ những cơ hội đáng thử.",
-      "advice": "Dành một phần nhỏ để học hỏi và thử những cách làm mới với tiền của mình."
+      "text": "Chuyện tiền bạc là sở trường của bạn: biết tích lũy, quản lý chi tiêu và giữ tiền khá giỏi. Tài chính thường đi lên đều nhờ kiên nhẫn chứ không nhờ may rủi. Mặt trái nhỏ là quá thận trọng nên đôi khi bỏ lỡ cơ hội đáng thử.",
+      "advice": "Dành một phần nhỏ tiền để thử cách làm mới.",
+      "short": "Bạn giữ tiền giỏi, tích lũy đều, chỉ cần dám thử thêm một chút."
     },
     "tat-ach": {
-      "text": "Thể trạng của bạn nhìn chung khá ổn định, có sức bền tốt. Thiên Phủ ở đây nhắc bạn chú ý giữ sức khỏe qua chuyện ăn uống điều độ, vì bạn dễ chiều theo khẩu vị hoặc thói quen ngồi lâu. Một nhịp sinh hoạt cân bằng sẽ giúp bạn luôn sung sức.",
+      "text": "Thể trạng của bạn nhìn chung ổn định, sức bền tốt. Bạn dễ chiều theo khẩu vị và thói quen ngồi lâu ở bàn làm việc. Ăn uống điều độ và một nhịp sinh hoạt cân bằng sẽ giúp bạn luôn sung sức.",
       "advice": "Đi bộ mỗi ngày và ăn chậm lại một chút."
     },
     "thien-di": {
-      "text": "Khi ra ngoài, bạn thường gặp được người tử tế và nhận được sự tin cậy nhờ phong thái chững chạc. Những môi trường mới mở ra cơ hội ổn định, phát triển bền vững hơn là bước nhảy vọt. Bạn hợp với việc đi đến đâu cũng xây dựng quan hệ lâu dài ở đó.",
-      "advice": "Giữ liên lạc với những người bạn gặp trên đường, họ có thể là quý nhân."
+      "text": "Ra ngoài, bạn thường gặp người tử tế và được tin cậy nhờ phong thái chững chạc. Môi trường mới mang lại cơ hội ổn định và phát triển bền hơn là bước nhảy vọt. Đi đến đâu bạn cũng hợp xây quan hệ lâu dài ở đó.",
+      "advice": "Giữ liên lạc với những người bạn quen trên đường, họ có thể giúp bạn sau này."
     },
     "no-boc": {
-      "text": "Vòng bạn bè, đồng nghiệp của bạn thường đông và có nhiều người đáng tin cậy. Bạn biết cách đối đãi rộng rãi nên dễ được giúp đỡ khi cần. Chỉ nên tỉnh táo một chút trong chuyện tiền bạc chung để giữ tình cảm lâu bền.",
-      "advice": "Rõ ràng trong các khoản góp chung, tình bạn sẽ càng vững."
+      "text": "Vòng bạn bè và đồng nghiệp của bạn khá đông, nhiều người đáng tin. Bạn đối đãi rộng rãi nên dễ được giúp khi cần. Chỉ cần tỉnh táo chuyện tiền góp chung để giữ tình cảm lâu bền.",
+      "advice": "Rõ ràng các khoản góp chung, tình bạn càng vững."
     },
     "quan-loc": {
-      "text": "Bạn phát huy tốt trong vai trò quản lý, điều phối nguồn lực hoặc các công việc cần sự ổn định như tài chính, hành chính, vận hành. Thiên Phủ cho thấy con đường sự nghiệp đi lên chắc chắn nhờ uy tín tích lũy theo năm tháng. Điều cần rèn thêm là sự mạnh dạn khi cần đổi mới.",
-      "advice": "Đừng ngại đề xuất ý tưởng mới, uy tín của bạn đủ để người khác lắng nghe."
+      "text": "Bạn phát huy tốt ở vai trò quản lý, điều phối nguồn lực hoặc việc cần sự ổn định như tài chính, hành chính, vận hành. Con đường công việc đi lên chắc nhờ uy tín tích lũy theo năm tháng. Điều cần rèn thêm là mạnh dạn đổi mới.",
+      "advice": "Đề xuất ý tưởng mới trong buổi họp tới, uy tín của bạn đủ để người ta nghe.",
+      "short": "Bạn hợp vai trò quản lý, điều phối, đi lên chắc nhờ uy tín, cần dám đổi mới hơn."
     },
     "dien-trach": {
-      "text": "Nhà cửa, đất đai là nơi Thiên Phủ thể hiện sự vững chãi. Bạn có xu hướng chăm chút tổ ấm, thích không gian rộng rãi, đủ đầy và có kế hoạch an cư rõ ràng. Hãy cân nhắc kỹ trước những khoản đầu tư lớn để giữ sự bình yên trong tâm trí.",
-      "advice": "Biến ngôi nhà thành nơi cả gia đình thích quay về mỗi ngày."
+      "text": "Chuyện nhà cửa là chỗ bạn thể hiện sự vững chãi. Bạn thích chăm chút tổ ấm, ưa không gian rộng rãi, đủ đầy và có kế hoạch an cư rõ ràng. Với khoản đầu tư lớn, cân nhắc kỹ sẽ giữ cho đầu óc bình yên.",
+      "advice": "Biến nhà thành nơi cả nhà thích quay về mỗi ngày."
     },
     "phuc-duc": {
-      "text": "Đời sống tinh thần của bạn khá an ổn, biết tận hưởng niềm vui giản dị và trân trọng những gì mình có. Bạn thường được tiếp nối truyền thống tốt đẹp của gia đình. Đôi lúc nên mở lòng với những trải nghiệm mới để tâm hồn thêm phong phú.",
+      "text": "Đời sống tinh thần của bạn khá an ổn, biết tận hưởng niềm vui giản dị và trân trọng những gì mình có. Bạn thường giữ được nếp tốt của gia đình. Thỉnh thoảng mở lòng với trải nghiệm mới sẽ làm tâm hồn phong phú hơn.",
       "advice": "Dành thời gian cho một sở thích nuôi dưỡng tâm hồn."
     },
     "phu-mau": {
-      "text": "Như một kho lương dự trữ, cha mẹ là chỗ dựa vững vàng, chu đáo và lo xa cho con cái. Bạn học được từ họ cách sống tiết kiệm, có trách nhiệm và giữ nề nếp. Mối quan hệ gần gũi hơn khi bạn chia sẻ cả những dự định riêng chứ không chỉ chuyện thường ngày.",
-      "advice": "Kể cho cha mẹ nghe kế hoạch của bạn để nhận thêm lời khuyên quý."
+      "text": "Cha mẹ là chỗ dựa vững, chu đáo và hay lo xa cho con. Bạn học được từ họ cách tiết kiệm, có trách nhiệm và giữ nề nếp. Quan hệ gần hơn khi bạn chia sẻ cả dự định riêng, không chỉ chuyện thường ngày.",
+      "advice": "Kể cho cha mẹ nghe một kế hoạch của bạn và nhờ góp ý."
     }
   },
   "thai-am": {
     "menh": {
-      "text": "Như ánh trăng, bạn dịu dàng, tinh tế và có đời sống nội tâm phong phú. Thái Âm tại Mệnh gợi ý óc thẩm mỹ tốt, sự chu đáo và khả năng vun vén cho bản thân lẫn người thân. Vì nhạy cảm nên bạn dễ để tâm trạng ảnh hưởng bởi lời nói hoặc không khí xung quanh.",
-      "advice": "Tập nói ra cảm xúc của mình thay vì giữ trong lòng quá lâu."
+      "text": "Bạn dịu dàng, tinh tế và có đời sống nội tâm phong phú. Bạn có gu thẩm mỹ tốt, chu đáo và biết vun vén cho mình lẫn người thân. Vì nhạy cảm nên tâm trạng bạn dễ bị ảnh hưởng bởi một câu nói hay không khí xung quanh.",
+      "advice": "Tập nói ra cảm xúc thay vì giữ trong lòng quá lâu.",
+      "short": "Bạn tinh tế, dịu dàng, nhạy cảm, tâm trạng dễ bị không khí xung quanh kéo đi."
     },
     "huynh-de": {
-      "text": "Tình anh em ở đây mang màu trăng dịu: mọi người thân thiết, biết quan tâm nhau theo cách nhẹ nhàng, ít ồn ào. Bạn có thể nhận được sự giúp đỡ âm thầm từ người thân, nhất là chị em gái. Khi có hiểu lầm, một cuộc trò chuyện chân thành sẽ hiệu quả hơn im lặng.",
-      "advice": "Chủ động nhắn tin hỏi thăm anh chị em vào những dịp không có lý do đặc biệt."
+      "text": "Tình anh chị em của bạn nhẹ nhàng, ít ồn ào nhưng biết quan tâm nhau. Bạn có thể nhận sự giúp đỡ âm thầm từ người thân, nhất là chị em gái. Khi có hiểu lầm, nói chuyện chân thành hiệu quả hơn im lặng.",
+      "advice": "Nhắn hỏi thăm anh chị em vào một ngày không có lý do đặc biệt."
     },
     "phu-the": {
-      "text": "Trong tình yêu, bạn lãng mạn, chu đáo và coi trọng sự thấu hiểu. Người bạn đời có xu hướng dịu dàng, khéo léo và biết chăm lo gia đình. Cả hai đều nhạy cảm nên cần nói rõ mong muốn, đừng chỉ chờ đối phương tự đoán.",
-      "advice": "Thể hiện tình cảm bằng những cử chỉ nhỏ nhưng đều đặn."
+      "text": "Trong tình yêu, bạn lãng mạn, chu đáo và coi trọng sự thấu hiểu. Người ấy thường dịu dàng, khéo léo và biết chăm lo cho nhà. Cả hai đều nhạy cảm nên cần nói rõ mong muốn, đừng chờ đối phương tự đoán.",
+      "advice": "Thể hiện tình cảm bằng những cử chỉ nhỏ nhưng đều đặn.",
+      "short": "Bạn yêu lãng mạn, chu đáo, cần được thấu hiểu và cần nói ra thay vì chờ đối phương đoán."
     },
     "tu-tuc": {
-      "text": "Thái Âm ở cung Tử Tức gợi những người con ngoan, tình cảm và có năng khiếu nghệ thuật hoặc sự tinh tế. Bạn là phụ huynh kiên nhẫn, chăm chút từng chi tiết trong việc nuôi dạy. Hãy cân bằng giữa yêu thương và rèn luyện để con vừa ấm áp vừa vững vàng.",
-      "advice": "Cùng con làm một việc sáng tạo, như vẽ hay nấu ăn, mỗi tuần."
+      "text": "Con cái thường ngoan, tình cảm và có năng khiếu nghệ thuật hoặc sự tinh tế. Bạn là phụ huynh kiên nhẫn, chăm từng chi tiết khi nuôi dạy. Cân bằng giữa yêu thương và rèn luyện để con vừa ấm áp vừa vững vàng.",
+      "advice": "Mỗi tuần cùng con làm một việc sáng tạo, như vẽ hoặc nấu ăn."
     },
     "tai-bach": {
-      "text": "Thái Âm vốn gắn với sự tích lũy nên tài chính của bạn thường tăng dần nhờ tiết kiệm và chi tiêu có kế hoạch. Bạn hợp với cách kiếm tiền ổn định, bền bỉ hơn là đầu cơ nhanh. Đôi khi cảm xúc có thể khiến bạn mua sắm để tự an ủi.",
-      "advice": "Chờ một ngày trước khi mua món đồ không có trong kế hoạch."
+      "text": "Tiền của bạn thường tăng dần nhờ tiết kiệm và chi tiêu có kế hoạch. Bạn hợp kiểu kiếm tiền ổn định, bền bỉ hơn là chạy theo cơ hội nhanh. Đôi khi bạn mua sắm để tự an ủi lúc tâm trạng không tốt.",
+      "advice": "Chờ một ngày trước khi mua món đồ ngoài kế hoạch.",
+      "short": "Bạn tích lũy đều, hợp lối kiếm tiền bền bỉ, chỉ cần cẩn thận khi mua sắm lúc buồn."
     },
     "tat-ach": {
-      "text": "Cơ thể bạn khá nhạy với nhịp sinh hoạt và cảm xúc, nên tâm trạng tốt cũng là sức khỏe tốt. Chú ý giữ sức khỏe bằng giấc ngủ đủ, ăn uống ấm áp và tránh thức khuya kéo dài. Những khoảng lặng yên tĩnh giúp bạn phục hồi rất nhanh.",
-      "advice": "Đi ngủ trước nửa đêm và hạn chế màn hình trước giờ ngủ."
+      "text": "Cơ thể bạn khá nhạy với nhịp sinh hoạt và cảm xúc, nên tâm trạng tốt cũng là sức khỏe tốt. Ngủ đủ, ăn ấm và tránh thức khuya kéo dài rất quan trọng với bạn. Những khoảng yên tĩnh giúp bạn hồi phục nhanh.",
+      "advice": "Đi ngủ trước nửa đêm, tắt màn hình sớm hơn một chút."
     },
     "thien-di": {
-      "text": "Người mới gặp thường quý bạn nhờ cách cư xử nhã nhặn và tinh ý. Những chuyến đi, nhất là đến nơi yên bình hoặc gần nước, thường giúp bạn nạp lại năng lượng và nảy ra ý tưởng mới. Ở môi trường lạ, bạn có thể cần chút thời gian để mở lòng.",
-      "advice": "Cho phép mình làm quen từ từ, không cần ép bản thân hòa nhập ngay."
+      "text": "Người mới gặp thường quý bạn vì cách cư xử nhã nhặn, tinh ý. Chuyến đi đến nơi yên bình hoặc gần nước hay giúp bạn nạp lại năng lượng và nảy ý tưởng. Ở chỗ lạ, bạn có thể cần chút thời gian mới mở lòng.",
+      "advice": "Cho phép mình làm quen từ từ, không cần hòa nhập ngay."
     },
     "no-boc": {
-      "text": "Bạn bè, đồng nghiệp của bạn thường là người hiền hòa, sống tình cảm và biết lắng nghe. Bạn có duyên với những mối quan hệ lâu năm, bền bỉ hơn là đông đảo. Đôi lúc vì nể nang, bạn khó từ chối lời nhờ vả vượt quá sức mình.",
-      "advice": "Học cách từ chối nhẹ nhàng mà vẫn giữ được tình cảm."
+      "text": "Bạn bè và đồng nghiệp quanh bạn thường hiền hòa, tình cảm và biết lắng nghe. Bạn hợp với những mối quan hệ lâu năm, bền hơn là thật đông. Vì nể nang, đôi khi bạn khó từ chối những lời nhờ vượt quá sức mình.",
+      "advice": "Tập từ chối nhẹ nhàng mà vẫn giữ được tình cảm."
     },
     "quan-loc": {
-      "text": "Bạn làm tốt những công việc cần sự tỉ mỉ, thẩm mỹ, chăm sóc hoặc quản lý tài sản như thiết kế, giáo dục, dịch vụ, tài chính. Thái Âm cho thấy sự nghiệp tiến bộ đều nhờ sự bền bỉ và cách làm việc êm thấm. Điều cần thêm là sự tự tin để nhận những vai trò lớn hơn.",
-      "advice": "Mạnh dạn ứng cử vào vị trí bạn biết mình làm được."
+      "text": "Bạn làm tốt những việc cần sự tỉ mỉ, thẩm mỹ, chăm sóc hoặc quản lý tài sản như thiết kế, giáo dục, dịch vụ, tài chính. Công việc của bạn tiến đều nhờ bền bỉ và cách làm êm thấm. Điều cần thêm là tự tin nhận vai trò lớn hơn.",
+      "advice": "Mạnh dạn xin vị trí mà bạn biết mình làm được.",
+      "short": "Bạn tỉ mỉ, có gu, làm việc êm thấm mà đều, chỉ cần tự tin nhận vai lớn hơn."
     },
     "dien-trach": {
-      "text": "Đây là nơi Thái Âm rất hợp: bạn có duyên với nhà cửa, biết trang trí và tạo không gian ấm cúng. Chuyện an cư thường được vun đắp dần theo thời gian bằng sự tích cóp. Ngôi nhà với bạn không chỉ là chỗ ở mà còn là nơi chữa lành.",
-      "advice": "Đầu tư cho một góc nhỏ trong nhà thật sự thuộc về riêng bạn."
+      "text": "Bạn có duyên với nhà cửa, biết trang trí và tạo không gian ấm cúng. Chuyện an cư thường được vun dần theo thời gian bằng sự tích cóp. Với bạn, nhà không chỉ là chỗ ở mà còn là nơi để nạp lại năng lượng.",
+      "advice": "Đầu tư cho một góc nhỏ trong nhà chỉ thuộc về riêng bạn."
     },
     "phuc-duc": {
-      "text": "Tâm hồn bạn sâu sắc, thích những niềm vui nhẹ nhàng như đọc sách, âm nhạc hay ngắm cảnh. Bạn thường nhận được sự yêu thương, che chở từ phía gia đình, đặc biệt là bên ngoại hoặc người mẹ. Đôi khi bạn hay suy nghĩ nhiều, nên cần những lúc buông bỏ.",
-      "advice": "Thử thiền hoặc đi dạo một mình để tâm trí lắng lại."
+      "text": "Tâm hồn bạn sâu sắc, thích niềm vui nhẹ nhàng như đọc sách, nghe nhạc hay ngắm cảnh. Bạn thường nhận được sự yêu thương của gia đình, nhất là bên ngoại hoặc mẹ. Bạn hay nghĩ nhiều, nên cần những lúc buông bớt.",
+      "advice": "Đi dạo một mình hoặc ngồi thiền vài phút để đầu óc lắng lại."
     },
     "phu-mau": {
-      "text": "Cha mẹ, nhất là mẹ, thường là người dịu dàng, chu đáo và ảnh hưởng sâu đến cách bạn yêu thương người khác. Mối quan hệ gia đình mang nhiều cảm xúc ấm áp. Khi khác quan điểm, sự kiên nhẫn và lời nói mềm mỏng sẽ giúp hai bên xích lại gần nhau.",
-      "advice": "Dành một buổi trò chuyện riêng với cha mẹ mỗi tháng."
+      "text": "Cha mẹ, nhất là mẹ, thường dịu dàng, chu đáo và ảnh hưởng sâu đến cách bạn thương người khác. Nhà bạn nhiều cảm xúc ấm áp. Khi khác quan điểm, kiên nhẫn và lời nói mềm sẽ kéo hai bên lại gần nhau.",
+      "advice": "Mỗi tháng dành một buổi trò chuyện riêng với cha mẹ."
     }
   },
   "tham-lang": {
     "menh": {
-      "text": "Đa tài, hoạt bát và ham học hỏi, bạn là kiểu người bước vào đâu cũng dễ làm không khí sôi động hơn. Tham Lang tại Mệnh mang sức hút tự nhiên, khiếu giao tiếp và mong muốn trải nghiệm nhiều điều. Mặt cần để ý là ham nhiều thứ cùng lúc nên dễ phân tán năng lượng.",
-      "advice": "Chọn một đam mê chính để đi sâu, phần còn lại để làm sở thích."
+      "text": "Bạn đa tài, hoạt bát, ham học, bước vào đâu cũng dễ làm không khí sôi động hơn. Bạn có sức hút tự nhiên và thích trải nghiệm nhiều thứ. Điểm cần để ý là ham nhiều việc cùng lúc nên dễ phân tán sức.",
+      "advice": "Chọn một đam mê chính để đi sâu, phần còn lại để làm sở thích.",
+      "short": "Bạn đa tài, cuốn hút, thích trải nghiệm, chỉ cần tập trung vào một hướng chính."
     },
     "huynh-de": {
-      "text": "Anh chị em hoặc bạn bè thân thiết thường năng động, vui vẻ và có nhiều tài lẻ. Các buổi tụ họp gia đình hiếm khi nhàm chán. Mỗi người một hướng đi riêng nên đôi khi ít gặp nhau, cần chủ động giữ kết nối.",
-      "advice": "Tạo một nhóm trò chuyện chung để mọi người cập nhật cho nhau."
+      "text": "Anh chị em hoặc bạn thân của bạn thường năng động, vui vẻ và có nhiều tài lẻ. Các buổi tụ họp hiếm khi nhàm. Mỗi người một hướng riêng nên ít gặp nhau, cần chủ động giữ kết nối.",
+      "advice": "Lập group chat chung để mọi người cập nhật cho nhau."
     },
     "phu-the": {
-      "text": "Bạn yêu bằng sự cuốn hút và nhiệt tình, thích một mối quan hệ có nhiều trải nghiệm chung. Người bạn đời thường duyên dáng, giỏi giao tiếp và thích hưởng thụ cuộc sống. Để tình cảm bền lâu, cả hai cần xây dựng sự tin tưởng và những thói quen gắn kết.",
-      "advice": "Cùng nhau đặt một mục tiêu chung, như chuyến đi hay dự án nhỏ."
+      "text": "Bạn yêu bằng sự cuốn hút và nhiệt tình, thích một mối quan hệ có nhiều trải nghiệm chung. Người ấy thường duyên dáng, giỏi giao tiếp và biết hưởng thụ cuộc sống. Để tình cảm bền, hai người cần tin nhau và có những thói quen chung.",
+      "advice": "Cùng nhau đặt một mục tiêu chung, như chuyến đi cuối tuần hay dự án nhỏ.",
+      "short": "Bạn yêu nhiệt tình, thích cùng nhau trải nghiệm, và cần xây thêm niềm tin để bền lâu."
     },
     "tu-tuc": {
-      "text": "Nhà bạn hẳn sẽ rộn ràng, vì con cái lanh lợi và có nhiều năng khiếu khác nhau. Bạn dễ trở thành người bạn đồng hành vui vẻ của con. Chỉ cần giúp con biết chọn lựa và kiên trì, để những tài năng ấy không bị dở dang.",
-      "advice": "Khuyến khích con theo đuổi một môn học đến cùng."
+      "text": "Nhà bạn hay rộn ràng vì con cái lanh lợi và có nhiều năng khiếu khác nhau. Bạn dễ thành người bạn đồng hành vui vẻ của con. Chỉ cần giúp con biết chọn và kiên trì, để tài năng không bị bỏ dở.",
+      "advice": "Khuyến khích con theo một môn đến nơi đến chốn."
     },
     "tai-bach": {
-      "text": "Bạn có khả năng kiếm tiền từ nhiều nguồn, đặc biệt là những công việc cần giao tiếp, sáng tạo hay kết nối con người. Tiền vào khá linh hoạt nhưng cũng dễ ra vì bạn thích tận hưởng. Một kế hoạch chi tiêu rõ ràng sẽ giúp bạn giữ được thành quả.",
-      "advice": "Tự động trích một phần thu nhập vào quỹ tiết kiệm ngay khi nhận lương."
+      "text": "Bạn có thể kiếm tiền từ nhiều nguồn, nhất là việc cần giao tiếp, sáng tạo hay kết nối người. Tiền vào khá linh hoạt nhưng cũng dễ ra vì bạn thích tận hưởng. Một kế hoạch chi tiêu rõ ràng sẽ giúp bạn giữ được thành quả.",
+      "advice": "Ngày nhận lương, chuyển ngay một phần vào quỹ tiết kiệm.",
+      "short": "Bạn kiếm tiền được từ nhiều nguồn, nhưng cũng dễ tiêu theo hứng nên cần kế hoạch."
     },
     "tat-ach": {
-      "text": "Năng lượng của bạn dồi dào, thích vui chơi và trải nghiệm. Tham Lang ở đây nhắc bạn chú ý giữ sức khỏe bằng cách điều độ trong ăn uống, tiệc tùng và giờ giấc. Biết dừng đúng lúc chính là bí quyết để bạn luôn tươi tắn.",
-      "advice": "Xen kẽ những ngày sống chậm sau các dịp vui chơi."
+      "text": "Bạn nhiều năng lượng, thích vui chơi và trải nghiệm. Ăn uống, tiệc tùng và giờ giấc thất thường là chỗ bạn nên điều độ hơn. Biết dừng đúng lúc chính là bí quyết để bạn luôn tươi tắn.",
+      "advice": "Sau những dịp vui chơi, xen vào một ngày sống chậm."
     },
     "thien-di": {
-      "text": "Ra ngoài là lúc bạn tỏa sáng: dễ kết bạn, dễ được chú ý và gặp nhiều cơ hội từ các mối quan hệ. Những chuyến đi xa giúp bạn mở mang tầm nhìn và học được kỹ năng mới. Hãy chọn lọc lời mời để tập trung vào những điều thật sự có giá trị.",
+      "text": "Ra ngoài là lúc bạn tỏa sáng: dễ kết bạn, dễ được chú ý và gặp nhiều cơ hội từ các mối quan hệ. Những chuyến đi xa giúp bạn mở mang tầm nhìn và học thêm kỹ năng mới. Hãy chọn lọc lời mời để tập trung vào việc thật sự có giá trị.",
       "advice": "Trước mỗi lời mời, tự hỏi nó có giúp mình tiến gần mục tiêu không."
     },
     "no-boc": {
-      "text": "Bạn có một mạng lưới quan hệ rộng, bạn bè đến từ nhiều lĩnh vực và tầng lớp. Sự vui vẻ, cởi mở giúp bạn được nhiều người yêu quý. Giữa rất nhiều mối quen, hãy dành thời gian vun đắp những người bạn thật sự hiểu mình.",
-      "advice": "Mỗi tháng gặp riêng một người bạn thân để trò chuyện sâu."
+      "text": "Bạn có mạng lưới quan hệ rộng, bạn bè đến từ nhiều lĩnh vực. Sự vui vẻ, cởi mở khiến nhiều người quý bạn. Giữa rất nhiều mối quen, hãy dành thời gian cho vài người thật sự hiểu mình.",
+      "advice": "Mỗi tháng hẹn riêng một người bạn thân đi cà phê."
     },
     "quan-loc": {
-      "text": "Tham Lang hợp với sự nghiệp cần sáng tạo, giao tiếp và sức hút cá nhân như kinh doanh, tiếp thị, nghệ thuật, giải trí hay dịch vụ. Bạn học nhanh và thích ứng tốt với nhiều vai trò. Điều cần rèn là sự kiên định để biến những khởi đầu hào hứng thành thành quả lâu dài.",
-      "advice": "Hoàn thành dứt điểm một dự án trước khi nhận dự án mới."
+      "text": "Bạn hợp công việc cần sáng tạo, giao tiếp và sức hút cá nhân như kinh doanh, tiếp thị, nghệ thuật, giải trí hay dịch vụ. Bạn học nhanh và thích nghi tốt với nhiều vai trò. Điều cần rèn là kiên định để biến những khởi đầu hào hứng thành thành quả lâu dài.",
+      "advice": "Hoàn thành dứt điểm một dự án trước khi nhận dự án mới.",
+      "short": "Bạn học nhanh, giỏi giao tiếp, hợp việc sáng tạo và cần kiên định để làm tới cùng."
     },
     "dien-trach": {
-      "text": "Bạn thích một không gian sống đẹp, tiện nghi và mang phong cách riêng. Chuyện nhà cửa có thể có nhiều thay đổi theo từng giai đoạn cuộc đời. Khi sắm sửa, nên cân nhắc giữa sở thích và nhu cầu thực tế để tổ ấm vừa đẹp vừa bền.",
-      "advice": "Lập danh sách ưu tiên trước khi mua sắm cho nhà cửa."
+      "text": "Bạn thích không gian sống đẹp, tiện nghi và mang phong cách riêng. Chuyện nhà cửa có thể đổi thay theo từng giai đoạn. Khi sắm sửa, cân giữa sở thích và nhu cầu thực tế để tổ ấm vừa đẹp vừa bền.",
+      "advice": "Lập danh sách ưu tiên trước khi mua đồ cho nhà."
     },
     "phuc-duc": {
-      "text": "Bạn biết cách tận hưởng cuộc sống và tìm niềm vui ở nhiều nơi, từ ẩm thực, du lịch đến nghệ thuật. Tâm hồn trẻ trung giúp bạn vượt qua khó khăn khá nhanh. Theo thời gian, những niềm vui sâu lắng như học hỏi hay giúp người sẽ mang lại sự bình an bền lâu hơn.",
-      "advice": "Thêm vào lịch một hoạt động nuôi dưỡng tinh thần, như đọc sách hay thiện nguyện."
+      "text": "Bạn biết tận hưởng cuộc sống và tìm niềm vui ở nhiều nơi, từ ăn uống, du lịch đến nghệ thuật. Tâm hồn trẻ giúp bạn vượt khó khá nhanh. Về lâu dài, những niềm vui sâu như học hỏi hay giúp người sẽ cho bạn sự bình an bền hơn.",
+      "advice": "Thêm vào lịch một việc nuôi tinh thần, như đọc sách hoặc làm tình nguyện."
     },
     "phu-mau": {
-      "text": "Bạn lớn lên bên những bậc sinh thành cởi mở, năng động và cho bạn khá nhiều tự do khám phá. Bạn học được từ họ sự linh hoạt và cách giao tiếp với mọi người. Đôi khi hai bên có lối sống khác nhau, nên sự tôn trọng khác biệt là chìa khóa giữ gìn tình thân.",
-      "advice": "Rủ cha mẹ cùng tham gia một hoạt động bạn yêu thích."
+      "text": "Bạn lớn lên bên cha mẹ cởi mở, năng động và cho khá nhiều tự do khám phá. Bạn học được từ họ sự linh hoạt và cách nói chuyện với mọi người. Đôi khi hai bên có lối sống khác nhau, nên tôn trọng khác biệt là chìa khóa.",
+      "advice": "Rủ cha mẹ cùng tham gia một hoạt động bạn thích."
     }
   },
   "cu-mon": {
     "menh": {
-      "text": "Sắc sảo, giỏi phân tích và có tài ăn nói, bạn thường nhìn ra điều người khác bỏ sót. Cự Môn tại Mệnh cho bạn tư duy phản biện, khả năng thuyết phục và tinh thần tìm đến tận gốc vấn đề. Đôi khi lời nói thẳng hoặc thói quen hoài nghi khiến người khác hiểu lầm ý tốt của bạn.",
-      "advice": "Bắt đầu góp ý bằng một điều tích cực, người nghe sẽ cởi mở hơn."
+      "text": "Bạn sắc sảo, giỏi phân tích và ăn nói có duyên, hay nhìn ra điều người khác bỏ sót. Bạn có tư duy phản biện và biết thuyết phục. Đôi khi lời nói thẳng hoặc thói quen hoài nghi khiến người khác hiểu lầm ý tốt của bạn.",
+      "advice": "Mở đầu góp ý bằng một điều tích cực, người nghe sẽ cởi mở hơn.",
+      "short": "Bạn sắc sảo, nhìn ra điều người khác bỏ sót, chỉ cần để ý cách nói thẳng của mình."
     },
     "huynh-de": {
-      "text": "Bữa cơm gia đình hiếm khi im ắng, vì anh chị em đều thông minh, có chính kiến và thích tranh luận. Những cuộc trò chuyện trong gia đình có thể sôi nổi nhưng giúp mọi người học hỏi nhau. Chỉ cần nhớ rằng thắng một cuộc tranh cãi không quan trọng bằng giữ được tình thân.",
-      "advice": "Khi thấy cuộc nói chuyện căng thẳng, hãy tạm dừng và quay lại sau."
+      "text": "Bữa cơm nhà bạn hiếm khi im ắng vì anh chị em đều thông minh, có chính kiến và thích tranh luận. Những cuộc nói chuyện có thể sôi nổi nhưng giúp mọi người học nhau. Thắng một cuộc cãi không quan trọng bằng giữ được tình thân.",
+      "advice": "Thấy câu chuyện căng, tạm dừng và quay lại nói sau."
     },
     "phu-the": {
-      "text": "Trong tình cảm, bạn coi trọng sự thấu hiểu và những cuộc trò chuyện có chiều sâu. Người bạn đời thường lanh lợi, nhiều ý kiến và cũng thích nói ra suy nghĩ. Hai người dễ có bất đồng nhỏ trong cách diễn đạt, nên sự lắng nghe sẽ quý hơn mọi lý lẽ.",
-      "advice": "Thay câu \"bạn sai rồi\" bằng \"mình cùng xem lại nhé\", không khí sẽ dịu đi ngay."
+      "text": "Trong tình cảm, bạn coi trọng sự thấu hiểu và những cuộc trò chuyện có chiều sâu. Người ấy thường lanh lợi, nhiều ý kiến và cũng thích nói ra suy nghĩ. Hai người dễ bất đồng nhỏ vì cách diễn đạt, nên biết lắng nghe còn quý hơn mọi lý lẽ.",
+      "advice": "Thay câu \"bạn sai rồi\" bằng \"mình cùng xem lại nhé\".",
+      "short": "Bạn cần một người hiểu mình và nói chuyện có chiều sâu, lắng nghe sẽ giúp hơn là cãi lý."
     },
     "tu-tuc": {
-      "text": "Một đứa trẻ hay hỏi \"tại sao\" là hình ảnh Cự Môn gợi ra: con cái thông minh và có óc quan sát tốt. Bạn giỏi giải thích, giúp con hiểu bản chất sự việc. Hãy kiên nhẫn với những câu hỏi \"tại sao\" và để con được bày tỏ ý kiến, kể cả khi khác bạn.",
-      "advice": "Dành thời gian lắng nghe con kể chuyện mà không vội nhận xét."
+      "text": "Con cái thường thông minh, hay hỏi \"tại sao\" và quan sát tốt. Bạn giỏi giải thích nên giúp con hiểu bản chất sự việc. Kiên nhẫn với những câu hỏi của con và để con nói ý kiến, kể cả khi khác bạn.",
+      "advice": "Nghe con kể chuyện mà chưa vội nhận xét."
     },
     "tai-bach": {
       "text": "Bạn có thể kiếm tiền nhờ lời nói và trí tuệ: tư vấn, giảng dạy, bán hàng, pháp lý hay truyền thông đều hợp. Thu nhập thường đến từ sự cạnh tranh và nỗ lực chứng minh năng lực. Trong các giao dịch, giấy tờ rõ ràng giúp bạn yên tâm hơn.",
-      "advice": "Ghi lại mọi thỏa thuận tiền bạc thành văn bản, dù với người quen."
+      "advice": "Ghi mọi thỏa thuận tiền bạc thành văn bản, dù với người quen.",
+      "short": "Bạn kiếm tiền bằng lời nói và trí tuệ, và nên ghi rõ mọi thỏa thuận cho yên tâm."
     },
     "tat-ach": {
-      "text": "Bạn hay suy nghĩ nhiều, và đầu óc làm việc liên tục có thể khiến cơ thể mệt mỏi. Cự Môn ở đây nhắc bạn chú ý giữ sức khỏe bằng cách ăn uống đúng giờ, nói chuyện vừa sức và cho tâm trí được nghỉ. Giấc ngủ sâu là liều thuốc tự nhiên tốt nhất với bạn.",
+      "text": "Bạn hay nghĩ nhiều, đầu óc chạy liên tục có thể làm cơ thể mệt. Ăn đúng giờ, nói chuyện vừa sức và cho đầu óc nghỉ là những điều bạn cần giữ. Giấc ngủ sâu là cách hồi phục tự nhiên tốt nhất với bạn.",
       "advice": "Viết những điều đang lo ra giấy trước khi đi ngủ."
     },
     "thien-di": {
-      "text": "Ở môi trường bên ngoài, bạn ghi điểm nhờ hiểu biết và khả năng trình bày. Môi trường mới, nhất là nơi cần tranh luận hay đàm phán, giúp bạn thể hiện thế mạnh. Hãy cẩn thận lời nói ở nơi chưa quen để tránh những hiểu lầm không đáng có.",
-      "advice": "Lắng nghe nhiều hơn nói trong lần đầu gặp gỡ."
+      "text": "Ở bên ngoài, bạn ghi điểm nhờ hiểu biết và cách trình bày. Môi trường mới, nhất là nơi cần tranh luận hay đàm phán, giúp bạn bộc lộ thế mạnh. Ở chỗ chưa quen, hãy cẩn thận lời nói để tránh hiểu lầm không đáng.",
+      "advice": "Lần đầu gặp ai đó, nghe nhiều hơn nói."
     },
     "no-boc": {
-      "text": "Bạn bè, đồng nghiệp thường đến với bạn để xin lời khuyên vì bạn nhìn vấn đề rõ ràng. Bạn quý những người thẳng thắn và có kiến thức. Đôi khi chuyện bàn tán có thể gây ra hiểu lầm, nên giữ thói quen nói thẳng với người trong cuộc.",
-      "advice": "Tránh tham gia những câu chuyện về người vắng mặt."
+      "text": "Bạn bè và đồng nghiệp hay tìm bạn xin lời khuyên vì bạn nhìn vấn đề rõ. Bạn quý người thẳng thắn, có hiểu biết. Đôi khi chuyện bàn tán gây hiểu lầm, nên có gì hãy nói thẳng với người trong cuộc.",
+      "advice": "Tránh tham gia chuyện bàn tán về người vắng mặt."
     },
     "quan-loc": {
-      "text": "Sự nghiệp của bạn phát triển mạnh ở những lĩnh vực dùng lời nói và tư duy như giảng dạy, luật, truyền thông, nghiên cứu, tư vấn hay bán hàng. Cự Môn giúp bạn thuyết phục và đi đến tận cùng vấn đề. Điều cần rèn là sự khéo léo trong cách góp ý với cấp trên và đồng nghiệp.",
-      "advice": "Đưa ra giải pháp kèm theo mỗi lần chỉ ra vấn đề."
+      "text": "Bạn phát triển mạnh ở lĩnh vực dùng lời nói và tư duy như giảng dạy, luật, truyền thông, nghiên cứu, tư vấn hay bán hàng. Bạn thuyết phục tốt và đi tới tận gốc vấn đề. Điều cần rèn là khéo léo khi góp ý với sếp và đồng nghiệp.",
+      "advice": "Mỗi lần chỉ ra vấn đề, đưa kèm một giải pháp.",
+      "short": "Bạn mạnh ở việc dùng lời nói và tư duy, cần khéo hơn khi góp ý với sếp và đồng nghiệp."
     },
     "dien-trach": {
-      "text": "Chuyện nhà cửa của bạn thường cần sự tìm hiểu kỹ trước khi quyết định. Bạn có óc phân tích tốt nên ít khi bị cuốn vào những lựa chọn vội vàng. Một không gian sống yên tĩnh, ít ồn ào sẽ giúp bạn thư giãn và suy nghĩ sáng suốt hơn.",
-      "advice": "Đọc kỹ giấy tờ và hỏi ý kiến người có kinh nghiệm trước việc lớn."
+      "text": "Chuyện nhà cửa của bạn thường cần tìm hiểu kỹ trước khi quyết. Bạn phân tích tốt nên ít khi bị cuốn vào lựa chọn vội. Không gian sống yên tĩnh, ít ồn sẽ giúp bạn thư giãn và nghĩ thoáng hơn.",
+      "advice": "Đọc kỹ giấy tờ và hỏi người có kinh nghiệm trước việc lớn."
     },
     "phuc-duc": {
-      "text": "Bạn có tâm hồn ham hiểu biết, thích đọc, thích tìm hiểu ý nghĩa sâu xa của mọi chuyện. Sự bình an đến khi bạn tìm được câu trả lời cho những thắc mắc của mình. Đôi khi bạn trăn trở quá nhiều, nên học cách chấp nhận rằng không phải câu hỏi nào cũng cần lời đáp ngay.",
-      "advice": "Dành thời gian cho những hoạt động giúp đầu óc nghỉ ngơi, như đi dạo hay làm vườn."
+      "text": "Bạn ham hiểu biết, thích đọc và tìm ý nghĩa sâu xa của mọi chuyện. Bạn thấy bình an khi tìm được câu trả lời cho thắc mắc của mình. Đôi khi bạn trăn trở quá nhiều, nên nhớ rằng không phải câu hỏi nào cũng cần lời đáp ngay.",
+      "advice": "Dành thời gian cho việc giúp đầu óc nghỉ, như đi dạo hoặc trồng cây."
     },
     "phu-mau": {
-      "text": "Từ nhỏ, bạn đã quen với những cuộc trò chuyện nhiều lý lẽ, vì cha mẹ có hiểu biết, có quan điểm rõ ràng và dạy bạn cách suy nghĩ độc lập. Hai thế hệ có thể đôi lần khác ý, nhưng những cuộc trò chuyện ấy giúp bạn trưởng thành. Sự nhẹ nhàng trong lời nói sẽ khiến mối quan hệ thêm gắn bó.",
-      "advice": "Khi khác ý cha mẹ, hãy hỏi lý do của họ trước khi trình bày ý mình."
+      "text": "Từ nhỏ bạn đã quen những cuộc trò chuyện nhiều lý lẽ, vì cha mẹ hiểu biết, có quan điểm rõ và dạy bạn nghĩ độc lập. Hai thế hệ có lúc khác ý, nhưng những lần nói chuyện ấy giúp bạn lớn lên. Lời nói nhẹ nhàng sẽ làm quan hệ thêm gắn bó.",
+      "advice": "Khi khác ý với cha mẹ, hỏi lý do của họ trước rồi hãy nói ý mình."
     }
   },
   "thien-tuong": {
     "menh": {
-      "text": "Bạn mang khí chất của người giữ ấn: chỉn chu, công bằng và sẵn lòng đứng ra bênh vực lẽ phải. Người xung quanh thường tin tưởng giao việc cho bạn vì bạn làm đến nơi đến chốn. Đôi khi bạn để môi trường và người thân cận ảnh hưởng quá nhiều đến lựa chọn của mình.",
-      "advice": "Hãy giữ thói quen tự hỏi điều mình thật sự muốn trước khi nhận lời giúp ai."
+      "text": "Bạn là người làm gì cũng chỉn chu và công bằng. Ai giao việc cho bạn cũng yên tâm vì bạn làm tới nơi tới chốn. Điểm cần để ý: bạn dễ bị người xung quanh kéo theo ý họ, nên đôi khi quên hỏi mình thật sự muốn gì.",
+      "advice": "Trước khi nhận lời giúp ai, tự hỏi mình có muốn làm không.",
+      "short": "Chỉn chu, công bằng, được tin giao việc, nhưng hay chiều ý người khác."
     },
     "huynh-de": {
-      "text": "Anh chị em hoặc bạn bè thân thiết dễ coi bạn là điểm tựa đáng tin. Không khí trong nhà thường hòa thuận nhờ cách bạn phân xử công tâm, ai cũng thấy mình được lắng nghe. Xu hướng gánh vác thay người khác có thể khiến bạn mệt mà không nói ra.",
-      "advice": "Chia sẻ việc chung rõ ràng để tình thân nhẹ nhàng và bền lâu."
+      "text": "Anh chị em hoặc bạn thân xem bạn là chỗ dựa đáng tin. Bạn phân xử công bằng nên nhà hay bạn bè đều êm. Có điều bạn dễ gánh việc chung một mình rồi mệt mà không nói.",
+      "advice": "Chia việc chung rõ ràng, đừng âm thầm làm hết."
     },
     "phu-the": {
-      "text": "Trong tình yêu, bạn trân trọng sự tôn trọng lẫn nhau và thích một mối quan hệ có nề nếp, rõ ràng. Người bạn đời thường là người tử tế, biết chăm chút hình ảnh và quan tâm gia đình. Thử thách nằm ở chỗ cả hai cùng ngại va chạm nên đôi khi để chuyện nhỏ tích lại.",
-      "advice": "Nói thẳng nhưng dịu dàng về điều chưa vừa ý ngay khi nó còn nhỏ."
+      "text": "Bạn thích một mối quan hệ rõ ràng, tôn trọng nhau, không drama. Người ấy thường tử tế và biết chăm chút cho gia đình. Chỉ là cả hai cùng ngại va chạm, nên chuyện nhỏ hay bị dồn lại.",
+      "advice": "Có gì chưa vừa ý, nói nhẹ nhàng ngay khi còn nhỏ.",
+      "short": "Thích yêu nề nếp, tôn trọng nhau, nhưng ngại nói thẳng chuyện nhỏ."
     },
     "tu-tuc": {
-      "text": "Cung Tử Tức có Thiên Tướng gợi hình ảnh những đứa trẻ ngoan, biết điều và sống có trách nhiệm. Bạn có khuynh hướng nuôi dạy con bằng sự công bằng, nêu gương nhiều hơn răn dạy. Hãy để con có khoảng tự quyết để lớn lên tự tin.",
-      "advice": "Khen con đúng lúc và cụ thể, con sẽ tự giác hơn mọi lời nhắc."
+      "text": "Con cái của bạn thường ngoan, biết điều và có trách nhiệm. Bạn nuôi con bằng sự công bằng, làm gương nhiều hơn giảng giải. Cứ chừa cho con chút quyền tự quyết, con sẽ lớn lên tự tin hơn.",
+      "advice": "Khen con đúng lúc và nói cụ thể, con sẽ tự giác hơn."
     },
     "tai-bach": {
-      "text": "Tiền bạc đến với bạn qua uy tín và sự chu đáo trong công việc nhiều hơn là may rủi. Bạn biết tiêu cho hình ảnh, cho người thân và những việc có ý nghĩa. Điểm cần để ý là sự nể nang có thể khiến bạn chi những khoản không thật cần.",
-      "advice": "Đặt một hạn mức cho các khoản giúp đỡ hay quà cáp mỗi tháng."
+      "text": "Tiền của bạn đến từ uy tín và sự chu đáo trong công việc, ít dựa vào may rủi. Bạn chịu chi cho người thân và những việc có ý nghĩa. Chỗ cần để ý là nể nang, dễ chi những khoản không thật cần.",
+      "advice": "Đặt hạn mức mỗi tháng cho quà cáp và khoản giúp người khác.",
+      "short": "Tiền đến nhờ uy tín và sự chu đáo, nhưng nể nang dễ làm bạn chi dư."
     },
     "tat-ach": {
-      "text": "Bạn có nền tảng thể chất khá ổn và biết giữ nếp sống chừng mực. Tuy vậy, thói quen ôm việc của người khác dễ khiến bạn căng thẳng âm thầm. Chú ý giữ sức khỏe bằng giấc ngủ đều và những khoảng nghỉ thật sự cho riêng mình.",
-      "advice": "Mỗi ngày dành ít phút thư giãn mà không phải lo cho ai cả."
+      "text": "Sức khỏe nền của bạn khá ổn và bạn biết giữ nếp sống chừng mực. Thói quen ôm việc của người khác dễ làm bạn căng thẳng mà không ai hay. Ngủ đủ và nghỉ thật sự sẽ giúp bạn giữ sức.",
+      "advice": "Mỗi ngày dành ít phút cho riêng mình, không lo cho ai."
     },
     "thien-di": {
-      "text": "Đi đến đâu, bạn cũng dễ được quý mến nhờ phong thái lịch sự và cách cư xử đàng hoàng. Những chuyến công tác hay một môi trường làm việc mới thường mở cho bạn những mối quan hệ tốt và người sẵn lòng nâng đỡ. Bạn chỉ cần tỉnh táo chọn nơi, chọn bạn để năng lượng tích cực được nhân lên.",
-      "advice": "Chủ động kết nối với người giỏi hơn mình ở mỗi nơi bạn đến."
+      "text": "Đi đến đâu bạn cũng dễ được quý nhờ cách cư xử lịch sự, đàng hoàng. Chuyến công tác hay chỗ làm mới thường mở ra mối quan hệ tốt. Chọn kỹ nơi và người bạn gần gũi để năng lượng tích cực được nhân lên.",
+      "advice": "Ở chỗ mới, chủ động làm quen một người giỏi hơn mình."
     },
     "no-boc": {
-      "text": "Bạn có duyên với cộng sự và bạn bè tử tế, những người biết giữ lời. Nhóm làm việc quanh bạn thường vận hành trơn tru nhờ cách bạn phân công công bằng. Đôi khi bạn quá cả nể nên khó từ chối những đề nghị chưa hợp lý.",
-      "advice": "Tập nói lời từ chối lịch sự mà vẫn giữ được tình cảm."
+      "text": "Bạn có duyên với đồng nghiệp và bạn bè tử tế, biết giữ lời. Nhóm quanh bạn chạy trơn tru vì bạn chia việc công bằng. Nhưng bạn hay cả nể nên khó từ chối những đề nghị chưa hợp lý.",
+      "advice": "Tập một câu từ chối lịch sự mà vẫn giữ được tình cảm."
     },
     "quan-loc": {
-      "text": "Thiên Tướng ở Quan Lộc hợp với vai trò điều phối, quản lý, giữ nguyên tắc hoặc đại diện cho tập thể. Bạn làm việc có trách nhiệm, tôn trọng quy trình nên dễ được tin cậy giao quyền. Muốn tiến xa, bạn nên mạnh dạn đưa ra chính kiến thay vì chỉ thực thi tốt.",
-      "advice": "Mỗi quý hãy đề xuất ít nhất một ý tưởng cải tiến của riêng bạn."
+      "text": "Bạn hợp vai điều phối, quản lý hoặc người giữ nguyên tắc cho cả nhóm. Làm việc có trách nhiệm, tôn trọng quy trình nên sếp dễ tin giao quyền. Muốn đi xa hơn, hãy dám nêu chính kiến thay vì chỉ làm tốt phần được giao.",
+      "advice": "Mỗi quý đề xuất ít nhất một ý tưởng cải tiến của riêng bạn.",
+      "short": "Hợp vai điều phối, giữ nguyên tắc; muốn lên cao thì dám nêu ý kiến riêng."
     },
     "dien-trach": {
-      "text": "Bạn thích một tổ ấm gọn gàng, đẹp mắt và có nề nếp. Chuyện nhà cửa thường được bạn vun đắp từ từ, chắc chắn, đôi khi nhờ sự hỗ trợ của gia đình. Khuynh hướng chăm chút hình thức có thể khiến chi phí sửa sang nhích lên.",
-      "advice": "Ưu tiên sự tiện nghi lâu dài hơn những món trang trí nhất thời."
+      "text": "Bạn thích một tổ ấm gọn gàng, đẹp mắt và có nề nếp. Bạn vun đắp nhà cửa từ từ, chắc chắn, đôi khi có gia đình hỗ trợ. Mê chăm chút hình thức nên chi phí sửa sang dễ nhích lên.",
+      "advice": "Ưu tiên đồ tiện dùng lâu dài hơn món trang trí nhất thời."
     },
     "phuc-duc": {
-      "text": "Cung Phúc Đức có Thiên Tướng cho thấy nền nếp gia đình tốt, bạn được thừa hưởng sự tử tế và lòng tự trọng từ người đi trước. Tâm hồn bạn hướng thiện, thích giúp đỡ và nhờ đó cũng hay gặp người tốt. Hãy nhớ chăm sóc niềm vui của chính mình song song với việc lo cho người khác.",
-      "advice": "Duy trì một việc thiện nhỏ đều đặn, nó nuôi dưỡng sự bình an trong bạn."
+      "text": "Bạn lớn lên trong nền nếp tử tế, thừa hưởng lòng tự trọng từ người đi trước. Bạn thích giúp người nên hay gặp người tốt. Nhớ nuôi niềm vui của chính mình song song với việc lo cho người khác.",
+      "advice": "Giữ một việc tốt nhỏ làm đều mỗi tuần, tâm sẽ nhẹ hơn."
     },
     "phu-mau": {
-      "text": "Gia đình bạn đề cao nề nếp; cha mẹ là người nghiêm túc, đứng đắn và dạy bạn biết giữ chữ tín. Mối quan hệ với bậc sinh thành dựa trên sự kính trọng, đôi lúc hơi khuôn phép nên ít bày tỏ cảm xúc. Một lời hỏi han thân mật sẽ làm khoảng cách ấy ấm lên rất nhiều.",
-      "advice": "Thỉnh thoảng hãy kể cho cha mẹ nghe một chuyện vui của bạn."
+      "text": "Nhà bạn đề cao nề nếp, cha mẹ nghiêm túc và dạy bạn biết giữ chữ tín. Hai bên thương nhau bằng sự kính trọng nên hơi khuôn phép, ít nói chuyện cảm xúc. Một câu hỏi han thân mật sẽ làm không khí ấm lên nhiều.",
+      "advice": "Thỉnh thoảng nhắn cho cha mẹ một chuyện vui của bạn."
     }
   },
   "thien-luong": {
     "menh": {
-      "text": "Bạn là kiểu người hay che chở: điềm đạm, nhân hậu và có cái nhìn chín chắn trước tuổi. Mọi người tìm đến bạn để xin lời khuyên vì bạn biết cân nhắc đúng sai. Điểm cần tiết chế là thói quen góp ý quá nhiều, đôi khi khiến người nghe thấy bị dạy bảo.",
-      "advice": "Hỏi người khác có muốn nghe lời khuyên không trước khi đưa ra."
+      "text": "Bạn điềm đạm, nhân hậu và nhìn đời chín chắn hơn tuổi. Bạn bè hay tìm bạn xin lời khuyên vì bạn cân nhắc đúng sai khá kỹ. Điểm cần tiết chế: góp ý nhiều quá, người nghe dễ thấy mình bị dạy.",
+      "advice": "Hỏi người ta có muốn nghe lời khuyên không rồi hãy nói.",
+      "short": "Điềm đạm, chín chắn, hay che chở; nhớ đừng góp ý quá tay."
     },
     "huynh-de": {
-      "text": "Trong anh chị em, bạn dễ đóng vai người anh cả hoặc chị cả về tinh thần, dù thứ bậc thế nào. Mọi người tin vào sự công tâm và lòng tốt của bạn khi có chuyện cần hòa giải. Hãy để mỗi người tự học từ trải nghiệm của họ, bạn không cần lo hết thay ai.",
-      "advice": "Lắng nghe trọn vẹn trước, khuyên sau, và khuyên ngắn thôi."
+      "text": "Trong nhà hay nhóm bạn thân, bạn dễ thành người anh cả, chị cả về tinh thần dù thứ bậc thế nào. Khi cần hòa giải, ai cũng tin sự công tâm của bạn. Để mỗi người tự học từ chuyện của họ, bạn không cần lo hết thay ai.",
+      "advice": "Nghe trọn vẹn trước, khuyên sau, và khuyên ngắn thôi."
     },
     "phu-the": {
-      "text": "Tình cảm của bạn thiên về sự chăm sóc và bao bọc, thường hợp với người lớn tuổi hơn hoặc chín chắn hơn mình. Mối quan hệ bền nhờ sự tin cậy và trách nhiệm lẫn nhau. Bạn chỉ cần nhớ người thương cần được bình đẳng chứ không chỉ được che chở.",
-      "advice": "Cùng nhau quyết định việc lớn để cả hai đều thấy mình có tiếng nói."
+      "text": "Bạn thương bằng cách chăm sóc, che chở, thường hợp người chín chắn hơn mình. Mối quan hệ bền nhờ tin cậy và trách nhiệm hai chiều. Nhớ rằng người ấy cần được bình đẳng chứ không chỉ cần được che chở.",
+      "advice": "Việc lớn cùng quyết định, để cả hai đều có tiếng nói.",
+      "short": "Yêu bằng sự chăm sóc và tin cậy; nhớ đối xử ngang hàng, đừng bao bọc quá."
     },
     "tu-tuc": {
-      "text": "Thiên Lương gợi một mối gắn bó sâu với con cái, bạn có xu hướng làm người thầy đầu tiên của con. Những đứa trẻ thường hiền lành, hiểu chuyện và biết thương người. Khi con lớn, sự tin tưởng sẽ hiệu quả hơn việc dặn dò từng chút.",
-      "advice": "Thử để con tự giải quyết một việc nhỏ và chỉ hỗ trợ khi con hỏi."
+      "text": "Bạn gắn bó sâu với con và hay là người thầy đầu tiên của con. Con thường hiền, hiểu chuyện và biết thương người. Khi con lớn, tin tưởng sẽ hiệu quả hơn dặn dò từng chút.",
+      "advice": "Cho con tự xử lý một việc nhỏ, chỉ giúp khi con hỏi."
     },
     "tai-bach": {
-      "text": "Tài chính của bạn có xu hướng ổn định, thường đến từ chuyên môn, sự tư vấn hoặc công việc mang tính phục vụ cộng đồng. Bạn không quá ham làm giàu nhanh nên ít rơi vào những quyết định vội. Lòng tốt dễ khiến bạn cho vay hoặc giúp đỡ vượt khả năng.",
-      "advice": "Tách riêng một quỹ để giúp người, tiêu trong giới hạn đó là đủ."
+      "text": "Tiền của bạn có xu hướng ổn định, đến từ chuyên môn, tư vấn hoặc công việc giúp ích cho người khác. Bạn không mê làm giàu nhanh nên ít quyết định vội. Lòng tốt dễ khiến bạn cho vay hay giúp vượt khả năng.",
+      "advice": "Lập một quỹ riêng để giúp người, tiêu trong mức đó là đủ.",
+      "short": "Tiền ổn định, đến từ chuyên môn; lòng tốt dễ làm bạn cho vay quá sức."
     },
     "tat-ach": {
-      "text": "Thiên Lương vốn được xem là sao che chở, gợi ý bạn có sức bền và khả năng phục hồi khá tốt. Dù vậy, việc suy nghĩ nhiều cho người khác có thể khiến bạn mất ngủ hoặc mệt mỏi tinh thần. Chú ý giữ sức khỏe bằng nếp sinh hoạt đều và những buổi đi bộ thong thả.",
-      "advice": "Đặt giờ đi ngủ cố định và giữ nó như một lời hẹn với bản thân."
+      "text": "Bạn có sức bền và khả năng hồi phục khá tốt. Nhưng nghĩ nhiều cho người khác dễ làm bạn mất ngủ, mệt tinh thần. Nếp sinh hoạt đều và những buổi đi bộ thong thả sẽ giúp bạn nhiều.",
+      "advice": "Đặt giờ ngủ cố định và giữ như một lời hẹn với chính mình."
     },
     "thien-di": {
-      "text": "Khi ra ngoài, bạn thường gặp quý nhân là người lớn tuổi, thầy cô hoặc người có kinh nghiệm. Đi xa giúp bạn mở rộng tầm nhìn và tìm thấy chỗ đứng nhờ uy tín cá nhân. Bạn hợp với những chuyến đi có mục đích học hỏi hơn là đi cho vui.",
-      "advice": "Ghi lại bài học từ mỗi chuyến đi, chúng sẽ thành vốn quý về sau."
+      "text": "Ra ngoài, bạn hay gặp người đỡ đầu là người lớn tuổi, thầy cô hoặc người nhiều kinh nghiệm. Đi xa giúp bạn mở tầm nhìn và có chỗ đứng nhờ uy tín. Bạn hợp chuyến đi để học hỏi hơn là đi cho vui.",
+      "advice": "Ghi lại một bài học sau mỗi chuyến đi hay chuyến công tác."
     },
     "no-boc": {
-      "text": "Bạn bè và cộng sự thường xem bạn như người cố vấn đáng tin. Nhờ tấm lòng rộng, bạn thu hút những người tử tế và biết ơn. Đôi khi bạn ôm vai trò người gỡ rối cho cả nhóm, nên cần để mọi người cùng gánh trách nhiệm.",
-      "advice": "Trao quyền cho người khác thay vì tự đứng ra giải quyết mọi chuyện."
+      "text": "Đồng nghiệp và bạn bè hay xem bạn như người cố vấn đáng tin. Bạn rộng lòng nên thu hút người tử tế, biết ơn. Đôi khi bạn ôm vai gỡ rối cho cả nhóm, hãy để mọi người cùng chia trách nhiệm.",
+      "advice": "Giao bớt việc cho người khác thay vì tự gỡ mọi chuyện."
     },
     "quan-loc": {
-      "text": "Sự nghiệp hợp với giáo dục, chăm sóc, tư vấn, nghiên cứu, pháp chế hoặc các công việc cần sự liêm chính. Bạn tiến bộ vững vàng nhờ uy tín và kinh nghiệm tích lũy theo thời gian. Môi trường quá cạnh tranh có thể làm bạn kém hứng thú, hãy chọn nơi coi trọng giá trị.",
-      "advice": "Đầu tư vào chứng chỉ và chuyên môn sâu, đó là chỗ dựa lâu dài của bạn."
+      "text": "Bạn hợp với giáo dục, chăm sóc, tư vấn, nghiên cứu hay những việc cần sự liêm chính. Bạn lên chậm mà chắc nhờ uy tín và kinh nghiệm tích lũy. Nơi quá cạnh tranh dễ làm bạn mất hứng, nên chọn công ty coi trọng giá trị.",
+      "advice": "Đầu tư thêm chứng chỉ và chuyên môn sâu, đó là chỗ dựa dài hạn.",
+      "short": "Hợp việc tư vấn, giáo dục, nghiên cứu; lên chậm mà chắc nhờ uy tín."
     },
     "dien-trach": {
-      "text": "Nhà cửa của bạn thường gắn với sự ấm cúng, có khi được thừa hưởng hoặc nhận hỗ trợ từ người lớn trong gia đình. Bạn thích không gian yên tĩnh, có cây xanh và chỗ đọc sách. Chuyện mua bán nhà đất nên đi từng bước chắc chắn thay vì đổi chỗ liên tục.",
-      "advice": "Dành một góc nhỏ trong nhà làm nơi nghỉ ngơi thật sự cho bạn."
+      "text": "Nhà bạn thường ấm cúng, đôi khi nhờ người lớn trong gia đình hỗ trợ. Bạn thích không gian yên tĩnh, có cây xanh và một góc đọc sách. Chuyện mua bán nhà nên đi từng bước chắc thay vì đổi chỗ liên tục.",
+      "advice": "Dành một góc nhỏ trong nhà để nghỉ ngơi thật sự."
     },
     "phuc-duc": {
-      "text": "Đây là vị trí đẹp của Thiên Lương: bạn có phúc phần từ gia đình và dễ được giúp đỡ vào lúc cần. Đời sống tinh thần của bạn phong phú, thiên về sự an nhiên và hướng thiện. Hãy biến may mắn ấy thành động lực để lan tỏa điều tốt cho người khác.",
-      "advice": "Nuôi dưỡng sự biết ơn mỗi ngày, bạn sẽ thấy lòng nhẹ hơn."
+      "text": "Đây là vị trí rất đẹp: bạn có gốc gác gia đình tốt và hay được giúp đúng lúc cần. Tinh thần bạn phong phú, thiên về an nhiên và làm điều thiện. Hãy biến sự may mắn ấy thành động lực lan tỏa điều tốt.",
+      "advice": "Mỗi tối nghĩ một điều đáng biết ơn trong ngày."
     },
     "phu-mau": {
-      "text": "Thiên Lương ở cung Phụ Mẫu là hình ảnh của mái che: cha mẹ hiền hậu, có hiểu biết và luôn che chở cho bạn. Bạn được thừa hưởng nền tảng đạo đức tốt và nhiều lời khuyên quý giá. Khi trưởng thành, bạn có cơ hội đáp lại bằng sự quan tâm chủ động và những cuộc trò chuyện ngang hàng.",
-      "advice": "Hỏi cha mẹ về những bài học đời họ, đó là món quà cho cả hai."
+      "text": "Cha mẹ bạn thường hiền hậu, có hiểu biết và che chở bạn nhiều. Bạn thừa hưởng nền tảng đạo đức tốt và nhiều lời khuyên quý. Lớn rồi, bạn có thể đáp lại bằng sự quan tâm chủ động và những cuộc trò chuyện ngang hàng.",
+      "advice": "Hỏi cha mẹ về bài học đời họ, đó là món quà cho cả hai."
     }
   },
   "that-sat": {
     "menh": {
-      "text": "Bạn mang năng lượng của một vị tướng tiên phong: dứt khoát, gan dạ và không ngại bắt đầu từ con số không. Áp lực càng lớn, bạn càng tỉnh táo và biết hành động. Mặt cần rèn là sự nóng vội, đôi khi bạn quyết nhanh hơn mức cần thiết.",
-      "advice": "Trước quyết định lớn, hãy cho mình một đêm để nghĩ lại."
+      "text": "Bạn dứt khoát, gan dạ và không ngại bắt đầu lại từ con số không. Càng áp lực, bạn càng tỉnh và biết hành động. Mặt cần rèn là hơi nóng vội, đôi khi quyết nhanh hơn mức cần thiết.",
+      "advice": "Trước quyết định lớn, cho mình một đêm để nghĩ lại.",
+      "short": "Dứt khoát, dám bắt đầu từ đầu, càng áp lực càng tỉnh; chỉ hơi nóng vội."
     },
     "huynh-de": {
-      "text": "Mỗi người con trong nhà đều có cá tính mạnh và sống tự lập từ sớm. Mọi người đi những con đường khác nhau, nhưng khi cần, cả nhà đều sẵn sàng đứng chung một chiến tuyến. Tranh luận có thể xảy ra vì ai cũng có chính kiến, và đó cũng là cách mọi người hiểu nhau hơn.",
-      "advice": "Tôn trọng con đường riêng của từng người, kết nối bằng những dịp gặp mặt đều đặn."
+      "text": "Anh chị em của bạn ai cũng cá tính mạnh và tự lập sớm. Mỗi người một đường, nhưng khi cần thì cả nhà đứng chung một phía. Có lúc cãi nhau vì ai cũng có chính kiến, và đó cũng là cách hiểu nhau hơn.",
+      "advice": "Tôn trọng đường riêng của mỗi người, giữ liên lạc bằng những buổi gặp đều đặn."
     },
     "phu-the": {
-      "text": "Bạn bị thu hút bởi người mạnh mẽ, có bản lĩnh và nhiều nhiệt huyết. Tình yêu của bạn nồng nhiệt, thẳng thắn, ít vòng vo. Vì cả hai đều có cái tôi rõ nét, mối quan hệ cần không gian riêng và sự nhường nhịn đúng lúc để đi đường dài.",
-      "advice": "Khi tranh luận, hãy hạ giọng trước, người kia sẽ dịu theo."
+      "text": "Bạn thích người mạnh mẽ, có bản lĩnh và nhiều nhiệt huyết. Bạn yêu nồng nhiệt, thẳng thắn, ít vòng vo. Vì cả hai đều có cái tôi rõ, cần có không gian riêng và biết nhường đúng lúc để đi đường dài.",
+      "advice": "Khi tranh luận, hạ giọng trước, người kia sẽ dịu theo.",
+      "short": "Yêu nồng nhiệt, thẳng thắn; cái tôi cao nên cần biết nhường nhau đúng lúc."
     },
     "tu-tuc": {
-      "text": "Con cái có thể sớm bộc lộ cá tính độc lập, hiếu động và thích tự khám phá. Đó là những đứa trẻ có ý chí, nếu được định hướng sẽ trở nên rất bản lĩnh. Bạn nên dẫn dắt bằng sự thấu hiểu thay vì áp đặt.",
-      "advice": "Cho con thử thách vừa sức như thể thao hay dự án nhỏ để giải tỏa năng lượng."
+      "text": "Con bạn có thể sớm bộc lộ cá tính độc lập, hiếu động và thích tự khám phá. Bé có ý chí, nếu được định hướng sẽ rất bản lĩnh. Hãy dẫn dắt bằng sự thấu hiểu thay vì áp đặt.",
+      "advice": "Cho con thử thách vừa sức như thể thao hoặc dự án nhỏ."
     },
     "tai-bach": {
-      "text": "Tiền bạc đến với bạn qua sự xông pha và những quyết định táo bạo, thường có giai đoạn lên rất nhanh. Bạn giỏi nắm bắt cơ hội mà người khác còn chần chừ. Xu hướng ra tay mạnh tay đôi khi làm dòng tiền dao động, nên một kế hoạch dự phòng sẽ giúp bạn vững hơn.",
-      "advice": "Luôn giữ một khoản tiết kiệm không đụng đến, dù cơ hội hấp dẫn đến đâu."
+      "text": "Tiền đến với bạn qua sự xông pha và những quyết định táo bạo, thường có đợt lên rất nhanh. Bạn giỏi chộp cơ hội khi người khác còn đắn đo. Vì chi mạnh tay nên dòng tiền dễ lên xuống, một quỹ dự phòng sẽ giúp bạn vững hơn.",
+      "advice": "Giữ một khoản tiết kiệm không đụng tới, dù kèo hấp dẫn cỡ nào.",
+      "short": "Dám làm dám chi nên có đợt lên nhanh; cần quỹ dự phòng để đi vững."
     },
     "tat-ach": {
-      "text": "Bạn có thể lực tốt và sức bền đáng nể, thường làm việc hăng say đến quên giờ. Chính nhịp độ cao ấy là điều cần để ý, vì cơ thể cũng cần thời gian nạp lại năng lượng. Chú ý giữ sức khỏe bằng việc vận động đúng cách và nghỉ ngơi trọn vẹn sau những đợt bận rộn.",
-      "advice": "Khởi động kỹ trước khi tập luyện và đừng xem nhẹ giấc ngủ."
+      "text": "Bạn có thể lực tốt, làm việc hăng tới quên giờ. Chính nhịp độ cao đó cần để ý, vì cơ thể cũng cần thời gian nạp lại. Vận động đúng cách và nghỉ trọn vẹn sau những đợt chạy deadline sẽ giữ sức bạn lâu dài.",
+      "advice": "Khởi động kỹ trước khi tập và đừng xem nhẹ giấc ngủ."
     },
     "thien-di": {
-      "text": "Môi trường bên ngoài là sân khấu để bạn thể hiện sự quả cảm và khả năng xoay xở. Bạn hợp với việc đi xa, lập nghiệp ở nơi mới hoặc những công việc cần di chuyển nhiều. Hãy chuẩn bị kỹ lộ trình, vì bạn thường thích đi ngay hơn là lên kế hoạch.",
-      "advice": "Lập danh sách việc cần chuẩn bị trước mỗi chuyến đi quan trọng."
+      "text": "Bên ngoài là sân khấu để bạn thể hiện sự quả cảm và khả năng xoay xở. Bạn hợp đi xa, lập nghiệp nơi mới hoặc việc phải di chuyển nhiều. Bạn hay thích đi ngay hơn lên kế hoạch, nên chuẩn bị kỹ lộ trình sẽ có lợi.",
+      "advice": "Lập danh sách cần chuẩn bị trước mỗi chuyến đi quan trọng."
     },
     "no-boc": {
-      "text": "Quanh bạn thường là những người năng nổ, có cá tính và thích làm việc nhanh. Bạn dẫn dắt nhóm tốt khi có mục tiêu rõ ràng và mọi người cùng chí hướng. Đôi khi phong cách quyết liệt của bạn khiến người khác ngại góp ý, nên hãy chủ động mở lời.",
-      "advice": "Định kỳ hỏi cộng sự: điều gì mình có thể làm tốt hơn?"
+      "text": "Quanh bạn thường là người năng nổ, có cá tính và làm việc nhanh. Bạn dẫn nhóm tốt khi mục tiêu rõ và mọi người cùng chí hướng. Phong cách quyết liệt đôi khi làm người khác ngại góp ý, nên hãy chủ động mở lời.",
+      "advice": "Định kỳ hỏi đồng đội: mình làm gì để tốt hơn?"
     },
     "quan-loc": {
-      "text": "Sự nghiệp là nơi Thất Sát tỏa sáng: bạn hợp với vai trò mở đường, khởi nghiệp, kỹ thuật, quân sự, thể thao hoặc những ngành cần quyết đoán. Bạn thích thử thách và thường thăng tiến nhờ dám nhận việc khó. Biết kiên nhẫn với những giai đoạn chậm sẽ giúp thành quả bền vững hơn.",
-      "advice": "Chọn một mục tiêu lớn và bám trụ đủ lâu để thấy kết quả."
+      "text": "Công việc là nơi bạn tỏa sáng: hợp vai mở đường, khởi nghiệp, kỹ thuật, thể thao hay những nghề cần quyết đoán. Bạn thích thử thách và thăng tiến nhờ dám nhận việc khó. Kiên nhẫn qua giai đoạn chậm sẽ giúp thành quả bền hơn.",
+      "advice": "Chọn một mục tiêu lớn và bám đủ lâu để thấy kết quả.",
+      "short": "Hợp vai mở đường, dám nhận việc khó; kiên nhẫn qua đoạn chậm sẽ đi xa."
     },
     "dien-trach": {
-      "text": "Chuyện nhà cửa của bạn thường gắn với tự lực: tự mua, tự xây, tự sắp đặt theo ý mình. Bạn có thể đổi chỗ ở vài lần trước khi tìm được nơi thật sự gắn bó. Mỗi lần thay đổi là một lần bạn hiểu rõ hơn mình cần một tổ ấm như thế nào.",
-      "advice": "Cân nhắc kỹ chi phí trước khi chuyển nhà hay sửa sang lớn."
+      "text": "Chuyện nhà của bạn thường gắn với tự lực: tự mua, tự dựng, tự sắp xếp theo ý mình. Bạn có thể đổi chỗ ở vài lần mới tìm được nơi gắn bó. Mỗi lần đổi là một lần bạn hiểu rõ hơn mình cần tổ ấm thế nào.",
+      "advice": "Tính kỹ chi phí trước khi chuyển nhà hay sửa lớn."
     },
     "phuc-duc": {
-      "text": "Bạn được thừa hưởng tinh thần tự lực và ý chí vươn lên từ gia đình. Đời sống nội tâm của bạn sôi nổi, luôn muốn làm điều gì đó có ý nghĩa. Đôi lúc tâm trí khó yên, nên những hoạt động giúp tĩnh lại sẽ là món quà quý cho chính bạn.",
-      "advice": "Thử thiền ngắn hoặc đi bộ một mình để tâm trí được nghỉ ngơi."
+      "text": "Bạn thừa hưởng tinh thần tự lực và ý chí vươn lên từ gia đình. Trong lòng bạn luôn sôi nổi, muốn làm điều gì đó có ý nghĩa. Đôi lúc đầu óc khó yên, nên những việc giúp tĩnh lại là món quà cho chính bạn.",
+      "advice": "Thử đi bộ một mình hoặc thiền ngắn để đầu óc nghỉ."
     },
     "phu-mau": {
-      "text": "Cha mẹ thường là người có bản lĩnh, nghiêm khắc và dạy bạn biết tự đứng trên đôi chân mình. Có thể bạn rời gia đình sớm để học tập hay lập nghiệp. Khoảng cách ấy không làm tình thân phai nhạt nếu bạn chủ động giữ liên lạc.",
-      "advice": "Gọi điện cho cha mẹ đều đặn, dù chỉ vài phút mỗi tuần."
+      "text": "Cha mẹ bạn thường có bản lĩnh, hơi nghiêm và dạy bạn tự đứng trên đôi chân mình. Bạn có thể rời nhà sớm để học hay lập nghiệp. Khoảng cách ấy không làm tình thân nhạt đi nếu bạn chủ động giữ liên lạc.",
+      "advice": "Gọi cho cha mẹ đều đặn, mỗi tuần vài phút cũng được."
     }
   },
   "pha-quan": {
     "menh": {
-      "text": "Bạn là người của sự đổi mới: không ngại phá bỏ cái cũ để xây dựng điều tốt hơn. Sự gan dạ, thẳng thắn và óc sáng tạo giúp bạn mở ra những lối đi người khác không dám thử. Điều cần rèn là sự kiên nhẫn để theo một việc đến khi trọn vẹn.",
-      "advice": "Trước khi bỏ một việc, hãy hoàn thành nốt phần còn dang dở."
+      "text": "Bạn thích đổi mới, không ngại bỏ cái cũ để làm cái tốt hơn. Gan dạ, thẳng thắn và sáng tạo giúp bạn mở ra lối đi người khác chưa dám thử. Điều cần rèn là kiên nhẫn theo một việc đến khi trọn vẹn.",
+      "advice": "Trước khi bỏ một việc, làm nốt phần còn dang dở.",
+      "short": "Thích đổi mới, dám làm khác; cần kiên nhẫn theo việc đến cùng."
     },
     "huynh-de": {
-      "text": "Mối quan hệ với anh chị em của bạn nhiều màu sắc, có lúc rất thân, có lúc mỗi người một ý. Mọi người trong nhà đều có cá tính và thích tự quyết chuyện riêng. Chính sự khác biệt ấy giúp cả nhà học cách tôn trọng nhau.",
-      "advice": "Đừng để bất đồng nhỏ kéo dài, chủ động làm lành trước cũng là bản lĩnh."
+      "text": "Quan hệ với anh chị em của bạn nhiều màu: lúc rất thân, lúc mỗi người một ý. Ai cũng có cá tính và thích tự quyết chuyện riêng. Chính sự khác biệt ấy dạy cả nhà tôn trọng nhau.",
+      "advice": "Bất đồng nhỏ đừng để lâu, chủ động làm lành trước cũng là bản lĩnh."
     },
     "phu-the": {
-      "text": "Bạn yêu bằng sự nồng nhiệt và thích những trải nghiệm mới mẻ cùng người thương. Mối quan hệ của bạn thường có nhiều biến chuyển, mỗi giai đoạn lại giúp hai người trưởng thành hơn. Sự bền chặt đến khi cả hai cùng đổi mới thay vì để thói quen làm nhạt đi.",
-      "advice": "Cùng nhau lên kế hoạch cho một trải nghiệm mới mỗi vài tháng."
+      "text": "Bạn yêu nồng nhiệt và thích thử trải nghiệm mới cùng người thương. Mối quan hệ hay có nhiều đoạn chuyển, mỗi đoạn giúp hai người trưởng thành hơn. Muốn bền, cả hai cùng làm mới mình thay vì để thói quen làm nhạt đi.",
+      "advice": "Cùng nhau lên kế hoạch một trải nghiệm mới mỗi vài tháng.",
+      "short": "Yêu nồng nhiệt, thích làm mới; muốn bền thì cùng nhau đổi mới, đừng để nhạt."
     },
     "tu-tuc": {
-      "text": "Con cái thường nghịch ngợm, sáng tạo và có nhiều ý tưởng khác người. Những đứa trẻ ấy học tốt nhất qua trải nghiệm thực tế hơn là lời dặn. Bạn sẽ thấy vui khi cùng con khám phá thay vì cố giữ con trong khuôn khổ.",
+      "text": "Con bạn thường nghịch ngợm, sáng tạo và nhiều ý tưởng lạ. Bé học tốt nhất qua trải nghiệm thật hơn là qua lời dặn. Cùng con khám phá sẽ vui hơn nhiều so với giữ con trong khuôn.",
       "advice": "Đặt ít quy tắc nhưng rõ ràng, và kiên định với chúng."
     },
     "tai-bach": {
-      "text": "Phá Quân ở Tài Bạch cho thấy dòng tiền năng động: kiếm được nhờ dám làm, dám đổi hướng, nhưng cũng dễ chi cho những ý tưởng mới. Bạn có khả năng gây dựng lại nhanh sau mỗi lần thay đổi. Kỷ luật tài chính là chiếc neo giúp sự táo bạo của bạn sinh lời lâu dài.",
-      "advice": "Ghi chép thu chi hằng tháng để thấy rõ tiền đang đi đâu."
+      "text": "Tiền của bạn năng động: kiếm nhờ dám làm, dám đổi hướng, nhưng cũng dễ chi cho ý tưởng mới. Bạn gây dựng lại khá nhanh sau mỗi lần thay đổi. Kỷ luật tài chính là chiếc neo giúp sự táo bạo sinh lời lâu dài.",
+      "advice": "Ghi thu chi mỗi tháng để thấy tiền đang đi đâu.",
+      "short": "Kiếm nhờ dám đổi hướng, cũng dễ chi cho ý tưởng mới; cần kỷ luật để giữ lại."
     },
     "tat-ach": {
-      "text": "Bạn có sức sống dồi dào và thích những hoạt động mạnh, nhiều vận động. Nhịp sống thất thường, lúc làm dồn dập lúc buông hẳn, là điều nên điều chỉnh. Chú ý giữ sức khỏe bằng thói quen ăn uống đều giờ và nghỉ ngơi có kế hoạch.",
-      "advice": "Giữ một lịch sinh hoạt cơ bản, kể cả trong những tuần bận nhất."
+      "text": "Bạn sức sống dồi dào, thích hoạt động mạnh và nhiều vận động. Nhịp sống thất thường, lúc làm dồn dập lúc buông hẳn, nên chỉnh lại cho đều hơn. Ăn đúng giờ và nghỉ có kế hoạch sẽ giúp bạn giữ sức.",
+      "advice": "Giữ một lịch sinh hoạt cơ bản, kể cả tuần bận nhất."
     },
     "thien-di": {
-      "text": "Ra khỏi vùng quen thuộc, bạn như cá gặp nước: thích nghi nhanh, dám thử và học hỏi rất nhanh. Những chuyến đi hay thay đổi môi trường thường mở ra bước ngoặt tích cực cho bạn. Chỉ cần nhớ chuẩn bị chu đáo để sự hứng khởi không bị cản bởi chuyện nhỏ.",
-      "advice": "Mỗi lần đến nơi mới, hãy tìm một người địa phương để học hỏi."
+      "text": "Ra khỏi vùng quen thuộc, bạn như cá gặp nước: thích nghi nhanh, dám thử, học cũng nhanh. Những chuyến đi hay đổi môi trường thường mở bước ngoặt tốt cho bạn. Chỉ cần chuẩn bị chu đáo để chuyện nhỏ không làm hụt hứng.",
+      "advice": "Đến nơi mới, tìm một người địa phương để học hỏi."
     },
     "no-boc": {
-      "text": "Vòng bạn bè của bạn thay đổi theo từng giai đoạn, luôn có người mới mang đến góc nhìn mới. Bạn thu hút những người thích phiêu lưu và dám nghĩ khác. Để có cộng sự lâu năm, hãy dành thời gian vun đắp những mối quan hệ đã chứng minh được sự tin cậy.",
+      "text": "Vòng bạn bè của bạn đổi theo từng giai đoạn, luôn có người mới mang góc nhìn mới. Bạn thu hút những người thích phiêu lưu và dám nghĩ khác. Muốn có đồng đội lâu năm, hãy dành thời gian giữ những mối quan hệ đã đáng tin.",
       "advice": "Giữ liên lạc với vài người bạn cũ, họ là nền móng của bạn."
     },
     "quan-loc": {
-      "text": "Sự nghiệp của bạn hợp với những lĩnh vực cần cải tổ, sáng tạo, công nghệ, kỹ thuật hoặc khởi nghiệp. Bạn có thể đổi nghề vài lần, và mỗi lần lại mang theo kinh nghiệm quý. Thành công lớn đến khi bạn tìm được lĩnh vực đủ thử thách để gắn bó lâu dài.",
-      "advice": "Trước khi chuyển việc, hãy xác định rõ mình đang chạy đến điều gì."
+      "text": "Bạn hợp lĩnh vực cần cải tổ, sáng tạo, công nghệ, kỹ thuật hoặc tự khởi nghiệp. Có thể bạn nhảy việc vài lần, và lần nào cũng mang theo kinh nghiệm quý. Thành công lớn đến khi bạn tìm được lĩnh vực đủ thử thách để gắn bó lâu.",
+      "advice": "Trước khi nhảy việc, xác định rõ mình đang chạy tới điều gì.",
+      "short": "Hợp việc cần đổi mới, sáng tạo; thành công lớn khi tìm được nghề đủ thử thách."
     },
     "dien-trach": {
-      "text": "Bạn thích làm mới không gian sống, thường sửa sang, bày biện lại hoặc chuyển đến nơi hợp hơn. Nhà cửa có thể trải qua vài lần thay đổi trước khi ổn định. Óc sáng tạo của bạn biến mỗi nơi ở thành một không gian rất riêng.",
+      "text": "Bạn thích làm mới không gian sống: sửa sang, bày biện lại hoặc dọn đến nơi hợp hơn. Nhà có thể đổi vài lần trước khi ổn định. Óc sáng tạo biến chỗ nào bạn ở cũng thành không gian rất riêng.",
       "advice": "Lập ngân sách rõ ràng trước mỗi lần cải tạo nhà."
     },
     "phuc-duc": {
-      "text": "Bạn có tâm hồn khoáng đạt, thích khám phá và không chịu bó mình trong lối mòn. Phúc phần của bạn nằm ở khả năng tự làm mới bản thân sau mỗi giai đoạn khó. Hãy dành chỗ cho sự tĩnh lặng để những ý tưởng lớn kịp lắng xuống thành hành động.",
-      "advice": "Dành một buổi mỗi tuần không lịch trình, chỉ để nghỉ và nghĩ."
+      "text": "Bạn có tâm hồn khoáng đạt, thích khám phá và không chịu bó trong lối mòn. Điểm mạnh là khả năng làm mới bản thân sau mỗi giai đoạn khó. Hãy chừa chỗ cho yên tĩnh để ý tưởng lớn kịp lắng thành hành động.",
+      "advice": "Dành một buổi cuối tuần không lịch trình, chỉ nghỉ và nghĩ."
     },
     "phu-mau": {
-      "text": "Mối quan hệ với cha mẹ có thể có những quan điểm khác biệt, nhất là về cách sống và lựa chọn nghề nghiệp. Đó là sự khác biệt thế hệ tự nhiên, và cũng là cơ hội để hai bên học hỏi lẫn nhau. Khi bạn chứng minh bằng kết quả, cha mẹ sẽ dần tin và ủng hộ.",
-      "advice": "Chia sẻ kế hoạch của bạn sớm với cha mẹ thay vì để họ bất ngờ."
+      "text": "Bạn và cha mẹ đôi khi khác quan điểm, nhất là chuyện cách sống và chọn nghề. Đó là khác biệt thế hệ rất bình thường, cũng là dịp hai bên học nhau. Khi bạn chứng minh bằng kết quả, cha mẹ sẽ dần tin và ủng hộ.",
+      "advice": "Chia sẻ kế hoạch với cha mẹ sớm, đừng để họ bất ngờ."
     }
   }
 }

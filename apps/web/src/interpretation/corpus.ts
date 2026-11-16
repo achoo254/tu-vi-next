@@ -19,11 +19,14 @@ const StarsSchema = z.record(
   z.string(),
   z.strictObject({
     name: text,
+    /** A short personality label ("Leader điềm tĩnh"), shown on the result card and the shared images. */
+    label: text,
     essence: text,
     brightness: z.strictObject({ mieu: text, vuong: text, dac: text, loi: text, binh: text, bat: text, ham: text }),
   }),
 );
-const StarInPalaceSchema = z.record(z.string(), z.record(z.string(), z.strictObject({ text, advice: text })));
+/** `short`: one plain sentence, written for the palaces of the "Đọc nhanh" cards (QUICK_READING_PALACES). */
+const StarInPalaceSchema = z.record(z.string(), z.record(z.string(), z.strictObject({ text, advice: text, short: z.optional(text) })));
 const TuHoaSchema = z.record(z.string(), z.strictObject({ name: text, essence: text, palaces: z.record(z.string(), text) }));
 const CucSchema = z.record(z.string(), z.strictObject({ name: text, element: text, number: z.int(), text }));
 
@@ -33,12 +36,17 @@ export function nameKey(name: string): string {
 }
 
 export interface StarReading {
+  /** The star as a personality, in a few words. */
+  label: string;
   /** What the star stands for. */
   essence: string;
   /** How it shows at its brightness; null when the chart gives none. */
   brightness: string | null;
-  /** The star in this palace, with one piece of advice; null for a palace name the corpus does not know. */
-  inPalace: { text: string; advice: string } | null;
+  /**
+   * The star in this palace, with one piece of advice and, for the quick-reading palaces, one short sentence; null
+   * for a palace name the corpus does not know.
+   */
+  inPalace: { text: string; advice: string; short?: string } | null;
 }
 
 export interface MutagenReading {
@@ -81,6 +89,7 @@ export function buildInterpretation(): Interpretation {
       if (!star) return null;
       const key = palaceKey(palaceName);
       return {
+        label: star.label,
         essence: star.essence,
         brightness: brightness ? star.brightness[brightness] : null,
         inPalace: key === undefined ? null : (starInPalace[star.key]?.[key] ?? null),
