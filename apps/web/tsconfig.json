@@ -6,5 +6,5 @@
     "allowImportingTsExtensions": true,
     "types": ["vite/client"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "vite-brand.ts", "vite-year-pages.ts", "prerender.ts", "vitest.config.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "vite-brand.ts", "vite-year-pages.ts", "vite-static-pages.ts", "vite-static-pages.test.ts", "prerender.ts", "vitest.config.ts"]
 }
