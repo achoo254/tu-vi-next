@@ -11,7 +11,7 @@ import { z } from 'zod';
 import type { ServerConfig } from '../config';
 import type { Db } from '../db/client';
 import type { Discovery, IdpMetadata } from './idp-metadata';
-import { codeChallenge, newLoginState, openState, profileFromUserinfo, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
+import { codeChallenge, forwardedUtm, newLoginState, openState, profileFromUserinfo, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
 import { clearSessionCookie, readCookie, readSessionToken, setSessionCookie } from './session-cookie';
 import { safeErrorText } from '../log-error';
 import {
@@ -114,6 +114,8 @@ export function authRoutes({ config, db, idp, now }: AuthRoutesOptions): Router 
         code_challenge_method: 'S256',
         ui_locales: lang,
         ...(signUp ? { prompt: 'create' } : {}),
+        // Where the visitor came from: recorded by the IdP if this flow makes an account.
+        ...forwardedUtm(req.query),
       }).toString();
       res.redirect(url.href);
     } catch (error) {

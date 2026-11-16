@@ -30,6 +30,25 @@ export function safeReturnPath(value: unknown): string {
   return value.length <= 200 ? value : '/';
 }
 
+/** The UTM tags the IdP records on an account made in a sign-up flow (auth-next integration guide). */
+const UTM_TAGS = ['utm_source', 'utm_medium', 'utm_campaign'] as const;
+/** Longest value passed on; the IdP lowercases, maps other characters to `_` and cuts to 64 itself. */
+const UTM_MAX_LENGTH = 200;
+
+/**
+ * The UTM tags of a `/auth/login` query to pass on to the authorization request: the first value of each (the IdP
+ * refuses a repeated parameter), non-empty and not absurdly long. The IdP normalises the value ("FB Ads" is "fb_ads").
+ */
+export function forwardedUtm(query: Record<string, unknown>): Record<string, string> {
+  const tags: Record<string, string> = {};
+  for (const tag of UTM_TAGS) {
+    const raw = query[tag];
+    const first: unknown = Array.isArray(raw) ? raw[0] : raw;
+    if (typeof first === 'string' && first.trim() !== '' && first.length <= UTM_MAX_LENGTH) tags[tag] = first;
+  }
+  return tags;
+}
+
 export function newLoginState(returnTo: string, now = Date.now()): LoginState {
   return {
     state: b64url(randomBytes(16)),

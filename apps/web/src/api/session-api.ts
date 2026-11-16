@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as z from 'zod/mini';
 import { apiFetch } from './api-client';
+import { landingUtm } from './landing-utm';
 
 /** The signed-in account as the IdP named it at the latest sign-in; any field may be null. */
 const SessionUserSchema = z.object({ name: z.nullable(z.string()), email: z.nullable(z.string()), picture: z.nullable(z.string()) });
@@ -37,6 +38,8 @@ export function loginReturnPath(search: string): string {
 function authLoginHref(locale: string, returnTo: string, signUp: boolean): string {
   const query = new URLSearchParams({ return: safeReturnPath(returnTo), lang: locale });
   if (signUp) query.set('signup', '1');
+  // Where the visit came from, so an account made here counts for that source.
+  for (const [tag, value] of landingUtm()) query.set(tag, value);
   return `/auth/login?${query.toString()}`;
 }
 

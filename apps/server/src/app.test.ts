@@ -122,6 +122,17 @@ describe('signed in through the hoandat.com account', () => {
     expect(location(callback)).toBe('/saved');
   });
 
+  it('passes the first value of each UTM tag on to the IdP (which normalises it), and drops empty ones', async () => {
+    const start = await fetch(`${server.origin}/auth/login?signup=1&utm_source=fb&utm_source=tiktok&utm_campaign=Tet%202027&utm_medium=&utm_term=x`, { redirect: 'manual' });
+    const authorize = new URL(location(start));
+    expect(authorize.searchParams.getAll('utm_source')).toEqual(['fb']);
+    expect(authorize.searchParams.getAll('utm_campaign')).toEqual(['Tet 2027']);
+    expect(authorize.searchParams.has('utm_medium')).toBe(false);
+    expect(authorize.searchParams.has('utm_term')).toBe(false);
+    const plain = new URL(location(await fetch(`${server.origin}/auth/login`, { redirect: 'manual' })));
+    expect([...plain.searchParams.keys()].some((key) => key.startsWith('utm_'))).toBe(false);
+  });
+
   it('rejects a callback without the login cookie or with another state', async () => {
     const start = await fetch(`${server.origin}/auth/login`, { redirect: 'manual' });
     const consent = await fetch(location(start), { redirect: 'manual' });

@@ -10,6 +10,7 @@ import '@achoo254/app-shell/app-shell.css';
 import './ui/app.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { rememberLandingUtm } from './api/landing-utm';
 import { App, type PageModules, loadPageModules } from './app';
 import { I18nProvider } from './i18n/i18n';
 
@@ -34,6 +35,8 @@ async function start(root: HTMLElement): Promise<void> {
     </StrictMode>,
   );
 }
+
+rememberLandingUtm(window.location.search);
 
 const root = document.getElementById('root');
 if (!root) throw new Error('#root missing from index.html');
