@@ -1,11 +1,13 @@
 import type { Chart } from '@tuvi/chart';
 import { type ReactNode, useEffect, useState } from 'react';
-import { APP_HOST, CLIP_HOST, CLIP_URL } from '../brand';
+import { APP_HOST, CLIP_HOST, CLIP_URL, inviteUrl } from '../brand';
 import { useI18n } from '../i18n/i18n';
 import { useInterpretation } from '../interpretation/use-interpretation';
 import { zodiacArt } from './chart-art';
 import { chartTitle } from './chart-facts';
 import { chartSummary, chartVideoUrl } from './chart-video-link';
+import { InviteFriendsButton } from './invite-friends';
+import { Term } from './term';
 
 type StoryModule = typeof import('./story-card');
 type ExportModule = typeof import('./export-png');
@@ -21,9 +23,10 @@ function loadStory(): Promise<[StoryModule, ExportModule]> {
 }
 
 /**
- * The chart at a glance, above the board: the con giáp, the star of Mệnh, the cục and one sentence of reading,
- * with the two ways to show it off: the story card (shared, or downloaded where sharing files is not offered) and
- * the chart video on Clip.
+ * The chart at a glance, first after the form: the con giáp, the personality label and one sentence of reading, with
+ * the ways to show it off: the story card (shared, or downloaded where sharing files is not offered), an invite link
+ * for friends and the chart video on Clip. The star of Mệnh, the cục and how the video link works sit in a closed
+ * "details" part, for readers who know Tử Vi.
  */
 export function ChartSummaryCard({ chart }: { chart: Chart }): ReactNode {
   const { t } = useI18n();
@@ -43,7 +46,7 @@ export function ChartSummaryCard({ chart }: { chart: Chart }): ReactNode {
     try {
       const [{ renderStoryPng }, { shareOrDownload, exportFileName }] = await loadStory();
       const blob = await renderStoryPng(summary, chart.input.name, t);
-      await shareOrDownload(blob, exportFileName(chart).replace(/\.png$/, '-story.png'), chartTitle(chart, t), true);
+      await shareOrDownload(blob, exportFileName(chart).replace(/\.png$/, '-story.png'), chartTitle(chart, t), true, inviteUrl('story'));
     } catch {
       setFailed(true);
     } finally {
@@ -55,23 +58,39 @@ export function ChartSummaryCard({ chart }: { chart: Chart }): ReactNode {
     <section className="chart-summary" aria-labelledby="chart-summary-title" data-id="chart-summary">
       {art && <img className="chart-summary-art" src={art} width={128} height={128} alt="" />}
       <div className="chart-summary-text">
-        <h2 id="chart-summary-title" className="chart-summary-title">
-          {t('story.animal', { animal: summary.animal })} · {t('story.soul', { stars: summary.stars })}
+        <p className="chart-summary-kicker">{t('story.animal', { animal: summary.animal })}</p>
+        {/* The label is the line people remember and share; it shows once the readings load. */}
+        <h2 id="chart-summary-title" className="chart-summary-title" data-id="chart-label">
+          {summary.label ?? t('summary.title')}
         </h2>
-        <p className="chart-summary-cuc">{summary.cuc}</p>
-        {summary.reading && <p className="chart-summary-reading">{summary.reading}</p>}
-        <p className="chart-summary-hint">{t('summary.hint')}</p>
+        {summary.reading && (
+          <p className="chart-summary-reading" lang="vi">
+            {summary.reading}
+          </p>
+        )}
         <div className="chart-summary-actions">
           <button type="button" className="btn btn-primary" onClick={() => void shareStory()} disabled={busy} data-id="chart-story">
             {busy ? t('actions.exporting') : t('story.share')}
           </button>
-          <a className="btn btn-secondary" href={chartVideoUrl(CLIP_URL, chart, interpretation, t, APP_HOST)} target="_blank" rel="noopener" aria-describedby="chart-video-note" data-id="chart-video">
+          <InviteFriendsButton label={summary.label} />
+          <a className="btn btn-secondary" href={chartVideoUrl(CLIP_URL, chart, interpretation, t, APP_HOST)} target="_blank" rel="noopener" data-id="chart-video">
             {t('actions.video')}
           </a>
         </div>
-        <p id="chart-video-note" className="chart-video-note" data-id="chart-video-note">
-          {t('actions.videoNote', { clip: CLIP_HOST })}
-        </p>
+        <details className="chart-summary-details" data-id="chart-summary-details">
+          <summary>{t('summary.details')}</summary>
+          <p>
+            {t('summary.soulLabel')}{' '}
+            <Term gloss={summary.mainStar ? t('gloss.soul') : t('gloss.noMajorStar')} lang="vi">{summary.stars}</Term>
+          </p>
+          <p>
+            {t('summary.cucLabel')}{' '}
+            <Term gloss={t('gloss.cuc')} lang="vi">{summary.cuc}</Term>
+          </p>
+          <p className="chart-video-note" data-id="chart-video-note">
+            {t('actions.videoNote', { clip: CLIP_HOST })}
+          </p>
+        </details>
         {failed && (
           <p className="alert alert-error" role="alert">
             {t('actions.error.export')}

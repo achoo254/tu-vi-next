@@ -1,6 +1,6 @@
 /**
- * The story card: a 1080 × 1920 PNG of the chart at a glance (con giáp, the star of Mệnh, the cục, one sentence of
- * reading and the site), made for stories and status posts. Drawn on a canvas in the browser over the AI sky paper,
+ * The story card: a 1080 × 1920 PNG of the chart at a glance (con giáp, the personality label, the star of Mệnh, one
+ * sentence of reading and the site; the cục stands in for the label until the readings load), made for stories and status posts. Drawn on a canvas in the browser over the AI sky paper,
  * in the export colours (--c-export-*, always light). At most four lines of reading keep everything above y = 1640:
  * the bottom of a story holds its reply bar and buttons.
  */
@@ -40,12 +40,14 @@ export function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w
 }
 
 /** The card's lines, in order: what the panel says (tested without a canvas). */
-export function storyLines(summary: ChartSummary, name: string, t: Translate): { tag: string; animal: string; soul: string; cuc: string; reading: string; cta: string } {
+export function storyLines(summary: ChartSummary, name: string, t: Translate): { tag: string; animal: string; headline: string; detail: string; reading: string; cta: string } {
+  const soul = t('story.soul', { stars: summary.stars });
   return {
     tag: name ? t('story.tagNamed', { name }) : t('story.tag'),
     animal: t('story.animal', { animal: summary.animal }),
-    soul: t('story.soul', { stars: summary.stars }),
-    cuc: summary.cuc,
+    // The label is the line people share for; the star of Mệnh says where it comes from.
+    headline: summary.label ?? soul,
+    detail: summary.label ? soul : summary.cuc,
     reading: summary.reading ?? '',
     cta: t('story.cta', { host: APP_HOST }),
   };
@@ -96,11 +98,11 @@ export function drawStory(
   y += 88;
   ctx.fillStyle = palette.soul;
   ctx.font = `800 58px ${SANS}`;
-  ctx.fillText(lines.soul, STORY_WIDTH / 2, y, PANEL.width - 2 * PANEL.pad);
+  ctx.fillText(lines.headline, STORY_WIDTH / 2, y, PANEL.width - 2 * PANEL.pad);
   y += 64;
   ctx.fillStyle = palette.muted;
   ctx.font = `600 40px ${SANS}`;
-  ctx.fillText(lines.cuc, STORY_WIDTH / 2, y, PANEL.width - 2 * PANEL.pad);
+  ctx.fillText(lines.detail, STORY_WIDTH / 2, y, PANEL.width - 2 * PANEL.pad);
   y += 24;
   ctx.fillStyle = palette.text;
   ctx.font = `600 44px ${SANS}`;

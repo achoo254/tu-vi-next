@@ -20,6 +20,9 @@ async function castChart(page: Page, birth: Birth): Promise<void> {
   await page.fill('[data-id=birth-form-time]', birth.time);
   await page.click('[data-id=birth-form-submit]');
   await expect(page.locator('[data-id=chart-board] .palace')).toHaveCount(12);
+  // The board is closed for readers who do not know Tử Vi; these tests read it.
+  await page.locator('[data-id=chart-full] > summary').click();
+  await expect(page.locator('[data-id=chart-board]')).toBeVisible();
 }
 
 /** Width and height from a PNG's IHDR chunk. */
@@ -35,6 +38,9 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
   });
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('trong 10 giây');
+  // The form is on the first screen, and nothing asks a guest to sign up before a chart (the header aside).
+  await expect(page.locator('[data-id=birth-form-submit]')).toBeInViewport();
+  await expect(page.locator('main a[href*="signup=1"]')).toHaveCount(0);
   // The signed-out welcome illustration loads (a real decoded image, not a broken link).
   await expect.poll(() => page.locator('[data-id=intro-hero]').evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
   // 25 March 1985 is in Vietnam's leap 2nd month (China has no leap month that year).
@@ -45,6 +51,10 @@ test('signed out: cast a chart in the Vietnamese calendar, read a star, export t
   await expect(centre).toContainText('ngày 5 tháng 2 nhuận năm Ất Sửu');
   await expect(centre).toContainText('Mùi (13:00–14:59)');
 
+  // The quick read and the label come first; then one invite to keep the chart.
+  await expect(page.locator('[data-id=quick-reading] li')).toHaveCount(4);
+  await expect(page.locator('[data-id=chart-label]')).not.toHaveText('Lá số của bạn tóm gọn');
+  await expect(page.locator('main a[href*="signup=1"]')).toHaveCount(1);
   // The chart in plain words: 12 palaces under their everyday names, Mệnh open; the board's key (collapsed) above it.
   const plain = page.locator('[data-id=plain-reading]');
   await expect(plain.locator('details')).toHaveCount(12);
@@ -129,7 +139,7 @@ test('signed in: save a chart, reload, open it again, delete it', async ({ page 
   await expect(page.locator('[data-id=account-menu]')).toContainText('e2e@example.com');
   await page.click('[data-id=account-menu-sign-out]');
   await expect(page.locator('[data-id=public-sign-in]')).toBeVisible();
-  await expect(page.locator('[data-id=sign-in-card]')).toBeVisible();
+  await expect(page.locator('[data-id=birth-form]')).toBeVisible();
 });
 
 test('layout: own header and footer, legal pages in both languages, the language kept across pages', async ({ page }) => {

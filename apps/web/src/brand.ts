@@ -5,8 +5,20 @@ import brandConfig from '../../../brand.config.json';
 /** The product's name, colours and hosts: read them from here, never hard-code them. */
 export const brand = defineBrand(brandConfig);
 
+/** The production origin, e.g. "https://tuvi.hoandat.com". */
+export const APP_ORIGIN = primaryOrigin(brand);
+
 /** The production host, printed on exported images, e.g. "tuvi.hoandat.com". */
-export const APP_HOST = new URL(primaryOrigin(brand)).host;
+export const APP_HOST = new URL(APP_ORIGIN).host;
+
+/** Where a shared chart invites friends: home, tagged so a sign-up from it counts as a share (`utm_source=tuvi_share`). */
+export type InviteMedium = 'story' | 'image' | 'link';
+export function inviteUrl(medium: InviteMedium): string {
+  const url = new URL('/', APP_ORIGIN);
+  url.searchParams.set('utm_source', 'tuvi_share');
+  url.searchParams.set('utm_medium', medium);
+  return url.href;
+}
 
 /** The ecosystem's home page (the footer's "An app from …" link). */
 export const ECOSYSTEM_URL = `https://${brand.primaryTenant.domain}`;

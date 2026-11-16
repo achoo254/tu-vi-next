@@ -1,8 +1,11 @@
 import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type ReactNode, useEffect, useState } from 'react';
 import { ApiError } from '../api/api-client';
+import { inviteUrl } from '../brand';
 import { useI18n } from '../i18n/i18n';
+import { useInterpretation } from '../interpretation/use-interpretation';
 import { chartTitle } from './chart-facts';
+import { personalityLabel } from './quick-reading';
 
 type ExportModule = typeof import('./export-png');
 
@@ -36,17 +39,19 @@ interface ChartActionsProps {
   signedIn: boolean;
   /** The account already keeps this chart: the save button says so instead of saving it twice. */
   alreadySaved: boolean;
-  /** Where a signed-out visitor signs up to save it (back here, saving it); undefined when sign-in is unavailable. */
-  signUpToSaveHref: string | undefined;
   /** Saves the chart's input; resolves when it is stored. */
   onSave(): Promise<void>;
 }
 
 type SaveState = 'idle' | 'saving' | 'saved';
 
-/** Save (signed in), download the full chart as a PNG, share it (Web Share API). */
-export function ChartActions({ chart, horoscope, signedIn, alreadySaved, signUpToSaveHref, onSave }: ChartActionsProps): ReactNode {
+/**
+ * Save (signed in), download the full chart as a PNG, share it (Web Share API, with the invite link). A guest is
+ * invited to sign up once, below the quick reading, so there is no sign-up button here.
+ */
+export function ChartActions({ chart, horoscope, signedIn, alreadySaved, onSave }: ChartActionsProps): ReactNode {
   const { t } = useI18n();
+  const interpretation = useInterpretation();
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const [exporting, setExporting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -75,8 +80,8 @@ export function ChartActions({ chart, horoscope, signedIn, alreadySaved, signUpT
     setExporting(true);
     try {
       const { renderChartPng, shareOrDownload, exportFileName } = await loadExport();
-      const blob = await renderChartPng(chart, t, horoscope);
-      await shareOrDownload(blob, exportFileName(chart), chartTitle(chart, t), share);
+      const blob = await renderChartPng(chart, t, horoscope, personalityLabel(chart, interpretation));
+      await shareOrDownload(blob, exportFileName(chart), chartTitle(chart, t), share, inviteUrl('image'));
     } catch {
       setMessage(t('actions.error.export'));
     } finally {
@@ -86,16 +91,10 @@ export function ChartActions({ chart, horoscope, signedIn, alreadySaved, signUpT
 
   return (
     <div className="chart-actions" data-id="chart-actions">
-      {signedIn ? (
+      {signedIn && (
         <button type="button" className="btn btn-primary" onClick={() => void save()} disabled={shownSaveState !== 'idle'} data-id="chart-save">
           {shownSaveState === 'saving' ? t('actions.saving') : shownSaveState === 'saved' ? t('actions.saved') : t('actions.save')}
         </button>
-      ) : (
-        signUpToSaveHref !== undefined && (
-          <a className="btn btn-secondary" href={signUpToSaveHref} data-id="chart-sign-up-to-save">
-            {t('actions.signUpToSave')}
-          </a>
-        )
       )}
       <button type="button" className="btn btn-secondary" onClick={() => void exportImage(false)} disabled={exporting} data-id="chart-export">
         {exporting ? t('actions.exporting') : t('actions.export')}

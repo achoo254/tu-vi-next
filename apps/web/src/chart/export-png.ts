@@ -307,6 +307,7 @@ export function drawChart(
   art: ExportArt = NO_ART,
   palette: Palette = readPalette(),
   horoscope: YearHoroscope | null = null,
+  label: string | null = null,
 ): void {
   ctx.fillStyle = palette.bg;
   ctx.fillRect(0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
@@ -315,7 +316,15 @@ export function drawChart(
   ctx.textAlign = 'left';
   ctx.fillStyle = palette.text;
   ctx.font = `700 40px ${SANS}`;
-  ctx.fillText(chartTitle(chart, t), MARGIN, 52, BOARD_SIZE);
+  // The personality label shares the title's line, on the right, when there is one.
+  ctx.fillText(chartTitle(chart, t), MARGIN, 52, label ? BOARD_SIZE * 0.6 : BOARD_SIZE);
+  if (label) {
+    ctx.textAlign = 'right';
+    ctx.font = `800 32px ${SANS}`;
+    ctx.fillStyle = palette.soul;
+    ctx.fillText(label, EXPORT_WIDTH - MARGIN, 58, BOARD_SIZE * 0.38);
+    ctx.textAlign = 'left';
+  }
   ctx.font = `500 22px ${SANS}`;
   ctx.fillStyle = palette.muted;
   ctx.fillText(exportSubtitle(chart, t, horoscope), MARGIN, 108, BOARD_SIZE);
@@ -422,8 +431,8 @@ async function loadArt(chart: Chart, horoscope: YearHoroscope | null): Promise<E
   return { sky, frame, medallion, yearAnimal, element, marks: present(marks), stars: present(stars), palaces: present(palaces), mutagens: present(mutagens) };
 }
 
-/** The PNG file of the chart (with the lưu niên, if any). Waits for the web fonts and the art so the canvas is complete. */
-export async function renderChartPng(chart: Chart, t: Translate, horoscope: YearHoroscope | null = null): Promise<Blob> {
+/** The PNG file of the chart (with the lưu niên and the personality label, if any). Waits for the web fonts and the art so the canvas is complete. */
+export async function renderChartPng(chart: Chart, t: Translate, horoscope: YearHoroscope | null = null, label: string | null = null): Promise<Blob> {
   const [art] = await Promise.all([
     loadArt(chart, horoscope),
     ...[`700 40px Inter`, `500 18px Inter`, `600 18px Inter`, `400 14px Inter`].map((font) => document.fonts.load(font)),
@@ -433,7 +442,7 @@ export async function renderChartPng(chart: Chart, t: Translate, horoscope: Year
   canvas.height = EXPORT_HEIGHT;
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('canvas 2d context unavailable');
-  drawChart(ctx, chart, t, art, readPalette(), horoscope);
+  drawChart(ctx, chart, t, art, readPalette(), horoscope, label);
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('canvas.toBlob returned nothing'))), 'image/png');
   });
@@ -452,12 +461,14 @@ export function exportFileName(chart: Chart): string {
   return `la-so-${base || `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`}.png`;
 }
 
-/** Shares the image through the Web Share API when the browser can share files; downloads it otherwise. */
-export async function shareOrDownload(blob: Blob, fileName: string, title: string, preferShare: boolean): Promise<'shared' | 'downloaded'> {
+/** Shares the image (and `inviteLink`) through the Web Share API when the browser can share files; downloads it otherwise. */
+export async function shareOrDownload(blob: Blob, fileName: string, title: string, preferShare: boolean, inviteLink?: string): Promise<'shared' | 'downloaded'> {
   const file = new File([blob], fileName, { type: 'image/png' });
   if (preferShare && typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
     try {
-      await navigator.share({ files: [file], title });
+      // The invite link rides along only where the browser says it can share it with the image.
+      const withLink = inviteLink !== undefined && navigator.canShare({ files: [file], url: inviteLink });
+      await navigator.share(withLink ? { files: [file], title, url: inviteLink } : { files: [file], title });
       return 'shared';
     } catch (error) {
       // The person closed the share sheet: nothing more to do.

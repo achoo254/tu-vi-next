@@ -660,36 +660,48 @@ button {
   gap: var(--space-2);
 }
 
-/* ---------- home: welcome, sign-in card, features ---------- */
+/* ---------- home: welcome and form on the first screen, sign-in card, the one-line feature list ---------- */
 .home {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-6);
 }
+/* Phones: title, form, then the rest. Wide screens: title and the rest on the left, the form beside them. */
 .hero {
   display: grid;
-  gap: var(--space-5);
+  grid-template-areas: "head" "aside" "extra";
+  gap: var(--space-4);
   align-items: start;
 }
 @media (min-width: 900px) {
-  .hero-split {
-    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
-    gap: var(--space-7);
-  }
-  .hero-aside {
-    position: sticky;
-    top: calc(var(--topbar-h) + var(--space-5));
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+    grid-template-areas: "head aside" "extra aside";
+    grid-template-rows: auto 1fr;
+    column-gap: var(--space-7);
   }
 }
-.hero-intro {
+.hero-head {
+  grid-area: head;
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.hero-aside {
+  grid-area: aside;
+  min-width: 0;
+}
+.hero-extra {
+  grid-area: extra;
   display: grid;
   gap: var(--space-3);
+  align-content: start;
   min-width: 0;
 }
 .hero-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(38px, 6.4vw, 64px);
+  font-size: clamp(32px, 5.6vw, 60px);
   line-height: 1.04;
   letter-spacing: -0.005em;
   color: var(--c-text);
@@ -697,7 +709,7 @@ button {
 }
 .hero-lede {
   max-width: 60ch;
-  font-size: 18px;
+  font-size: 17px;
   color: var(--c-text-muted);
   text-wrap: pretty;
 }
@@ -728,11 +740,10 @@ button {
 .intro-why p {
   max-width: 60ch;
 }
-/* The zodiac wheel in a gold-rimmed window on the sky; a short banner, so the form stays near the top. */
+/* The zodiac wheel in a gold-rimmed window on the sky; a small banner beside (or under) the form. */
 .intro-hero-frame {
   position: relative;
-  max-width: 640px;
-  margin-top: var(--space-2);
+  max-width: 460px;
   padding: 4px;
   border-radius: var(--radius-xl);
   background: linear-gradient(
@@ -795,49 +806,9 @@ button {
   text-align: left;
 }
 
-.features {
-  display: grid;
-  gap: var(--space-5);
-}
-.feature-grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-  gap: var(--space-4);
-}
-.feature {
-  display: grid;
-  align-content: start;
-  gap: var(--space-2);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
-  transition:
-    transform var(--dur-base) var(--ease-standard),
-    border-color var(--dur-base) var(--ease-standard);
-}
-.feature:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--c-primary) 45%, var(--c-border));
-}
-.feature-title {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 1.15;
-}
-.feature-title::before {
-  content: "✦" / "";
-  flex: none;
+.features-line {
+  max-width: 80ch;
   font-size: 14px;
-  color: var(--c-primary);
-}
-.feature-text {
-  font-size: 15px;
   color: var(--c-text-muted);
 }
 
@@ -874,15 +845,98 @@ button {
   line-height: 1.1;
   color: var(--c-primary);
 }
-.chart-summary-cuc {
+.chart-summary-kicker {
   font-weight: 700;
+  color: var(--c-text-muted);
 }
 .chart-summary-reading {
   font-size: 17px;
   line-height: 1.5;
 }
-.chart-summary-hint {
+.chart-summary-details {
+  display: grid;
+  gap: var(--space-2);
   font-size: 14px;
+}
+.chart-summary-details summary,
+.chart-full-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 600;
+  color: var(--c-primary);
+  cursor: pointer;
+}
+.chart-summary-details p {
+  margin: 0;
+}
+
+/* "Đọc nhanh": four short cards under the result card */
+.quick-reading {
+  display: grid;
+  gap: var(--space-3);
+}
+.quick-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  gap: var(--space-3);
+}
+.quick-card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+}
+.quick-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--c-primary);
+}
+
+/* the full board, closed until asked for */
+.chart-full {
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-3);
+}
+.chart-full[open] {
+  padding-bottom: var(--space-3);
+}
+.chart-full-body {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* a term of the art: tap for a one-line gloss */
+.term-button {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+.term-button:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+}
+.term-gloss[hidden] {
+  display: none;
+}
+.term-gloss {
+  display: block;
+  margin: var(--space-1) 0;
+  padding: var(--space-2) var(--space-3);
+  border-left: 2px solid var(--c-primary);
+  font-size: 13px;
+  font-weight: 400;
   color: var(--c-text-muted);
 }
 .chart-summary-actions {
@@ -925,7 +979,7 @@ button {
   align-items: start;
 }
 @media (min-width: 1100px) {
-  .home-grid {
+  .home-grid-side {
     grid-template-columns: 340px minmax(0, 1fr);
   }
 }
@@ -1303,7 +1357,7 @@ button {
   color: var(--c-primary);
 }
 .plain-palace-terms {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--c-text-muted);
 }
 .plain-palace-body {
@@ -1774,7 +1828,6 @@ button {
     animation: none !important;
     scroll-behavior: auto !important;
   }
-  .feature:hover,
   .sign-card:hover,
   .btn-primary:hover:not(:disabled),
   .pill-gold:hover:not(:disabled) {

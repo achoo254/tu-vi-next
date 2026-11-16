@@ -80,14 +80,17 @@ describe('chartVideoLink', () => {
     for (const part of ['1987', '23', chart.canChi.year, chart.canChi.day, chart.canChi.hour]) expect(all).not.toContain(part);
   });
 
-  it('sends no star (on purpose) and the cục reading when Mệnh has no major star', () => {
+  it('sends no star (on purpose) and reads the palace opposite when Mệnh has no major star', () => {
     const empty = CHARTS.find((c) => c.palaces.find((p) => p.isSoulPalace)?.majorStars.length === 0);
     if (!empty) throw new Error('no chart without a major star in Mệnh among the samples');
     const query = chartVideoQuery(empty, reading, t, 'tuvi.example');
     expect(query.has('star')).toBe(true);
     expect(query.get('star')).toBe('');
     expect(query.get('line1')).toContain('vô chính diệu');
-    expect(query.get('reading')).toBe(clampText(firstSentence(reading.cuc(empty.fiveElementsClass) ?? ''), CLIP_LIMITS.reading));
+    const opposite = empty.palaces.find((p) => p.branchIndex === ((empty.palaces.find((q) => q.isSoulPalace)?.branchIndex ?? 0) + 6) % 12)?.majorStars[0];
+    const text = opposite ? reading.star(opposite.name, opposite.brightness, 'Mệnh')?.inPalace?.text : undefined;
+    expect(text).toBeTruthy();
+    expect(query.get('reading')).toBe(clampText(firstSentence(text ?? ''), CLIP_LIMITS.reading));
   });
 
   it('leaves the name out when the chart has none, and stands in for the reading before the corpus loads', () => {
@@ -104,7 +107,7 @@ describe('chartVideoLink', () => {
     expect(fragment.get('name')).toBe('Lan & <b>');
     expect(fragment.get('line1')).toBe('Tuổi Mùi · Mệnh Thái Dương, Thiên Lương');
     expect(fragment.get('line2')).toBe('Mộc Tam Cục');
-    expect(fragment.get('reading')).toMatch(/^Như mặt trời/);
+    expect(fragment.get('reading')).toMatch(/^Bạn nhiệt thành/);
   });
 });
 

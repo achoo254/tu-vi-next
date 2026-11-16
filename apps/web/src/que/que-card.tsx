@@ -67,7 +67,7 @@ interface QueCardProps {
   engine: ChartEngineState;
 }
 
-/** "Quẻ hôm nay": one quẻ a day for a saved chart, with a streak, for signed-in accounts; an invitation for guests. */
+/** "Quẻ hôm nay": one quẻ a day for a saved chart, with a streak, for signed-in accounts; for guests, the invitation to keep the chart and get it. */
 export function QueCard({ charts, signedIn, signUpHref, engine }: QueCardProps): ReactNode {
   const { t } = useI18n();
   const ref = useRef<HTMLElement>(null);
@@ -80,7 +80,7 @@ export function QueCard({ charts, signedIn, signUpHref, engine }: QueCardProps):
   return (
     <section ref={ref} className="card que-card" id={QUE_ANCHOR} aria-labelledby="que-title" data-id="que-today">
       <h2 id="que-title" className="card-title">
-        {t('que.title')}
+        {signedIn ? t('que.title') : t('que.guest.title')}
       </h2>
       {signedIn ? (
         <SignedInQue charts={charts} engine={engine} />

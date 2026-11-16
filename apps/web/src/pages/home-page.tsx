@@ -1,10 +1,9 @@
-import { AccountValueCard } from '@achoo254/app-shell';
 import type { Chart, YearHoroscope } from '@tuvi/chart';
 import { type BirthInput, MAX_BIRTH_YEAR, MIN_BIRTH_YEAR } from '@tuvi/chart/schema';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { type SavedChart, deleteChart, listCharts, saveChart } from '../api/charts-api';
 import { ApiError } from '../api/api-client';
-import { type SessionState, signInHref, signUpHref } from '../api/session-api';
+import { type SessionState, signUpHref } from '../api/session-api';
 import { BirthForm } from '../chart/birth-form';
 import { ChartActions } from '../chart/chart-actions';
 import { ChartBoard } from '../chart/chart-board';
@@ -12,6 +11,7 @@ import { type ChartEngineState, useChartEngine } from '../chart/chart-engine';
 import { ChartErrorBoundary } from '../chart/chart-error-boundary';
 import { ChartSummaryCard } from '../chart/chart-summary';
 import { PlainReadingSection } from '../chart/plain-reading-section';
+import { QuickReadingSection } from '../chart/quick-reading-section';
 import { ConfirmDialog } from '../chart/confirm-dialog';
 import { keepReturnPath, sameInput, useKeepAfterSignUp } from '../chart/keep-after-sign-up';
 import { loadLastInput, saveLastInput } from '../chart/local-input';
@@ -21,9 +21,7 @@ import { YearlyPanel } from '../chart/yearly-panel';
 import { FEATURED_YEAR } from '../year/year-routes';
 import { YearPagesTeaser } from './year-pages-teaser';
 import { HERO_1200_URL, HERO_640_URL, HERO_HEIGHT, HERO_WIDTH } from '../art/illustrations';
-import { BRAND_MARK_SRC, brand } from '../brand';
 import { type Translate, useI18n } from '../i18n/i18n';
-import { SignInCard } from '../layout/sign-in-card';
 import { QueCard } from '../que/que-card';
 
 type Cast = { chart: Chart; error: null } | { chart: null; error: string | null };
@@ -68,29 +66,11 @@ function loginNotice(t: Translate): string | null {
   return null;
 }
 
-const FEATURE_IDS = ['calendar', 'plain', 'yearly', 'story', 'private', 'save'] as const;
-
-/** What the app does, for a visitor who has not signed in: a grid of short cards. */
-function FeatureList(): ReactNode {
-  const { t } = useI18n();
-  return (
-    <section className="features" id="features" aria-labelledby="features-title" data-id="features">
-      <h2 id="features-title" className="section-title">
-        {t('features.title')}
-      </h2>
-      <ul className="feature-grid">
-        {FEATURE_IDS.map((id) => (
-          <li key={id} className="card feature" data-id={`feature-${id}`}>
-            <h3 className="feature-title">{t(`features.${id}.title`)}</h3>
-            <p className="feature-text">{t(`features.${id}.text`)}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-/** Intro, the birth form and the chart; the saved charts when signed in. */
+/**
+ * Intro and the birth form on the first screen; then the chart, read in plain words first (the result card, "Đọc
+ * nhanh", the twelve palaces) with the full board closed for readers who know Tử Vi. A guest is invited to sign up
+ * once, after the quick reading (the header's button aside). Signed in: the daily quẻ and the saved charts.
+ */
 export function HomePage({ session }: { session: SessionState }): ReactNode {
   const { t, locale } = useI18n();
   const engine = useChartEngine();
@@ -105,7 +85,7 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
   const [yearChoice, setYearChoice] = useState<number | null>(null);
   const { years, horoscope } = useMemo(() => yearly(engine, chart, yearChoice), [engine, chart, yearChoice]);
   const signedIn = session.status === 'ready' && session.signedIn;
-  // The card waits for the session, so a signed-in visitor never sees it flash.
+  // The invite waits for the session, so a signed-in visitor never sees it flash.
   const showSignIn = session.status === 'ready' && !session.signedIn && session.signInAvailable;
   const notice = loginNotice(t);
 
@@ -189,55 +169,54 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           {t('saved.kept')}
         </p>
       )}
-      <section className={showSignIn ? 'hero hero-split' : 'hero'} data-id="hero">
-        <div className="hero-intro">
+      <section className="hero" data-id="hero">
+        <div className="hero-head">
           <h1 className="hero-title">{t('intro.title')}</h1>
           <p className="hero-lede">{t('intro.lead')}</p>
+        </div>
+        <div className="hero-aside">
+          <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
+        </div>
+        <div className="hero-extra">
           <p className="intro-note">{signedIn ? t('intro.point.save') : t('intro.point.private')}</p>
           <details className="intro-why" data-id="intro-why">
             <summary>{t('intro.why')}</summary>
             <p>{t('intro.point.calendar')}</p>
           </details>
-          {/* The signed-out welcome only: signed-in visitors come back for their charts. Decorative. */}
+          {/* The signed-out welcome only, small so the form stays on the first screen. Decorative. */}
           {!signedIn && (
             <div className="intro-hero-frame">
               <img
                 className="intro-hero"
-                src={HERO_1200_URL}
+                src={HERO_640_URL}
                 srcSet={`${HERO_640_URL} 640w, ${HERO_1200_URL} 1200w`}
-                sizes="(min-width: 1120px) 620px, 100vw"
+                sizes="(min-width: 900px) 460px, 100vw"
                 width={HERO_WIDTH}
                 height={HERO_HEIGHT}
                 alt=""
-                fetchPriority="high"
                 decoding="async"
                 data-id="intro-hero"
               />
             </div>
           )}
         </div>
-        {showSignIn && (
-          <div className="hero-aside">
-            <SignInCard href={signInHref(locale, '/')} title={t('signIn.title')} description={t('signIn.lead')} headingLevel={2} />
+      </section>
+      <ConfirmDialog
+        message={pendingDelete ? t('saved.confirmDelete', { name: pendingDelete.input.name || t('chart.unnamed') }) : null}
+        confirmLabel={t('saved.delete')}
+        cancelLabel={t('saved.cancel')}
+        onConfirm={() => {
+          if (pendingDelete) void remove(pendingDelete);
+        }}
+        onCancel={() => setPendingDelete(null)}
+      />
+      <div className={signedIn ? 'home-grid home-grid-side' : 'home-grid'}>
+        {signedIn && (
+          <div className="home-side">
+            <QueCard charts={saved} signedIn signUpHref={undefined} engine={engine} />
+            <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={setPendingDelete} />
           </div>
         )}
-      </section>
-      <div className="home-grid">
-        <div className="home-side">
-          {signedIn && <QueCard charts={saved} signedIn signUpHref={undefined} engine={engine} />}
-          <BirthForm key={formKey} initial={input} error={error} onSubmit={submit} />
-          {showSignIn && <QueCard charts={null} signedIn={false} signUpHref={signUpHref(locale, keepReturnPath('#que-today'))} engine={engine} />}
-          {signedIn && <SavedCharts charts={saved} message={savedMessage} onOpen={open} onDelete={setPendingDelete} />}
-          <ConfirmDialog
-            message={pendingDelete ? t('saved.confirmDelete', { name: pendingDelete.input.name || t('chart.unnamed') }) : null}
-            confirmLabel={t('saved.delete')}
-            cancelLabel={t('saved.cancel')}
-            onConfirm={() => {
-              if (pendingDelete) void remove(pendingDelete);
-            }}
-            onCancel={() => setPendingDelete(null)}
-          />
-        </div>
         {engine === 'failed' && (
           <p className="alert alert-error" role="alert" data-id="engine-failed">
             {t('chart.engineFailed')}{' '}
@@ -247,60 +226,58 @@ export function HomePage({ session }: { session: SessionState }): ReactNode {
           </p>
         )}
         {chart && (
-          <section className="chart" ref={chartRef} aria-labelledby="chart-title" data-id="chart">
+          <section className="chart" ref={chartRef} aria-labelledby="chart-summary-title" data-id="chart">
             <ChartSummaryCard key={`summary-${JSON.stringify(chart.input)}`} chart={chart} />
-            {/* A guest's first chart is the moment a free account has something to keep. Never for the signed-in.
-                Its button signs up and comes back saving this chart. */}
-            {showSignIn && (
-              <AccountValueCard
-                brand={{ appName: brand.appName, domain: brand.primaryTenant.domain, markSrc: BRAND_MARK_SRC }}
-                locale={locale}
-                signInHref={signUpHref(locale, keepReturnPath())}
-                benefits={[t('accountValue.save'), t('accountValue.devices'), t('accountValue.que')]}
-              />
-            )}
-            {/* The daily quẻ sits beside the form (above it on phones): one tap back to it from the chart. */}
+            <QuickReadingSection chart={chart} />
+            {/* The one sign-up invite a guest sees (the header's button aside): keep this chart, get tomorrow's quẻ.
+                Its button signs up and comes back saving this chart, on the quẻ. Never for the signed-in. */}
+            {showSignIn && <QueCard charts={null} signedIn={false} signUpHref={signUpHref(locale, keepReturnPath('#que-today'))} engine={engine} />}
+            {/* The daily quẻ sits beside the chart (above it on phones): one tap back to it from here. */}
             {signedIn && (
               <a className="btn btn-secondary que-jump" href="#que-today" data-id="que-jump">
                 {t('que.open')}
               </a>
             )}
             <PlainReadingSection key={`plain-${JSON.stringify(chart.input)}`} chart={chart} />
-            <div className="chart-head">
-              <h2 id="chart-title" className="card-title">
-                {t('chart.title')}
-              </h2>
-              <ChartActions
-                key={JSON.stringify(chart.input)}
-                chart={chart}
-                horoscope={horoscope}
-                signedIn={signedIn}
-                alreadySaved={chartSaved}
-                signUpToSaveHref={showSignIn ? signUpHref(locale, keepReturnPath()) : undefined}
-                onSave={async () => {
-                  await saveChart(chart.input);
-                  await refresh();
-                }}
-              />
-            </div>
-            <YearlyPanel chart={chart} horoscope={horoscope} years={years} onYear={setYearChoice} />
-            <ChartErrorBoundary
+            <ChartActions
               key={JSON.stringify(chart.input)}
-              fallback={(retry) => (
-                <p className="alert alert-error" role="alert" data-id="chart-error">
-                  {t('chart.renderError')}{' '}
-                  <button type="button" className="btn btn-secondary btn-sm" onClick={retry}>
-                    {t('chart.retry')}
-                  </button>
-                </p>
-              )}
-            >
-              <ChartBoard chart={chart} horoscope={horoscope} />
-            </ChartErrorBoundary>
+              chart={chart}
+              horoscope={horoscope}
+              signedIn={signedIn}
+              alreadySaved={chartSaved}
+              onSave={async () => {
+                await saveChart(chart.input);
+                await refresh();
+              }}
+            />
+            {/* The board and the year's marks, for readers who know Tử Vi: closed until asked for. */}
+            <details className="chart-full" data-id="chart-full">
+              <summary className="chart-full-toggle">{t('chart.fullToggle')}</summary>
+              <div className="chart-full-body">
+                <YearlyPanel chart={chart} horoscope={horoscope} years={years} onYear={setYearChoice} />
+                <ChartErrorBoundary
+                  key={JSON.stringify(chart.input)}
+                  fallback={(retry) => (
+                    <p className="alert alert-error" role="alert" data-id="chart-error">
+                      {t('chart.renderError')}{' '}
+                      <button type="button" className="btn btn-secondary btn-sm" onClick={retry}>
+                        {t('chart.retry')}
+                      </button>
+                    </p>
+                  )}
+                >
+                  <ChartBoard chart={chart} horoscope={horoscope} />
+                </ChartErrorBoundary>
+              </div>
+            </details>
           </section>
         )}
       </div>
-      {!signedIn && <FeatureList />}
+      {!signedIn && (
+        <p className="features-line" data-id="features">
+          {t('features.line')}
+        </p>
+      )}
       <YearPagesTeaser />
     </div>
   );

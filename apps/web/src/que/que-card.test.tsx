@@ -36,11 +36,11 @@ function renderCard(props: Partial<Parameters<typeof QueCard>[0]> = {}): void {
 }
 
 describe('QueCard', () => {
-  it('tells a guest what it is and where to sign up, without calling the API', () => {
+  it('invites a guest to keep the chart for the daily quẻ, without calling the API', () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch');
     renderCard({ signUpHref: '/auth/login?return=%2F%3Fkeep%3D1%23que-today&lang=vi&signup=1' });
-    expect(screen.getByRole('heading', { name: 'Quẻ hôm nay' })).not.toBeNull();
-    const cta = screen.getByRole('link', { name: 'Đăng ký miễn phí để xin quẻ' });
+    expect(screen.getByRole('heading', { name: 'Lưu lá số, mai nhận quẻ mới' })).not.toBeNull();
+    const cta = screen.getByRole('link', { name: 'Lưu lá số miễn phí' });
     expect(cta.getAttribute('href')).toBe('/auth/login?return=%2F%3Fkeep%3D1%23que-today&lang=vi&signup=1');
     expect(fetchSpy).not.toHaveBeenCalled();
   });

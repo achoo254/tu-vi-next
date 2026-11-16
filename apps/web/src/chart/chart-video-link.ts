@@ -9,6 +9,8 @@
 import type { Chart } from '@tuvi/chart';
 import type { Translate } from '../i18n/i18n';
 import type { Interpretation } from '../interpretation/corpus';
+import { oppositePalace } from './plain-reading';
+import { personalityLabel } from './quick-reading';
 
 /** Clip's field limits for the template (clip-next packages/templates/src/catalog.ts, layout `chart`). */
 export const CLIP_LIMITS = { name: 40, line: 60, reading: 160 } as const;
@@ -81,8 +83,10 @@ export interface ChartSummary {
   stars: string;
   /** The cục, e.g. "Mộc Tam Cục". */
   cuc: string;
-  /** One sentence of reading for the main star in Mệnh (else the cục); null before the corpus loads. */
+  /** One sentence of reading for the main star in Mệnh (or the palace opposite, else the cục); null before the corpus loads. */
   reading: string | null;
+  /** The chart's personality label ("Leader điềm tĩnh"); null before the corpus loads. */
+  label: string | null;
 }
 
 /** The chart at a glance. `reading` is the corpus once loaded (null before). */
@@ -92,7 +96,9 @@ export function chartSummary(chart: Chart, reading: Interpretation | null, t: Tr
   const soul = chart.palaces.find((p) => p.isSoulPalace);
   const majors = (soul?.majorStars ?? []).filter((s) => STAR_IDS[s.name] !== undefined);
   const main = majors[0];
-  const starText = main && soul ? reading?.star(main.name, main.brightness, soul.name)?.inPalace?.text : undefined;
+  // A Mệnh without a major star reads the first major star of the palace opposite, as the quick read and the label do.
+  const readStar = main ?? (soul ? oppositePalace(chart, soul)?.majorStars[0] : undefined);
+  const starText = readStar && soul ? reading?.star(readStar.name, readStar.brightness, soul.name)?.inPalace?.text : undefined;
   const text = starText ?? reading?.cuc(chart.fiveElementsClass) ?? null;
   return {
     branchIndex,
@@ -101,6 +107,7 @@ export function chartSummary(chart: Chart, reading: Interpretation | null, t: Tr
     stars: majors.length > 0 ? majors.map((s) => s.name).join(', ') : t('video.noMajorStar'),
     cuc: chart.fiveElementsClass,
     reading: text ? firstSentence(text) : null,
+    label: personalityLabel(chart, reading),
   };
 }
 

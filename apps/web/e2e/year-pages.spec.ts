@@ -15,6 +15,8 @@ test('chart: lưu niên 2027 on the board, in the summary and in the PNG', async
   await page.fill('[data-id=birth-form-time]', '03:30');
   await page.click('[data-id=birth-form-submit]');
   await expect(page.locator('[data-id=chart-board] .palace')).toHaveCount(12);
+  // The board and the year's marks are closed for readers who do not know Tử Vi.
+  await page.locator('[data-id=chart-full] > summary').click();
 
   await expect(page.locator('[data-id=yearly-select]')).toHaveValue('2027');
   await expect(page.locator('[data-id=yearly-select] option')).toHaveText(['2026 Bính Ngọ', '2027 Đinh Mùi', '2028 Mậu Thân', '2029 Kỷ Dậu', '2030 Canh Tuất']);

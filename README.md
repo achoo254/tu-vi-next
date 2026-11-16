@@ -3,19 +3,25 @@
 Thư mục repo: `tu-vi-next` (tên hiển thị lấy từ [`brand.config.json`](brand.config.json), không có hậu tố `-next`).
 Chạy tại `https://tuvi.hoandat.com`, thuộc tầng giải trí của hệ sinh thái hoandat.com.
 
-Nhập ngày giờ sinh (dương hoặc âm lịch) để lập lá số tử vi 12 cung bằng tiếng Việt, xem lưu niên (mặc định 2027) trên
-lá số, bấm vào từng sao để đọc nghĩa ngắn, xuất lá số thành ảnh PNG 1080×1350 để chia sẻ, hoặc bấm "Làm video lá số" để mở mẫu "Lá số tử vi" của Clip
+Nhập ngày giờ sinh (dương hoặc âm lịch, form nằm ngay màn đầu) để lập lá số tử vi 12 cung bằng tiếng Việt. Kết quả đọc
+bằng lời thường trước: thẻ tóm gọn có nhãn tính cách theo chính tinh ở Mệnh (vd. "Leader điềm tĩnh"), "Đọc nhanh" bốn
+thẻ (con người bạn, công việc, tình cảm, tiền bạc), rồi 12 mục theo tên đời thường; tên Hán Việt, sao, độ sáng, cục chỉ
+hiện bên trong và bấm vào là có chú thích. Bảng lá số đầy đủ gập sẵn ("Xem bảng lá số cho người rành tử vi"): trên đó
+xem lưu niên (mặc định 2027), bấm vào từng sao để đọc nghĩa ngắn. Có thể xuất lá số thành ảnh PNG 1080×1350 để chia sẻ, hoặc bấm "Làm video lá số" để mở mẫu "Lá số tử vi" của Clip
 (video dọc 9:16) đã điền sẵn con giáp, chính tinh ở Mệnh, cục và một câu luận giải; link chỉ mang các giá trị đó và tên,
 không mang ngày giờ sinh; query chỉ có id mẫu và id hình, còn tên và các dòng chữ nằm trong `#fragment` nên không tới
 log máy chủ nào (`apps/web/src/chart/chart-video-link.ts`). Âm lịch tính theo giờ Việt Nam (UTC+7). Chưa đăng nhập thì mọi
 thứ nằm trên trình duyệt; đăng nhập tài khoản hoandat.com thì lưu được tối đa 50 lá số. Đã đăng nhập và có lá số đã lưu thì mỗi ngày
 xin được một "Quẻ hôm nay" cho lá số đó (64 quẻ tự viết, lưu tĩnh ở [`content/que`](content/que/SOURCES.md), chọn theo
 id lá số và ngày giờ Việt Nam, không gọi AI), kèm chuỗi ngày xem liên tiếp lưu trên máy chủ và ảnh quẻ 1080×1350 để
-chia sẻ; khách thấy thẻ giới thiệu và nút đăng ký. Trên thẻ quẻ, người có lá số đã lưu bật được "Nhắc quẻ hôm nay":
+chia sẻ; khách thấy đúng một lời mời sau "Đọc nhanh" ("Lưu lá số, mai nhận quẻ mới"). Trên thẻ quẻ, người có lá số đã lưu bật được "Nhắc quẻ hôm nay":
 mỗi sáng 07:30 giờ Việt Nam trình duyệt nhận một thông báo Web Push mở thẳng thẻ quẻ (chỉ khi server có khoá VAPID,
-[`docs/deployment-guide.md`](docs/deployment-guide.md#nhắc-quẻ-hằng-ngày-web-push)). Mọi nút "Đăng ký…" (nút ở header, thẻ dưới lá số đầu tiên,
-"Đăng ký miễn phí để lưu", thẻ quẻ) mở thẳng màn tạo tài khoản hoandat.com (`/auth/login?signup=1`, máy chủ thêm
-`prompt=create`); nút "Đăng nhập" thì không. Các nút giữ lá số quay về `/?keep=1` và lưu lá số đang xem (nhớ trên trình
+[`docs/deployment-guide.md`](docs/deployment-guide.md#nhắc-quẻ-hằng-ngày-web-push)). Khách chỉ thấy hai nút đăng ký: nút ở header và lời mời trên
+(không có lời mời nào trước khi có lá số); cả hai mở thẳng màn tạo tài khoản hoandat.com (`/auth/login?signup=1`, máy
+chủ thêm `prompt=create`); nút "Đăng nhập" thì không. Mọi link đăng nhập, đăng ký mang theo `utm_source`, `utm_medium`,
+`utm_campaign` của URL khách vào (giá trị đầu, nhớ trong tab, `apps/web/src/api/landing-utm.ts`); máy chủ chuyển cho
+IdP để ghi nguồn tài khoản mới. Ảnh story, ảnh PNG (có nhãn tính cách) và nút "Rủ bạn bè xem" chia sẻ link
+`/?utm_source=tuvi_share&utm_medium=story|image|link`. Các nút giữ lá số quay về `/?keep=1` và lưu lá số đang xem (nhớ trên trình
 duyệt, không đi qua URL) vào tài khoản một lần, bỏ qua nếu tài khoản đã có. Nội dung mang tính giải trí, tham khảo.
 
 ## Cấu trúc
