@@ -1,7 +1,23 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
+import { afterEach, beforeAll, describe, expect, it, onTestFinished, vi } from 'vitest';
+import { loadChartEngine } from '../chart/chart-engine';
 import { I18nProvider } from '../i18n/i18n';
+import { loadInterpretation } from '../interpretation/use-interpretation';
 import { HomePage } from './home-page';
+
+// The page loads the chart engine (iztro) and the written readings as their own chunks. Cold, the first import of
+// each is transformed on the spot and can take longer than the one second a findBy waits on a busy machine, so the
+// first test to cast a chart failed under load. Load them once up front: the waits below then cover rendering only.
+beforeAll(async () => {
+  await Promise.all([loadChartEngine(), loadInterpretation()]);
+}, 60_000);
+
+/**
+ * How long a wait for a cast chart may take. Casting renders the whole board (twelve palaces, a hundred-odd stars) in
+ * jsdom through React's scheduler; on a machine busy with other suites that took longer than the one-second default
+ * and failed the first cast of the run. Only the wait is longer; what is expected does not change.
+ */
+const CHART_WAIT = { timeout: 10_000 };
 
 afterEach(() => {
   cleanup();
@@ -50,7 +66,7 @@ describe('home page, signed out', () => {
     );
     expect(screen.queryByRole('group', { name: /Bàn lá số/ })).toBeNull();
     castChart();
-    const board = await screen.findByRole('group', { name: /Bàn lá số/ });
+    const board = await screen.findByRole('group', { name: /Bàn lá số/ }, CHART_WAIT);
     expect(board.querySelectorAll('.palace')).toHaveLength(12);
     expect(board.textContent).toContain('ngày 1 tháng 1 năm Đinh Hợi');
     expect(JSON.parse(window.localStorage.getItem('tuvi.last-input') ?? 'null')).toMatchObject({ year: 2007, month: 2, day: 17 });
@@ -64,7 +80,7 @@ describe('home page, signed out', () => {
     expect(board.querySelectorAll('.star-yearly')).toHaveLength(4);
     expect(screen.getByRole('link', { name: /tuổi Hợi/ }).getAttribute('href')).toBe('/tu-vi-2027/tuoi-hoi');
     // The written readings load on their own: the cục text in the centre.
-    expect((await screen.findByText(/./, { selector: '[data-id=cuc-reading]' })).textContent?.length).toBeGreaterThan(40);
+    expect((await screen.findByText(/./, { selector: '[data-id=cuc-reading]' }, CHART_WAIT)).textContent?.length).toBeGreaterThan(40);
     // (The star and palace dialogs use <dialog>.showModal, which jsdom lacks: covered by the E2E run.)
   });
 
@@ -76,12 +92,12 @@ describe('home page, signed out', () => {
       </I18nProvider>,
     );
     castChart();
-    const quick = await screen.findByRole('region', { name: 'Đọc nhanh' });
+    const quick = await screen.findByRole('region', { name: 'Đọc nhanh' }, CHART_WAIT);
     expect([...quick.querySelectorAll('h3')].map((h) => h.textContent)).toEqual(['🌟 Con người bạn', '💼 Công việc', '💞 Tình cảm', '💰 Tiền bạc']);
     for (const card of quick.querySelectorAll('li')) expect(card.querySelector('p')?.textContent?.length).toBeGreaterThan(30);
     // The personality label heads the result card; the cục and the video's fine print wait in the details.
     const summary = document.querySelector('[data-id=chart-summary]');
-    await waitFor(() => expect(document.querySelector('[data-id=chart-label]')?.textContent).not.toBe('Lá số của bạn tóm gọn'));
+    await waitFor(() => expect(document.querySelector('[data-id=chart-label]')?.textContent).not.toBe('Lá số của bạn tóm gọn'), CHART_WAIT);
     const details = summary?.querySelector('details[data-id=chart-summary-details]');
     expect(details?.textContent).toContain('Cục');
     expect(details?.querySelector('[data-id=chart-video-note]')).not.toBeNull();
@@ -136,8 +152,8 @@ describe('home page, signed out', () => {
       </I18nProvider>,
     );
     castChart();
-    await screen.findByRole('group', { name: /Bàn lá số/ });
-    await screen.findByRole('region', { name: 'Đọc nhanh' });
+    await screen.findByRole('group', { name: /Bàn lá số/ }, CHART_WAIT);
+    await screen.findByRole('region', { name: 'Đọc nhanh' }, CHART_WAIT);
     const invites = signUpInvites();
     expect(invites).toHaveLength(1);
     expect(invites[0]?.getAttribute('href')).toBe(SIGN_UP_TO_KEEP);
@@ -154,7 +170,7 @@ describe('home page, signed out', () => {
       </I18nProvider>,
     );
     // The last chart reopens from this browser; a signed-in visitor sees it without the invite.
-    await screen.findByRole('group', { name: /Bàn lá số/ });
+    await screen.findByRole('group', { name: /Bàn lá số/ }, CHART_WAIT);
     expect(signUpInvites()).toEqual([]);
   });
 
