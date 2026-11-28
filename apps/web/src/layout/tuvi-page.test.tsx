@@ -95,6 +95,13 @@ describe('page frame', () => {
     expect(document.documentElement.lang).toBe('zh-CN');
   });
 
+  it('opens in Simplified Chinese when another hoandat.com app picked it', () => {
+    document.cookie = 'hd_lang=zh-CN; Path=/';
+    show('/', SIGNED_OUT);
+    expect(document.querySelector('[data-id=lang-zh-CN]')?.getAttribute('aria-pressed')).toBe('true');
+    expect(document.querySelector('[data-id=foot-note]')?.textContent).toBe('内容仅供娱乐和参考。');
+  });
+
   it('opens in the language picked before the shared choice', () => {
     window.localStorage.setItem('tuvi.lang', 'en');
     show('/', SIGNED_OUT);

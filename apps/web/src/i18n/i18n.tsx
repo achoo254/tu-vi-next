@@ -39,7 +39,7 @@ export function initialLocale(search: string, stored: Locale | undefined): Local
 
 /** The language picked in any hoandat.com app (or here before the shared choice), if any. */
 function storedLocale(): Locale | undefined {
-  return readPreferences({ domain: brand.primaryTenant.domain, legacyLangKey: LEGACY_LANG_KEY }).lang;
+  return readPreferences({ domain: brand.primaryTenant.domain, legacyLangKey: LEGACY_LANG_KEY, locales: LOCALES }).lang;
 }
 
 interface I18n {
