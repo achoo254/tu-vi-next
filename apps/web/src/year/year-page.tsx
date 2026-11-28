@@ -24,7 +24,7 @@ import { zodiacArt } from '../chart/chart-art';
 import { type Locale, type Translate, format, translator, useI18n } from '../i18n/i18n';
 import { ZODIAC_NAME_KEYS } from '../i18n/messages';
 import { INTERPRETATION_FIELDS, LUNAR_YEAR_FACTS, type LunarYearFacts, interpretation } from './year-content';
-import { HAN_NOTES, STAR_NOTES, TAI_SUI_SHORT, TAI_SUI_TERMS, YEAR_MESSAGES, type YearMessageKey } from './year-messages';
+import { HAN_NOTES, STAR_NOTES, TAI_SUI_JOINER, TAI_SUI_SHORT, TAI_SUI_TERMS, YEAR_MESSAGES, type YearMessageKey } from './year-messages';
 import { type YearRoute, yearIndexPath, yearSignPath } from './year-routes';
 import { type YearVideo, yearVideo } from './year-video';
 
@@ -45,6 +45,7 @@ function yearTranslator(locale: Locale): YearTranslate {
 const WEEKDAYS: Record<Locale, readonly string[]> = {
   vi: ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'],
   en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  'zh-CN': ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
 };
 
 const formatDate = (d: SolarDate): string => `${d.day}/${d.month}/${d.year}`;
@@ -157,7 +158,7 @@ function YearFacts({ year, y, locale }: { year: number; y: YearTranslate; locale
 
 function kindsText(kinds: TaiSuiKind[], locale: Locale): string {
   const terms = kinds.map((kind) => TAI_SUI_TERMS[locale][kind]);
-  return locale === 'vi' ? terms.join(', ') : terms.join(' and ');
+  return terms.join(TAI_SUI_JOINER[locale]);
 }
 
 function TaiSuiTable({ year, y }: { year: number; y: YearTranslate }): ReactNode {

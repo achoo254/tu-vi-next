@@ -2,13 +2,15 @@ import { readPreferences, subscribePreferences } from '@achoo254/app-shell/prefe
 import { type ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { brand } from '../brand';
 import { type MessageKey, type Messages, en, vi } from './messages';
+import { zhCN } from './messages-zh-cn';
 
-export const LOCALES = ['vi', 'en'] as const;
+/** The languages of the shared shell (`@achoo254/app-shell`): Vietnamese, English and Simplified Chinese. */
+export const LOCALES = ['vi', 'en', 'zh-CN'] as const;
 export type Locale = (typeof LOCALES)[number];
 
 /** Where the language was kept before the choice shared by every hoandat.com app (cookie `hd_lang`). */
 export const LEGACY_LANG_KEY = 'tuvi.lang';
-const DICTIONARIES: Record<Locale, Messages> = { vi, en };
+const DICTIONARIES: Record<Locale, Messages> = { vi, en, 'zh-CN': zhCN };
 
 export type Translate = (key: MessageKey, vars?: Record<string, string | number>) => string;
 
@@ -26,7 +28,7 @@ export function translator(locale: Locale): Translate {
   return (key, vars) => format(dictionary[key], vars);
 }
 
-export const isLocale = (value: unknown): value is Locale => value === 'vi' || value === 'en';
+export const isLocale = (value: unknown): value is Locale => LOCALES.some((locale) => locale === value);
 
 /** `?lang=` wins (a shared link), then the saved choice, then Vietnamese. */
 export function initialLocale(search: string, stored: Locale | undefined): Locale {

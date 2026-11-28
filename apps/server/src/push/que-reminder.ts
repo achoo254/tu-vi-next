@@ -22,6 +22,7 @@ export const REMINDER_CHECK_MS = 5 * 60 * 1000;
 const WORDS: Record<ReminderLocale, { title: string; body: string }> = {
   vi: { title: 'Quẻ hôm nay', body: 'Quẻ hôm nay của bạn đã sẵn sàng. Mở xem lời nhắn cho ngày mới nhé!' },
   en: { title: 'Quẻ of the day', body: 'Your quẻ for today is ready. Open it for a small nudge for the day.' },
+  'zh-CN': { title: '今日一签', body: '你今天的签已经准备好了，打开看看今天的小提醒吧！' },
 };
 
 /** Opens the app on the quẻ card. */

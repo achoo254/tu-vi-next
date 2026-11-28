@@ -1,6 +1,6 @@
 /**
- * UI strings in Vietnamese (default) and English. Chart content (palace and star names, can chi) stays
- * Vietnamese in both: those are the terms of the art. `{app}` is replaced by the brand name.
+ * UI strings in Vietnamese (default) and English; Simplified Chinese is in messages-zh-cn.ts. Chart content (palace
+ * and star names, can chi) stays Vietnamese in every language: those are the terms of the art. `{app}` is replaced by the brand name.
  */
 export const vi = {
   'layout.credits': 'Ghi công',

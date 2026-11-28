@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { requireUserId } from '../auth/require-user';
 import type { ServerConfig } from '../config';
 import type { Db } from '../db/client';
+import { REMINDER_LOCALES } from '../db/schema';
 import { HttpError } from '../http-error';
 import { removePushSubscription, savePushSubscription } from './push-store';
 import { isPushEndpoint } from './web-push-sender';
@@ -28,7 +29,7 @@ const SubscribeBody = z.object({
       auth: z.string().regex(/^[A-Za-z0-9_-]{16,32}={0,2}$/),
     }),
   }),
-  locale: z.enum(['vi', 'en']),
+  locale: z.enum(REMINDER_LOCALES),
 });
 
 const UnsubscribeBody = z.object({ endpoint: z.string().max(1000) });

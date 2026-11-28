@@ -7,8 +7,8 @@ import { LOCALES, type Locale, useI18n } from '../i18n/i18n';
 import { FEATURED_YEAR, parseYearRoute, yearIndexPath } from '../year/year-routes';
 
 /** Each language in its own words (never translated), and the short code the header pill shows. */
-const LOCALE_NAMES: Record<Locale, string> = { vi: 'Tiếng Việt', en: 'English' };
-const LOCALE_CODES: Record<Locale, string> = { vi: 'VI', en: 'EN' };
+const LOCALE_NAMES: Record<Locale, string> = { vi: 'Tiếng Việt', en: 'English', 'zh-CN': '中文' };
+const LOCALE_CODES: Record<Locale, string> = { vi: 'VI', en: 'EN', 'zh-CN': '中文' };
 
 interface NavLink {
   href: string;

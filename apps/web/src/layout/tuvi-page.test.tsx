@@ -85,6 +85,16 @@ describe('page frame', () => {
     expect(document.documentElement.lang).toBe('en');
   });
 
+  it('switches to Simplified Chinese and keeps it in the shared cookie', () => {
+    show('/', SIGNED_OUT);
+    fireEvent.click(screen.getByRole('button', { name: '中文' }));
+    expect(document.querySelector('[data-id=foot-note]')?.textContent).toBe('内容仅供娱乐和参考。');
+    expect(document.querySelector('[data-id=public-sign-in]')?.getAttribute('href')).toBe('/auth/login?return=%2F&lang=zh-CN&signup=1');
+    expect(document.querySelector('[data-id=lang-zh-CN]')?.getAttribute('aria-pressed')).toBe('true');
+    expect(document.cookie).toContain('hd_lang=zh-CN');
+    expect(document.documentElement.lang).toBe('zh-CN');
+  });
+
   it('opens in the language picked before the shared choice', () => {
     window.localStorage.setItem('tuvi.lang', 'en');
     show('/', SIGNED_OUT);

@@ -63,6 +63,9 @@ export const queStreaks = pgTable('que_streaks', {
   streak: integer('streak').notNull(),
 });
 
+/** The languages a reminder can be written in: the languages of the shared shell. */
+export const REMINDER_LOCALES = ['vi', 'en', 'zh-CN'] as const;
+
 /**
  * Browsers that turned on the daily quẻ reminder (Web Push): the push service endpoint and the keys to encrypt for
  * it, one row per browser. An endpoint belongs to one browser, so it is unique: whoever turned the reminder on there
@@ -79,7 +82,7 @@ export const pushSubscriptions = pgTable(
     endpoint: text('endpoint').notNull().unique(),
     p256dh: text('p256dh').notNull(),
     auth: text('auth').notNull(),
-    locale: text('locale', { enum: ['vi', 'en'] }).notNull(),
+    locale: text('locale', { enum: REMINDER_LOCALES }).notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
   },
   (table) => [index('push_subscriptions_user_id_idx').on(table.userId)],

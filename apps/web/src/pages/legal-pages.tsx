@@ -1,4 +1,4 @@
-/** /privacy, /terms and /credits in Vietnamese and English. `{app}` is the brand name. */
+/** /privacy, /terms and /credits in Vietnamese, English and Simplified Chinese. `{app}` is the brand name. */
 import type { ReactNode } from 'react';
 import { APP_HOST } from '../brand';
 import { type Locale, format, useI18n } from '../i18n/i18n';
@@ -108,6 +108,46 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
       ],
     },
+    'zh-CN': {
+      title: '隐私',
+      intro: `{app}（${APP_HOST}）是由一位独立开发者运营的娱乐应用。本页说明应用保存什么、不保存什么。`,
+      sections: [
+        {
+          heading: '未登录时',
+          paragraphs: [
+            '命盘直接在你的浏览器中计算。你输入的出生日期和时间、姓名和性别不会发送到服务器；浏览器只记住你最近的一张命盘（localStorage），方便你回来时打开。在浏览器中清除网站数据即可全部删除。',
+          ],
+        },
+        {
+          heading: '登录后',
+          items: [
+            '通过 hoandat.com 账号（auth.hoandat.com）以 "openid profile email" 权限登录：应用会收到账号标识、显示名称（没有则为用户名）、邮箱和头像地址。',
+            '名称、邮箱和头像地址随账号保存在应用的服务器上，每次登录时更新，仅用于在页面顶部的账号菜单中显示。应用不会给你发邮件，不作他用，也不与任何人共享。',
+            '头像由浏览器直接从保存它的地方（Google 或 GitHub，取决于你的登录方式）加载，不附带你正在浏览的页面地址；应用不保存头像副本。使用 Apple 登录则没有头像，因为 Apple 不共享头像。',
+            '你点击“保存”的命盘以输入数据的形式保存（姓名（如有）、出生日期和时间、历法、性别），每个账号最多 50 张。命盘始终在浏览器中重新计算。',
+            '今日签：服务器只保存你最近一次求签的日期和连续天数，用于显示连续记录。签在浏览器中根据已保存的命盘和当天日期选出，不会保存；用来求签的命盘只记在这个浏览器里。',
+            '今日签提醒（仅在你开启时）：对每台开启提醒的设备，服务器保存浏览器提供的推送地址（push endpoint）和加密密钥，以及提醒的语言，仅用于每天早上通过浏览器的推送服务（Google、Mozilla、Apple 或 Microsoft，取决于浏览器）发送一条“今日签已准备好”的通知。提醒不包含姓名或出生信息。服务器还会记下最近一次发送的日期，确保每天最多发送一次。你在该设备上关闭提醒，或浏览器取消订阅时，该地址即被删除。',
+            '会话 Cookie（__Host-tuvi_session）让你保持登录最多 30 天；服务器只保存它的哈希值。',
+            '你可以随时删除任何已保存的命盘；退出登录即在服务器上结束会话。',
+            {
+              text: '删除 hoandat.com 账号',
+              href: ACCOUNT_DELETE_URL,
+              note: '是删除账号的唯一方式；届时应用会立即删除该账号在这里的全部数据：名称、邮箱、头像、已保存的命盘、看签连续记录、开启提醒的设备和所有登录会话。',
+            },
+          ],
+        },
+        {
+          heading: '访问统计',
+          paragraphs: [
+            '网站可能使用 Cloudflare Web Analytics 统计页面浏览量。它不设置 Cookie，也不会在其他网站上跟踪你。应用不展示广告，也不出售数据。',
+          ],
+        },
+        {
+          heading: '联系',
+          paragraphs: ['有问题：请在 Facebook 上给 Hoandat Apps 主页发消息。'],
+        },
+      ],
+    },
   },
   terms: {
     vi: {
@@ -162,6 +202,28 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
           ],
         },
         { heading: 'Contact', paragraphs: ['Message the Hoandat Apps Facebook Page.'] },
+      ],
+    },
+    'zh-CN': {
+      title: '使用条款',
+      intro: `{app}（${APP_HOST}）是一款免费的娱乐应用。使用本应用即表示你同意以下条款。`,
+      sections: [
+        {
+          heading: '娱乐内容',
+          items: [
+            '命盘和星曜含义仅供娱乐和参考。请勿用其代替医疗、法律或财务建议，也不要据此做重要决定。',
+            '星曜按 iztro 库的默认设置安放；不同的紫微斗数流派可能安星不同。',
+          ],
+        },
+        {
+          heading: '你输入的数据',
+          items: ['只输入你自己的信息，或已征得对方同意的信息。下载和分享命盘图片由你自己决定。', '每个账号最多保存 50 张命盘。'],
+        },
+        {
+          heading: '责任',
+          paragraphs: ['本应用按“现状”提供。开发者可随时更改、暂停或停止本应用。条款可能会更新；最新版本始终在本页。'],
+        },
+        { heading: '联系', paragraphs: ['请在 Facebook 上给 Hoandat Apps 主页发消息。'] },
       ],
     },
   },
@@ -258,6 +320,52 @@ const DOCS: Record<LegalPageKind, Record<Locale, LegalDoc>> = {
         },
         { heading: '2027 horoscope videos', paragraphs: ['The 12 videos on the sign pages (pictures, motion, voice, music): ' + VIDEO_LICENCE] },
         { heading: 'Source code', paragraphs: ["The app's source code is under the MIT licence."] },
+      ],
+    },
+    'zh-CN': {
+      title: '致谢',
+      intro: '{app} 建立在以下开源项目和参考资料之上。',
+      sections: [
+        {
+          heading: '排盘核心与历法',
+          items: [
+            { text: 'iztro', href: 'https://github.com/SylarLong/iztro', note: '作者 SylarLong，MIT 许可：安星、宫位和命盘的越南语（vi-VN）数据。' },
+            { text: 'lunar-typescript', href: 'https://github.com/6tail/lunar-typescript', note: '作者 6tail，MIT 许可：iztro 使用的中国农历，以及 1967 年 8 月 8 日之前的越南历法。' },
+            {
+              text: 'Hồ Ngọc Đức 的越南农历算法',
+              note: '依据 Jean Meeus 的《Astronomical Algorithms》，按 UTC+7 时区计算；应用重新实现了已公开的算法。',
+            },
+            {
+              text: 'ziwei-doushu',
+              href: 'https://github.com/Renhuai123/ziwei-doushu',
+              note: '作者 Renhuai123（MIT 代码）：仅作为回归测试思路的参考阅读；未复制任何代码或数据集。',
+            },
+          ],
+        },
+        {
+          heading: '命盘解读',
+          paragraphs: [
+            '星曜、宫位、四化、五行局以及年度运势的解读均为本应用原创文字（越南语），未照抄任何书籍或网站；含义遵循《紫微斗数新编》（Vân Đằng Thái Thứ Lang）的惯例，以现代、积极的语气重写。仅供娱乐和参考。',
+            '值年星与年限表按 Báo Hà Tĩnh 和 Báo La Văn Sử 所述的九曜、八限算法，并与 ngaydep.com 的 2027 年表核对。',
+          ],
+        },
+        {
+          heading: '界面',
+          items: [
+            { text: 'React', href: 'https://react.dev', note: 'MIT 许可。' },
+            { text: 'Inter', href: 'https://rsms.me/inter/', note: '和 JetBrains Mono，SIL Open Font License 1.1 许可。' },
+          ],
+        },
+        { heading: '应用图标', paragraphs: [APP_ICON_LICENCE] },
+        {
+          heading: '插图',
+          paragraphs: [
+            '十二生肖、十四主星徽章、星空纸纹、命盘边框和徽章：' + ICON_LICENCE,
+            '十二宫、四化和五行局徽章、首页插图、链接预览图、空命盘列表插图和 404 页插图：' + OPEN_ART_LICENCE,
+          ],
+        },
+        { heading: '2027 年运势视频', paragraphs: ['各生肖页面上的 12 段视频（画面、动态、配音、音乐）：' + VIDEO_LICENCE] },
+        { heading: '源代码', paragraphs: ['本应用的源代码采用 MIT 许可。'] },
       ],
     },
   },

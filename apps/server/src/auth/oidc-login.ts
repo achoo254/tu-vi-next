@@ -9,6 +9,13 @@ import { createHash, createHmac, randomBytes, timingSafeEqual } from 'node:crypt
 import { z } from 'zod';
 import type { AccountProfile } from './session-store';
 
+/** The languages of the shared shell, passed to the IdP as `ui_locales`. */
+export const LOGIN_LANGS = ['vi', 'en', 'zh-CN'] as const;
+export type LoginLang = (typeof LOGIN_LANGS)[number];
+export function isLoginLang(value: unknown): value is LoginLang {
+  return LOGIN_LANGS.some((lang) => lang === value);
+}
+
 const LoginStateSchema = z.object({
   state: z.string().min(1),
   nonce: z.string().min(1),

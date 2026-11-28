@@ -3,7 +3,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { type DbHandle, openPglite } from '../db/client';
 import { charts, pushSubscriptions, users } from '../db/schema';
 import { recordQueDraw } from '../que/que-store';
-import { REMINDER_URL, reminderStart, sendDueReminders, startReminderTimer } from './que-reminder';
+import type { ReminderLocale } from './push-store';
+import { REMINDER_URL, reminderPayload, reminderStart, sendDueReminders, startReminderTimer } from './que-reminder';
 import { PushError, type PushResult, type PushSender, type PushTarget } from './web-push-sender';
 
 const DAY = '2026-11-02';
@@ -68,7 +69,7 @@ describe('the morning quẻ reminder', () => {
     }
     const list = Array.from({ length: endpoints }, (_, i) => `https://fcm.googleapis.com/fcm/send/u${n}-d${i}`);
     for (const endpoint of list) {
-      await db.insert(pushSubscriptions).values({ userId: user.id, endpoint, p256dh: 'k', auth: 'a', locale: locale as 'vi' | 'en', createdAt: subscribedAt });
+      await db.insert(pushSubscriptions).values({ userId: user.id, endpoint, p256dh: 'k', auth: 'a', locale: locale as ReminderLocale, createdAt: subscribedAt });
     }
     return { userId: user.id, endpoints: list };
   }
@@ -99,6 +100,10 @@ describe('the morning quẻ reminder', () => {
     expect(sender.sent).toHaveLength(3);
     // The next morning: again.
     expect(await sendDueReminders(database.db, sender, NEXT_MORNING)).toMatchObject({ day: '2026-11-03', accounts: 2, sent: 3 });
+  });
+
+  it('words the reminder in every language of the shared shell', () => {
+    expect(JSON.parse(reminderPayload('zh-CN'))).toEqual({ title: '今日一签', body: expect.stringContaining('签'), url: REMINDER_URL, tag: 'que-today' });
   });
 
   it('sends once even when two runs overlap', async () => {

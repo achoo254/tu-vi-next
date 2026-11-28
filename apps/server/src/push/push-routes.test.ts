@@ -146,6 +146,8 @@ describe('push reminder routes, push on', () => {
     // Again from the same browser (a reload): still one row, the language follows the latest.
     expect((await subscribe(server, session, { subscription: sub, locale: 'en' })).status).toBe(204);
     expect(await storedFor(server, sub.endpoint)).toEqual([expect.objectContaining({ locale: 'en' })]);
+    expect((await subscribe(server, session, { subscription: sub, locale: 'zh-CN' })).status).toBe(204);
+    expect(await storedFor(server, sub.endpoint)).toEqual([expect.objectContaining({ locale: 'zh-CN' })]);
     expect((await unsubscribe(server, session, sub.endpoint)).status).toBe(204);
     expect(await storedFor(server, sub.endpoint)).toEqual([]);
   });

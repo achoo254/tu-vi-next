@@ -11,7 +11,7 @@ import { z } from 'zod';
 import type { ServerConfig } from '../config';
 import type { Db } from '../db/client';
 import type { Discovery, IdpMetadata } from './idp-metadata';
-import { codeChallenge, forwardedUtm, newLoginState, openState, profileFromUserinfo, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
+import { codeChallenge, forwardedUtm, isLoginLang, newLoginState, openState, profileFromUserinfo, safeReturnPath, sealState, subFromIdToken } from './oidc-login';
 import { clearSessionCookie, readCookie, readSessionToken, setSessionCookie } from './session-cookie';
 import { safeErrorText } from '../log-error';
 import {
@@ -94,7 +94,7 @@ export function authRoutes({ config, db, idp, now }: AuthRoutesOptions): Router 
       res.redirect(withLoginResult(returnTo, 'unavailable'));
       return;
     }
-    const lang = req.query.lang === 'en' ? 'en' : 'vi';
+    const lang = isLoginLang(req.query.lang) ? req.query.lang : 'vi';
     // `signup=1`: the person pressed a sign-up button, so the IdP opens on making an account (its screen links to
     // sign-in for people who already have one). Plain sign-in links never send it.
     const signUp = req.query.signup === '1';

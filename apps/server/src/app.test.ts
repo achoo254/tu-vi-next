@@ -122,6 +122,14 @@ describe('signed in through the hoandat.com account', () => {
     expect(location(callback)).toBe('/saved');
   });
 
+  it('asks the IdP for the page language, Simplified Chinese included, and Vietnamese for anything else', async () => {
+    const uiLocales = async (lang: string): Promise<string | null> =>
+      new URL(location(await fetch(`${server.origin}/auth/login?return=/&lang=${lang}`, { redirect: 'manual' }))).searchParams.get('ui_locales');
+    expect(await uiLocales('zh-CN')).toBe('zh-CN');
+    expect(await uiLocales('en')).toBe('en');
+    expect(await uiLocales('fr')).toBe('vi');
+  });
+
   it('passes the first value of each UTM tag on to the IdP (which normalises it), and drops empty ones', async () => {
     const start = await fetch(`${server.origin}/auth/login?signup=1&utm_source=fb&utm_source=tiktok&utm_campaign=Tet%202027&utm_medium=&utm_term=x`, { redirect: 'manual' });
     const authorize = new URL(location(start));

@@ -1,11 +1,11 @@
 import { and, eq, sql } from 'drizzle-orm';
 import type { Db } from '../db/client';
-import { charts, pushSubscriptions } from '../db/schema';
+import { type REMINDER_LOCALES, charts, pushSubscriptions } from '../db/schema';
 
 /** Browsers one account may turn the reminder on in. */
 export const MAX_PUSH_DEVICES = 10;
 
-export type ReminderLocale = 'vi' | 'en';
+export type ReminderLocale = (typeof REMINDER_LOCALES)[number];
 
 export interface NewPushSubscription {
   endpoint: string;
