@@ -57,8 +57,21 @@ nút bật nhắc, không chạy hẹn giờ gửi, không nạp thư viện `we
 
 1. **IdP:** trên `auth-next` đặt `TUVI_WEB_CLIENT_SECRET` (client `tuvi-web`, redirect
    `https://tuvi.hoandat.com/auth/callback`) rồi deploy lại IdP. Việc này thuộc repo `auth-next`.
-2. **DNS:** bản ghi `A` `tuvi.hoandat.com` **proxied** trỏ về `<SERVER_65_IP>` (cách gọi Cloudflare API: runbook của
-   `miu-world-next`, mục DNS). Kiểm: `dig +short A tuvi.hoandat.com @1.1.1.1` trả IP của Cloudflare.
+2. **DNS:** bản ghi `A` `tuvi.hoandat.com` **proxied** trỏ về `<SERVER_65_IP>`,
+   zone `hoandat.com` trên Cloudflare, SSL mode `full`. `wrangler` không quản lý bản ghi DNS nên gọi thẳng Cloudflare
+   API; token lấy trong `access-tokens.json` (mục `service` là `api.cloudflare.com`, trường `token.api_token`) và đi
+   qua stdin, không nằm trong đối số của lệnh:
+
+   ```sh
+   TOK="$(jq -r '.tokens[] | select(.service == "api.cloudflare.com") | .token.api_token' <thư mục>/access-tokens.json)"
+   cf() { printf 'Authorization: Bearer %s\nContent-Type: application/json\n' "$TOK" | curl -sS -H @- "$@"; }
+   API=https://api.cloudflare.com/client/v4
+   ZID="$(cf "$API/zones?name=hoandat.com" | jq -r '.result[0].id')"
+   cf -X POST --data "$(jq -nc --arg n tuvi.hoandat.com --arg ip '<SERVER_65_IP>' '{type:"A", name:$n, content:$ip, proxied:true, ttl:1}')" \
+     "$API/zones/$ZID/dns_records"
+   ```
+
+   Kiểm: `dig +short A tuvi.hoandat.com @1.1.1.1` trả IP của Cloudflare.
 3. **Database** (trên `.65`, hỏi người trước):
 
    ```sh
